@@ -12,7 +12,11 @@ Commercial/Business app
 
 -uses clean framework - 
 
-For each feature, login and hello_landing 
+login - Shrey
+hub (hello work displays) - loads after login - Mitchell
+locations - loads from a small button on login screen - Ben 
+
+For each feature, login, hello_landing and locations  
 -create a screen, view model, presenter
 -create tests so you have 100% coverage
 -bloc
