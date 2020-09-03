@@ -1,8 +1,9 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:business_banking/example_locator.dart';
+import 'hello_landing_service_response_model.dart';
 
-class HelloLandingService extends EitherService<JsonRequestModel, JsonResponseModel> {
+class HelloLandingService extends EitherService<JsonRequestModel, HelloLandingServiceResponseModel> {
   HelloLandingService() : super(
     method: RestMethod.post,
     restApi: ExampleLocator().api,
@@ -10,10 +11,7 @@ class HelloLandingService extends EitherService<JsonRequestModel, JsonResponseMo
   );
   
   @override
-  JsonResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
-    return JsonResponseModel.fromJson(jsonResponse);
+  HelloLandingServiceResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
+    return HelloLandingServiceResponseModel.fromJson(jsonResponse);
   }
-  
-  // Getting error with JsonResponseModel.fromJson(jsonResponse), so I'm going to write a temporary one
-  
 }
