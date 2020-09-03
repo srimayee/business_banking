@@ -7,7 +7,7 @@ class HelloLandingService extends EitherService<JsonRequestModel, HelloLandingSe
   HelloLandingService() : super(
     method: RestMethod.post,
     restApi: ExampleLocator().api,
-    path: null
+    path: 'hello-landing'
   );
   
   @override
