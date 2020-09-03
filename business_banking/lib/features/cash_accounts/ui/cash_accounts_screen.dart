@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/hello_landing/model/hello_landing_view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:flutter/material.dart';
 
-class HelloLandingScreen extends Screen {
-  final HelloLandingViewModel viewModel;
+class CashAccountsScreen extends Screen {
+  final CashAccountsViewModel viewModel;
   
-  HelloLandingScreen({
+  CashAccountsScreen({
     @required this.viewModel
   }) : assert(() {
     return viewModel != null;

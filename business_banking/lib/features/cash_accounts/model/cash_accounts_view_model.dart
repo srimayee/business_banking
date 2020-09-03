@@ -1,11 +1,11 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class HelloLandingViewModel extends ViewModel {
+class CashAccountsViewModel extends ViewModel {
   final String accountName;
   final int accountLastFour;
   final double accountBalance;
   
-  HelloLandingViewModel({
+  CashAccountsViewModel({
     this.accountName,
     this.accountLastFour,
     this.accountBalance

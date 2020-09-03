@@ -1,11 +1,11 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class HelloLandingEntity extends Entity {
+class CashAccountsEntity extends Entity {
   final String name;
   final int lastFour;
   final double balance;
   
-  HelloLandingEntity(
+  CashAccountsEntity(
     {List<EntityError> errors = const [],
      String name,
      int lastFour,
@@ -21,7 +21,7 @@ class HelloLandingEntity extends Entity {
   
   @override
   merge({errors, String name, int lastFour, double balance}) {
-    return HelloLandingEntity(
+    return CashAccountsEntity(
       errors: errors ?? this.errors,
       name: name ?? this.name,
       lastFour: lastFour ?? this.lastFour,
