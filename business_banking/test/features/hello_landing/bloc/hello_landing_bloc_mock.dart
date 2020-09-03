@@ -12,4 +12,7 @@ class HelloLandingBlocMock extends Fake implements HelloLandingBloc {
       helloLandingViewModelPipe.send(HelloLandingViewModel());
     });
   }
+  
+  @override
+  void dispose() {}
 }
