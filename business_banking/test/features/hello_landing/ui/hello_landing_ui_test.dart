@@ -5,13 +5,11 @@ import 'package:business_banking/features/hello_landing/ui/hello_landing_present
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../bloc/hello_landing_bloc_mock.dart';
-
 void main() {
-  testWidgets('HelloLanding, with mocked bloc', (tester) async {
+  testWidgets('HelloLanding, with true bloc', (tester) async {
     final testWidget = MaterialApp(
         home: BlocProvider<HelloLandingBloc>(
-            create: (_) => HelloLandingBlocMock(), child: HelloLandingWidget()));
+            create: (_) => HelloLandingBloc(), child: HelloLandingWidget()));
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
