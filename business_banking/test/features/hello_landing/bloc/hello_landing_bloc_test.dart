@@ -3,5 +3,11 @@ import 'package:business_banking/features/hello_landing/model/hello_landing_view
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  
+  test('HelloLandingBloc gets view model', () {
+    final bloc = HelloLandingBloc();
+
+    bloc.helloLandingViewModelPipe.receive.listen(expectAsync1((model) {
+      expect(model, isA<HelloLandingViewModel>());
+    }));
+  });
 }
