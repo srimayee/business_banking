@@ -24,6 +24,10 @@ class CashAccountsUseCase extends UseCase {
   }
   
   CashAccountsViewModel buildViewModel(CashAccountsEntity entity) {
-    return CashAccountsViewModel();
+    return CashAccountsViewModel(
+      name: entity.name,
+      lastFour: entity.lastFour,
+      balance: entity.balance
+    );
   }
 }

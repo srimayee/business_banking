@@ -7,7 +7,7 @@ class CashAccountsService extends EitherService<JsonRequestModel, CashAccountsSe
   CashAccountsService() : super(
     method: RestMethod.post,
     restApi: ExampleLocator().api,
-    path: 'hello-landing'
+    path: 'accounts'
   );
   
   @override

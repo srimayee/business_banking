@@ -11,6 +11,10 @@ class CashAccountsServiceAdapter extends ServiceAdapter<CashAccountsEntity,
   @override
   CashAccountsEntity createEntity(
       CashAccountsEntity initialEntity, CashAccountsServiceResponseModel responseModel) {
-    return initialEntity.merge(errors: <EntityError>[]);
+    return initialEntity.merge(
+      name: responseModel.name,
+      lastFour: responseModel.lastFour,
+      balance: responseModel.balance
+    );
   }
 }

@@ -4,7 +4,14 @@ import 'package:equatable/equatable.dart';
 class CashAccountsServiceResponseModel extends Equatable
     implements JsonResponseModel {
 
-  CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json);
+  final String name;
+  final int lastFour;
+  final double balance;
+  
+  CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
+  : name = json['name'] ?? '',
+    lastFour = json['lastFour'] ?? 0,
+    balance = json['balance'] ?? 0.0;
 
   @override
   List<Object> get props => [];

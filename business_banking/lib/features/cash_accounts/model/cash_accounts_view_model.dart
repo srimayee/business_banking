@@ -1,15 +1,15 @@
 import 'package:clean_framework/clean_framework.dart';
 
 class CashAccountsViewModel extends ViewModel {
-  final String accountName;
-  final int accountLastFour;
-  final double accountBalance;
+  final String name;
+  final int lastFour;
+  final double balance;
   
   CashAccountsViewModel({
-    this.accountName,
-    this.accountLastFour,
-    this.accountBalance
-  }) : assert(accountName != null &&
-              accountLastFour != null &&
-              accountBalance != null);
+    this.name,
+    this.lastFour,
+    this.balance
+  }) : assert(name != null &&
+              lastFour != null &&
+              balance != null);
 }
