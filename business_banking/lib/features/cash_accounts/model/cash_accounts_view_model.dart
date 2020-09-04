@@ -2,7 +2,7 @@ import 'package:clean_framework/clean_framework.dart';
 
 class CashAccountsViewModel extends ViewModel {
   final String name;
-  final int lastFour;
+  final String lastFour;
   final double balance;
   
   CashAccountsViewModel({

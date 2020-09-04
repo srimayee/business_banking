@@ -12,15 +12,25 @@ void main() {
 
     bloc.helloLandingViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<CashAccountsViewModel>());
+      expect(model.name, 'Employee Checking');
+      expect(model.lastFour.toString(), '5462');
+      expect(model.balance.toString(), '56423.52');
     }));
   });
   
   test('Entity is created by service adapter', () {
     final entity = CashAccountsServiceAdapter().createEntity(
         CashAccountsEntity(),
-        CashAccountsServiceResponseModel.fromJson({}));
+        CashAccountsServiceResponseModel.fromJson({
+          'name': 'Employee Checking',
+          'lastFour': '5462',
+          'balance': 56423.52
+        }));
 
-    expect(entity,
-        CashAccountsEntity());
+    expect(entity, CashAccountsEntity(
+      name: 'Employee Checking',
+      lastFour: '5462',
+      balance: 56423.52
+    ));
   });
 }

@@ -15,6 +15,6 @@ class CashAccountsBloc extends Bloc {
 
   CashAccountsBloc({CashAccountsService helloLandingService}) {
     _useCase = CashAccountsUseCase((viewModel) => helloLandingViewModelPipe.send(viewModel));
-    helloLandingViewModelPipe.onListen(() => _useCase.execute());
+    helloLandingViewModelPipe.onListen(() => _useCase.create());
   }
 }

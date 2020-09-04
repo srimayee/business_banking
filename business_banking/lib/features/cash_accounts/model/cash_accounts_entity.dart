@@ -2,16 +2,16 @@ import 'package:clean_framework/clean_framework.dart';
 
 class CashAccountsEntity extends Entity {
   final String name;
-  final int lastFour;
+  final String lastFour;
   final double balance;
   
   CashAccountsEntity(
     {List<EntityError> errors = const [],
      String name,
-     int lastFour,
-     this.balance = 0.0})
-    : name = name ?? '',
-      lastFour = lastFour ?? 0000,
+     String lastFour,
+     this.balance = 0.00})
+    : name = name ?? 'Account',
+      lastFour = lastFour ?? '0000',
       super(errors: errors);
   
   @override
@@ -20,7 +20,7 @@ class CashAccountsEntity extends Entity {
   ];
   
   @override
-  merge({errors, String name, int lastFour, double balance}) {
+  merge({errors, String name, String lastFour, double balance}) {
     return CashAccountsEntity(
       errors: errors ?? this.errors,
       name: name ?? this.name,

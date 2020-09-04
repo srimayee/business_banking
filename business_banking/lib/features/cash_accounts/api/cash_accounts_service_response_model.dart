@@ -5,13 +5,13 @@ class CashAccountsServiceResponseModel extends Equatable
     implements JsonResponseModel {
 
   final String name;
-  final int lastFour;
+  final String lastFour;
   final double balance;
   
   CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
-  : name = json['name'] ?? '',
+  : name = json['name'] ?? 'Account',
     lastFour = json['lastFour'] ?? 0,
-    balance = json['balance'] ?? 0.0;
+    balance = json['balance'] ?? 0.00;
 
   @override
   List<Object> get props => [];
