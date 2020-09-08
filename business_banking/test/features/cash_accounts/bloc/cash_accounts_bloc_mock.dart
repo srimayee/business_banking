@@ -10,8 +10,8 @@ class CashAccountsBlocMock extends Fake implements CashAccountsBloc {
     cashAccountsViewModelPipe.onListen(() {
       cashAccountsViewModelPipe.send(CashAccountsViewModel(
           name: 'Employee Checking',
-          lastFour: '5462',
-          balance: 56423.52
+          lastFour: '6542',
+          balance: 3545.54
         ));
     });
   }

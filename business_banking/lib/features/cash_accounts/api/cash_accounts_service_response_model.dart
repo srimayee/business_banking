@@ -9,10 +9,10 @@ class CashAccountsServiceResponseModel extends Equatable
   final double balance;
   
   CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
-  : name = json['name'] ?? 'Account',
+  : name = json['type'] ?? 'Account',
     lastFour = json['lastFour'] ?? 0,
     balance = json['balance'] ?? 0.00;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [name, lastFour, balance];
 }
