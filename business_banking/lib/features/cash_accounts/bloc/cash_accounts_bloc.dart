@@ -6,15 +6,15 @@ import 'cash_accounts_usecase.dart';
 class CashAccountsBloc extends Bloc {
   CashAccountsUseCase _useCase;
 
-  final helloLandingViewModelPipe = Pipe<CashAccountsViewModel>();
+  final cashAccountsViewModelPipe = Pipe<CashAccountsViewModel>();
 
   @override
   void dispose() {
-    helloLandingViewModelPipe.dispose();
+    cashAccountsViewModelPipe.dispose();
   }
 
-  CashAccountsBloc({CashAccountsService helloLandingService}) {
-    _useCase = CashAccountsUseCase((viewModel) => helloLandingViewModelPipe.send(viewModel));
-    helloLandingViewModelPipe.onListen(() => _useCase.create());
+  CashAccountsBloc({CashAccountsService cashAccountsService}) {
+    _useCase = CashAccountsUseCase((viewModel) => cashAccountsViewModelPipe.send(viewModel));
+    cashAccountsViewModelPipe.onListen(() => _useCase.create());
   }
 }

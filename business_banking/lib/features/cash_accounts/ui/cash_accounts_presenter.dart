@@ -8,7 +8,7 @@ import 'cash_accounts_screen.dart';
 class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsViewModel, CashAccountsScreen> {
   @override
   Stream<CashAccountsViewModel> getViewModelStream(CashAccountsBloc bloc) {
-    return bloc.helloLandingViewModelPipe.receive;
+    return bloc.cashAccountsViewModelPipe.receive;
   }
   
   @override

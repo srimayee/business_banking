@@ -10,7 +10,7 @@ void main() {
   test('CashAccountsBloc gets view model', () {
     final bloc = CashAccountsBloc();
 
-    bloc.helloLandingViewModelPipe.receive.listen(expectAsync1((model) {
+    bloc.cashAccountsViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<CashAccountsViewModel>());
       expect(model.name, 'Employee Checking');
       expect(model.lastFour.toString(), '5462');
