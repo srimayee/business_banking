@@ -28,4 +28,10 @@ class CashAccountsEntity extends Entity {
       balance: balance ?? this.balance
     );
   }
+  
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "$name $lastFour $balance";
+  }
 }

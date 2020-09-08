@@ -17,8 +17,8 @@ class ExampleLocator implements Locator {
   Connectivity connectivity = AlwaysOnlineConnectivity();
 
   @override
-  Logger logger = ConsoleLogger(LogLevel.nothing);
-  SimpleRestApi api = SimpleRestApi(baseUrl: 'localhost:3001'); // Points to Mockoon instance
+  Logger logger = ConsoleLogger(LogLevel.verbose);
+  SimpleRestApi api = SimpleRestApi(baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
 
   Repository repository = Repository();
 }

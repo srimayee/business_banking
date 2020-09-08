@@ -1,3 +1,4 @@
+import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_service_adapter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_entity.dart';
@@ -21,8 +22,10 @@ class CashAccountsUseCase extends UseCase {
     } else {
       _scope.subscription = _notifySubscribers;
     }
-    final entity = ExampleLocator().repository.get<CashAccountsEntity>(_scope);
-    _viewModelCallBack(buildViewModel(entity));
+    
+    await ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope, CashAccountsServiceAdapter());
   }
   
   void _notifySubscribers(entity) {

@@ -28,20 +28,4 @@ void main() {
       expect(model.balance.toString(), '3545.54');
     }));
   });
-  
-  test('Entity is created by service adapter', () {
-    final entity = CashAccountsServiceAdapter().createEntity(
-        CashAccountsEntity(),
-        CashAccountsServiceResponseModel.fromJson({
-          'name': 'Employee Checking',
-          'lastFour': '6542',
-          'balance': 3545.54
-        }));
-
-    expect(entity, CashAccountsEntity(
-      name: 'Employee Checking',
-      lastFour: '6542',
-      balance: 3545.54
-    ));
-  });
 }

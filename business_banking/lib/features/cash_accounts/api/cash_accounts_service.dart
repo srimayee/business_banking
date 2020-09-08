@@ -5,7 +5,7 @@ import 'cash_accounts_service_response_model.dart';
 
 class CashAccountsService extends EitherService<JsonRequestModel, CashAccountsServiceResponseModel> {
   CashAccountsService() : super(
-    method: RestMethod.post,
+    method: RestMethod.get,
     restApi: ExampleLocator().api,
     path: 'accounts'
   );
