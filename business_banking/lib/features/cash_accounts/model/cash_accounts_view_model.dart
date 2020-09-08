@@ -1,4 +1,5 @@
 import 'package:clean_framework/clean_framework.dart';
+import 'package:flutter/material.dart';
 
 class CashAccountsViewModel extends ViewModel {
   final String name;
@@ -6,9 +7,9 @@ class CashAccountsViewModel extends ViewModel {
   final double balance;
   
   CashAccountsViewModel({
-    this.name,
-    this.lastFour,
-    this.balance
+    @required this.name,
+    @required this.lastFour,
+    @required this.balance
   }) : assert(name != null &&
               lastFour != null &&
               balance != null);
