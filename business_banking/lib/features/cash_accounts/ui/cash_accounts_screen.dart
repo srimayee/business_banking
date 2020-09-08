@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:flutter/material.dart';
@@ -19,15 +18,16 @@ class CashAccountsScreen extends Screen {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
+          title: Text('Business Banking'),
         ),
         backgroundColor: Colors.grey[300],
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AccountCard(viewModel: viewModel),
+              AccountCard(viewModel: viewModel)
             ],
-          )
+          ),
         ),
       ),
     );
@@ -46,20 +46,19 @@ class AccountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 125,
-      color: Colors.red, // This is for alignment testing
       child: Card(
         color: Colors.white,
         shadowColor: Colors.grey[500],
         elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Row(
                   children: [
-                    Text(
+                    Text( //TODO: Find solution to auto-size text to avoid overflow
                       viewModel.name + ' *' + viewModel.lastFour.toString(),
                       style: TextStyle(
                         fontSize: 30.0,
