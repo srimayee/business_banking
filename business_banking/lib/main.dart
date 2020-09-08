@@ -14,9 +14,6 @@ void main() {
       statusBarColor: Colors.green
     )
   );
-  SystemChrome.setPreferredOrientations(
-    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
-  );
 
   runApp(
     MaterialApp(
