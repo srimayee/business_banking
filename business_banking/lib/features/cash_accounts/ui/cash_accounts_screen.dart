@@ -6,13 +6,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class CashAccountsScreen extends Screen {
   final CashAccountsViewModel viewModel;
-  
-  CashAccountsScreen({
-    @required this.viewModel
-  }) : assert(() {
-    return viewModel != null;
-  } ());
-  
+  final VoidCallback navigateToAccountDetail;
+
+  CashAccountsScreen(
+      {@required this.viewModel, @required this.navigateToAccountDetail})
+      : assert(() {
+          return viewModel != null;
+        }());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +27,12 @@ class CashAccountsScreen extends Screen {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AccountCard(viewModel: viewModel)
+              GestureDetector(
+                child: AccountCard(viewModel: viewModel),
+                onTap: () {
+                  navigateToAccountDetail();
+                },
+              )
             ],
           ),
         ),
@@ -77,17 +83,12 @@ class AccountCard extends StatelessWidget {
                   children: [
                     Text(
                       "Account Balance:",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 17.0
-                      ),
+                      style: TextStyle(color: Colors.black54, fontSize: 17.0),
                     ),
                     Text(
                       '\$' + viewModel.balance.toStringAsFixed(2),
                       style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w300
-                      ),
+                          fontSize: 25.0, fontWeight: FontWeight.w300),
                     )
                   ],
                 ),

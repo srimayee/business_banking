@@ -5,8 +5,10 @@ import 'package:business_banking/features/account_detail/model/account_detail_vi
 
 class AccountDetailScreen extends Screen {
   final AccountDetailViewModel viewModel;
+  final VoidCallback navigateToCashAccounts;
 
-  AccountDetailScreen({@required this.viewModel})
+  AccountDetailScreen(
+      {@required this.viewModel, @required this.navigateToCashAccounts})
       : assert(() {
           return viewModel != null;
         }());
@@ -17,12 +19,15 @@ class AccountDetailScreen extends Screen {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          leading: IconButton(
-              icon: Icon(
-                Icons.chevron_left,
-                size: 40.0,
-              ),
-              onPressed: null),
+          leading: GestureDetector(
+            child: Icon(
+              Icons.chevron_left,
+              size: 40.0,
+            ),
+            onTap: () {
+              navigateToCashAccounts();
+            },
+          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -91,22 +96,30 @@ class AccountDetailScreen extends Screen {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Account Type: ' + viewModel.accountType, style: TextStyle(fontSize: 15.0)),
+                    Text('Account Type: ' + viewModel.accountType,
+                        style: TextStyle(fontSize: 15.0)),
                   ],
                 ),
                 const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Routing Number: ' + viewModel.routingNumber.toString(), style: TextStyle(fontSize: 15.0)),
+                    Text(
+                        'Routing Number: ' + viewModel.routingNumber.toString(),
+                        style: TextStyle(fontSize: 15.0)),
                   ],
                 ),
                 const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Account Number: ••••••' + viewModel.lastFour, style: TextStyle(fontSize: 15.0)),
-                    Text('Show', style: TextStyle(decoration: TextDecoration.underline, fontSize: 15.0),)
+                    Text('Account Number: ••••••' + viewModel.lastFour,
+                        style: TextStyle(fontSize: 15.0)),
+                    Text(
+                      'Show',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline, fontSize: 15.0),
+                    )
                   ],
                 )
               ],
@@ -121,15 +134,10 @@ class AccountDetailScreen extends Screen {
 Text pendingCheck(double pendingTransactions) {
   if (pendingTransactions >= 0.00) {
     return Text('\$' + pendingTransactions.toStringAsFixed(2),
-        style: TextStyle(
-          fontSize: 15.0
-        ));
+        style: TextStyle(fontSize: 15.0));
   } else {
     return Text('-\$' + pendingTransactions.toStringAsFixed(2).substring(1),
         style: TextStyle(
-          fontSize: 15.0,
-          fontWeight: FontWeight.bold,
-          color: Colors.red
-        ));
+            fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.red));
   }
 }

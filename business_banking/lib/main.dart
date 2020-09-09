@@ -3,9 +3,7 @@ import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
-
 import 'example_locator.dart';
-import 'features/account_detail/ui/account_detail_widget.dart';
 
 void main() {
   logger().setLogLevel(LogLevel.verbose);
@@ -18,7 +16,7 @@ void main() {
 
   runApp(
     MaterialApp(
-      home: AccountDetailWidget(),
+      home: CashAccountsWidget(),
       debugShowCheckedModeBanner: false,
     ),
   );

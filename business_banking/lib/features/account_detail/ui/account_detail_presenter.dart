@@ -5,16 +5,25 @@ import 'package:business_banking/features/account_detail/model/account_detail_vi
 import 'package:business_banking/features/account_detail/bloc/account_detail_bloc.dart';
 import 'account_detail_screen.dart';
 
-class AccountDetailPresenter extends Presenter<AccountDetailBloc, AccountDetailViewModel, AccountDetailScreen> {
+class AccountDetailPresenter extends Presenter<AccountDetailBloc,
+    AccountDetailViewModel, AccountDetailScreen> {
   @override
   Stream<AccountDetailViewModel> getViewModelStream(AccountDetailBloc bloc) {
     return bloc.accountDetailViewModelPipe.receive;
   }
-  
+
   @override
-  AccountDetailScreen buildScreen(BuildContext context, AccountDetailBloc bloc, AccountDetailViewModel viewModel) {
+  AccountDetailScreen buildScreen(BuildContext context, AccountDetailBloc bloc,
+      AccountDetailViewModel viewModel) {
     return AccountDetailScreen(
       viewModel: viewModel,
+      navigateToCashAccounts: () {
+        _navigateToCashAccounts(context);
+      },
     );
+  }
+
+  void _navigateToCashAccounts(BuildContext context) {
+    Navigator.pop(context);
   }
 }
