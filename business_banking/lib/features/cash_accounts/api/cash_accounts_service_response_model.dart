@@ -10,7 +10,7 @@ class CashAccountsServiceResponseModel extends Equatable
   
   CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
   : name = json['type'] ?? 'Account',
-    lastFour = json['lastFour'] ?? 0,
+    lastFour = json['lastFour'] ?? '0000',
     balance = json['balance'] ?? 0.00;
 
   @override
