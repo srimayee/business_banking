@@ -23,7 +23,7 @@ class AccountDetailEntity extends Entity {
       : name = name ?? 'Account',
         lastFour = lastFour ?? '0000',
         accountType = accountType ?? 'Account Checking',
-        routingNumber = routingNumber ?? '000000000',
+        routingNumber = routingNumber ?? 000000000,
         super(errors: errors);
 
   @override

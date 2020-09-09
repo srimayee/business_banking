@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 
 import 'example_locator.dart';
+import 'features/account_detail/ui/account_detail_widget.dart';
 
 void main() {
   logger().setLogLevel(LogLevel.verbose);
@@ -17,7 +18,7 @@ void main() {
 
   runApp(
     MaterialApp(
-      home: CashAccountsWidget(),
+      home: AccountDetailWidget(),
       debugShowCheckedModeBanner: false,
     ),
   );
