@@ -23,6 +23,8 @@ void main() {
       }
     });
     
+    // These will only pass with the specific JSON included in Max's Mockoon environment (as of 9/10/20)
+    
     test('CashAccountsScreen, app bar is displayed', () async {
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
