@@ -20,7 +20,10 @@ class CashAccountsScreen extends Screen {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: Text('Business Banking'),
+          title: Text(
+            'Business Banking',
+            key: Key('CAappBarName')
+          ),
         ),
         backgroundColor: Colors.grey[300],
         body: Center(
@@ -28,7 +31,7 @@ class CashAccountsScreen extends Screen {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               GestureDetector(
-                child: AccountCard(viewModel: viewModel),
+                child: AccountCard(viewModel: viewModel, key: Key('accountCard1'),),
                 onTap: () {
                   navigateToAccountDetail();
                 },
@@ -89,6 +92,7 @@ class AccountCard extends StatelessWidget {
                       '\$' + viewModel.balance.toStringAsFixed(2),
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.w300),
+                      key: Key('balance'),
                     )
                   ],
                 ),

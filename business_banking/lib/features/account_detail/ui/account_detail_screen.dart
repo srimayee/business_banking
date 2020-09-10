@@ -27,12 +27,18 @@ class AccountDetailScreen extends Screen {
             onTap: () {
               navigateToCashAccounts();
             },
+            key: Key('backButton'),
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AutoSizeText(viewModel.name),
-              Text('*' + viewModel.lastFour)
+              AutoSizeText(
+                viewModel.name,
+              ),
+              Text(
+                '*' + viewModel.lastFour,
+                key: Key('ADappBarL4'),
+              )
             ],
           ),
         ),
@@ -45,6 +51,7 @@ class AccountDetailScreen extends Screen {
                 Text(
                   '\$' + viewModel.balance.toStringAsFixed(2),
                   style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w200),
+                  key: Key('bigBalance'),
                 ),
                 const SizedBox(height: 40.0),
                 // Beginning Balance Row
@@ -74,7 +81,8 @@ class AccountDetailScreen extends Screen {
                   children: [
                     Text('Deposit Holds:', style: TextStyle(fontSize: 15.0)),
                     Text('\$' + viewModel.depositHolds.toStringAsFixed(2),
-                        style: TextStyle(fontSize: 15.0))
+                        style: TextStyle(fontSize: 15.0),
+                        key: Key('depHold'))
                   ],
                 ),
                 const SizedBox(height: 10.0),
