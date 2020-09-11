@@ -9,7 +9,7 @@ Following are the instructions for setting up your Mockoon routes for each scree
 Having these routes set correctly and having the Mockoon environment running during your tests is **essential** to these tests passing.  
 Please keep this updated regarding the information you are testing against.  
 For information on installing and setting up Mockoon, please see mockoon.md.  
-An OpenAPI export from Mockoon of the environment can be found in the mockoon folder.
+A JSON export from Mockoon of the environment can be found in the mockoon folder.
 
 ### CashAccounts Screen
 
