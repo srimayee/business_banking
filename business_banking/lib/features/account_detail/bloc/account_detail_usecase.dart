@@ -3,7 +3,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:business_banking/features/account_detail/bloc/account_detail_service_adapter.dart';
 import 'package:business_banking/features/account_detail/model/account_detail_entity.dart';
 import 'package:business_banking/features/account_detail/model/account_detail_view_model.dart';
-import 'package:business_banking/example_locator.dart';
+import 'package:business_banking/locator.dart';
 
 class AccountDetailUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
