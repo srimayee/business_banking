@@ -3,6 +3,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('Banking App Driver Tests:', () {
+    final signInText = find.byValueKey('signInText');
+    final loginButton = find.byValueKey('login_button_key');
     final accountCard = find.byValueKey('accountCard1');
     final cashAccountBalance = find.byValueKey('balance');
     final cashAccountAppBar = find.byValueKey('CAappBarName');
@@ -23,9 +25,15 @@ void main() {
       }
     });
     
-    // These will only pass with the specific JSON included in Max's Mockoon environment (as of 9/10/20)
+    // These will only pass with the specific JSON included in the Mockoon folder
     
-    test('CashAccountsScreen, app bar is displayed', () async {
+    test('LoginScreen, screen is displayed', () async {
+      expect(await driver.getText(signInText), 'Sign In');
+    });
+    
+    test('CashAccountsScreen, navigated to and app bar is displayed', () async {
+      await driver.tap(loginButton);
+      await driver.waitForAbsent(loginButton);
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
     

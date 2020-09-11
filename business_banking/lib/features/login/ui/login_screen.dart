@@ -33,7 +33,8 @@ class LoginScreen extends Screen {
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 32,
-                            color: Colors.lightGreen)))),
+                            color: Colors.lightGreen),
+                        key: Key('signInText'),))),
             Container(
                 color: Colors.white.withOpacity(.8),
                 child: Padding(

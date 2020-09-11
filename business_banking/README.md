@@ -2,6 +2,48 @@
 
 A demo app to showcase the clean framework for a business banking app.
 
+## Setting up your Mockoon environment
+
+Following are the instructions for setting up your Mockoon routes for each screen.  
+*Make sure your port is set to 3001.*  
+Having these routes set correctly and having the Mockoon environment running during your tests is **essential** to these tests passing.  
+Please keep this updated regarding the information you are testing against.
+
+### CashAccounts Screen
+
+| route | method | response |
+| --- | --- | --- |
+| /accounts | GET | 200 |
+
+#### JSON
+```json
+{
+  "type": "Employee Checking",
+  "lastFour": "6542",
+  "balance": 3545.54
+}
+```
+
+### AccountDetail Screen
+
+| route | method | response |
+| --- | --- | --- |
+| /account-details | GET | 200 |
+
+#### JSON
+```json
+{
+  "name": "Employee Checking",
+  "lastFour": "6542",
+  "accountType": "Employee Checking",
+  "routingNum": 746395735,
+  "balance": 3545.54,
+  "begBalance": 3674.43,
+  "penTrans": -128.89,
+  "depHolds": 0.00
+}
+```
+
 ## Getting Started
 
 Commercial/Business app
