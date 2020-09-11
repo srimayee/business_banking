@@ -7,7 +7,8 @@ A demo app to showcase the clean framework for a business banking app.
 Following are the instructions for setting up your Mockoon routes for each screen.  
 *Make sure your port is set to 3001.*  
 Having these routes set correctly and having the Mockoon environment running during your tests is **essential** to these tests passing.  
-Please keep this updated regarding the information you are testing against.
+Please keep this updated regarding the information you are testing against.  
+For information on installing and setting up Mockoon, please see [mockoon.md](business_banking/mockoon.md).
 
 ### CashAccounts Screen
 
