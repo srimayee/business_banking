@@ -1,3 +1,4 @@
+import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
@@ -11,7 +12,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
-        _navigateToHelloWorldScreen(context);
+        return;
       } else if (viewModel.serviceStatus == ServiceStatus.fail) {
         _showErrorDialog(context);
       } else if (viewModel.serviceStatus == ServiceStatus.unknown) {
@@ -26,7 +27,8 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       onChangePassword: (value) {
         _onChangePassword(bloc, value);
       },
-      onTapSubmit: () => _onTapSubmit(bloc),
+      // Make login button route to CashAccounts screen, implement login later
+      onTapSubmit: () => _navigateToCashAccountsScreen(context),
     );
   }
 
@@ -38,9 +40,10 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     bloc.passwordPipe.send(password);
   }
 
-  void _onTapSubmit(LoginBloc bloc) {
-    bloc.submitPipe.launch();
-  }
+  // Add back in when login is added
+  // void _onTapSubmit(LoginBloc bloc) {
+  //   bloc.submitPipe.launch();
+  // }
 
   @override
   Stream<LoginViewModel> getViewModelStream(LoginBloc bloc) {
@@ -54,8 +57,12 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     );
   }
 
-  void _navigateToHelloWorldScreen(BuildContext context) {
-    //todo handle logic to navigate to second screen here
+  void _navigateToCashAccountsScreen(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            settings: RouteSettings(name: 'CashAccountsWidget'),
+            builder: (context) => CashAccountsWidget()));
   }
 
   void _showErrorDialog(BuildContext context) {
