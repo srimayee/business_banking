@@ -3,7 +3,7 @@ import 'package:business_banking/features/login/model/login_entity.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:business_banking/example_locator.dart';
+import 'package:business_banking/locator.dart';
 
 class LoginUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
