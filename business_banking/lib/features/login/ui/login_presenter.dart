@@ -2,6 +2,7 @@ import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
+import 'package:business_banking/features/navigation_rail/ui/navigation_rail_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -28,7 +29,9 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      onTapSubmit: () => _navigateToCashAccountsScreen(context),
+      //onTapSubmit: () => _navigateToCashAccountsScreen(context),
+      onTapSubmit: () => _showLoginSuccessDialog(context),
+
     );
   }
 
@@ -96,4 +99,79 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
               ],
             ));
   }
+
+  void _showLoginSuccessDialog(BuildContext context){
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (_) =>  Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    const Icon(Icons.verified_user),
+                    const Flexible(
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Logged in Successfully!',
+                          softWrap: true,key: Key('Form Submit'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 24, bottom: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    RaisedButton(
+                      key: Key('Cash Button'),
+                      child: const Text('Cash Accounts',style: TextStyle(color: Colors.white),),
+                      color: Colors.lightGreen,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                settings: RouteSettings(name: 'CashAccountsWidget'),
+                                builder: (context) => CashAccountsWidget()));
+                      },
+                    ),
+                    RaisedButton(
+                      key: Key('Rail Button'),
+                      child: const Text('NavigationRail',style: TextStyle(color: Colors.white),),
+                      color: Colors.lightGreen,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                settings: RouteSettings(name: 'NavigationRailWidget'),
+                                builder: (context) => NavigationRailWidget()));
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+  }
+
 }
