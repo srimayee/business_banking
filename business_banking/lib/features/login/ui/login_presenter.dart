@@ -1,4 +1,4 @@
-import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
+import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
@@ -8,8 +8,7 @@ import 'package:flutter/scheduler.dart';
 
 class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   @override
-  LoginScreen buildScreen(
-      BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
+  LoginScreen buildScreen(BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
         return;
@@ -28,7 +27,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      onTapSubmit: () => _navigateToCashAccountsScreen(context),
+      onTapSubmit: () => _navigateToHubScreen(context),
     );
   }
 
@@ -57,43 +56,49 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     );
   }
 
-  void _navigateToCashAccountsScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            settings: RouteSettings(name: 'CashAccountsWidget'),
-            builder: (context) => CashAccountsWidget()));
+  void _navigateToHubScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'CashAccountsWidget'),
+        builder: (context) => HubScreen(),
+      ),
+    );
   }
 
   void _showErrorDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text('Error'),
-              content: Text('Submit Failed'),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('OK'))
-              ],
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Error'),
+        content: Text('Submit Failed'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
+    );
   }
 
   void _showInvalidDataDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text('Invalid'),
-              content: Text('Data entered is incorrect.'),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('OK'))
-              ],
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Invalid'),
+        content: Text('Data entered is incorrect.'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
+    );
   }
 }

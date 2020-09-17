@@ -8,11 +8,12 @@ class LoginScreen extends Screen {
   final Function onChangePassword;
   final Function onTapSubmit;
 
-  LoginScreen(
-      {this.onChangeUsermame,
-      this.onChangePassword,
-      this.onTapSubmit,
-      this.viewModel});
+  LoginScreen({
+    this.onChangeUsermame,
+    this.onChangePassword,
+    this.onTapSubmit,
+    this.viewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +27,33 @@ class LoginScreen extends Screen {
           children: <Widget>[
             SizedBox(height: media.width * .1),
             Container(
-                color: Colors.white.withOpacity(.8),
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 12, 10, 0),
-                    child: Text('Sign In',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 32,
-                            color: Colors.lightGreen),
-                        key: Key('signInText'),))),
+              color: Colors.white.withOpacity(.8),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 12, 10, 0),
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 32, color: Colors.lightGreen),
+                  key: Key('signInText'),
+                ),
+              ),
+            ),
             Container(
-                color: Colors.white.withOpacity(.8),
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
-                    child: Text('Securely access business banking information',
-                        style:
-                            TextStyle(fontSize: 20, color: Colors.black54)))),
+              color: Colors.white.withOpacity(.8),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
+                child: Text(
+                  'Securely access business banking information',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: media.width * .03),
-            _textFormField(Key('usename_key'), 'Huntington Username',
-                onChangeUsermame, TextInputType.emailAddress),
+            _textFormField(Key('usename_key'), 'Huntington Username', onChangeUsermame, TextInputType.emailAddress),
             SizedBox(height: media.width * .01),
-            _textFormField(Key('password_key'), 'Password', onChangePassword,
-                TextInputType.visiblePassword),
+            _textFormField(Key('password_key'), 'Password', onChangePassword, TextInputType.visiblePassword),
             SizedBox(height: media.width * .02),
             RaisedButton(
               key: Key('login_button_key'),
@@ -61,8 +67,7 @@ class LoginScreen extends Screen {
     );
   }
 
-  Widget _textFormField(Key key, String hintText, Function onChangeTextField,
-      TextInputType textInputType) {
+  Widget _textFormField(Key key, String hintText, Function onChangeTextField, TextInputType textInputType) {
     return TextFormField(
       key: key,
       keyboardType: textInputType,
@@ -75,8 +80,7 @@ class LoginScreen extends Screen {
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.lightGreen, width: 2.0),
         ),
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
       ),
       onChanged: (value) {
         onChangeTextField(value);
