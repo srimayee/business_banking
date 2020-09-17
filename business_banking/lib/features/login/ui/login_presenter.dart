@@ -8,8 +8,7 @@ import 'package:flutter/scheduler.dart';
 
 class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   @override
-  LoginScreen buildScreen(
-      BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
+  LoginScreen buildScreen(BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
         return;
@@ -58,11 +57,8 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   }
 
   void _navigateToCashAccountsScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            settings: RouteSettings(name: 'CashAccountsWidget'),
-            builder: (context) => CashAccountsWidget()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(settings: RouteSettings(name: 'CashAccountsWidget'), builder: (context) => CashAccountsWidget()));
   }
 
   void _showErrorDialog(BuildContext context) {
