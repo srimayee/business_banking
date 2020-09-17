@@ -1,4 +1,4 @@
-import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
+import 'package:business_banking/features/hub/ui/hub_feature_widget.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
@@ -58,38 +58,47 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
 
   void _navigateToCashAccountsScreen(BuildContext context) {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(settings: RouteSettings(name: 'CashAccountsWidget'), builder: (context) => CashAccountsWidget()));
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'CashAccountsWidget'),
+        builder: (context) => HubFeatureWidget(),
+      ),
+    );
   }
 
   void _showErrorDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text('Error'),
-              content: Text('Submit Failed'),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('OK'))
-              ],
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Error'),
+        content: Text('Submit Failed'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
+    );
   }
 
   void _showInvalidDataDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text('Invalid'),
-              content: Text('Data entered is incorrect.'),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('OK'))
-              ],
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Invalid'),
+        content: Text('Data entered is incorrect.'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
+    );
   }
 }
