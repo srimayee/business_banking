@@ -1,4 +1,4 @@
-import 'package:business_banking/features/hub/ui/hub_feature_widget.dart';
+import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
@@ -27,7 +27,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      onTapSubmit: () => _navigateToCashAccountsScreen(context),
+      onTapSubmit: () => _navigateToHubScreen(context),
     );
   }
 
@@ -56,12 +56,12 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     );
   }
 
-  void _navigateToCashAccountsScreen(BuildContext context) {
+  void _navigateToHubScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         settings: RouteSettings(name: 'CashAccountsWidget'),
-        builder: (context) => HubFeatureWidget(),
+        builder: (context) => HubScreen(),
       ),
     );
   }
