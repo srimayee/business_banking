@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CashAccountsScreen extends Screen {
   final CashAccountsViewModel viewModel;
@@ -43,8 +44,12 @@ class AccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Locale Currency Conversion
+    /// ToDo() make this a global reference somewhere
+    var _usdCurrency = new NumberFormat("#,##0.00", "en_US");
+
     return Container(
-      height: 125,
+      height: 160,
       padding: EdgeInsets.all(5.0),
       child: Card(
         color: Colors.white,
@@ -60,19 +65,51 @@ class AccountCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        viewModel.name,
+                        viewModel.accountTitle,
                         style: TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 23.0,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     AutoSizeText(
-                      ' *' + viewModel.lastFour.toString(),
+                      ' ...' + viewModel.accountNumber.toString(),
                       style: TextStyle(
-                        fontSize: 25.0,
+                        fontSize: 23.0,
                       ),
                     ),
+                  ],
+                ),
+              ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Account Balance:",
+                        style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                      ),
+                      Text(
+                        "\$" + _usdCurrency.format(viewModel.accountBalance),
+                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+                        key: Key('accountBalance'),
+                      )
+                    ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Account Type:",
+                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
+                    ),
+                    Text(
+                      viewModel.accountType,
+                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300),
+                      key: Key('accountType'),
+                    )
                   ],
                 ),
               ),
@@ -81,13 +118,13 @@ class AccountCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Account Balance:",
-                      style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                      "Account Status:",
+                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
                     ),
                     Text(
-                      '\$' + viewModel.balance.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
-                      key: Key('balance'),
+                      viewModel.accountStatus,
+                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300),
+                      key: Key('accountStatus'),
                     )
                   ],
                 ),
