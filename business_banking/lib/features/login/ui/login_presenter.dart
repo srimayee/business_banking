@@ -29,8 +29,8 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      //onTapSubmit: () => _navigateToCashAccountsScreen(context),
-      onTapSubmit: () => _showLoginSuccessDialog(context),
+      onTapSubmit: () => _navigateToCashAccountsScreen(context),
+      //onTapSubmit: () => _showLoginSuccessDialog(context),
 
     );
   }
@@ -61,11 +61,18 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   }
 
   void _navigateToCashAccountsScreen(BuildContext context) {
+
     Navigator.push(
         context,
         MaterialPageRoute(
+            settings: RouteSettings(name: 'NavigationRailWidget'),
+            builder: (context) => NavigationRailWidget()));
+
+    /*Navigator.push(
+        context,
+        MaterialPageRoute(
             settings: RouteSettings(name: 'CashAccountsWidget'),
-            builder: (context) => CashAccountsWidget()));
+            builder: (context) => CashAccountsWidget()));*/
   }
 
   void _showErrorDialog(BuildContext context) {

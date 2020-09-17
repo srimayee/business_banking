@@ -33,18 +33,11 @@ void main() {
     NavigationRailBloc navigationRailBloc = NavigationRailBloc();
     await tester.pumpWidget(makeTestableWidget(child: navigationRailBloc));
 
-    final button1Text = find.byKey(Key('Button1'));
+    final button1Text = find.byKey(Key('Cash Accounts'));
     expect(button1Text, findsOneWidget);
 
-
-    final button2Text = find.byKey(Key('Button2'));
+    final button2Text = find.byKey(Key('Account Details'));
     expect(button2Text, findsOneWidget);
-
-    final button3Text = find.byKey(Key('Button3'));
-    expect(button3Text, findsOneWidget);
-
-    final button4Text = find.byKey(Key('Button4'));
-    expect(button4Text, findsOneWidget);
 
     tester.pump();
 

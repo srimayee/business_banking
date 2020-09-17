@@ -1,3 +1,5 @@
+import 'package:business_banking/features/account_detail/ui/account_detail_widget.dart';
+import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/navigation_rail/bloc/rail_bloc.dart';
 import 'package:business_banking/features/navigation_rail/bloc/rail_event.dart';
 import 'package:business_banking/features/navigation_rail/bloc/rail_state.dart';
@@ -22,7 +24,7 @@ class NavigationRailView extends StatelessWidget {
         appBar: AppBar(
             backgroundColor: Colors.green,
             title: const Text(
-              'Navigation Rail View',
+              'Business Banking',
               key: Key('Toolbar Text'),
             )),
         body: BlocProvider(
@@ -35,10 +37,13 @@ class NavigationRailView extends StatelessWidget {
 }
 
 class NavigationRailBloc extends StatelessWidget {
-  final List<Widget> screens = [Button1(), Button2(), Button3(), Button4()];
+
+  final List<Widget> screens = [CashAccountsWidget(), AccountDetailWidget()];
 
   @override
   Widget build(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
+    print('Device Width: $deviceWidth');
     return SafeArea(
         child: BlocProvider(
       create: (context) => RailBloc(),
@@ -46,13 +51,49 @@ class NavigationRailBloc extends StatelessWidget {
         builder: (_, state) {
           if (state is InitialHomeState) {
             return Scaffold(
-              body: Row(
+              bottomNavigationBar: (deviceWidth < 600)
+                  ? BottomNavigationBar(
+                backgroundColor: Colors.grey,
+                currentIndex: state.selectedIndex,
+                onTap: (index) {
+                  BlocProvider.of<RailBloc>(_).add(
+                      SelectDestinationEvent(selectedIndex: index));
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      title: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Text(
+                          "Cash Accounts",
+                          style: TextStyle(color: Colors.white),
+                          key:Key('Cash Accounts'),
+                        ),
+                      )
+                  ),
+                  BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      title: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Text(
+                          "Account Details",
+                          style: TextStyle(color: Colors.white),
+                          key:Key('Account Details'),
+                        ),
+                      )
+                  ),
+
+                ],
+              )
+                  : null,
+              body:(deviceWidth < 600)
+                  ? screens[state.selectedIndex]
+                  :  Row(
                 children: <Widget>[
                   LayoutBuilder(builder: (context, constraint) {
                     return SingleChildScrollView(
                       child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(minHeight: constraint.maxHeight),
+                        constraints: BoxConstraints(minHeight: constraint.maxHeight),
                         child: IntrinsicHeight(
                           child: NavigationRail(
                             backgroundColor: Colors.grey,
@@ -68,16 +109,7 @@ class NavigationRailBloc extends StatelessWidget {
                               BlocProvider.of<RailBloc>(_).add(
                                   SelectDestinationEvent(selectedIndex: index));
                             },
-                            groupAlignment: 1.0,
                             labelType: NavigationRailLabelType.all,
-                            leading: Column(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  backgroundImage: AssetImage('images/f1.jpg'),
-                                ),
-                                SizedBox(height: 20),
-                              ],
-                            ),
                             destinations: [
                               NavigationRailDestination(
                                   icon: SizedBox.shrink(),
@@ -87,9 +119,9 @@ class NavigationRailBloc extends StatelessWidget {
                                     child: RotatedBox(
                                       quarterTurns: -1,
                                       child: Text(
-                                        "Button1",
+                                        "Cash Accounts",
                                         style: TextStyle(color: Colors.white),
-                                        key:Key('Button1'),
+                                        key:Key('Cash Accounts'),
                                       ),
                                     ),
                                   )),
@@ -101,40 +133,12 @@ class NavigationRailBloc extends StatelessWidget {
                                     child: RotatedBox(
                                       quarterTurns: -1,
                                       child: Text(
-                                        "Button2",
+                                        "Account Details",
                                         style: TextStyle(color: Colors.white),
-                                        key:Key('Button2'),
+                                        key:Key('Account Details'),
                                       ),
                                     ),
-                                  )),
-                              NavigationRailDestination(
-                                  icon: SizedBox.shrink(),
-                                  label: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 24),
-                                    child: RotatedBox(
-                                      quarterTurns: -1,
-                                      child: Text(
-                                        "Button3",
-                                        style: TextStyle(color: Colors.white),
-                                        key:Key('Button3'),
-                                      ),
-                                    ),
-                                  )),
-                              NavigationRailDestination(
-                                  icon: SizedBox.shrink(),
-                                  label: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 24),
-                                    child: RotatedBox(
-                                      quarterTurns: -1,
-                                      child: Text(
-                                        "Button4",
-                                        style: TextStyle(color: Colors.white),
-                                        key:Key('Button4'),
-                                      ),
-                                    ),
-                                  ))
+                                  ),),
                             ],
                           ),
                         ),
@@ -156,115 +160,5 @@ class NavigationRailBloc extends StatelessWidget {
         },
       ),
     ));
-  }
-}
-
-class Button1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12.0),
-      child: ListView(
-        children: <Widget>[
-          SizedBox(width: 20),
-          Text(
-            "Button1",
-            style: TextStyle(fontSize: 24, color: Colors.black),
-          ),
-          SizedBox(height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/f1.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/f2.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/f3.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/f6.jpg')),
-        ],
-      ),
-    );
-  }
-}
-
-class Button2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12.0),
-      child: ListView(
-        children: <Widget>[
-          SizedBox(width: 20),
-          Text(
-            "Button2",
-            style: TextStyle(fontSize: 24, color: Colors.black),
-          ),
-          SizedBox(height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n1.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n2.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n3.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n4.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n5.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n6.jpg')),
-          Divider(color: Colors.transparent, height: 20),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/n8.jpg')),
-        ],
-      ),
-    );
-  }
-}
-
-class Button3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 28),
-      child: Center(
-        child: Text(
-          "Hello world Button3",
-          style: TextStyle(fontSize: 24, color: Colors.black),
-        ),
-      ),
-    );
-  }
-}
-
-class Button4 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 28),
-      child: Center(
-        child: Text(
-          "Hello world Button4",
-          style: TextStyle(fontSize: 24, color: Colors.black),
-        ),
-      ),
-    );
   }
 }
