@@ -6,7 +6,7 @@ void main() {
     final signInText = find.byValueKey('signInText');
     final loginButton = find.byValueKey('login_button_key');
     final accountCard = find.byValueKey('accountCard1');
-    final cashAccountBalance = find.byValueKey('balance');
+    final cashAccountBalance = find.byValueKey('accountBalance');
     final cashAccountAppBar = find.byValueKey('CAappBarName');
     final backButton = find.byValueKey('backButton');
     final accountDetailAppBar = find.byValueKey('ADappBarL4');
