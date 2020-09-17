@@ -1,7 +1,7 @@
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_bloc.dart';
-import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
-import 'package:business_banking/features/cash_accounts/ui/cash_accounts_presenter.dart';
+import 'package:business_banking/features/cash_accounts/bloc/bloc.dart';
+import 'package:business_banking/features/cash_accounts/ui/widget.dart';
+import 'package:business_banking/features/cash_accounts/ui/presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

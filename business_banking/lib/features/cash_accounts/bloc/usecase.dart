@@ -1,7 +1,7 @@
-import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_service_adapter.dart';
+import 'package:business_banking/features/cash_accounts/bloc/service_adapter.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_entity.dart';
+import 'package:business_banking/features/cash_accounts/model/view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/entity.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
@@ -35,6 +35,7 @@ class CashAccountsUseCase extends UseCase {
 
   CashAccountsViewModel buildViewModel(CashAccountsEntity entity) {
     return CashAccountsViewModel(
+        accountType: entity.accountType,
         accountTitle: entity.accountTitle,
         accountNumber: entity.accountNumber,
         accountBalance: entity.accountBalance,

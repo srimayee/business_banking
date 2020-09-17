@@ -20,8 +20,9 @@ class ExampleLocator implements Locator {
   Logger logger = ConsoleLogger(LogLevel.verbose);
 
   /// Points to Mockoon local instance
-  /// If you are testing on a physical device make sure to point to
-  /// the proper endpoint of your local machine: Ex: http://192.1.2.123:3001/
+  /// If you are testing on a physical device or Android Emulator
+  /// make sure to point to the proper endpoint of your local
+  /// machine: Ex: http://192.1.2.123:3001/
   /// Just get the IP address from the localhost machine and replace the
   /// 'localhost' value within the baseUrl.
   SimpleRestApi api = SimpleRestApi(baseUrl: 'http://localhost:3001/');
