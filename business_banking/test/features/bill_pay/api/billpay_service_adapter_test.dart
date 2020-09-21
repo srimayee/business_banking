@@ -1,6 +1,3 @@
-import 'package:business_banking/features/account_detail/api/account_detail_service_response_model.dart';
-import 'package:business_banking/features/account_detail/bloc/account_detail_service_adapter.dart';
-import 'package:business_banking/features/account_detail/model/account_detail_entity.dart';
 import 'package:business_banking/features/billpay/api/billpay_service_response_model.dart';
 import 'package:business_banking/features/billpay/bloc/billpay_service_adapter.dart';
 import 'package:business_banking/features/billpay/model/billpay_entity.dart';
