@@ -6,11 +6,7 @@ class LoginViewModel extends ViewModel {
   final serviceStatus;
   final dataStatus;
 
-  LoginViewModel(
-      {this.username,
-      this.password,
-      this.serviceStatus = ServiceStatus.unknown,
-      this.dataStatus = DataStatus.unknown})
+  LoginViewModel({this.username, this.password, this.serviceStatus = ServiceStatus.unknown, this.dataStatus = DataStatus.unknown})
       : assert(username != null && password != null);
 }
 

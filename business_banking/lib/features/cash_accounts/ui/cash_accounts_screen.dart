@@ -59,11 +59,18 @@ class AccountCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: AutoSizeText(
-                        viewModel.name + ' *' + viewModel.lastFour.toString(),
+                      child: Text(
+                        viewModel.name,
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 25.0,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    AutoSizeText(
+                      ' *' + viewModel.lastFour.toString(),
+                      style: TextStyle(
+                        fontSize: 25.0,
                       ),
                     ),
                   ],
@@ -75,11 +82,11 @@ class AccountCard extends StatelessWidget {
                   children: [
                     Text(
                       "Account Balance:",
-                      style: TextStyle(color: Colors.black54, fontSize: 17.0),
+                      style: TextStyle(color: Colors.black54, fontSize: 18.0),
                     ),
                     Text(
                       '\$' + viewModel.balance.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w300),
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
                       key: Key('balance'),
                     )
                   ],
