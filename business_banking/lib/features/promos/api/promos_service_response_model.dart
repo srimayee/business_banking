@@ -11,4 +11,7 @@ class PromosServiceResponseModel extends Equatable implements JsonResponseModel 
 
   @override
   List<Object> get props => [imageUrl, externalUrl];
+
+  @override
+  bool get stringify => true;
 }
