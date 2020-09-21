@@ -60,7 +60,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(name: 'CashAccountsWidget'),
+        settings: RouteSettings(name: 'HubScreen'),
         builder: (context) => HubScreen(),
       ),
     );
