@@ -39,6 +39,18 @@ class BillPayUI extends StatelessWidget {
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: [
+          DropdownButton<String>(
+            items: <String>['Jim', 'John', 'Jack', 'James', 'Jessica']
+                .map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(value),
+              );
+            }).toList(),
+            onChanged: (_) {
+              //
+            },
+          ),
           TextField(),
           FlatButton(
             key: Key('PayBtn'),
