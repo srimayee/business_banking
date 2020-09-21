@@ -1,3 +1,4 @@
+import 'package:business_banking/features/billpay/ui/bill_screen.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/scheduler.dart';
 
 class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   @override
-  LoginScreen buildScreen(BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
+  LoginScreen buildScreen(
+      BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
         return;
@@ -27,7 +29,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      onTapSubmit: () => _navigateToHubScreen(context),
+      onTapSubmit: () => _navigateToBillPayScreen(context),
     );
   }
 
@@ -62,6 +64,16 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       MaterialPageRoute(
         settings: RouteSettings(name: 'CashAccountsWidget'),
         builder: (context) => HubScreen(),
+      ),
+    );
+  }
+
+  void _navigateToBillPayScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'BillPayFeatureWidget'),
+        builder: (context) => BillScreen(),
       ),
     );
   }
