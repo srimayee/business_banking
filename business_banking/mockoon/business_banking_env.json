@@ -15,19 +15,11 @@
                         "uuid": "",
                         "documentation": "Gets info for CashAccounts screen",
                         "method": "get",
-<<<<<<< HEAD
                         "endpoint": "cash_accounts",
                         "responses": [
                             {
                                 "uuid": "",
                                 "body": "{\n\t\"accountTitle\": \"Checking Account\",\n\t\"accountNumber\": \"6542\",\n\t\"accountBalance\": 3545.54,\n\t\"accountStatus\": \"Active\"\n}",
-=======
-                        "endpoint": "account/getAccounts",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"accountType\": \"Cash\",\n  \"accountTitle\": \"Checking Account\",\n  \"accountNumber\": \"6542\",\n  \"accountBalance\": 3545.54,\n  \"accountStatus\": \"Active\"\n}",
->>>>>>> origin/feat/cash_account_creation_minicard
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -86,19 +78,11 @@
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-<<<<<<< HEAD
                         "endpoint": "transactions/account_transactions",
                         "responses": [
                             {
                                 "uuid": "",
                                 "body": "{\n  \"accountTransactions\": [\n      {\n        \"transactionTitle\": \"MacBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 499.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 499.52\n            }\n          ]\n      }\n    ]\n}",
-=======
-                        "endpoint": "transactions/getAccountTransactions",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "",
->>>>>>> origin/feat/cash_account_creation_minicard
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
