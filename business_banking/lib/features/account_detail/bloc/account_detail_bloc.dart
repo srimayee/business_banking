@@ -14,7 +14,8 @@ class AccountDetailBloc extends Bloc {
   }
 
   AccountDetailBloc({AccountDetailService accountDetailService}) {
-    _useCase = AccountDetailUseCase((viewModel) => accountDetailViewModelPipe.send(viewModel));
+    _useCase = AccountDetailUseCase(
+        (viewModel) => accountDetailViewModelPipe.send(viewModel));
     accountDetailViewModelPipe.onListen(() => _useCase.create());
   }
 }

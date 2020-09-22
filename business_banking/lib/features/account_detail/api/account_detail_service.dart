@@ -9,11 +9,14 @@ class AccountDetailService
       : super(
             method: RestMethod.get,
             restApi: ExampleLocator().api,
-            path: 'account-details');
+            path: 'transactions/account_transactions');
 
   @override
   AccountDetailServiceResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
+    /// Log JSON Response for Cash Accounts Service.
+    /// ToDo() - Set Logging only to Dev environment
+    logger().debug("AccountDetailService JSON: " + jsonResponse.toString());
     return AccountDetailServiceResponseModel.fromJson(jsonResponse);
   }
 }

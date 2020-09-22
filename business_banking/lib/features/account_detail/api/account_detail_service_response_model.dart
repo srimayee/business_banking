@@ -1,36 +1,32 @@
+import 'package:business_banking/features/account_detail/model/account_detail_transaction_details_model.dart';
+import 'package:business_banking/features/account_detail/model/account_detail_transaction_holds_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
 class AccountDetailServiceResponseModel extends Equatable
     implements JsonResponseModel {
-  final String name;
-  final String lastFour;
-  final String accountType;
-  final int routingNumber;
-  final double balance;
-  final double beginningBalance;
-  final double pendingTransactions;
-  final double depositHolds;
+  final String transactionTitle;
+  final String transactionNumber;
+  final String transactionAmount;
+  final String transactionId;
+  final TransactionDetails transactionDetails;
+  final TransactionHolds transactionHolds;
 
   AccountDetailServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : name = json['name'] ?? 'Account',
-        lastFour = json['lastFour'] ?? '0000',
-        accountType = json['accountType'] ?? 'Account Checking',
-        routingNumber = json['routingNum'] ?? 000000000,
-        balance = json['balance'] ?? 0.00,
-        beginningBalance = json['begBalance'] ?? 0.00,
-        pendingTransactions = json['penTrans'] ?? 0.00,
-        depositHolds = json['depHolds'] ?? 0.00;
+      : transactionTitle = json['transactionTitle'],
+        transactionNumber = json['transactionNumber'] ?? '0',
+        transactionAmount = json['transactionAmount'],
+        transactionId = json['transactionId'] ?? '000000000',
+        transactionDetails = json['transactionDetails'],
+        transactionHolds = json['transactionHolds'];
 
   @override
   List<Object> get props => [
-        name,
-        lastFour,
-        accountType,
-        routingNumber,
-        balance,
-        beginningBalance,
-        pendingTransactions,
-        depositHolds
+        transactionTitle,
+        transactionNumber,
+        transactionAmount,
+        transactionId,
+        transactionDetails,
+        transactionHolds
       ];
 }

@@ -12,14 +12,11 @@ class AccountDetailServiceAdapter extends ServiceAdapter<AccountDetailEntity,
   AccountDetailEntity createEntity(AccountDetailEntity initialEntity,
       AccountDetailServiceResponseModel responseModel) {
     return AccountDetailEntity(
-      name: responseModel.name,
-      lastFour: responseModel.lastFour,
-      accountType: responseModel.accountType,
-      routingNumber: responseModel.routingNumber,
-      balance: responseModel.balance,
-      beginningBalance: responseModel.beginningBalance,
-      pendingTransactions: responseModel.pendingTransactions,
-      depositHolds: responseModel.depositHolds
-    );
+        transactionTitle: responseModel.transactionTitle,
+        transactionNumber: responseModel.transactionNumber,
+        transactionAmount: responseModel.transactionAmount,
+        transactionId: responseModel.transactionId,
+        transactionDetails: responseModel.transactionDetails,
+        transactionHolds: responseModel.transactionHolds);
   }
 }

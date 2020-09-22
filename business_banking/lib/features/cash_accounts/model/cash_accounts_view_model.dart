@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CashAccountsViewModel extends ViewModel {
   /// Rest API Accounts Object.
-  final String accountType;
+//  final List<cashAccountsEntity> cashAccountsEntity
   final String accountTitle;
   final String accountNumber;
   final double accountBalance;
@@ -13,13 +13,11 @@ class CashAccountsViewModel extends ViewModel {
       {
 
       /// List required fields.
-      @required this.accountType,
       @required this.accountTitle,
       @required this.accountNumber,
       @required this.accountBalance,
       @required this.accountStatus})
-      : assert(accountType != null &&
-            accountTitle != null &&
+      : assert(accountTitle != null &&
             accountNumber != null &&
             accountBalance != null &&
             accountStatus != null);
