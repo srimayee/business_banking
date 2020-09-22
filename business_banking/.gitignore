@@ -19,6 +19,9 @@
 *.iws
 .idea/
 
+# VSCode related
+.vscode/
+
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
