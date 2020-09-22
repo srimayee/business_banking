@@ -29,7 +29,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         _onChangePassword(bloc, value);
       },
       // Make login button route to CashAccounts screen, implement login later
-      onTapSubmit: () => _navigateToBillPayScreen(context),
+      onTapSubmit: () => _navigateToHubScreen(context),
     );
   }
 
@@ -64,16 +64,6 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       MaterialPageRoute(
         settings: RouteSettings(name: 'CashAccountsWidget'),
         builder: (context) => HubScreen(),
-      ),
-    );
-  }
-
-  void _navigateToBillPayScreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        settings: RouteSettings(name: 'BillPayFeatureWidget'),
-        builder: (context) => BillScreen(),
       ),
     );
   }

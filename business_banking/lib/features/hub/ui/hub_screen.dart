@@ -1,3 +1,4 @@
+import 'package:business_banking/features/billpay/ui/bill_screen.dart';
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,34 @@ class HubScreen extends Screen {
             )),
             height: 80,
           ),
-          CashAccountsWidget(),
+          Expanded(child: CashAccountsWidget()),
+          _payBillBtn(context),
+          SizedBox(height: 30),
         ],
+      ),
+    );
+  }
+
+  _payBillBtn(BuildContext context) {
+    return RaisedButton(
+      key: Key('BtnPayBill'),
+      color: Colors.green,
+      onPressed: () async {
+        _navigateToBillPayScreen(context);
+      },
+      child: Text(
+        'Pay Bill',
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  void _navigateToBillPayScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'BillScreen'),
+        builder: (context) => BillScreen(),
       ),
     );
   }

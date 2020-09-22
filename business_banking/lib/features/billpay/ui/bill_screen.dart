@@ -11,6 +11,13 @@ class BillScreen extends StatelessWidget {
           'Bill Pay',
           key: Key('CBillPayAppBarTitle'),
         ),
+        leading: IconButton(
+          key: Key('BillPayBackBtn'),
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Column(
         children: [

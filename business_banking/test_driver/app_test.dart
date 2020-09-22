@@ -15,6 +15,8 @@ void main() {
     final btnBillPay = find.byValueKey('PayBtn');
     final billPayAppBar = find.byValueKey('CBillPayAppBarTitle');
     final btnOK = find.byValueKey('BtnOK');
+    final btnPayBill = find.byValueKey('BtnPayBill');
+    final billPayBackBtn = find.byValueKey('BillPayBackBtn');
 
     FlutterDriver driver;
 
@@ -65,8 +67,9 @@ void main() {
     });
 
     test('Bill Pay Screen, navigated to and app bar is displayed', () async {
-      await driver.tap(loginButton);
-      await driver.waitForAbsent(loginButton);
+      await Future.delayed(Duration(milliseconds: 2000));
+      await driver.tap(btnPayBill);
+      await driver.waitForAbsent(btnPayBill);
       expect(await driver.getText(billPayAppBar), 'Bill Pay');
     });
 
@@ -74,6 +77,8 @@ void main() {
       await driver.tap(btnBillPay);
       await Future.delayed(Duration(milliseconds: 2000));
       await driver.tap(btnOK);
+      await Future.delayed(Duration(milliseconds: 2000));
+      await driver.tap(billPayBackBtn);
     });
   });
 }
