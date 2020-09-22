@@ -1,4 +1,4 @@
-import 'package:business_banking/features/account_detail/bloc/account_detail_bloc.dart';
+import 'package:business_banking/features/cash_accounts/bloc/account_detail_bloc.dart';
 import 'package:business_banking/features/account_detail/ui/account_detail_presenter.dart';
 import 'package:business_banking/features/account_detail/ui/account_detail_widget.dart';
 import 'package:clean_framework/clean_framework.dart';

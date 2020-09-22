@@ -1,6 +1,6 @@
+import 'package:business_banking/features/cash_accounts/model/account_detail/account_detail_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/account_detail/model/account_detail_view_model.dart';
-import 'package:business_banking/features/account_detail/api/account_detail_service.dart';
+import 'package:business_banking/features/cash_accounts/api/account_detail/account_detail_service.dart';
 import 'account_detail_usecase.dart';
 
 class AccountDetailBloc extends Bloc {
