@@ -27,7 +27,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       onChangePassword: (value) {
         _onChangePassword(bloc, value);
       },
-      // Make login button route to CashAccounts screen, implement login later
+      // Make login button route to Hub screen, implement login later
       onTapSubmit: () => _navigateToHubScreen(context),
     );
   }
