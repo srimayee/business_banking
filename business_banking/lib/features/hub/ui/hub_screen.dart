@@ -31,7 +31,8 @@ class HubScreen extends Screen {
           CashAccountsWidget(),
           SizedBox(height: 15),
           PromosWidget(),
-          SizedBox(height: 15,)
+          SizedBox(height: 15,),
+          _payBillBtn(context),
         ],
       ),
     );
