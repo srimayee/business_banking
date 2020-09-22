@@ -1,5 +1,5 @@
-import 'package:business_banking/features/account_detail/model/account_detail_transaction_details_model.dart';
-import 'package:business_banking/features/account_detail/model/account_detail_transaction_holds_model.dart';
+import 'package:business_banking/features/cash_accounts/bloc/account_detail/account_detail_transaction_details_model.dart';
+import 'package:business_banking/features/cash_accounts/model/account_detail/account_detail_transaction_holds_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 

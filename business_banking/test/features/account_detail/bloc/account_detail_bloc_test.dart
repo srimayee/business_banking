@@ -1,5 +1,5 @@
-import 'package:business_banking/features/account_detail/bloc/account_detail_bloc.dart';
-import 'package:business_banking/features/account_detail/model/account_detail_view_model.dart';
+import 'package:business_banking/features/cash_accounts/bloc/account_detail_bloc.dart';
+import 'package:business_banking/features/cash_accounts/model/account_detail/account_detail_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

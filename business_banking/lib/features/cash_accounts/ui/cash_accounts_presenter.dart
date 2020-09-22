@@ -1,13 +1,14 @@
 import 'dart:async';
 
-import 'package:business_banking/features/account_detail/ui/account_detail_widget.dart';
 import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_bloc.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
+import 'package:business_banking/features/cash_accounts/ui/account_detail/account_detail_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'cash_accounts_screen.dart';
+
 
 class CashAccountsPresenter extends Presenter<CashAccountsBloc,
     CashAccountsViewModel, CashAccountsScreen> {
@@ -31,8 +32,8 @@ class CashAccountsPresenter extends Presenter<CashAccountsBloc,
     Navigator.push(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(name: 'AccountDetailWidget'),
-        builder: (context) => AccountDetailWidget(),
+        settings: RouteSettings(name: 'AccountDetailScreen'),
+        builder: (context) => AccountDetailScreen(),
       ),
     );
   }

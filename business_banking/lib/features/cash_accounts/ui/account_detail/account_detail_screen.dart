@@ -1,18 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/account_detail/model/account_detail_view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/account_detail/account_detail_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AccountDetailScreen extends Screen {
-  final AccountDetailViewModel viewModel;
+  //final AccountDetailViewModel viewModel;
   final VoidCallback navigateToCashAccounts;
 
   AccountDetailScreen(
-      {@required this.viewModel, @required this.navigateToCashAccounts})
-      : assert(() {
-          return viewModel != null;
-        }());
+      {
+        //@required this.viewModel,
+        @required this.navigateToCashAccounts});
+      // : assert(() {
+      //     return viewModel != null;
+      //   }());
 
   @override
   Widget build(BuildContext build) {
