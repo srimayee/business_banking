@@ -1,4 +1,4 @@
-import 'package:business_banking/features/billpay/ui/bill_screen.dart';
+import 'package:business_banking/features/billpay/ui/billpay_widget.dart';
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +53,8 @@ class HubScreen extends Screen {
     Navigator.push(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(name: 'BillScreen'),
-        builder: (context) => BillScreen(),
+        settings: RouteSettings(name: 'BillPayFeatureWidget'),
+        builder: (context) => BillPayFeatureWidget(),
       ),
     );
   }

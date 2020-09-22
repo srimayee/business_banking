@@ -11,14 +11,42 @@ class BillPayScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        BillPayUI(
-          viewModel: viewModel,
-          startPayTap: startPayTap,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text(
+          'Bill Pay',
+          key: Key('CBillPayAppBarTitle'),
         ),
-      ],
+        leading: IconButton(
+          key: Key('BillPayBackBtn'),
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            child: Center(
+                child: Text(
+              'Welcome',
+              style: TextStyle(fontSize: 18),
+            )),
+            height: 80,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              BillPayUI(
+                viewModel: viewModel,
+                startPayTap: startPayTap,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
