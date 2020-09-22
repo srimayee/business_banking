@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -82,13 +82,45 @@ class AccountCard extends StatelessWidget {
                   ],
                 ),
               ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Account Balance:",
+                        style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                      ),
+                      Text(
+                        "\$" + _usdCurrency.format(viewModel.accountBalance),
+                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+                        key: Key('accountBalance'),
+                      )
+                    ],
+                ),
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Account Balance:",
-                      style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                      "Account Type:",
+                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
+                    ),
+                    Text(
+                      viewModel.accountType,
+                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300),
+                      key: Key('accountType'),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Account Status:",
+                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
                     ),
                     Text(
                       "\$" + _usdCurrency.format(viewModel.accountBalance),
