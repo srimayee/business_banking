@@ -67,7 +67,6 @@ void main() {
     });
 
     test('Bill Pay Screen, navigated to and app bar is displayed', () async {
-      await Future.delayed(Duration(milliseconds: 2000));
       await driver.tap(btnPayBill);
       await driver.waitForAbsent(btnPayBill);
       expect(await driver.getText(billPayAppBar), 'Bill Pay');
@@ -75,9 +74,7 @@ void main() {
 
     test('Tap on Pay, Alert should be displayed', () async {
       await driver.tap(btnBillPay);
-      await Future.delayed(Duration(milliseconds: 2000));
       await driver.tap(btnOK);
-      await Future.delayed(Duration(milliseconds: 2000));
       await driver.tap(billPayBackBtn);
     });
   });
