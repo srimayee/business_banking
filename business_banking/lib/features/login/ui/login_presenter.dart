@@ -27,7 +27,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       onChangePassword: (value) {
         _onChangePassword(bloc, value);
       },
-      // Make login button route to CashAccounts screen, implement login later
+      // Make login button route to Hub screen, implement login later
       onTapSubmit: () => _navigateToHubScreen(context),
     );
   }
@@ -61,7 +61,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(name: 'CashAccountsWidget'),
+        settings: RouteSettings(name: 'HubScreen'),
         builder: (context) => HubScreen(),
       ),
     );
