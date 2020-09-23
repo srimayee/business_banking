@@ -18,10 +18,10 @@ class BillPayUseCase extends UseCase {
   void create() async {
     _scope = ExampleLocator().repository.containsScope<BillPayEntity>();
     if (_scope == null) {
-      final newLoginEntity = BillPayEntity();
+      final newBillPayEntity = BillPayEntity(amount: 0);
       _scope = ExampleLocator()
           .repository
-          .create<BillPayEntity>(newLoginEntity, _notifySubscribers);
+          .create<BillPayEntity>(newBillPayEntity, _notifySubscribers);
     } else {
       _scope.subscription = _notifySubscribers;
     }
@@ -32,10 +32,10 @@ class BillPayUseCase extends UseCase {
   void startBillPay() async {
     _scope = ExampleLocator().repository.containsScope<BillPayEntity>();
     if (_scope == null) {
-      final newCashAccountsEntity = BillPayEntity();
+      final billPayEntity = BillPayEntity(amount: 0);
       _scope = ExampleLocator()
           .repository
-          .create<BillPayEntity>(newCashAccountsEntity, _notifySubscribers);
+          .create<BillPayEntity>(billPayEntity, _notifySubscribers);
     } else {
       _scope.subscription = _notifySubscribers;
     }

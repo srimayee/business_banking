@@ -9,9 +9,7 @@ class BillPayEntity extends Entity {
   }) : super(errors: errors);
 
   @override
-  List<Object> get props => [
-        amount,
-      ];
+  List<Object> get props => [amount];
 
   @override
   merge({errors, double amount}) {
