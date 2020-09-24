@@ -8,8 +8,8 @@ class AccountDetailEntity extends Entity {
   final String transactionNumber;
   final String transactionAmount;
   final String transactionId;
-  final TransactionDetails transactionDetails;
-  final TransactionHolds transactionHolds;
+  final List<TransactionDetailsModel> transactionDetails;
+  final List<TransactionHoldsModel> transactionHolds;
 
   AccountDetailEntity({
     List<EntityError> errors = const [],
@@ -17,8 +17,8 @@ class AccountDetailEntity extends Entity {
     String transactionNumber,
     String transactionAmount,
     String transactionId,
-    TransactionDetails transactionDetails,
-    TransactionHolds transactionHolds,
+    List<TransactionDetailsModel> transactionDetails,
+    List<TransactionHoldsModel> transactionHolds,
   })  : transactionTitle = transactionTitle,
         transactionNumber = transactionNumber ?? '0',
         transactionAmount = transactionAmount ?? '0.00',
@@ -45,8 +45,8 @@ class AccountDetailEntity extends Entity {
       String transactionNumber,
       String transactionAmount,
       String transactionId,
-      double transactionDetails,
-      double transactionHolds}) {
+      List<TransactionDetailsModel> transactionDetails,
+      List<TransactionHoldsModel> transactionHolds}) {
     return AccountDetailEntity(
         errors: errors ?? this.errors,
         transactionTitle: transactionTitle ?? this.transactionTitle,

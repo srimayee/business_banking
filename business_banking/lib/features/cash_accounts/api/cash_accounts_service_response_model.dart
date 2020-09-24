@@ -1,21 +1,20 @@
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_entity.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
 class CashAccountsServiceResponseModel extends Equatable
     implements JsonResponseModel {
   /// Rest API Accounts Object.
-  final String accountTitle;
-  final String accountNumber;
-  final double accountBalance;
-  final String accountStatus;
+
+  final List<CashAccountsEntityModel> cashAccountsModel;
 
   CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : accountTitle = json['accountTitle'] ?? 'Checking Account',
-        accountNumber = json['accountNumber'] ?? '0000',
-        accountBalance = json['accountBalance'] ?? 0.00,
-        accountStatus = json['accountStatus'] ?? 'Active';
+      : cashAccountsModel = List<CashAccountsEntityModel>.from(
+              json['accounts']?.map((cashAccountsJSONObject) =>
+                  CashAccountsEntityModel.fromJson(cashAccountsJSONObject)),
+            ) ??
+            [];
 
   @override
-  List<Object> get props =>
-      [accountTitle, accountNumber, accountBalance, accountStatus];
+  List<Object> get props => [cashAccountsModel];
 }

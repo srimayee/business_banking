@@ -9,8 +9,8 @@ class AccountDetailViewModel extends ViewModel {
   final String transactionNumber;
   final String transactionAmount;
   final String transactionId;
-  final TransactionDetails transactionDetails;
-  final TransactionHolds transactionHolds;
+  final List<TransactionDetailsModel> transactionDetails;
+  final List<TransactionHoldsModel> transactionHolds;
 
   AccountDetailViewModel(
       {@required this.transactionTitle,

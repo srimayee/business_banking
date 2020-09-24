@@ -1,13 +1,15 @@
+import 'package:clean_framework/clean_framework_defaults.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class TransactionHolds {
+class TransactionHoldsModel extends Equatable implements JsonResponseModel {
   final String holdTitle;
   final String holdInitiationDate;
   final String holdInitiator;
   final String holdDescription;
   final String holdAmount;
 
-  TransactionHolds(
+  TransactionHoldsModel(
       {@required this.holdTitle,
       @required this.holdInitiationDate,
       @required this.holdInitiator,
@@ -18,4 +20,21 @@ class TransactionHolds {
             holdInitiator != null &&
             holdDescription != null &&
             holdAmount != null);
+
+  TransactionHoldsModel.fromJson(Map<String, dynamic> json)
+      : holdTitle = json['holdTitle'],
+        holdInitiationDate = json['holdInitiationDate'],
+        holdInitiator = json['holdInitiator'],
+        holdDescription = json['holdDescription'],
+        holdAmount = json['holdAmount'];
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [
+        holdTitle,
+        holdInitiationDate,
+        holdInitiator,
+        holdDescription,
+        holdAmount
+      ];
 }

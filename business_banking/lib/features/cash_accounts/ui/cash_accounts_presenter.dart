@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_bloc.dart';
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:business_banking/features/cash_accounts/ui/account_detail/account_detail_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -10,16 +11,14 @@ import 'package:flutter/material.dart';
 import 'cash_accounts_screen.dart';
 
 
-class CashAccountsPresenter extends Presenter<CashAccountsBloc,
-    CashAccountsViewModel, CashAccountsScreen> {
+class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsListViewModel, CashAccountsScreen> {
   @override
-  Stream<CashAccountsViewModel> getViewModelStream(CashAccountsBloc bloc) {
-    return bloc.cashAccountsViewModelPipe.receive;
+  Stream<CashAccountsListViewModel> getViewModelStream(CashAccountsBloc bloc) {
+    return bloc.cashAccountsListViewModelPipe.receive;
   }
 
   @override
-  CashAccountsScreen buildScreen(BuildContext context, CashAccountsBloc bloc,
-      CashAccountsViewModel viewModel) {
+  CashAccountsScreen buildScreen(BuildContext context, CashAccountsBloc bloc, CashAccountsListViewModel viewModel) {
     return CashAccountsScreen(
       viewModel: viewModel,
       navigateToAccountDetail: () {
