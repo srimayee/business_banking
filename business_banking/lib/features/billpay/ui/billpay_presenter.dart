@@ -30,6 +30,9 @@ class BillPayPresenter
       startPayTap: () {
         bloc.submitPipe.send(viewModel);
       },
+      onChangeBillPayAmount: (amount) {
+        bloc.billAmontPipe.send(double.parse(amount));
+      },
     );
   }
 

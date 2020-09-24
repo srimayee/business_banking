@@ -6,8 +6,13 @@ class BillPayScreen extends Screen {
   //
   final BillPayViewModel viewModel;
   final Function startPayTap;
+  final Function onChangeBillPayAmount;
 
-  BillPayScreen({this.viewModel, this.startPayTap});
+  BillPayScreen({
+    this.viewModel,
+    this.startPayTap,
+    this.onChangeBillPayAmount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,7 @@ class BillPayScreen extends Screen {
               BillPayUI(
                 viewModel: viewModel,
                 startPayTap: startPayTap,
+                onChangeBillPayAmount: onChangeBillPayAmount,
               ),
             ],
           )
@@ -56,10 +62,12 @@ class BillPayUI extends StatelessWidget {
     Key key,
     @required this.viewModel,
     this.startPayTap,
+    this.onChangeBillPayAmount,
   }) : super(key: key);
 
   final BillPayViewModel viewModel;
   final Function startPayTap;
+  final Function onChangeBillPayAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +78,21 @@ class BillPayUI extends StatelessWidget {
           DropdownButton<String>(
             items: <String>['Jim', 'John', 'Jack', 'James', 'Jessica']
                 .map((String value) {
-              return new DropdownMenuItem<String>(
+              return DropdownMenuItem<String>(
                 value: value,
-                child: new Text(value),
+                child: Text(value),
               );
             }).toList(),
             onChanged: (_) {
               //
             },
           ),
-          TextField(),
+          _textFormField(
+            Key('bill_pay_amount_tf_key'),
+            "Pay Amount",
+            onChangeBillPayAmount,
+            TextInputType.number,
+          ),
           FlatButton(
             key: Key('PayBtn'),
             onPressed: () {
@@ -90,6 +103,29 @@ class BillPayUI extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _textFormField(Key key, String hintText, Function onChangeTextField,
+      TextInputType textInputType) {
+    return TextFormField(
+      key: key,
+      keyboardType: textInputType,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.payment),
+        filled: true,
+        hintText: hintText,
+        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.lightGreen, width: 2.0),
+        ),
+        enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
+      ),
+      onChanged: (value) {
+        onChangeTextField(value);
+      },
     );
   }
 }

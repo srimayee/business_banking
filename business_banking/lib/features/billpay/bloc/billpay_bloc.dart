@@ -5,24 +5,31 @@ import 'billpay_usecase.dart';
 
 class BillPayBloc extends Bloc {
   //
-  BillPayUseCase _useCase;
+  BillPayUseCase _billPayUseCase;
   final submitPipe = EventPipe();
+  final billAmontPipe = Pipe<double>();
   final billPayViewModelPipe = Pipe<BillPayViewModel>();
 
   @override
   void dispose() {
-    billPayViewModelPipe.dispose();
     submitPipe.dispose();
+    billAmontPipe.dispose();
+    billPayViewModelPipe.dispose();
   }
 
   BillPayBloc({BillPayService billPayService}) {
-    _useCase =
+    _billPayUseCase =
         BillPayUseCase((viewModel) => billPayViewModelPipe.send(viewModel));
-    billPayViewModelPipe.onListen(() => _useCase.create());
+    billPayViewModelPipe.onListen(() => _billPayUseCase.create());
     submitPipe.listen(submitHandler);
+    billAmontPipe.receive.listen(onBillPayAmountChanged);
+  }
+
+  void onBillPayAmountChanged(double payAmount) {
+    _billPayUseCase.updateBillAmount(payAmount);
   }
 
   void submitHandler() {
-    _useCase.startBillPay();
+    _billPayUseCase.startBillPay();
   }
 }

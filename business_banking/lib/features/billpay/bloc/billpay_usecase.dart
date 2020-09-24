@@ -49,16 +49,26 @@ class BillPayUseCase extends UseCase {
   }
 
   BillPayViewModel buildIniitalViewModel(BillPayEntity entity) {
-    return BillPayViewModel(amount: 0);
+    return BillPayViewModel(amount: entity.amount);
   }
 
   BillPayViewModel buildViewModel(BillPayEntity entity) {
-    if (entity.hasErrors()) {
-      return BillPayViewModel(
-          amount: entity.amount, serviceStatus: ServiceStatus.fail);
-    } else {
-      return BillPayViewModel(
-          amount: entity.amount, serviceStatus: ServiceStatus.success);
-    }
+    return BillPayViewModel(
+      amount: entity.amount,
+      serviceStatus: ServiceStatus.success,
+    );
+  }
+
+  void updateBillAmount(double amount) async {
+    final entity = ExampleLocator().repository.get<BillPayEntity>(_scope);
+    final updatedEntity = entity.merge(amount: amount);
+    ExampleLocator().repository.update<BillPayEntity>(_scope, updatedEntity);
+    _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
+  }
+
+  buildViewModelForLocalUpdate(BillPayEntity billPayEntity) {
+    return BillPayViewModel(
+      amount: billPayEntity.amount,
+    );
   }
 }
