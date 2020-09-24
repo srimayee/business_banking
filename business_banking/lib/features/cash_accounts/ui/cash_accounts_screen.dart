@@ -56,13 +56,15 @@ class AccountCard extends StatelessWidget {
           final currentCashAccountViewModel =
               viewModel.cashAccountEntityModel[index];
           return Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
             child: Card(
               color: Colors.white,
               shadowColor: Colors.grey[500],
               elevation: 3.0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 20.0),
+                    vertical: 18.0, horizontal: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -71,11 +73,11 @@ class AccountCard extends StatelessWidget {
                       children: [
                         Text(currentCashAccountViewModel.accountTitle,
                             style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w300),
+                                fontSize: 20.0, fontWeight: FontWeight.w400),
                             overflow: TextOverflow.ellipsis),
-                        Text(currentCashAccountViewModel.accountNumber,
+                        Text("..." + currentCashAccountViewModel.accountNumber,
                             style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w300))
+                                fontSize: 20.0, fontWeight: FontWeight.w400))
                       ],
                     ),
                     Row(
