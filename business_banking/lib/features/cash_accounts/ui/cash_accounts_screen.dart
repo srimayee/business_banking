@@ -1,13 +1,16 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../locator.dart';
+
 class CashAccountsScreen extends Screen {
-  final CashAccountsViewModel viewModel;
+  final CashAccountsListViewModel viewModel;
   final VoidCallback navigateToAccountDetail;
 
   CashAccountsScreen(
@@ -41,7 +44,7 @@ class AccountCard extends StatelessWidget {
     @required this.viewModel,
   }) : super(key: key);
 
-  final CashAccountsViewModel viewModel;
+  final CashAccountsListViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -52,87 +55,93 @@ class AccountCard extends StatelessWidget {
     return Container(
       height: 160,
       padding: EdgeInsets.all(5.0),
-      child: Card(
-        color: Colors.white,
-        shadowColor: Colors.grey[500],
-        elevation: 3.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        viewModel.accountTitle,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+      child: Expanded(
+        child: ListView.builder(
+          itemCount: viewModel.cashAccountEntityModel.length,
+          itemBuilder: (BuildContext context, int index) {
+            final currentCashAccountViewModel =
+                viewModel.cashAccountEntityModel[index];
+
+            logger().debug("UI Length: " + viewModel.cashAccountEntityModel.length.toString());
+
+            logger().debug("UI Values: $index: " + currentCashAccountViewModel.toString());
+
+
+            return UnconstrainedBox(
+                  child: Card(
+                    color: Colors.white,
+                    shadowColor: Colors.grey[500],
+                    elevation: 3.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //  Expanded(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(currentCashAccountViewModel.accountTitle,
+                                  style: TextStyle(
+                                      fontSize: 20.0, fontWeight: FontWeight.w300),
+                                  overflow: TextOverflow.ellipsis),
+                              Text(currentCashAccountViewModel.accountNumber,
+                                  style: TextStyle(
+                                      fontSize: 20.0, fontWeight: FontWeight.w300))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Account Balance:',
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  overflow: TextOverflow.ellipsis),
+                              Text(
+                                  "\$" +
+                                      _usdCurrency.format(
+                                          currentCashAccountViewModel.accountBalance),
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  key: Key('accountBalance'))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Account Type:',
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  overflow: TextOverflow.ellipsis),
+                              Text("Cash",
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  key: Key('accountType'))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Account Status:',
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  overflow: TextOverflow.ellipsis),
+                              Text(currentCashAccountViewModel.accountStatus,
+                                  style: TextStyle(
+                                      fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  key: Key('accountStatus'))
+                            ],
+                          ),
+                        ],
                       ),
+                      // ),
                     ),
-                    AutoSizeText(
-                      ' ...' + viewModel.accountNumber.toString(),
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Account Balance:",
-                        style: TextStyle(color: Colors.black54, fontSize: 18.0),
-                      ),
-                      Text(
-                        "\$" + _usdCurrency.format(viewModel.accountBalance),
-                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
-                        key: Key('accountBalance'),
-                      )
-                    ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Account Type:",
-                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
-                    ),
-                    Text(
-                      "Cash",
-                      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300),
-                      key: Key('accountType'),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Account Status:",
-                      style: TextStyle(color: Colors.black54, fontSize: 14.0),
-                    ),
-                    Text(
-                      viewModel.accountStatus,
-                      style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.w300),
-                      key: Key('accountStatus'),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                  );
+
+          },
+
         ),
       ),
     );

@@ -18,9 +18,9 @@ class PromosScreen extends Screen {
         width: 300,
         height: 300,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(viewModel.imageUrl),
-          ),
+          // image: DecorationImage(
+          //   image: NetworkImage(viewModel.imageUrl),
+          // ),
         ),
       ),
     );

@@ -1,13 +1,13 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class CashAccountsEntity extends Entity {
+class CashAccountsEntityModel extends Entity {
   /// Rest API Accounts Object.
   final String accountTitle;
   final String accountNumber;
   final double accountBalance;
   final String accountStatus;
 
-  CashAccountsEntity(
+  CashAccountsEntityModel(
       {
 
       /// Replicate object response.
@@ -29,6 +29,12 @@ class CashAccountsEntity extends Entity {
   List<Object> get props =>
       [errors, accountTitle, accountNumber, accountBalance, accountStatus];
 
+  CashAccountsEntityModel.fromJson(Map<String, dynamic> json)
+      : accountTitle = json['accountTitle'],
+        accountNumber = json['accountNumber'],
+        accountBalance = json['accountBalance'],
+        accountStatus = json['accountStatus'];
+
   @override
   merge(
       {errors,
@@ -36,7 +42,7 @@ class CashAccountsEntity extends Entity {
       String accountNumber,
       double accountBalance,
       String accountStatus}) {
-    return CashAccountsEntity(
+    return CashAccountsEntityModel(
       errors: errors ?? this.errors,
       accountTitle: accountTitle ?? this.accountTitle,
       accountNumber: accountNumber ?? this.accountNumber,

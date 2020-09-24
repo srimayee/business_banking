@@ -19,7 +19,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n\t\"accountTitle\": \"Checking Account\",\n\t\"accountNumber\": \"6542\",\n\t\"accountBalance\": 3545.54,\n\t\"accountStatus\": \"Active\"\n}",
+                                "body": "{\n\t\"accounts\": [\n\t  {\n\t\t\t\"accountTitle\": \"Checking Account\",\n\t\t\t\"accountNumber\": \"6542\",\n\t\t\t\"accountBalance\": 3545.54,\n\t\t\t\"accountStatus\": \"Active\"\n\t\t},\n\t\t{\n\t\t\t\"accountTitle\": \"Checking Account\",\n\t\t\t\"accountNumber\": \"6542\",\n\t\t\t\"accountBalance\": 3545.54,\n\t\t\t\"accountStatus\": \"Active\"\n\t\t}\n\t]\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",

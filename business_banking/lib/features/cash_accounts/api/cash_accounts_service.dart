@@ -13,8 +13,7 @@ class CashAccountsService
             path: 'cash_accounts');
 
   @override
-  CashAccountsServiceResponseModel parseResponse(
-      Map<String, dynamic> jsonResponse) {
+  CashAccountsServiceResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
     /// Log JSON Response for Cash Accounts Service.
     /// ToDo() - Set Logging only to Dev environment
     logger().debug("CashAccountsService JSON: " + jsonResponse.toString());
