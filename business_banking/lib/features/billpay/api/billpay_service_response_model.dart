@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class BillPayServiceResponseModel extends Equatable
     implements JsonResponseModel {
+  //
   final bool succeeded;
 
   BillPayServiceResponseModel.fromJson(Map<String, dynamic> json)

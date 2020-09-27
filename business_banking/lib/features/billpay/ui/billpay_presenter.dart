@@ -20,10 +20,13 @@ class BillPayPresenter
       BuildContext context, BillPayBloc bloc, BillPayViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
-        _showAlert(context);
+        _showPaySuccessMessage(context);
         return;
       } else if (viewModel.serviceStatus == ServiceStatus.fail) {
       } else if (viewModel.serviceStatus == ServiceStatus.unknown) {}
+      if (viewModel.dataStatus == DataStatus.invalid) {
+        _showErrorMessage(context);
+      }
     });
     return BillPayScreen(
       viewModel: viewModel,
@@ -36,11 +39,31 @@ class BillPayPresenter
     );
   }
 
-  void _showAlert(BuildContext context) {
+  void _showErrorMessage(BuildContext context) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
         key: Key('BillPaySuccessAlert'),
+        title: Text('Error'),
+        content: Text('Please Enter amount'),
+        actions: <Widget>[
+          FlatButton(
+            key: Key('BtnOK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _showPaySuccessMessage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        key: Key('BillPayEmptyAmountAlert'),
         title: Text('Success'),
         content: Text('Pay Successful'),
         actions: <Widget>[

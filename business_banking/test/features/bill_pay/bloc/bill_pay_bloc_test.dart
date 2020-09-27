@@ -10,4 +10,11 @@ void main() {
       expect(model.amount, 0);
     }));
   });
+
+  test('BillPayBloc Test', () {
+    final bloc = BillPayBloc();
+    bloc.billAmontPipe.receive.listen((amount) {
+      expect(amount, isA<double>());
+    });
+  });
 }

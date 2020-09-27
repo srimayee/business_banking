@@ -30,14 +30,10 @@ class BillPayUseCase extends UseCase {
   }
 
   void startBillPay() async {
-    _scope = ExampleLocator().repository.containsScope<BillPayEntity>();
-    if (_scope == null) {
-      final billPayEntity = BillPayEntity(amount: 0);
-      _scope = ExampleLocator()
-          .repository
-          .create<BillPayEntity>(billPayEntity, _notifySubscribers);
-    } else {
-      _scope.subscription = _notifySubscribers;
+    final entity = ExampleLocator().repository.get<BillPayEntity>(_scope);
+    if (0 == entity.amount) {
+      _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
+      return;
     }
     await ExampleLocator()
         .repository
@@ -59,6 +55,13 @@ class BillPayUseCase extends UseCase {
     );
   }
 
+  BillPayViewModel buildViewModelForLocalUpdateWithError(BillPayEntity entity) {
+    return BillPayViewModel(
+      amount: entity.amount,
+      dataStatus: DataStatus.invalid,
+    );
+  }
+
   void updateBillAmount(double amount) async {
     final entity = ExampleLocator().repository.get<BillPayEntity>(_scope);
     final updatedEntity = entity.merge(amount: amount);
@@ -67,8 +70,6 @@ class BillPayUseCase extends UseCase {
   }
 
   buildViewModelForLocalUpdate(BillPayEntity billPayEntity) {
-    return BillPayViewModel(
-      amount: billPayEntity.amount,
-    );
+    return BillPayViewModel(amount: billPayEntity.amount);
   }
 }
