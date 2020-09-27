@@ -29,5 +29,6 @@ void main() {
     await tester.pump(Duration(milliseconds: 500));
     expect(find.byKey(Key('PayBtn')), findsOneWidget);
     expect(find.byKey(Key('bill_pay_amount_tf_key')), findsOneWidget);
+    expect(find.byKey(Key('WelcomeTextKey')), findsOneWidget);
   });
 }

@@ -37,6 +37,7 @@ class BillPayScreen extends Screen {
             child: Center(
                 child: Text(
               'Welcome',
+              key: Key('WelcomeTextKey'),
               style: TextStyle(fontSize: 18),
             )),
             height: 80,
