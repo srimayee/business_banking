@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 
 class PromosScreen extends Screen {
   final PromosViewModel viewModel;
-  final Function launchURL;
+  final Function openUrl;
 
-  PromosScreen({@required this.viewModel, this.launchURL}) : assert(viewModel != null);
+  PromosScreen({@required this.viewModel, this.openUrl})
+      : assert(viewModel != null);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        launchURL(viewModel.link);
+        openUrl(viewModel.link);
       },
       child: NetworkImageContainer(
         width: 300,
