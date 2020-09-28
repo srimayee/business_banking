@@ -311,7 +311,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \n  \"imageUrl\":\"https://via.placeholder.com/300\",\n  \"externalUrl\": \"http://google.com/\"\n}",
+                                "body": "{\n  \n  \"imageUrl\":\"https://via.placeholder.com/300\",\n  \"externalUrl\": \"https://www.huntington.com/\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
