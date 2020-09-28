@@ -8,9 +8,9 @@ class BillPayService
     extends EitherService<BillPayRequestModel, BillPayServiceResponseModel> {
   BillPayService()
       : super(
-          method: RestMethod.post,
+          method: RestMethod.get,
           restApi: ExampleLocator().api,
-          path: 'bill-pay',
+          path: 'bill-pay/{amount}',
         );
 
   @override

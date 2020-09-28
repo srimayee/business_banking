@@ -8,7 +8,7 @@ void main() {
     final entity = BillPayServiceAdapter().createEntity(
         BillPayEntity(),
         BillPayServiceResponseModel.fromJson({
-          'amount': 0,
+          'succeeded': true,
         }));
 
     expect(entity, BillPayEntity(amount: 0));

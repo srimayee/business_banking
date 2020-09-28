@@ -25,11 +25,13 @@ class BillPayBloc extends Bloc {
     billAmontPipe.receive.listen(onBillPayAmountChanged);
   }
 
-  void onBillPayAmountChanged(double payAmount) {
+  bool onBillPayAmountChanged(double payAmount) {
     _billPayUseCase.updateBillAmount(payAmount);
+    return true;
   }
 
-  void submitHandler() {
+  bool submitHandler() {
     _billPayUseCase.startBillPay();
+    return true;
   }
 }

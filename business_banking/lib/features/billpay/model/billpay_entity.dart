@@ -9,17 +9,18 @@ class BillPayEntity extends Entity {
   }) : super(errors: errors);
 
   @override
-  List<Object> get props => [amount];
+  List<Object> get props => [errors, amount];
 
   @override
   merge({errors, double amount}) {
     return BillPayEntity(
+      errors: errors ?? this.errors,
       amount: amount ?? this.amount,
     );
   }
 
   @override
   String toString() {
-    return '$amount';
+    return '$amount errors: $errors';
   }
 }
