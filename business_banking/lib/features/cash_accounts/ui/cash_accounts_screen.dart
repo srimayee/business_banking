@@ -51,88 +51,87 @@ class AccountCard extends StatelessWidget {
     var _usdCurrency = new NumberFormat("#,##0.00", "en_US");
 
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: viewModel.cashAccountEntityModel.length,
-        itemBuilder: (BuildContext context, int index) {
-          final currentCashAccountViewModel =
-              viewModel.cashAccountEntityModel[index];
+      shrinkWrap: true,
+      itemCount: viewModel.cashAccountEntityModel.length,
+      itemBuilder: (BuildContext context, int index) {
+        final currentCashAccountViewModel =
+            viewModel.cashAccountEntityModel[index];
 
-          logger().debug("Cash Accounts UI Data: " + currentCashAccountViewModel.toString());
+        logger().debug(
+            "Cash Accounts UI Data: " + currentCashAccountViewModel.toString());
 
-
-          return Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
-            child: Card(
-              color: Colors.white,
-              shadowColor: Colors.grey[500],
-              elevation: 3.0,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 18.0, horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(currentCashAccountViewModel.accountTitle,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w400),
-                            overflow: TextOverflow.ellipsis),
-                        Text("..." + currentCashAccountViewModel.accountNumber,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w400))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Balance:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text(
-                            "\$" +
-                                _usdCurrency.format(
-                                    currentCashAccountViewModel.accountBalance),
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('accountBalance'))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Type:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text("Cash",
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('accountType'))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Status:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text(currentCashAccountViewModel.accountStatus,
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('accountStatus'))
-                      ],
-                    ),
-                  ],
-                ),
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+          child: Card(
+            color: Colors.white,
+            shadowColor: Colors.grey[500],
+            elevation: 3.0,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(currentCashAccountViewModel.accountTitle,
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w400),
+                          overflow: TextOverflow.ellipsis),
+                      Text("..." + currentCashAccountViewModel.accountNumber,
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w400))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Account Balance:',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          overflow: TextOverflow.ellipsis),
+                      Text(
+                          "\$" +
+                              _usdCurrency.format(
+                                  currentCashAccountViewModel.accountBalance),
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          key: Key('accountBalance'))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Account Type:',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          overflow: TextOverflow.ellipsis),
+                      Text("Cash",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          key: Key('accountType'))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Account Status:',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          overflow: TextOverflow.ellipsis),
+                      Text(currentCashAccountViewModel.accountStatus,
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w300),
+                          key: Key('accountStatus'))
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        );
+      },
     );
   }
 }

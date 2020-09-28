@@ -25,7 +25,6 @@ class HubScreen extends Screen {
               'Welcome John Doe',
               style: TextStyle(fontSize: 18),
             )),
-            height: 80,
           ),
           CashAccountsWidget(),
           SizedBox(height: 15),
