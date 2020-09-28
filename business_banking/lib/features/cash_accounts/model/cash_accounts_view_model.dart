@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class CashAccountsViewModel extends ViewModel {
   /// Rest API Accounts Object.
-//  final List<cashAccountsEntity> cashAccountsEntity
   final String accountTitle;
   final String accountNumber;
   final double accountBalance;

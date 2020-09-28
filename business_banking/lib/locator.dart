@@ -19,6 +19,7 @@ class ExampleLocator implements Locator {
   @override
   Logger logger = ConsoleLogger(LogLevel.verbose);
 
+
   /// Points to Mockoon local instance
   /// If you are testing on a physical device or Android Emulator
   /// make sure to point to the proper endpoint of your local
