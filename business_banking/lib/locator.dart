@@ -26,7 +26,7 @@ class ExampleLocator implements Locator {
   /// machine: Ex: http://192.1.2.123:3001/
   /// Just get the IP address from the localhost machine and replace the
   /// 'localhost' value within the baseUrl.
-  SimpleRestApi api = SimpleRestApi(baseUrl: 'http://192.168.1.230:3001/');
+  SimpleRestApi api = SimpleRestApi(baseUrl: 'http://192.168.1.106:3001/');
 
   Repository repository = Repository();
 }

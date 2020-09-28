@@ -5,6 +5,8 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../locator.dart';
+
 class CashAccountsScreen extends Screen {
   final CashAccountsListViewModel viewModel;
   final VoidCallback navigateToAccountDetail;
@@ -48,13 +50,16 @@ class AccountCard extends StatelessWidget {
     /// ToDo() make this a global reference somewhere
     var _usdCurrency = new NumberFormat("#,##0.00", "en_US");
 
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         shrinkWrap: true,
         itemCount: viewModel.cashAccountEntityModel.length,
         itemBuilder: (BuildContext context, int index) {
           final currentCashAccountViewModel =
               viewModel.cashAccountEntityModel[index];
+
+          logger().debug("Cash Accounts UI Data: " + currentCashAccountViewModel.toString());
+
+
           return Container(
             padding:
                 const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
@@ -128,7 +133,6 @@ class AccountCard extends StatelessWidget {
             ),
           );
         },
-      ),
     );
   }
 }
