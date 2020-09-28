@@ -9,7 +9,7 @@ void main() {
     bloc.promosViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<PromosViewModel>());
       expect(model.imageUrl, 'https://via.placeholder.com/300');
-      expect(model.link, 'http://google.com/');
+      expect(model.link, 'https://www.huntington.com/');
     }));
   });
 }
