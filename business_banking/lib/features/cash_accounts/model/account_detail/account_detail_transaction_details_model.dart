@@ -2,7 +2,8 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class TransactionDetailsModel extends Equatable implements JsonResponseModel {
+class AccountDetailTransactionDetailsModel extends Equatable
+    implements JsonResponseModel {
   final String transactionInitiator;
   final String transactionAlias;
   final String initiatorTelephone;
@@ -11,7 +12,7 @@ class TransactionDetailsModel extends Equatable implements JsonResponseModel {
   final String transactionInitiationDate;
   final String transactionPostDate;
 
-  TransactionDetailsModel({
+  AccountDetailTransactionDetailsModel({
     @required this.transactionInitiator,
     @required this.transactionAlias,
     @required this.initiatorTelephone,
@@ -26,7 +27,7 @@ class TransactionDetailsModel extends Equatable implements JsonResponseModel {
             transactionInitiationDate != null &&
             transactionPostDate != null);
 
-  TransactionDetailsModel.fromJson(Map<String, dynamic> json)
+  AccountDetailTransactionDetailsModel.fromJson(Map<String, dynamic> json)
       : transactionInitiator = json['transactionInitiator'],
         transactionAlias = json['transactionAlias'],
         initiatorTelephone = json['initiatorTelephone'],

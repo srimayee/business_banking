@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_bloc.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:business_banking/features/cash_accounts/ui/account_detail/account_detail_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +17,10 @@ class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsList
   }
 
   @override
-  CashAccountsScreen buildScreen(BuildContext context, CashAccountsBloc bloc, CashAccountsListViewModel viewModel) {
+  CashAccountsScreen buildScreen(
+      BuildContext context,
+      CashAccountsBloc bloc,
+      CashAccountsListViewModel viewModel) {
     return CashAccountsScreen(
       viewModel: viewModel,
       navigateToAccountDetail: () {

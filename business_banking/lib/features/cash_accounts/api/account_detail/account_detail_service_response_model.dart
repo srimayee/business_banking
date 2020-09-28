@@ -9,23 +9,23 @@ class AccountDetailServiceResponseModel extends Equatable
   final String transactionNumber;
   final String transactionAmount;
   final String transactionId;
-  final List<TransactionDetailsModel> transactionDetails;
-  final List<TransactionHoldsModel> transactionHolds;
+  final List<AccountDetailTransactionDetailsModel> transactionDetails;
+  final List<AccountDetailsTransactionHoldsModel> transactionHolds;
 
   AccountDetailServiceResponseModel.fromJson(Map<String, dynamic> json)
       : transactionTitle = json['transactionTitle'],
         transactionNumber = json['transactionNumber'] ?? '0',
         transactionAmount = json['transactionAmount'],
         transactionId = json['transactionId'] ?? '000000000',
-        transactionDetails = List<TransactionDetailsModel>.from(
+        transactionDetails = List<AccountDetailTransactionDetailsModel>.from(
               json['transactionDetails']?.map((transactionDetailJSONObject) =>
-                  TransactionDetailsModel.fromJson(
+                  AccountDetailTransactionDetailsModel.fromJson(
                       transactionDetailJSONObject)),
             ) ??
             [],
-        transactionHolds = List<TransactionHoldsModel>.from(
+        transactionHolds = List<AccountDetailsTransactionHoldsModel>.from(
               json['transactionHolds']?.map((transactionHoldsJSONObject) =>
-                  TransactionHoldsModel.fromJson(transactionHoldsJSONObject)),
+                  AccountDetailsTransactionHoldsModel.fromJson(transactionHoldsJSONObject)),
             ) ??
             [];
 

@@ -16,10 +16,10 @@ class AccountDetailUseCase extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<AccountDetailEntity>();
+    _scope = ExampleLocator().repository.containsScope<AccountDetailEntityModel>();
     if (_scope == null) {
-      final newAccountDetailEntity = AccountDetailEntity();
-      _scope = ExampleLocator().repository.create<AccountDetailEntity>(
+      final newAccountDetailEntity = AccountDetailEntityModel();
+      _scope = ExampleLocator().repository.create<AccountDetailEntityModel>(
           newAccountDetailEntity, _notifySubscribers);
     } else {
       _scope.subscription = _notifySubscribers;
@@ -34,7 +34,7 @@ class AccountDetailUseCase extends UseCase {
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  AccountDetailViewModel buildViewModel(AccountDetailEntity entity) {
+  AccountDetailViewModel buildViewModel(AccountDetailEntityModel entity) {
     return AccountDetailViewModel(
         transactionTitle: entity.transactionTitle,
         transactionNumber: entity.transactionNumber,

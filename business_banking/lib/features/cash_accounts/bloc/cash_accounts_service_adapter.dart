@@ -4,12 +4,18 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/cash_accounts/api/cash_accounts_service.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class CashAccountsServiceAdapter extends ServiceAdapter<CashAccountsListEntityModel,
-    JsonRequestModel, CashAccountsServiceResponseModel, CashAccountsService> {
+class CashAccountsServiceAdapter extends ServiceAdapter<
+    CashAccountsEntityModelList,
+    JsonRequestModel,
+    CashAccountsServiceResponseModel,
+    CashAccountsService> {
   CashAccountsServiceAdapter() : super(CashAccountsService());
 
   @override
-  CashAccountsListEntityModel createEntity(CashAccountsListEntityModel initialEntity, CashAccountsServiceResponseModel responseModel) {
-    return initialEntity.merge(cashAccountEntityModel: responseModel.cashAccountsModel);
+  CashAccountsEntityModelList createEntity(
+      CashAccountsEntityModelList cashAccountsEntityModelList,
+      CashAccountsServiceResponseModel responseModel) {
+    return cashAccountsEntityModelList.merge(
+        cashAccountEntityModel: responseModel.cashAccountsModelList);
   }
 }

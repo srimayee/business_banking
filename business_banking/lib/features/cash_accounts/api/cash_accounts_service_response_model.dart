@@ -6,15 +6,15 @@ class CashAccountsServiceResponseModel extends Equatable
     implements JsonResponseModel {
   /// Rest API Accounts Object.
 
-  final List<CashAccountsEntityModel> cashAccountsModel;
+  final List<CashAccountsEntityModel> cashAccountsModelList;
 
   CashAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : cashAccountsModel = List<CashAccountsEntityModel>.from(
+      : cashAccountsModelList = List<CashAccountsEntityModel>.from(
               json['accounts']?.map((cashAccountsJSONObject) =>
                   CashAccountsEntityModel.fromJson(cashAccountsJSONObject)),
             ) ??
             [];
 
   @override
-  List<Object> get props => [cashAccountsModel];
+  List<Object> get props => [cashAccountsModelList];
 }
