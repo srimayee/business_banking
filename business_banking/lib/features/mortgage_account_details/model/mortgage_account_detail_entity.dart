@@ -20,9 +20,9 @@ class MortgageAccountDetailEntity extends Entity {
         this.beginningBalance = 0.00,
         this.pendingTransactions = 0.00,
         this.depositHolds = 0.00})
-      : name = name ?? 'Account',
+      : name = name ?? 'Mortgage Account',
         lastFour = lastFour ?? '0000',
-        accountType = accountType ?? 'Account Checking',
+        accountType = accountType ?? 'Account Mortgage',
         routingNumber = routingNumber ?? 000000000,
         super(errors: errors);
 

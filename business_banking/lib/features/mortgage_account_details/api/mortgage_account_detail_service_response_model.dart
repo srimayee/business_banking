@@ -13,9 +13,9 @@ class MortgageAccountDetailServiceResponseModel extends Equatable
   final double depositHolds;
 
   MortgageAccountDetailServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : name = json['name'] ?? 'Account',
+      : name = json['name'] ?? 'Mortgage Account',
         lastFour = json['lastFour'] ?? '0000',
-        accountType = json['accountType'] ?? 'Account Checking',
+        accountType = json['accountType'] ?? 'Mortgage',
         routingNumber = json['routingNum'] ?? 000000000,
         balance = json['balance'] ?? 0.00,
         beginningBalance = json['begBalance'] ?? 0.00,

@@ -10,7 +10,7 @@ class MortgageAccountsEntity extends Entity {
         String name,
         String lastFour,
         this.balance = 0.00})
-      : name = name ?? 'Mortagage Account',
+      : name = name ?? 'Mortagage',
         lastFour = lastFour ?? '0000',
         super(errors: errors);
 

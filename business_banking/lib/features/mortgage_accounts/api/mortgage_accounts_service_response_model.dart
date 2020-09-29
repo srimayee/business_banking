@@ -9,7 +9,7 @@ class MortgageAccountsServiceResponseModel extends Equatable
   final double balance;
 
   MortgageAccountsServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : name = json['type'] ?? 'Mortagage Account',
+      : name = json['type'] ?? 'Mortagage',
         lastFour = json['lastFour'] ?? '0000',
         balance = json['balance'] ?? 0.00;
 

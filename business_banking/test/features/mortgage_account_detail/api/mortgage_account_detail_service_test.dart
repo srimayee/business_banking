@@ -2,6 +2,8 @@ import 'package:business_banking/features/mortgage_account_details/api/mortgage_
 import 'package:business_banking/features/mortgage_account_details/api/mortgage_account_detail_service_response_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'mortgage_account_detail_mock_service.dart';
+
 void main() {
   test('MortgageAccountDetailService success', () async {
     final service = MortgageAccountDetailService();
@@ -11,13 +13,36 @@ void main() {
     expect(
         eitherResponse.fold((_) {}, (m) => m),
         MortgageAccountDetailServiceResponseModel.fromJson(
-            {'name': 'Employee Checking',
-             'lastFour': '6542',
-             'accountType': 'Employee Checking',
-             'routingNum': 746395735,
-             'balance': 3545.54,
-             'begBalance': 3674.43,
-             'penTrans': -128.89,
-             'depHolds': 0.00}));
+            {'name': 'Employee Mortgage',
+              'lastFour': '6789',
+              'accountType': 'Employee Mortgage',
+              'routingNum': 738395735,
+              'balance': 7383.54,
+              'begBalance': 23674.43,
+              'penTrans': -4128.89,
+              'depHolds': 0.00}));
+  });
+
+  test('MortgageAccountDetailService success mock', () async {
+    final service = MortgageAccountDetailMockService();
+
+    expect(
+        service.parseResponse({'name': 'Employee Mortgage',
+          'lastFour': '6789',
+          'accountType': 'Employee Mortgage',
+          'routingNum': 738395735,
+          'balance': 7383.54,
+          'begBalance': 23674.43,
+          'penTrans': -4128.89,
+          'depHolds': 0.00}),
+        MortgageAccountDetailServiceResponseModel.fromJson(
+            {'name': 'Employee Mortgage',
+              'lastFour': '6789',
+              'accountType': 'Employee Mortgage',
+              'routingNum': 738395735,
+              'balance': 7383.54,
+              'begBalance': 23674.43,
+              'penTrans': -4128.89,
+              'depHolds': 0.00}));
   });
 }

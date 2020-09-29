@@ -9,9 +9,9 @@ void main() {
 
     bloc.mortgageAccountsViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<MortgageAccountsViewModel>());
-      expect(model.name, 'Employee Checking');
-      expect(model.lastFour.toString(), '6542');
-      expect(model.balance.toString(), '3545.54');
+      expect(model.name, 'Employee Mortgage');
+      expect(model.lastFour.toString(), '3425');
+      expect(model.balance.toString(), '7898.54');
     }));
   });
   

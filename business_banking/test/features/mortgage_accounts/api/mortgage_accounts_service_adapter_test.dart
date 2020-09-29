@@ -2,22 +2,22 @@ import 'package:business_banking/features/mortgage_accounts/api/mortgage_account
 import 'package:business_banking/features/mortgage_accounts/model/mortgage_accounts_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'mortgage_accounts_mock_service.dart';
+import 'mortgage_accounts_mock_service_adapter.dart';
 
 void main() {
   test('Entity is created by service adapter', () {
     final entity = MortgageAccountsMockServiceAdapter().createEntity(
         MortgageAccountsEntity(),
         MortgageAccountsServiceResponseModel.fromJson({
-          'type': 'Employee Checking',
-          'lastFour': '6542',
-          'balance': 3545.54
+          'type': 'Employee Mortgage',
+          'lastFour': '7635',
+          'balance': 7635.23
         }));
 
     expect(entity, MortgageAccountsEntity(
-      name: 'Employee Checking',
-      lastFour: '6542',
-      balance: 3545.54
+      name: 'Employee Mortgage',
+      lastFour: '7635',
+      balance: 7635.23
     ));
   });
 }

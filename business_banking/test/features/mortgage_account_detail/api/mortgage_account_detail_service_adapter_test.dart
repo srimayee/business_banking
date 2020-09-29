@@ -11,21 +11,21 @@ void main() {
           'name': 'Mortgage',
           'lastFour': '6542',
           'accountType': 'Mortgage',
-          'routingNum': 746395735,
-          'balance': 3545.54,
-          'begBalance': 3674.43,
-          'penTrans': -128.89,
+          'routingNum': 876395735,
+          'balance': 6735.54,
+          'begBalance': 9243.43,
+          'penTrans': -228.89,
           'depHolds': 0.00
         }));
 
     expect(entity, MortgageAccountDetailEntity(
-      name: 'Employee Checking',
+      name: 'Mortgage',
       lastFour: '6542',
-      accountType: 'Employee Checking',
-      routingNumber: 746395735,
-      balance: 3545.54,
-      beginningBalance: 3674.43,
-      pendingTransactions: -128.89,
+      accountType: 'Mortgage',
+      routingNumber: 876395735,
+      balance: 6735.54,
+      beginningBalance: 9243.43,
+      pendingTransactions: -228.89,
       depositHolds: 0.00
     ));
   });

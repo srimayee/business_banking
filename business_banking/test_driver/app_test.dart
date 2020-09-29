@@ -74,11 +74,11 @@ void main() {
 
     test('MortgageAccountScreen, app bar is displayed', () async {
       await driver.tap(mortgageAccountCard);
-      expect(await driver.getText(mortgageDetailsAppBar), '*6542');
+      expect(await driver.getText(mortgageDetailsAppBar), '*4243');
     });
 
     test('MortgageAccountDetailScreen, account balance is displayed', () async {
-      expect(await driver.getText(mortgageAccountDetailBalance), '\$3545.54');
+      expect(await driver.getText(mortgageAccountDetailBalance), '\$5354.54');
     });
 
     test('MortgageAccountDetailScreen, deposit hold amount is displayed on card', () async {

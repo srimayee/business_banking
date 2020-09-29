@@ -1,18 +1,12 @@
-import 'package:business_banking/features/mortgage_accounts/bloc/mortgage_accounts_service_adapter.dart';
-import 'package:mockito/mockito.dart';
-import 'package:business_banking/features/mortgage_accounts/model/mortgage_accounts_entity.dart';
+import 'package:business_banking/features/mortgage_accounts/api/mortgage_accounts_service.dart';
 import 'package:business_banking/features/mortgage_accounts/api/mortgage_accounts_service_response_model.dart';
+import 'package:mockito/mockito.dart';
 
-class MortgageAccountsMockServiceAdapter extends Fake implements MortgageAccountsServiceAdapter {
-  MortgageAccountsMockServiceAdapter();
+class MortgageAccountsMockService extends Fake implements MortgageAccountsService {
+  MortgageAccountsMockService();
 
-@override
-  MortgageAccountsEntity createEntity(
-      MortgageAccountsEntity initialEntity, MortgageAccountsServiceResponseModel responseModel) {
-    return MortgageAccountsEntity(
-        name: responseModel.name,
-        lastFour: responseModel.lastFour,
-        balance: responseModel.balance
-    );
+  @override
+  MortgageAccountsServiceResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
+    return MortgageAccountsServiceResponseModel.fromJson(jsonResponse);
   }
 }

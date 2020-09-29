@@ -9,9 +9,9 @@ class MortgageAccountsBlocMock extends Fake implements MortgageAccountsBloc {
   MortgageAccountsBlocMock() {
     mortgageAccountsViewModelPipe.onListen(() {
       mortgageAccountsViewModelPipe.send(MortgageAccountsViewModel(
-          name: 'Employee Checking',
-          lastFour: '6542',
-          balance: 3545.54
+          name: 'Employee Mortgage',
+          lastFour: '3425',
+          balance: 7898.54
         ));
     });
   }
