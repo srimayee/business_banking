@@ -4,13 +4,13 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:mockito/mockito.dart';
 
 class MortgageAccountDetailMockBloc extends Fake implements MortgageAccountDetailBloc {
-  Pipe<MortgageAccountDetailViewModel> mortgageAccountsViewModelPipe = Pipe<MortgageAccountDetailViewModel>();
+  Pipe<MortgageAccountDetailViewModel> mortgageAccountDetailViewModelPipe = Pipe<MortgageAccountDetailViewModel>();
 
   MortgageAccountDetailMockBloc() {
-    mortgageAccountsViewModelPipe.onListen(() {
-      mortgageAccountsViewModelPipe.send(MortgageAccountDetailViewModel(
+    mortgageAccountDetailViewModelPipe.onListen(() {
+      mortgageAccountDetailViewModelPipe.send(MortgageAccountDetailViewModel(
           name: 'Employee Mortgage',
-          lastFour: '1904',
+          lastFour: '7635',
           accountType: 'Mortgage',
           routingNumber:879076567,
           balance:8935.90,

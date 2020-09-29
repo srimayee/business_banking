@@ -37,7 +37,7 @@ void main() {
           MortgageAccountDetailEntity(),
           MortgageAccountDetailServiceResponseModel.fromJson({
             'name': 'Mortgage',
-            'lastFour': '6542',
+            'lastFour': '7635',
             'accountType': 'Mortgage',
             'routingNum': 876395735,
             'balance': 6735.54,
@@ -48,7 +48,7 @@ void main() {
 
       expect(entity, MortgageAccountDetailEntity(
           name: 'Mortgage',
-          lastFour: '6542',
+          lastFour: '7635',
           accountType: 'Mortgage',
           routingNumber: 876395735,
           balance: 6735.54,

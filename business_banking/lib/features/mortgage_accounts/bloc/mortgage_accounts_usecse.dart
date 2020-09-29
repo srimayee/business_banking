@@ -1,3 +1,4 @@
+import 'package:business_banking/features/mortgage_accounts/api/mortgage_accounts_service_response_model.dart';
 import 'package:business_banking/features/mortgage_accounts/bloc/mortgage_accounts_service_adapter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/mortgage_accounts/model/mortgage_accounts_view_model.dart';
@@ -8,10 +9,11 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 
 class MortgageAccountsUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
+  final MortgageAccountsServiceAdapter serviceAdapter;
 
   RepositoryScope _scope;
 
-  MortgageAccountsUseCase(Function(ViewModel) viewModelCallBack) : assert(viewModelCallBack != null), _viewModelCallBack = viewModelCallBack;
+  MortgageAccountsUseCase(Function(ViewModel) viewModelCallBack, {this.serviceAdapter}) : assert(viewModelCallBack != null), _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<MortgageAccountsEntity>();
@@ -23,9 +25,9 @@ class MortgageAccountsUseCase extends UseCase {
     } else {
       _scope.subscription = _notifySubscribers;
     }
-    await ExampleLocator()
+        await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, MortgageAccountsServiceAdapter());
+        .runServiceAdapter(_scope, serviceAdapter == null ? MortgageAccountsServiceAdapter() : serviceAdapter);
   }
 
   void _notifySubscribers(entity) {

@@ -69,16 +69,16 @@ void main() {
 
     ///mortgage Account
     test('MortgageAccountsScreen, account balance is displayed on card', () async {
-          expect(await driver.getText(mortgageAccountBalance), '\$3545.54');
+          expect(await driver.getText(mortgageAccountBalance), '\$2829.40');
         });
 
     test('MortgageAccountScreen, app bar is displayed', () async {
       await driver.tap(mortgageAccountCard);
-      expect(await driver.getText(mortgageDetailsAppBar), '*4243');
+      expect(await driver.getText(mortgageDetailsAppBar), '*7635');
     });
 
     test('MortgageAccountDetailScreen, account balance is displayed', () async {
-      expect(await driver.getText(mortgageAccountDetailBalance), '\$5354.54');
+      expect(await driver.getText(mortgageAccountDetailBalance), '\$6735.54');
     });
 
     test('MortgageAccountDetailScreen, deposit hold amount is displayed on card', () async {

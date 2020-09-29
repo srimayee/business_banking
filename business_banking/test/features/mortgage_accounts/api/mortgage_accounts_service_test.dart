@@ -7,13 +7,12 @@ import 'mortgage_accounts_mock_service.dart';
 void main() {
   test('MortgageAccountsService success', () async {
     final service = MortgageAccountsService();
-    final eitherResponse = await service.request();
-
-    expect(eitherResponse.isRight, isTrue);
-    expect(
-        eitherResponse.fold((_) {}, (m) => m),
+    expect(service, isA<MortgageAccountsService>());
+    final response = service.parseResponse({'type': 'Employee Mortgage', 'lastFour': '7635', 'balance': 7635.23});
+    expect(response,
         MortgageAccountsServiceResponseModel.fromJson(
             {'type': 'Employee Mortgage', 'lastFour': '7635', 'balance': 7635.23}));
+    expect(response.props, isA<List<Object>>());
   });
 
   test('MortgageAccountsService success Mock', () async {

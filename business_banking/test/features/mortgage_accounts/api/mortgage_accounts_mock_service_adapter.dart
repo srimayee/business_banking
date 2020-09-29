@@ -6,9 +6,9 @@ import 'package:business_banking/features/mortgage_accounts/api/mortgage_account
 class MortgageAccountsMockServiceAdapter extends Fake implements MortgageAccountsServiceAdapter {
   MortgageAccountsMockServiceAdapter();
 
-@override
-  MortgageAccountsEntity createEntity(
-      MortgageAccountsEntity initialEntity, MortgageAccountsServiceResponseModel responseModel) {
+  @override
+  MortgageAccountsEntity createEntity(MortgageAccountsEntity initialEntity,
+      MortgageAccountsServiceResponseModel responseModel) {
     return MortgageAccountsEntity(
         name: responseModel.name,
         lastFour: responseModel.lastFour,
