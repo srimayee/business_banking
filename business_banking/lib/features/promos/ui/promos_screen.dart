@@ -13,6 +13,7 @@ class PromosScreen extends Screen {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      key: Key('network_image_container'),
       onTap: () {
         openUrl(viewModel.link);
       },
