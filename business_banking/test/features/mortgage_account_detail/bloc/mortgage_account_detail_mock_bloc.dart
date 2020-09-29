@@ -12,7 +12,7 @@ class MortgageAccountDetailMockBloc extends Fake implements MortgageAccountDetai
           name: 'Employee Mortgage',
           lastFour: '7635',
           accountType: 'Mortgage',
-          routingNumber:879076567,
+          applicationNumber:879076567,
           balance:8935.90,
           beginningBalance:9390.43,
           pendingTransactions:-898.89,

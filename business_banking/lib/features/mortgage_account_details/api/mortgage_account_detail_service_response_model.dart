@@ -6,7 +6,7 @@ class MortgageAccountDetailServiceResponseModel extends Equatable
   final String name;
   final String lastFour;
   final String accountType;
-  final int routingNumber;
+  final int applicationNumber;
   final double balance;
   final double beginningBalance;
   final double pendingTransactions;
@@ -16,7 +16,7 @@ class MortgageAccountDetailServiceResponseModel extends Equatable
       : name = json['name'] ?? 'Mortgage Account',
         lastFour = json['lastFour'] ?? '0000',
         accountType = json['accountType'] ?? 'Mortgage',
-        routingNumber = json['routingNum'] ?? 000000000,
+        applicationNumber = json['applicationNumber'] ?? 000000000,
         balance = json['balance'] ?? 0.00,
         beginningBalance = json['begBalance'] ?? 0.00,
         pendingTransactions = json['penTrans'] ?? 0.00,
@@ -27,7 +27,7 @@ class MortgageAccountDetailServiceResponseModel extends Equatable
     name,
     lastFour,
     accountType,
-    routingNumber,
+    applicationNumber,
     balance,
     beginningBalance,
     pendingTransactions,

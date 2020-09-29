@@ -15,7 +15,7 @@ class MortgageAccountDetailMockServiceAdapter extends Fake implements MortgageAc
         name: responseModel.name,
         lastFour: responseModel.lastFour,
         accountType: responseModel.accountType,
-        routingNumber: responseModel.routingNumber,
+        applicationNumber: responseModel.applicationNumber,
         balance: responseModel.balance,
         beginningBalance: responseModel.beginningBalance,
         pendingTransactions: responseModel.pendingTransactions,

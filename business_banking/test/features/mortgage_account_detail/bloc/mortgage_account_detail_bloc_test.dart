@@ -15,7 +15,7 @@ void main() {
       expect(model.lastFour.toString(), '7635');
       expect(model.balance.toString(), '8935.9');
       expect(model.accountType, 'Mortgage');
-      expect(model.routingNumber.toString(), '879076567');
+      expect(model.applicationNumber.toString(), '879076567');
       expect(model.beginningBalance.toString(), '9390.43');
       expect(model.pendingTransactions.toString(), '-898.89');
       expect(model.depositHolds.toStringAsFixed(2), '0.00');

@@ -39,7 +39,7 @@ class MortgageAccountDetailUseCase extends UseCase {
         name: entity.name,
         lastFour: entity.lastFour,
         accountType: entity.accountType,
-        routingNumber: entity.routingNumber,
+        applicationNumber: entity.applicationNumber,
         balance: entity.balance,
         beginningBalance: entity.beginningBalance,
         pendingTransactions: entity.pendingTransactions,

@@ -5,7 +5,7 @@ class MortgageAccountDetailViewModel extends ViewModel {
   final String name;
   final String lastFour;
   final String accountType;
-  final int routingNumber;
+  final int applicationNumber;
   final double balance;
   final double beginningBalance;
   final double pendingTransactions;
@@ -15,7 +15,7 @@ class MortgageAccountDetailViewModel extends ViewModel {
     @required this.name,
     @required this.lastFour,
     @required this.accountType,
-    @required this.routingNumber,
+    @required this.applicationNumber,
     @required this.balance,
     @required this.beginningBalance,
     @required this.pendingTransactions,
@@ -23,7 +23,7 @@ class MortgageAccountDetailViewModel extends ViewModel {
   }) : assert(name != null &&
       lastFour != null &&
       accountType != null &&
-      routingNumber != null &&
+      applicationNumber != null &&
       balance != null &&
       beginningBalance != null &&
       pendingTransactions != null &&

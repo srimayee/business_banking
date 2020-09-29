@@ -100,7 +100,7 @@ class MortgageAccountDetailScreen extends Screen {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('Routing Number: ' + viewModel.routingNumber.toString(), style: TextStyle(fontSize: 15.0)),
+                  Text('Application Number: ' + viewModel.applicationNumber.toString(), style: TextStyle(fontSize: 15.0)),
                 ],
               ),
               const SizedBox(height: 10.0),

@@ -21,7 +21,6 @@ void main() {
     expect(find.byKey(Key('mortagageAccountDetailBalance')), findsOneWidget);
     expect(find.text('account balance'), findsOneWidget);
     expect(find.text('Show'), findsOneWidget);
-    expect(find.text('Account Balance:'), findsOneWidget);
   });
 
   testWidgets('MortgageAccountDetailBackNavigation, with true bloc', (tester) async {

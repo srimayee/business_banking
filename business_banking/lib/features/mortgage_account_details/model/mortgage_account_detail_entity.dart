@@ -4,7 +4,7 @@ class MortgageAccountDetailEntity extends Entity {
   final String name;
   final String lastFour;
   final String accountType;
-  final int routingNumber;
+  final int applicationNumber;
   final double balance;
   final double beginningBalance;
   final double pendingTransactions;
@@ -15,7 +15,7 @@ class MortgageAccountDetailEntity extends Entity {
         String name,
         String lastFour,
         String accountType,
-        int routingNumber,
+        int applicationNumber,
         this.balance = 0.00,
         this.beginningBalance = 0.00,
         this.pendingTransactions = 0.00,
@@ -23,7 +23,7 @@ class MortgageAccountDetailEntity extends Entity {
       : name = name ?? 'Mortgage Account',
         lastFour = lastFour ?? '0000',
         accountType = accountType ?? 'Account Mortgage',
-        routingNumber = routingNumber ?? 000000000,
+        applicationNumber = applicationNumber ?? 000000000,
         super(errors: errors);
 
   @override
@@ -32,7 +32,7 @@ class MortgageAccountDetailEntity extends Entity {
     name,
     lastFour,
     accountType,
-    routingNumber,
+    applicationNumber,
     balance,
     beginningBalance,
     pendingTransactions,
@@ -45,7 +45,7 @@ class MortgageAccountDetailEntity extends Entity {
         String name,
         String lastFour,
         String accountType,
-        int routingNumber,
+        int applicationNumber,
         double balance,
         double beginningBalance,
         double pendingTransactions,
@@ -55,7 +55,7 @@ class MortgageAccountDetailEntity extends Entity {
         name: name ?? this.name,
         lastFour: lastFour ?? this.lastFour,
         accountType: accountType ?? this.accountType,
-        routingNumber: routingNumber ?? this.routingNumber,
+        applicationNumber: applicationNumber ?? this.applicationNumber,
         balance: balance ?? this.balance,
         beginningBalance: beginningBalance ?? this.beginningBalance,
         pendingTransactions: pendingTransactions ?? this.pendingTransactions,
@@ -64,6 +64,6 @@ class MortgageAccountDetailEntity extends Entity {
 
   @override
   String toString() {
-    return '$name $lastFour $accountType $routingNumber $balance $beginningBalance $pendingTransactions $depositHolds';
+    return '$name $lastFour $accountType $applicationNumber $balance $beginningBalance $pendingTransactions $depositHolds';
   }
 }
