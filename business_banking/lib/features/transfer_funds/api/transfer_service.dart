@@ -10,7 +10,8 @@ class TransferFundsService extends EitherService<TransferFundsRequestModel,
       : super(
       method: RestMethod.post,
       restApi: ExampleLocator().api,
-      path: 'transfer-send');
+      path: 'transfer-send'
+  );
 
   @override
   TransferFundsResponseModel parseResponse(Map<String, dynamic> jsonResponse) {

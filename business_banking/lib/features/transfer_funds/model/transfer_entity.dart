@@ -47,6 +47,6 @@ class TransferFundsEntity extends Entity {
 
   @override
   String toString() {
-    return "$fromAccount $toAccount $amount $date $fromAccounts $toAccounts";
+    return "$id $fromAccount $toAccount $amount $date $fromAccounts $toAccounts";
   }
 }

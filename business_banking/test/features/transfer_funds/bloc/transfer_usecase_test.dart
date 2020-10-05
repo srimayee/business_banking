@@ -109,22 +109,22 @@ void main() {
     }
 
     // TODO testing updateId method failed
-    // bool result = await useCase.updateId();
-    // expect(result, isTrue);
-    // if (result) {
-    //   entity = useCase.getEntity();
-    //
-    // }
-    // expect(entity != null, isTrue);
-    //
-    // if (entity != null) {
-    //   expect(entity.fromAccounts, ['1111111111', '2222222222', '3333333333']);
-    //   expect(entity.toAccounts, ['4444444444', '5555555555', '6666666666']);
-    //   expect(entity.fromAccount, '1111111111');
-    //   expect(entity.toAccount, '5555555555');
-    //   expect(entity.amount, 23.5);
-    //   expect(entity.id, '123456789');
-    //   expect(entity.date, date);
-    // }
+    print('Starting test updateId');
+    bool result = await useCase.updateId();
+    expect(result, isTrue);
+    if (result) {
+      entity = useCase.getEntity();
+      expect(entity != null, isTrue);
+
+      if (entity != null) {
+        expect(entity.fromAccounts, ['1111111111', '2222222222', '3333333333']);
+        expect(entity.toAccounts, ['4444444444', '5555555555', '6666666666']);
+        expect(entity.fromAccount, '1111111111');
+        expect(entity.toAccount, '5555555555');
+        expect(entity.amount, 23.5);
+        expect(entity.id, '123456789');
+        expect(entity.date, date);
+      }
+    }
   });
 }

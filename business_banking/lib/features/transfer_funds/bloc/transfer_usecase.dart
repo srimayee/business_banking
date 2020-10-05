@@ -115,9 +115,13 @@ class TransferFundsUseCase extends UseCase {
   Future<bool> updateId() async {
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
+      // TODO this does not update an Entity with new id
+      TransferFundsServiceAdapter serviceAdapter = TransferFundsServiceAdapter();
       await ExampleLocator()
           .repository
-          .runServiceAdapter(_scope, TransferFundsServiceAdapter());
+          .runServiceAdapter(_scope, serviceAdapter);
+      final newEntity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+      print('UseCase: new entity id = ${newEntity.id}');
       return true;
     }
     else {
