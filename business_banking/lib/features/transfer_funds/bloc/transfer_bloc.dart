@@ -10,7 +10,7 @@ class TransferFundsBloc extends Bloc {
   final toAccountPipe = Pipe<String>();
   final amountPipe = Pipe<String>();
   final datePipe = Pipe<DateTime>();
-  // final idPipe = Pipe<void>();
+  //final submitPipe = Pipe<void>();
 
   TransferFundsBloc() {
     _useCase = TransferFundsUseCase(

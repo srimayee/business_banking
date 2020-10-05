@@ -6,10 +6,6 @@ void main() {
 
   TransferFundsBloc bloc;
 
-  setUp(() {
-    bloc = TransferFundsBloc();
-  });
-
   test('testing transferFundsViewModelPipe', () async {
 
     // testing transferFundsViewModelPipe
@@ -22,14 +18,27 @@ void main() {
       expect(model.amount, 0);
       expect(model.id, null);
     },));
-  });
+  }, timeout: Timeout(Duration(seconds: 3)));
 
   test('testing fromAccountPipe', () async {
-    //testing fromAccountPipe
-    bloc.fromAccountPipe.receive.listen(expectAsync1((account) {
-      expect(account, isA<String>());
-      expect(account, '1111111111');
-    }));
-    bloc.fromAccountPipe.send('1111111111');
-  });
+    final bloc = TransferFundsBloc();
+    int counter = 0;
+
+    bloc.transferFundsViewModelPipe.receive.listen(expectAsync1((model) {
+      expect(model, isA<TransferFundsViewModel>());
+      expect(model.fromAccounts, ['1111111111', '2222222222', '3333333333']);
+      expect(model.toAccounts, null);
+      if (counter < 1) {
+        expect(model.fromAccount, null);
+      }
+      else {
+        expect(model.fromAccount, '1111111111');
+      }
+      expect(model.toAccount, null);
+      expect(model.amount, 0);
+      expect(model.id, null);
+      counter++;
+      bloc.fromAccountPipe.send('1111111111');
+    }, count: 2),);
+  }, timeout: Timeout(Duration(seconds: 3)));
 }

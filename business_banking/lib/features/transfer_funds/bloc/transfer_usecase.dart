@@ -32,14 +32,6 @@ class TransferFundsUseCase extends UseCase {
         .runServiceAdapter(_scope, TransferFundsAccountsFromServiceAdapter());
   }
 
-  TransferFundsEntity getEntity() {
-    return ExampleLocator().repository.get(_scope);
-  }
-
-  RepositoryScope getScope() {
-    return _scope;
-  }
-
   void _notifyTransferSubscribers(entity) {
     _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
@@ -112,7 +104,7 @@ class TransferFundsUseCase extends UseCase {
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 
-  Future<bool> updateId() async {
+  Future<bool> submitTransfer() async {
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
       // TODO this does not update an Entity with new id

@@ -1,4 +1,5 @@
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
+import 'package:business_banking/features/transfer_funds/ui/confirmation_screen.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/from_accounts_dropdown.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -88,7 +89,7 @@ class TransferFundsScreen extends Screen {
                 textColor: Colors.white,
                 color: Colors.black54,
                 child: Text('Submit Transfer'),
-                onPressed: (){},
+                onPressed: () => Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new ConfirmationScreen(viewModel))),
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),

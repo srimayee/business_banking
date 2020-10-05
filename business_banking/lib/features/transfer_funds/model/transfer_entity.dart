@@ -1,6 +1,6 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class TransferFundsEntity extends Entity {
+class TransferFundsEntity extends Entity{
   final String id;
   final String fromAccount;
   final String toAccount;
@@ -49,4 +49,6 @@ class TransferFundsEntity extends Entity {
   String toString() {
     return "$id $fromAccount $toAccount $amount $date $fromAccounts $toAccounts";
   }
+
+
 }

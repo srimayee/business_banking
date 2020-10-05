@@ -17,7 +17,7 @@ void main() {
     final entity = serviceAdapter.createEntity(
         TransferFundsEntity(),
         TransferFundsResponseModel.fromJson({"confirmation" : "123456789"}));
-    expect(entity.id, TransferFundsEntity(id: '123456789').id);
+    expect(entity.id, '123456789');
 
     // testing createRequest method
     DateTime date = DateTime.now();

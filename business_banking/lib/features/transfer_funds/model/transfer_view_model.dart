@@ -1,8 +1,8 @@
 import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
-class TransferFundsViewModel extends ViewModel {
+class TransferFundsViewModel extends Equatable implements ViewModel {
   final String fromAccount;
   final String toAccount;
   final double amount;
@@ -14,14 +14,18 @@ class TransferFundsViewModel extends ViewModel {
   final dataStatus;
 
   TransferFundsViewModel({
-    @required this.fromAccount,
-    @required this.toAccount,
-    @required this.amount,
-    @required this.date,
-    @required this.fromAccounts,
-    @required this.toAccounts,
+    this.fromAccount,
+    this.toAccount,
+    this.amount = 0,
+    this.date,
+    this.fromAccounts,
+    this.toAccounts,
     this.id,
     this.dataStatus = DataStatus.unknown,
     this.serviceStatus = ServiceStatus.unknown
   });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [fromAccount, toAccount, amount, fromAccounts, toAccounts, id];
 }
