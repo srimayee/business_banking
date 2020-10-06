@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 
-class ConfirmationScreen extends Screen {
+class TransferConfirmationScreen extends Screen {
   final TransferFundsViewModel viewModel;
 
-  ConfirmationScreen(this.viewModel);
+  TransferConfirmationScreen(this.viewModel);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +17,9 @@ class ConfirmationScreen extends Screen {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('Transfer Confirmation'),
-        leading: GestureDetector(
-          child: Icon(
-            Icons.chevron_left,
-            size: 40.0,
-          ),
-          onTap: () {
-                // ignore: unnecessary_statements
-                () => Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new HubScreen()));
-          },
-          key: Key('backButton'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: (){ Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new HubScreen()));}
         ),
       ),
       body: Container(

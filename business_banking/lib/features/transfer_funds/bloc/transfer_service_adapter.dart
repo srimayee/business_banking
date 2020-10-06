@@ -13,16 +13,24 @@ class TransferFundsServiceAdapter extends ServiceAdapter<
 
   @override
   TransferFundsRequestModel createRequest(TransferFundsEntity entity) {
-    return TransferFundsRequestModel(
+    TransferFundsRequestModel model = TransferFundsRequestModel(
         fromAccount: entity.fromAccount,
         toAccount: entity.toAccount,
         amount: entity.amount,
         date: entity.date);
+    // return TransferFundsRequestModel(
+    //     //     fromAccount: entity.fromAccount,
+    //     //     toAccount: entity.toAccount,
+    //     //     amount: entity.amount,
+    //     //     date: entity.date);
+    print('model created by TransferServiceAdapter: ${model.fromAccount}, ${model.toAccount}, ${model.amount}, ${model.date}');
+    return model;
   }
 
   @override
   TransferFundsEntity createEntity(TransferFundsEntity initialEntity,
       TransferFundsResponseModel responseModel) {
+    print('TransferServiceAdapter creating Entity');
     return initialEntity
         .merge(errors: <EntityError>[], id: responseModel.confirmation);
   }

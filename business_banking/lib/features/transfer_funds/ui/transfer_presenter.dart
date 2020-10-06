@@ -23,7 +23,10 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
         },
         onChangeDate: (date) {
           _onChangeDate(bloc, date);
-        }
+        },
+        onSubmitTransfer: (_) {
+          _onSubmitTransfer(bloc);
+        },
     );
   }
 
@@ -46,5 +49,9 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
 
   void _onChangeDate(TransferFundsBloc bloc, DateTime date) {
     bloc.datePipe.send(date);
+  }
+
+  void _onSubmitTransfer(TransferFundsBloc bloc) {
+    bloc.submitPipe.send(null);
   }
 }

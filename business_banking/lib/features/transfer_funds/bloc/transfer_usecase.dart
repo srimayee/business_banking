@@ -1,6 +1,7 @@
+import 'package:business_banking/features/transfer_funds/api/transfer_response_model.dart';
+import 'package:business_banking/features/transfer_funds/api/transfer_service.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_from_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_to_service_adapter.dart';
-import 'package:business_banking/features/transfer_funds/bloc/transfer_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
@@ -54,6 +55,7 @@ class TransferFundsUseCase extends UseCase {
           date: entity.date,
           fromAccounts: entity.fromAccounts,
           toAccounts: entity.toAccounts,
+          id: entity.id,
           serviceStatus: ServiceStatus.success);
     }
   }
@@ -65,7 +67,8 @@ class TransferFundsUseCase extends UseCase {
         amount: entity.amount,
         date: entity.date,
         fromAccounts: entity.fromAccounts,
-        toAccounts: entity.toAccounts
+        toAccounts: entity.toAccounts,
+        id: entity.id
     );
   }
 
@@ -107,14 +110,29 @@ class TransferFundsUseCase extends UseCase {
   Future<bool> submitTransfer() async {
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
-      // TODO this does not update an Entity with new id
-      TransferFundsServiceAdapter serviceAdapter = TransferFundsServiceAdapter();
-      await ExampleLocator()
-          .repository
-          .runServiceAdapter(_scope, serviceAdapter);
+
+      // Todo this does not update an Entity with new id
+      // await ExampleLocator()
+      //    .repository
+      //    .runServiceAdapter(_scope, serviceAdapter);
+
+      // final serviceAdapter = TransferFundsServiceAdapter();
+      final service = TransferFundsService();
+      // final requestModel = serviceAdapter.createRequest(entity);
+      //  var requestJson = requestModel.toJson();
+      // final eitherResponse = await service.request(requestModel: requestModel);
+      final eitherResponse = await service.request();
+      final TransferFundsResponseModel responseModel = eitherResponse.fold((_) {}, (m) => m);
+      final updatedEntity = entity.merge(id: responseModel.confirmation);
+
+      // stderr.writeln("Example Locator Repo Scope: " + ExampleLocator().repository.scopes.toString());
+      // stderr.writeln("Example Locator: " + ExampleLocator().api.toString());
+      //stderr.writeln("Service Adapter: " + serviceAdapter.toString());
+      // stderr.writeln("Scope: " + _scope.toString());
+      ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
+      _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
       final newEntity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-      print('UseCase: new entity id = ${newEntity.id}');
-      return true;
+      return newEntity.id != null;
     }
     else {
       return false;

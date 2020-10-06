@@ -28,4 +28,9 @@ class TransferFundsViewModel extends Equatable implements ViewModel {
   @override
   // TODO: implement props
   List<Object> get props => [fromAccount, toAccount, amount, fromAccounts, toAccounts, id];
+
+  @override
+  String toString() {
+    return "$fromAccount $toAccount $amount $date $fromAccounts $toAccounts $id $dataStatus $serviceStatus";
+  }
 }

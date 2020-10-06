@@ -1,5 +1,5 @@
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
-import 'package:business_banking/features/transfer_funds/ui/confirmation_screen.dart';
+import 'package:business_banking/features/transfer_funds/ui/transfer_confirmation_screen.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/from_accounts_dropdown.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -12,6 +12,7 @@ class TransferFundsScreen extends Screen {
   final Function onChangeSelectedToAccount;
   final Function onChangeAmount;
   final Function onChangeDate;
+  final Function onSubmitTransfer;
 
   TransferFundsScreen({
     @required this.viewModel,
@@ -19,6 +20,7 @@ class TransferFundsScreen extends Screen {
     @required this.onChangeSelectedToAccount,
     @required this.onChangeAmount,
     @required this.onChangeDate,
+    @required this.onSubmitTransfer
   });
 
   @override
@@ -89,7 +91,7 @@ class TransferFundsScreen extends Screen {
                 textColor: Colors.white,
                 color: Colors.black54,
                 child: Text('Submit Transfer'),
-                onPressed: () => Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new ConfirmationScreen(viewModel))),
+                onPressed: () => _simpleNavigationToConfirmationScreen(context),
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),
@@ -97,5 +99,23 @@ class TransferFundsScreen extends Screen {
             ]),
       ),
     );
+  }
+
+  void _simpleNavigationToConfirmationScreen(BuildContext context) {
+    Navigator.pushReplacement(context, MaterialPageRoute(
+      settings: RouteSettings(name: 'ConfirmationScreen'),
+      builder: (context) => new TransferConfirmationScreen(viewModel),
+    ),
+    );
+  }
+
+  void _navigateToConfirmationScreen(BuildContext context) {
+    onSubmitTransfer().than(Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'ConfirmationScreen'),
+        builder: (context) => new TransferConfirmationScreen(viewModel),
+      ),
+    ));
   }
 }

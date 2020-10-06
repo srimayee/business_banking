@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:business_banking/features/transfer_funds/api/transfer_request_model.dart';
 import 'package:business_banking/features/transfer_funds/api/transfer_response_model.dart';
 import 'package:business_banking/locator.dart';
@@ -15,6 +17,7 @@ class TransferFundsService extends EitherService<TransferFundsRequestModel,
 
   @override
   TransferFundsResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
+        stderr.writeln("parseResponse: " + jsonResponse.toString());
     return TransferFundsResponseModel.fromJson(jsonResponse);
   }
 }
