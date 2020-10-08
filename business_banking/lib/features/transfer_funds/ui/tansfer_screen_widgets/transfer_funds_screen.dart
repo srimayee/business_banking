@@ -1,5 +1,5 @@
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
-import 'package:business_banking/features/transfer_funds/ui/transfer_confirmation_screen.dart';
+import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_screen.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/from_accounts_dropdown.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -12,7 +12,7 @@ class TransferFundsScreen extends Screen {
   final Function onChangeSelectedToAccount;
   final Function onChangeAmount;
   final Function onChangeDate;
-  final Function onSubmitTransfer;
+  final VoidCallback onTapSubmit;
 
   TransferFundsScreen({
     @required this.viewModel,
@@ -20,7 +20,7 @@ class TransferFundsScreen extends Screen {
     @required this.onChangeSelectedToAccount,
     @required this.onChangeAmount,
     @required this.onChangeDate,
-    @required this.onSubmitTransfer
+    @required this.onTapSubmit
   });
 
   @override
@@ -91,7 +91,7 @@ class TransferFundsScreen extends Screen {
                 textColor: Colors.white,
                 color: Colors.black54,
                 child: Text('Submit Transfer'),
-                onPressed: () => _simpleNavigationToConfirmationScreen(context),
+                onPressed: () { onTapSubmit(); },
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),
@@ -109,13 +109,13 @@ class TransferFundsScreen extends Screen {
     );
   }
 
-  void _navigateToConfirmationScreen(BuildContext context) {
-    onSubmitTransfer().than(Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        settings: RouteSettings(name: 'ConfirmationScreen'),
-        builder: (context) => new TransferConfirmationScreen(viewModel),
-      ),
-    ));
-  }
+  // void _navigateToConfirmationScreen(BuildContext context) {
+  //   onTapSubmit().than(Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(
+  //       settings: RouteSettings(name: 'ConfirmationScreen'),
+  //       builder: (context) => new TransferConfirmationScreen(viewModel),
+  //     ),
+  //   ));
+  // }
 }

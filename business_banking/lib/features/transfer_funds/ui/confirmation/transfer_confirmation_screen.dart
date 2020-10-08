@@ -31,7 +31,7 @@ class TransferConfirmationScreen extends Screen {
               children: <Widget>[
                 Text('Transaction', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0)),
                 SizedBox(height: 15.0,),
-                TransactionLane('Confirmation #:', '123456789'),
+                TransactionLane('Confirmation #:', viewModel.id ?? 'not defined'),
                 SizedBox(height: 15.0,),
                 TransactionLane('Transfer Date', DateFormat('MM/dd/yyyy').format(viewModel.date)),
                 SizedBox(height: 15.0,),

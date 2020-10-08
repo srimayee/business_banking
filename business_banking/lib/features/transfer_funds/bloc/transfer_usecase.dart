@@ -72,6 +72,18 @@ class TransferFundsUseCase extends UseCase {
     );
   }
 
+  TransferFundsViewModel buildViewModelForLocalUpdateWithError(TransferFundsEntity entity) {
+    return TransferFundsViewModel(
+        fromAccount: entity.fromAccount,
+        toAccount: entity.toAccount,
+        amount: entity.amount,
+        date: entity.date,
+        fromAccounts: entity.fromAccounts,
+        toAccounts: entity.toAccounts,
+        id: entity.id,
+        dataStatus: DataStatus.invalid);
+  }
+
   Future<void> updateFromAccount(String fromAccount) async {
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     TransferFundsEntity updatedEntity = entity.merge(fromAccount: fromAccount);
@@ -111,7 +123,6 @@ class TransferFundsUseCase extends UseCase {
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
 
-      // Todo this does not update an Entity with new id
       // await ExampleLocator()
       //    .repository
       //    .runServiceAdapter(_scope, serviceAdapter);
@@ -130,11 +141,12 @@ class TransferFundsUseCase extends UseCase {
       //stderr.writeln("Service Adapter: " + serviceAdapter.toString());
       // stderr.writeln("Scope: " + _scope.toString());
       ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
-      _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
+      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity));
       final newEntity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
       return newEntity.id != null;
     }
     else {
+      _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
       return false;
     }
   }
