@@ -3,7 +3,6 @@ import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
 import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/transfer_funds_screen.dart';
-import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,11 +13,9 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   @override
   TransferFundsScreen buildScreen(BuildContext context, TransferFundsBloc bloc,
       TransferFundsViewModel viewModel) {
+    print('TransferFundsPresenter buildScreen is called');
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      if (viewModel.id != null) {
-        _navigateToConfirmationScreen(bloc, context, viewModel);
-        return;
-      } else if (viewModel.serviceStatus == ServiceStatus.fail) {
+      if (viewModel.serviceStatus == ServiceStatus.fail) {
         _showErrorDialog(context);
       }
     });
@@ -39,7 +36,19 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
         },
         onTapSubmit:
             //() => _navigateToConfirmationScreen(bloc, context),
-        () { _onTapSubmit(bloc); }
+        () { _onTapSubmit(context, viewModel); }
+    );
+  }
+
+
+  @override
+  Widget buildLoadingScreen(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('Transfer funds'),
+        backgroundColor: Colors.green,
+      ),
+      body: Center(child: CircularProgressIndicator(backgroundColor: Colors.green,)),
     );
   }
 
@@ -64,20 +73,24 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
     bloc.datePipe.send(date);
   }
 
-  void _onTapSubmit(TransferFundsBloc bloc) {
-    bloc.submitPipe.launch();
+  void _onTapSubmit(BuildContext context, TransferFundsViewModel viewModel) {
+    if (viewModel.fromAccount != null && viewModel.toAccount != null && viewModel.amount > 0) {
+      _navigateToConfirmationScreen(context);
+      // _navigateToAccountDetail(context);
+    }
+    else {
+      _showInvalidDataDialog(context);
+    }
   }
 
-  void _navigateToConfirmationScreen(TransferFundsBloc bloc, BuildContext context, TransferFundsViewModel viewModel) {
+  void _navigateToConfirmationScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      // MaterialPageRoute(
-      //   settings: RouteSettings(name: 'TransferConfirmationScreen'),
-      //   builder: (context) => TransferFundsConfirmationWidget(bloc),
-      // ),
       MaterialPageRoute(
           settings: RouteSettings(name: 'TransferConfirmationScreen'),
-          builder: (context) => TransferConfirmationScreen(viewModel))
+          // builder: (context) => TransferConfirmationScreen(viewModel)
+          builder: (context) => TransferFundsConfirmationWidget()
+      )
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
-import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_screen.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/from_accounts_dropdown.dart';
 import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -100,22 +99,4 @@ class TransferFundsScreen extends Screen {
       ),
     );
   }
-
-  void _simpleNavigationToConfirmationScreen(BuildContext context) {
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      settings: RouteSettings(name: 'ConfirmationScreen'),
-      builder: (context) => new TransferConfirmationScreen(viewModel),
-    ),
-    );
-  }
-
-  // void _navigateToConfirmationScreen(BuildContext context) {
-  //   onTapSubmit().than(Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(
-  //       settings: RouteSettings(name: 'ConfirmationScreen'),
-  //       builder: (context) => new TransferConfirmationScreen(viewModel),
-  //     ),
-  //   ));
-  // }
 }

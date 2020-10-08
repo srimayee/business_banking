@@ -1,5 +1,3 @@
-import 'package:business_banking/features/transfer_funds/api/transfer_response_model.dart';
-import 'package:business_banking/features/transfer_funds/api/transfer_service.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_from_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_to_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/enums.dart';
@@ -117,37 +115,5 @@ class TransferFundsUseCase extends UseCase {
     final updatedEntity = entity.merge(date: date);
     ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
-  }
-
-  Future<bool> submitTransfer() async {
-    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-    if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
-
-      // await ExampleLocator()
-      //    .repository
-      //    .runServiceAdapter(_scope, serviceAdapter);
-
-      // final serviceAdapter = TransferFundsServiceAdapter();
-      final service = TransferFundsService();
-      // final requestModel = serviceAdapter.createRequest(entity);
-      //  var requestJson = requestModel.toJson();
-      // final eitherResponse = await service.request(requestModel: requestModel);
-      final eitherResponse = await service.request();
-      final TransferFundsResponseModel responseModel = eitherResponse.fold((_) {}, (m) => m);
-      final updatedEntity = entity.merge(id: responseModel.confirmation);
-
-      // stderr.writeln("Example Locator Repo Scope: " + ExampleLocator().repository.scopes.toString());
-      // stderr.writeln("Example Locator: " + ExampleLocator().api.toString());
-      //stderr.writeln("Service Adapter: " + serviceAdapter.toString());
-      // stderr.writeln("Scope: " + _scope.toString());
-      ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity));
-      final newEntity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-      return newEntity.id != null;
-    }
-    else {
-      _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
-      return false;
-    }
   }
 }

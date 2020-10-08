@@ -1,13 +1,12 @@
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
-import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
-import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
+import 'package:business_banking/features/transfer_funds/model/transfer_confirmation_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 
 class TransferConfirmationScreen extends Screen {
-  final TransferFundsViewModel viewModel;
+  final TransferConfirmationViewModel viewModel;
 
   TransferConfirmationScreen(this.viewModel);
 

@@ -71,14 +71,14 @@ void main() {
     bloc.datePipe.send(DateTime(2020));
   }, timeout: Timeout(Duration(seconds: 3)));
 
-  test('testing SubmitPipe', () async {
-    // Setup a Listener to receive specific pipe data
-    createSubmitPipeListener(bloc, debugEnabled);
-
-    // Providing the Date Value and send through the pipe
-    // to receiver.
-    bloc.submitPipe.launch();
-  }, timeout: Timeout(Duration(seconds: 3)));
+  // test('testing SubmitPipe', () async {
+  //   // Setup a Listener to receive specific pipe data
+  //   createSubmitPipeListener(bloc, debugEnabled);
+  //
+  //   // Providing the Date Value and send through the pipe
+  //   // to receiver.
+  //   bloc.submitPipe.launch();
+  // }, timeout: Timeout(Duration(seconds: 3)));
 }
 
 void createFromAccountPipeListener(TransferFundsBloc bloc, bool debugEnabled) {
@@ -141,17 +141,17 @@ void createDatePipeListener(TransferFundsBloc bloc, bool debugEnabled) {
   }));
 }
 
-void createSubmitPipeListener(TransferFundsBloc bloc, bool debugEnabled) {
-  // Create Pipe Listener
-  bloc.transferFundsViewModelPipe.receive.listen(expectAsync1((model) {
-    if (model.fromAccount != null) {
-      if (debugEnabled) {
-        stderr.writeln("Testing SubmitPipe: " + model.toString());
-      }
-
-      // Test the Receiving Pipe Data
-      expect(model, isA<TransferFundsViewModel>());
-      expect(model.id, '123456789');
-    }
-  }));
-}
+// void createSubmitPipeListener(TransferFundsBloc bloc, bool debugEnabled) {
+//   // Create Pipe Listener
+//   bloc.transferFundsViewModelPipe.receive.listen(expectAsync1((model) {
+//     if (model.fromAccount != null) {
+//       if (debugEnabled) {
+//         stderr.writeln("Testing SubmitPipe: " + model.toString());
+//       }
+//
+//       // Test the Receiving Pipe Data
+//       expect(model, isA<TransferFundsViewModel>());
+//       expect(model.id, '123456789');
+//     }
+//   }));
+// }
