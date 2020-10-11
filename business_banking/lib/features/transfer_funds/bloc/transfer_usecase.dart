@@ -1,5 +1,6 @@
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_from_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_accounts_to_service_adapter.dart';
+import 'package:business_banking/features/transfer_funds/bloc/transfer_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
@@ -36,6 +37,7 @@ class TransferFundsUseCase extends UseCase {
   }
 
   TransferFundsViewModel buildViewModelForServiceUpdate(TransferFundsEntity entity) {
+    DataStatus dataStatus = _checkEntityData(entity);
     if (entity.hasErrors()) {
       return TransferFundsViewModel(
           fromAccount: entity.fromAccount,
@@ -44,7 +46,8 @@ class TransferFundsUseCase extends UseCase {
           date: entity.date,
           fromAccounts: entity.fromAccounts,
           toAccounts: entity.toAccounts,
-          serviceStatus: ServiceStatus.fail);
+          serviceStatus: ServiceStatus.fail,
+          dataStatus: dataStatus);
     } else {
       return TransferFundsViewModel(
           fromAccount: entity.fromAccount,
@@ -54,7 +57,8 @@ class TransferFundsUseCase extends UseCase {
           fromAccounts: entity.fromAccounts,
           toAccounts: entity.toAccounts,
           id: entity.id,
-          serviceStatus: ServiceStatus.success);
+          serviceStatus: ServiceStatus.success,
+          dataStatus: dataStatus);
     }
   }
 
@@ -66,11 +70,12 @@ class TransferFundsUseCase extends UseCase {
         date: entity.date,
         fromAccounts: entity.fromAccounts,
         toAccounts: entity.toAccounts,
-        id: entity.id
+        id: entity.id,
+        dataStatus: _checkEntityData(entity)
     );
   }
 
-  TransferFundsViewModel buildViewModelForLocalUpdateWithError(TransferFundsEntity entity) {
+  TransferFundsViewModel buildViewModelForLocalUpdateWithResetServiceStatus(TransferFundsEntity entity) {
     return TransferFundsViewModel(
         fromAccount: entity.fromAccount,
         toAccount: entity.toAccount,
@@ -79,7 +84,8 @@ class TransferFundsUseCase extends UseCase {
         fromAccounts: entity.fromAccounts,
         toAccounts: entity.toAccounts,
         id: entity.id,
-        dataStatus: DataStatus.invalid);
+        serviceStatus: ServiceStatus.unknown,
+        dataStatus: _checkEntityData(entity));
   }
 
   Future<void> updateFromAccount(String fromAccount) async {
@@ -115,5 +121,29 @@ class TransferFundsUseCase extends UseCase {
     final updatedEntity = entity.merge(date: date);
     ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
+  }
+
+  Future<void> submitTransfer() async {
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    if (_checkEntityData(entity) == DataStatus.valid) {
+      await ExampleLocator()
+          .repository
+          .runServiceAdapter(_scope, TransferFundsServiceAdapter());
+    }
+    else {
+      _viewModelCallBack(buildViewModelForLocalUpdate(entity));
+    }
+  }
+
+  void resetServiceStatus() {
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    _viewModelCallBack(buildViewModelForLocalUpdateWithResetServiceStatus(entity));
+  }
+
+  DataStatus _checkEntityData(TransferFundsEntity entity) {
+    if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
+      return DataStatus.valid;
+    }
+    return DataStatus.invalid;
   }
 }

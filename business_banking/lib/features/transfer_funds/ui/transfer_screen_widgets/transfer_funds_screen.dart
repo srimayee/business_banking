@@ -1,6 +1,6 @@
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
-import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/from_accounts_dropdown.dart';
-import 'package:business_banking/features/transfer_funds/ui/tansfer_screen_widgets/to_accounts_dropdown.dart';
+import 'package:business_banking/features/transfer_funds/ui/transfer_screen_widgets/from_accounts_dropdown.dart';
+import 'package:business_banking/features/transfer_funds/ui/transfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

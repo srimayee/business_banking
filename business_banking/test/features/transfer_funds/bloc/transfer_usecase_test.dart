@@ -1,7 +1,5 @@
 import 'package:business_banking/features/transfer_funds/bloc/transfer_usecase.dart';
-import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
-import 'package:business_banking/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -13,7 +11,6 @@ void main() {
 
     // testing create method
     await useCase.create();
-    // TransferFundsViewModel modelToCompare = new TransferFundsViewModel(fromAccounts: ['1111111111', '2222222222', '3333333333']);
     expect(
         model,
         TransferFundsViewModel(
@@ -86,10 +83,8 @@ void main() {
     expect(model, modelForComparing);
     expect(model.date, modelForComparing.date);
 
-    // // testing submitTransfer method
-    //
-    // bool result = await useCase.submitTransfer();
-    // expect(result, isTrue);
-    // expect(model.id, '123456789');
+    // testing submitTransfer method
+    await useCase.submitTransfer();
+    expect(model.id, '123456789');
   });
 }

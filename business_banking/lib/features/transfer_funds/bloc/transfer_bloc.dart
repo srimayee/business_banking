@@ -10,7 +10,8 @@ class TransferFundsBloc extends Bloc {
   final toAccountPipe = Pipe<String>();
   final amountPipe = Pipe<String>();
   final datePipe = Pipe<DateTime>();
-  // final submitPipe = EventPipe();
+  final submitPipe = EventPipe();
+  final resetServiceStatusPipe = EventPipe();
 
   TransferFundsBloc() {
     _useCase = TransferFundsUseCase(
@@ -20,7 +21,8 @@ class TransferFundsBloc extends Bloc {
     toAccountPipe.receive.listen(toAccountInputHandler);
     amountPipe.receive.listen(amountPipeHandler);
     datePipe.receive.listen(dateHandler);
-    // submitPipe.listen(submitHandler);
+    submitPipe.listen(submitHandler);
+    resetServiceStatusPipe.listen(serviceStatusHandler);
   }
 
   void fromAccountInputHandler(String fromAccount) {
@@ -39,9 +41,13 @@ class TransferFundsBloc extends Bloc {
     _useCase.updateDate(date);
   }
 
-  // void submitHandler() {
-  //   _useCase.submitTransfer();
-  // }
+  void submitHandler() {
+    _useCase.submitTransfer();
+  }
+
+  void serviceStatusHandler() {
+    _useCase.resetServiceStatus();
+  }
 
   @override
   void dispose() {
@@ -50,6 +56,7 @@ class TransferFundsBloc extends Bloc {
     toAccountPipe.dispose();
     amountPipe.dispose();
     datePipe.dispose();
-    // submitPipe.dispose();
+    submitPipe.dispose();
+    resetServiceStatusPipe.dispose();
   }
 }

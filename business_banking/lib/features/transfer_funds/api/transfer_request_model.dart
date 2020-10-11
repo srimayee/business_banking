@@ -8,14 +8,18 @@ class TransferFundsRequestModel extends Equatable implements JsonRequestModel {
   final DateTime date;
 
   TransferFundsRequestModel(
-      {this.fromAccount, this.toAccount, this.amount, this.date});
+      {this.fromAccount,
+        this.toAccount,
+        this.amount,
+        this.date
+      });
 
   @override
   Map<String, dynamic> toJson() {
     return {
       'fromAccount': fromAccount,
       'toAccount': toAccount,
-      'amount': amount,
+      'amount': amount.toString(),
       'date': date.toIso8601String()
     };
   }

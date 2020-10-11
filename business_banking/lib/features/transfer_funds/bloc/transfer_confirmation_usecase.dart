@@ -1,5 +1,4 @@
-import 'package:business_banking/features/transfer_funds/api/transfer_response_model.dart';
-import 'package:business_banking/features/transfer_funds/api/transfer_service.dart';
+import 'package:business_banking/features/transfer_funds/bloc/transfer_service_adapter.dart';
 import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_confirmation_view_model.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
@@ -25,7 +24,9 @@ class TransferConfirmationUseCase extends UseCase {
     } else {
       _scope.subscription = _notifyTransferSubscribers;
     }
-    await submitTransfer();
+    // await submitTransfer();
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
 
   void _notifyTransferSubscribers(entity) {
@@ -61,21 +62,19 @@ class TransferConfirmationUseCase extends UseCase {
         dataStatus: DataStatus.invalid);
   }
 
-  Future<bool> submitTransfer() async {
-    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-    if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
-      final service = TransferFundsService();
-      final eitherResponse = await service.request();
-      final TransferFundsResponseModel responseModel = eitherResponse.fold((_) {}, (m) => m);
-      final updatedEntity = entity.merge(id: responseModel.confirmation);
-      ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity));
-      final newEntity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-      return newEntity.id != null;
-    }
-    else {
-      _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
-      return false;
-    }
+  // void submitTransfer() async {
+  //   final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+  //   if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
+  //     await ExampleLocator()
+  //         .repository
+  //         .runServiceAdapter(_scope, TransferFundsServiceAdapter());
+  //   }
+  //   else {
+  //     _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
+  //   }
+  // }
+
+  void clearTransferData() {
+    // TODO
   }
 }
