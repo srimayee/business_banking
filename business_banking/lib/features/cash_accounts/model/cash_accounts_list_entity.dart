@@ -26,4 +26,9 @@ class CashAccountsEntityModelList extends Entity {
           cashAccountEntityModel ?? this.cashAccountsEntityModelList,
     );
   }
+
+  @override
+  String toString() {
+    return 'CashAccountsEntityModelList{cashAccountsEntityModelList: $cashAccountsEntityModelList}';
+  }
 }

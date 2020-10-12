@@ -5,13 +5,23 @@ void main() {
   group('Banking App Driver Tests:', () {
     final signInText = find.byValueKey('signInText');
     final loginButton = find.byValueKey('login_button_key');
-    final accountCard = find.byValueKey('accountCard1');
-    final cashAccountBalance = find.byValueKey('accountBalance');
+
+    /// Cash Accounts - Card 1
+    //final cashAccountsCardOne = find.byValueKey('cashAccountsCard1');
+    final cashAccountsCardOneLastFourAccountNumber = find.byValueKey('cashAccountsCard1AccountNumber');
+    final cashAccountsCardOneAccountBalance = find.byValueKey('cashAccountsCard1Balance');
+    final cashAccountsCardOneAccountType = find.byValueKey('cashAccountsCard1AccountType');
+    final cashAccountsCardOneAccountStatus = find.byValueKey('cashAccountsCard1AccountStatus');
+
+    /// Cash Accounts - Card 2
+    //final cashAccountsCardTwo = find.byValueKey('cashAccountsCard2');
+    final cashAccountsCardTwoLastFourAccountNumber = find.byValueKey('cashAccountsCard2AccountNumber');
+    final cashAccountsCardTwoAccountBalance = find.byValueKey('cashAccountsCard2Balance');
+    final cashAccountsCardTwoAccountType = find.byValueKey('cashAccountsCard2AccountType');
+    final cashAccountsCardTwoAccountStatus = find.byValueKey('cashAccountsCard2AccountStatus');
+
     final cashAccountAppBar = find.byValueKey('CAappBarName');
-    final backButton = find.byValueKey('backButton');
-    final accountDetailAppBar = find.byValueKey('ADappBarL4');
-    final bigBalance = find.byValueKey('bigBalance');
-    final depHold = find.byValueKey('depHold');
+    //final backButton = find.byValueKey('backButton');
     
     FlutterDriver driver;
     
@@ -25,10 +35,9 @@ void main() {
       }
     });
     
-    // These will only pass with the specific JSON included in the Mockoon folder
-    
+    /// These will only pass with the specific JSON included in the Mockoon folder
     test('LoginScreen, screen is displayed', () async {
-      expect(await driver.getText(signInText), 'Sign In');
+       expect(await driver.getText(signInText), 'Sign In');
     });
     
     test('CashAccountsScreen, navigated to and app bar is displayed', () async {
@@ -37,27 +46,18 @@ void main() {
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
     
-    test('CashAccountsScreen, account balance is displayed on card', () async {
-      expect(await driver.getText(cashAccountBalance), '\$3545.54');
+    test('CashAccountsScreen, displaying Card 1 Data', () async {
+      expect(await driver.getText(cashAccountsCardOneLastFourAccountNumber), '...6542');
+      expect(await driver.getText(cashAccountsCardOneAccountBalance), '\$3,545.54');
+      expect(await driver.getText(cashAccountsCardOneAccountType), 'Cash');
+      expect(await driver.getText(cashAccountsCardOneAccountStatus), 'Active');
     });
-    
-    test('AccountDetailScreen, app bar is displayed', () async {
-      await driver.tap(accountCard);
-      expect(await driver.getText(accountDetailAppBar), '*6542');
-    });
-    
-    test('AccountDetailScreen, account balance is displayed', () async {
-      expect(await driver.getText(bigBalance), '\$3545.54');
-    });
-    
-    test('AccountDetailScreen, deposit hold ammount is displayed on card', () async {
-      expect(await driver.getText(depHold), '\$0.00');
-    });
-    
-    test('CashAccountScreen, check to find correct app bar', () async {
-      await driver.tap(backButton);
-      await driver.waitForAbsent(accountDetailAppBar);
-      expect(await driver.getText(cashAccountAppBar), 'Business Banking');
+
+    test('CashAccountsScreen, displaying Card 2 Data', () async {
+      expect(await driver.getText(cashAccountsCardTwoLastFourAccountNumber), '...6543');
+      expect(await driver.getText(cashAccountsCardTwoAccountBalance), '\$0.02');
+      expect(await driver.getText(cashAccountsCardTwoAccountType), 'Cash');
+      expect(await driver.getText(cashAccountsCardTwoAccountStatus), 'Active');
     });
   });
 }
