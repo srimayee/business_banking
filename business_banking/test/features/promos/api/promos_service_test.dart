@@ -1,13 +1,10 @@
 import 'package:business_banking/features/promos/api/promos_service.dart';
 import 'package:business_banking/features/promos/api/promos_service_request_model.dart';
 import 'package:business_banking/features/promos/api/promos_service_response_model.dart';
-import 'package:business_banking/locator.dart';
-import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  logger().setLogLevel(LogLevel.verbose);
   test(
     'PromosService success',
     () async {
@@ -19,7 +16,10 @@ void main() {
       expect(
         eitherResponse.fold((_) {}, (m) => m),
         PromosServiceResponseModel.fromJson(
-          {"imageUrl": "https://via.placeholder.com/300", "externalUrl": "http://google.com/"},
+          {
+            "imageUrl": "https://via.placeholder.com/300",
+            "externalUrl": "https://www.huntington.com/"
+          },
         ),
       );
     },
