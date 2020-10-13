@@ -13,14 +13,13 @@ class TransferFundsScreen extends Screen {
   final Function onChangeDate;
   final VoidCallback onTapSubmit;
 
-  TransferFundsScreen({
-    @required this.viewModel,
-    @required this.onChangeSelectedFromAccount,
-    @required this.onChangeSelectedToAccount,
-    @required this.onChangeAmount,
-    @required this.onChangeDate,
-    @required this.onTapSubmit
-  });
+  TransferFundsScreen(
+      {@required this.viewModel,
+      @required this.onChangeSelectedFromAccount,
+      @required this.onChangeSelectedToAccount,
+      @required this.onChangeAmount,
+      @required this.onChangeDate,
+      @required this.onTapSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +56,13 @@ class TransferFundsScreen extends Screen {
                 },
                 keyboardType: TextInputType.number,
                 controller: TextEditingController()
-                  ..text = viewModel.amount == 0 ? '' : viewModel.amount.toString(),
+                  ..text =
+                      viewModel.amount == 0 ? '' : viewModel.amount.toString(),
                 decoration: InputDecoration(
                   isDense: true,
                   prefixIcon: Text('\$ '),
                   prefixIconConstraints:
-                  BoxConstraints(minWidth: 0, minHeight: 0),
+                      BoxConstraints(minWidth: 0, minHeight: 0),
                 ),
               ),
               SizedBox(height: 20.0),
@@ -75,10 +75,10 @@ class TransferFundsScreen extends Screen {
                   ..text = DateFormat('MM/dd/yyyy').format(viewModel.date),
                 onTap: () {
                   showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2021))
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2021))
                       .then((date) {
                     onChangeDate(date);
                   });
@@ -90,7 +90,9 @@ class TransferFundsScreen extends Screen {
                 textColor: Colors.white,
                 color: Colors.black54,
                 child: Text('Submit Transfer'),
-                onPressed: () { onTapSubmit(); },
+                onPressed: () {
+                  onTapSubmit();
+                },
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),

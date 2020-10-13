@@ -27,9 +27,20 @@ class TransferFundsUseCase extends UseCase {
       _scope.subscription = _notifyTransferSubscribers;
     }
 
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope, TransferFundsAccountsFromServiceAdapter());
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    if (entity.fromAccounts == null) {
+      await ExampleLocator()
+          .repository
+          .runServiceAdapter(_scope, TransferFundsAccountsFromServiceAdapter());
+    }
+    else {
+      _notifyTransferSubscribers(entity);
+    }
+  }
+
+  void createViewModel() {
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
 
   void _notifyTransferSubscribers(entity) {

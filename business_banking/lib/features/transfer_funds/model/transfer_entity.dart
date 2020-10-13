@@ -18,10 +18,11 @@ class TransferFundsEntity extends Entity{
         List<String> fromAccounts,
         List<String> toAccounts,
         String id})
-      : this.fromAccount = fromAccount,
+      :
+        this.fromAccount = fromAccount,
         this.toAccount = toAccount,
         this.amount = amount,
-        this.date = date ?? DateTime.now(),
+        this.date = date ?? _getLastMidnight(),// change,
         this.fromAccounts = fromAccounts,
         this.toAccounts = toAccounts,
         this.id = id;
@@ -50,5 +51,9 @@ class TransferFundsEntity extends Entity{
     return "$id $fromAccount $toAccount $amount $date $fromAccounts $toAccounts";
   }
 
-
+  static DateTime _getLastMidnight() {
+    final now = DateTime.now();
+    final lastMidnight = new DateTime(now.year, now.month, now.day);
+    return lastMidnight;
+  }
 }

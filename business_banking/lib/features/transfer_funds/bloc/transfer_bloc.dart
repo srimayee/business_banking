@@ -1,9 +1,12 @@
+import 'package:business_banking/features/transfer_funds/bloc/transfer_confirmation_usecase.dart';
 import 'package:business_banking/features/transfer_funds/bloc/transfer_usecase.dart';
+import 'package:business_banking/features/transfer_funds/model/transfer_confirmation_view_model.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class TransferFundsBloc extends Bloc {
-  TransferFundsUseCase _useCase;
+  TransferFundsUseCase _fundsUseCase;
+  TransferConfirmationUseCase _confirmationUseCase;
 
   final transferFundsViewModelPipe = Pipe<TransferFundsViewModel>();
   final fromAccountPipe = Pipe<String>();
@@ -12,41 +15,44 @@ class TransferFundsBloc extends Bloc {
   final datePipe = Pipe<DateTime>();
   final submitPipe = EventPipe();
   final resetServiceStatusPipe = EventPipe();
+  final confirmationViewModelPipe = Pipe<TransferConfirmationViewModel>();
+  final resetViewModelPipe = EventPipe();
 
   TransferFundsBloc() {
-    _useCase = TransferFundsUseCase(
+    _fundsUseCase = TransferFundsUseCase(
             (viewModel) => transferFundsViewModelPipe.send(viewModel));
-    transferFundsViewModelPipe.onListen(() => _useCase.create());
+    transferFundsViewModelPipe.onListen(() {
+      _fundsUseCase.create();
+    });
+
+    _confirmationUseCase = TransferConfirmationUseCase((viewModel) => confirmationViewModelPipe.send(viewModel));
+    confirmationViewModelPipe.onListen(() {
+      _confirmationUseCase.create();
+    });
+
     fromAccountPipe.receive.listen(fromAccountInputHandler);
     toAccountPipe.receive.listen(toAccountInputHandler);
     amountPipe.receive.listen(amountPipeHandler);
     datePipe.receive.listen(dateHandler);
-    submitPipe.listen(submitHandler);
-    resetServiceStatusPipe.listen(serviceStatusHandler);
+    resetServiceStatusPipe.listen(() => _fundsUseCase.resetServiceStatus());
+    submitPipe.listen(() => _fundsUseCase.submitTransfer());
+    resetViewModelPipe.listen(() => _confirmationUseCase.clearTransferData());
   }
 
   void fromAccountInputHandler(String fromAccount) {
-    _useCase.updateFromAccount(fromAccount);
+    _fundsUseCase.updateFromAccount(fromAccount);
   }
 
   void toAccountInputHandler(String toAccount) {
-    _useCase.updateToAccount(toAccount);
+    _fundsUseCase.updateToAccount(toAccount);
   }
 
   void amountPipeHandler(String amount) {
-    _useCase.updateAmount(amount);
+    _fundsUseCase.updateAmount(amount);
   }
 
   void dateHandler(DateTime date) {
-    _useCase.updateDate(date);
-  }
-
-  void submitHandler() {
-    _useCase.submitTransfer();
-  }
-
-  void serviceStatusHandler() {
-    _useCase.resetServiceStatus();
+    _fundsUseCase.updateDate(date);
   }
 
   @override
@@ -58,5 +64,7 @@ class TransferFundsBloc extends Bloc {
     datePipe.dispose();
     submitPipe.dispose();
     resetServiceStatusPipe.dispose();
+    confirmationViewModelPipe.dispose();
+    resetViewModelPipe.dispose();
   }
 }

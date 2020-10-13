@@ -1,5 +1,3 @@
-import 'package:business_banking/features/transfer_funds/bloc/transfer_service_adapter.dart';
-import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_confirmation_view_model.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_entity.dart';
 import 'package:business_banking/locator.dart';
@@ -14,17 +12,13 @@ class TransferConfirmationUseCase extends UseCase {
       : assert(viewModelCallBack != null),
         _viewModelCallBack = viewModelCallBack;
 
-  Future<void> create() async {
+  void create() async {
     _scope = ExampleLocator().repository.containsScope<TransferFundsEntity>();
     if (_scope == null) {
-      TransferFundsEntity newTransferEntity = new TransferFundsEntity();
-      _scope = ExampleLocator()
-          .repository
-          .create<TransferFundsEntity>(newTransferEntity, _notifyTransferSubscribers);
-    } else {
-      _scope.subscription = _notifyTransferSubscribers;
+      throw StateError('Transfers entity does not exist');
     }
-    // await submitTransfer();
+
+    _scope.subscription = _notifyTransferSubscribers;
     final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
@@ -40,15 +34,14 @@ class TransferConfirmationUseCase extends UseCase {
           toAccount: entity.toAccount,
           amount: entity.amount,
           date: entity.date,
-          serviceStatus: ServiceStatus.fail);
+          id: entity.id);
     } else {
       return TransferConfirmationViewModel(
           fromAccount: entity.fromAccount,
           toAccount: entity.toAccount,
           amount: entity.amount,
           date: entity.date,
-          id: entity.id,
-          serviceStatus: ServiceStatus.success);
+          id: entity.id);
     }
   }
 
@@ -58,23 +51,12 @@ class TransferConfirmationUseCase extends UseCase {
         toAccount: entity.toAccount,
         amount: entity.amount,
         date: entity.date,
-        id: entity.id,
-        dataStatus: DataStatus.invalid);
+        id: entity.id);
   }
 
-  // void submitTransfer() async {
-  //   final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
-  //   if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
-  //     await ExampleLocator()
-  //         .repository
-  //         .runServiceAdapter(_scope, TransferFundsServiceAdapter());
-  //   }
-  //   else {
-  //     _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
-  //   }
-  // }
-
   void clearTransferData() {
-    // TODO
+    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    final emptyEntity = TransferFundsEntity(fromAccounts: entity.fromAccounts);
+    ExampleLocator().repository.update<TransferFundsEntity>(_scope, emptyEntity);
   }
 }

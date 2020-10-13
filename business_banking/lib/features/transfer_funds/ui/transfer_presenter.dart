@@ -14,6 +14,7 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   @override
   TransferFundsScreen buildScreen(BuildContext context, TransferFundsBloc bloc,
       TransferFundsViewModel viewModel) {
+    print('TransferFundsPresenter: buildScreen() called');
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success && viewModel.dataStatus == DataStatus.valid) {
         _navigateToConfirmationScreen(context);
@@ -38,12 +39,10 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
           _onChangeDate(bloc, date);
         },
         onTapSubmit:
-            //() => _navigateToConfirmationScreen(bloc, context),
         () { _onTapSubmit(context, bloc, viewModel); }
 
     );
   }
-
 
   @override
   Widget buildLoadingScreen(BuildContext context) {
@@ -52,6 +51,7 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
 
   @override
   Stream<TransferFundsViewModel> getViewModelStream(TransferFundsBloc bloc) {
+    print('TransferFundsPresenter: getViewModelStream() called');
     return bloc.transferFundsViewModelPipe.receive;
   }
 

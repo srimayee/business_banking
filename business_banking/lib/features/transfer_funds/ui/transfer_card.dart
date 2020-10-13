@@ -27,7 +27,12 @@ class TransferFundsCard extends StatelessWidget {
               ),
               OutlineButton(
                 key: Key('transfer_funds_button_key'),
-                onPressed: () => Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => new TransferFundsWidget())),
+                onPressed: () => Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            new TransferFundsWidget(),
+                        maintainState: false)),
                 borderSide: BorderSide(
                   color: Colors.black54, //Color of the border
                   style: BorderStyle.solid, //Style of the border
