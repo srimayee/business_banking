@@ -74,7 +74,7 @@ class TransferFundsUseCase extends UseCase {
   }
 
   TransferFundsViewModel buildViewModelForLocalUpdate(TransferFundsEntity entity) {
-    return TransferFundsViewModel(
+    TransferFundsViewModel model = TransferFundsViewModel(
         fromAccount: entity.fromAccount,
         toAccount: entity.toAccount,
         amount: entity.amount,
@@ -84,9 +84,12 @@ class TransferFundsUseCase extends UseCase {
         id: entity.id,
         dataStatus: _checkEntityData(entity)
     );
+    print('created new view model: ${model.toString()}');
+    return model;
   }
 
   TransferFundsViewModel buildViewModelForLocalUpdateWithResetServiceStatus(TransferFundsEntity entity) {
+
     return TransferFundsViewModel(
         fromAccount: entity.fromAccount,
         toAccount: entity.toAccount,

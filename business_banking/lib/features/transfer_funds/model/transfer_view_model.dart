@@ -13,23 +13,23 @@ class TransferFundsViewModel extends Equatable implements ViewModel {
   final serviceStatus;
   final dataStatus;
 
-  TransferFundsViewModel({
-    this.fromAccount,
-    this.toAccount,
-    this.amount = 0,
-    this.date,
-    this.fromAccounts,
-    this.toAccounts,
-    this.id,
-    this.dataStatus = DataStatus.unknown,
-    this.serviceStatus = ServiceStatus.unknown
-  });
+  TransferFundsViewModel(
+      {this.fromAccount,
+      this.toAccount,
+      this.amount = 0,
+      this.date,
+      this.fromAccounts,
+      this.toAccounts,
+      this.id,
+      this.dataStatus = DataStatus.unknown,
+      this.serviceStatus = ServiceStatus.unknown});
 
   @override
-  List<Object> get props => [fromAccount, toAccount, amount, fromAccounts, toAccounts, id];
+  List<Object> get props =>
+      [fromAccount, toAccount, amount, fromAccounts, toAccounts, id];
 
   @override
   String toString() {
-    return "$fromAccount $toAccount $amount $date $fromAccounts $toAccounts $id $dataStatus $serviceStatus";
+    return "fromAccount: $fromAccount, toAccount: $toAccount, amount: $amount, date: $date, fromAccounts: $fromAccounts, toAccounts: $toAccounts, id: $id, dataStatus: $dataStatus, serviceStatus: $serviceStatus";
   }
 }

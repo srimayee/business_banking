@@ -1,4 +1,5 @@
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -12,6 +13,18 @@ void main() {
     final accountDetailAppBar = find.byValueKey('ADappBarL4');
     final bigBalance = find.byValueKey('bigBalance');
     final depHold = find.byValueKey('depHold');
+    // transfer funds widgets
+    // transfer funds screen widgets
+    final transferFundsButton = find.byValueKey('transfer_funds_button');
+    final transferFundsBarTitle = find.byValueKey('transfer_funds_bar_title');
+    final fromLabel = find.byValueKey('from_label');
+    final fromAccountDropdown = find.byValueKey('from_account_dropdown');
+    final toLabel = find.byValueKey('to_label');
+    final toAccountDropdown = find.byValueKey('to_account_dropdown');
+    final amountLabel = find.byValueKey('amount_label');
+    final amountTextField = find.byValueKey('amount_text_field');
+    final dateLabel = find.byValueKey('date_label');
+    final dateTextField = find.byValueKey('date_text_field');
     
     FlutterDriver driver;
     
@@ -58,6 +71,43 @@ void main() {
       await driver.tap(backButton);
       await driver.waitForAbsent(accountDetailAppBar);
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
+    });
+
+    // transfer funds feature
+    test('TransferFundsScreen, navigated to and app bar is displayed', () async {
+      await driver.tap(transferFundsButton);
+      await driver.waitForAbsent(transferFundsButton);
+      expect(await driver.getText(transferFundsBarTitle), 'Transfer Funds');
+    });
+
+    test('TransferFundsScreen, check from label is displayed', () async {
+      expect(await driver.getText(fromLabel), 'From');
+    });
+
+    test('TransferFundsScreen, check to label is displayed', () async {
+      expect(await driver.getText(toLabel), 'To');
+    });
+
+    test('TransferFundsScreen, check amount label is displayed', () async {
+      expect(await driver.getText(amountLabel), 'Amount');
+    });
+
+    test('TransferFundsScreen, check amount field is displayed', () async {
+      expect(await driver.getText(amountTextField), '');
+    });
+
+    test('TransferFundsScreen, check date label is displayed', () async {
+      expect(await driver.getText(dateLabel), 'Transfer date');
+    });
+
+    test('TransferFundsScreen, check date field is displayed', () async {
+      expect(await driver.getText(dateTextField), DateFormat('MM/dd/yyyy').format(DateTime.now()));
+    });
+
+    test('TransferFundsScreen, choose from account', () async {
+      // await driver.tap(fromAccountDropdown);
+      await driver.tap(find.byValueKey('accounts_from_1'));
+      print('selected from account');
     });
   });
 }

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 class ToAccountsDropDown extends StatelessWidget {
   final TransferFundsViewModel viewModel;
   final Function onChangeSelectedToAccount;
+  final Key key;
 
   ToAccountsDropDown(
-      {@required this.viewModel,
+      { @required this.key,
+        @required this.viewModel,
         @required this.onChangeSelectedToAccount
       });
 
@@ -14,6 +16,7 @@ class ToAccountsDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> _toMenuItems = buildDropdownMenuItems(viewModel.toAccounts);
     return DropdownButton<String>(
+      key: key,
       isExpanded: true,
       items: _toMenuItems,
       onChanged: (String value) {
@@ -29,11 +32,13 @@ class ToAccountsDropDown extends StatelessWidget {
       return null;
     }
     List<DropdownMenuItem<String>> items = List();
+    int itemIndex = 0;
     for (String account in accounts) {
+      itemIndex++;
       items.add(
         DropdownMenuItem(
           value: account,
-          child: Text(account),
+          child: Text(account, key: Key('account_to_$itemIndex')),
         ),
       );
     }

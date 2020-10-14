@@ -25,8 +25,9 @@ class TransferFundsScreen extends Screen {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        key: Key('transfer_funds_bar_key'),
         backgroundColor: Colors.green,
-        title: Text('Transfer Funds'),
+        title: Text('Transfer Funds', key: Key('transfer_funds_bar_title')),
       ),
       body: Container(
         margin: new EdgeInsets.all(15.0),
@@ -34,23 +35,26 @@ class TransferFundsScreen extends Screen {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: Text('From'),
+                child: Text('From', key: Key('from_label'),),
                 width: double.infinity,
               ),
               FromAccountsDropDown(
+                  key: Key('from_account_dropdown'),
                   viewModel: viewModel,
                   onChangeSelectedFromAccount: onChangeSelectedFromAccount),
               SizedBox(height: 15.0),
-              Text('To'),
+              Text('To', key: Key('to_label')),
               SizedBox(height: 5.0),
               ToAccountsDropDown(
+                key: Key('to_account_dropdown'),
                 viewModel: viewModel,
                 onChangeSelectedToAccount: onChangeSelectedToAccount,
               ),
               SizedBox(height: 15.0),
-              Text('Amount'),
+              Text('Amount', key: Key('amount_label')),
               SizedBox(height: 15.0),
               TextField(
+                key: Key('amount_text_field'),
                 onSubmitted: (String value) {
                   onChangeAmount(value);
                 },
@@ -66,11 +70,12 @@ class TransferFundsScreen extends Screen {
                 ),
               ),
               SizedBox(height: 20.0),
-              Text('Transfer date'),
+              Text('Transfer date', key: Key('date_label')),
               SizedBox(
                 height: 15.0,
               ),
               TextField(
+                key: Key('date_text_field'),
                 controller: TextEditingController()
                   ..text = DateFormat('MM/dd/yyyy').format(viewModel.date),
                 onTap: () {

@@ -26,7 +26,7 @@ class TransferFundsCard extends StatelessWidget {
                     style: TextStyle(color: Colors.lightGreen, fontSize: 30.0)),
               ),
               OutlineButton(
-                key: Key('transfer_funds_button_key'),
+                key: Key('transfer_funds_button'),
                 onPressed: () => Navigator.push(
                     context,
                     new MaterialPageRoute(
