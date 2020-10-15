@@ -22,7 +22,7 @@ void main() {
     final fromLabel = find.byValueKey('from_label');
     final fromAccountDropdown = find.byType('FromAccountsDropDown');
     final toLabel = find.byValueKey('to_label');
-    final toAccountDropdown = find.byValueKey('ToAccountsDropDown');
+    final toAccountDropdown = find.byType('ToAccountsDropDown');
     final amountLabel = find.byValueKey('amount_label');
     final amountTextField = find.byValueKey('amount_text_field');
     final dateLabel = find.byValueKey('date_label');
@@ -107,22 +107,24 @@ void main() {
     });
 
     test('TransferFundsScreen, choose from account and enter amount', () async {
+      // select from account
       await driver.tap(fromAccountDropdown);
       await driver.tap(find.text('1111111111'));
       await driver.waitFor(find.text('1111111111'));
-      print('account from selected');
+      // select data
+      await driver.tap(dateTextField);
+      await driver.tap(find.text('16'));
+      await driver.tap(find.text('OK'));
+      // enter amount 10.5
+      await driver.setTextEntryEmulation(enabled: false);
+      await driver.requestData("prepare");
       await driver.tap(amountTextField);
-      print('selected amount text field');
-      await driver.enterText('10.5');
-      print('entered amount');
+      await driver.requestData('type transfer amount 10.5');
+      // choose to account
+      await driver.tap(toAccountDropdown);
+      await driver.tap(find.text('5555555555'));
+      await driver.waitFor(find.text('5555555555'));
       await driver.waitFor(find.text('10.5'));
     });
-
-    // test('TransferFundsScreen, choose to account', () async {
-    //   sleep(Duration(seconds: 2));
-    //   await driver.tap(toAccountDropdown);
-    //   await driver.tap(find.text('5555555555'));
-    //   await driver.waitFor(find.text('5555555555'));
-    // });
   });
 }
