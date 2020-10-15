@@ -5,20 +5,20 @@ import 'package:intl/intl.dart';
 
 class TransferConfirmationScreen extends Screen {
   final TransferConfirmationViewModel viewModel;
+
   // final Function navigateToHubScreen;
   final Function navigateToTransferScreen;
 
   TransferConfirmationScreen(
-      {@required this.viewModel,
-      @required this.navigateToTransferScreen
-  });
+      {@required this.viewModel, @required this.navigateToTransferScreen});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('Transfer Confirmation'),
+        title: Text('Transfer Confirmation',
+            key: Key('transfer_confirmation_bar_title')),
         leading: new Container(),
       ),
       body: Container(
@@ -29,38 +29,62 @@ class TransferConfirmationScreen extends Screen {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('Transaction',
+                    key: Key('transaction_confirmation_title'),
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0)),
                 SizedBox(
                   height: 15.0,
                 ),
                 TransactionLane(
-                    'Confirmation #:', viewModel.id ?? 'not defined'),
+                    'Confirmation #:',
+                    viewModel.id ?? 'not defined',
+                    'transfer_confirmation_id_label',
+                    'transfer_confirmation_id_field'),
                 SizedBox(
                   height: 15.0,
                 ),
-                TransactionLane('Transfer Date',
-                    DateFormat('MM/dd/yyyy').format(viewModel.date)),
+                TransactionLane(
+                    'Transfer Date',
+                    DateFormat('MM/dd/yyyy').format(viewModel.date),
+                    'transfer_confirmation_date_label',
+                    'transfer_confirmation_date_field'),
                 SizedBox(
                   height: 15.0,
                 ),
-                TransactionLane('From', viewModel.fromAccount),
+                TransactionLane(
+                    'From',
+                    viewModel.fromAccount,
+                    'transfer_confirmation_from_account_label',
+                    'transfer_confirmation_from_account_field'),
                 SizedBox(
                   height: 15.0,
                 ),
-                TransactionLane('To', viewModel.toAccount),
+                TransactionLane(
+                    'To',
+                    viewModel.toAccount,
+                    'transfer_confirmation_to_account_label',
+                    'transfer_confirmation_to_account_field'),
                 SizedBox(
                   height: 15.0,
                 ),
-                TransactionLane('Amount', '\$' + viewModel.amount.toString()),
+                TransactionLane(
+                    'Amount',
+                    '\$' + viewModel.amount.toString(),
+                    'transfer_confirmation_amount_label',
+                    'transfer_confirmation_amount_field'),
                 SizedBox(
                   height: 15.0,
                 ),
-                TransactionLane('Type', 'Transfer'),
+                TransactionLane(
+                    'Type',
+                    'Transfer',
+                    'transfer_confirmation_type_label',
+                    'transfer_confirmation_type_field'),
                 SizedBox(
                   height: 15.0,
                 ),
                 RaisedButton(
+                  key: Key('make_another_transfer_button'),
                   child: Text('Make Another Transfer'),
                   color: Colors.black54,
                   textColor: Colors.white,
@@ -79,16 +103,18 @@ class TransferConfirmationScreen extends Screen {
 class TransactionLane extends StatelessWidget {
   final String label;
   final String value;
+  final String labelKey;
+  final String valueFieldKey;
 
-  TransactionLane(this.label, this.value);
+  TransactionLane(this.label, this.value, this.labelKey, this.valueFieldKey);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: TextStyle(fontSize: 15.0)),
-        Text(value, style: TextStyle(fontSize: 15.0))
+        Text(label, style: TextStyle(fontSize: 15.0), key: Key(labelKey)),
+        Text(value, style: TextStyle(fontSize: 15.0), key: Key(valueFieldKey))
       ],
     );
   }

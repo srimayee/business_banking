@@ -26,7 +26,6 @@ class TransferFundsScreen extends Screen {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        key: Key('transfer_funds_bar_key'),
         backgroundColor: Colors.green,
         title: Text('Transfer Funds', key: Key('transfer_funds_bar_title')),
       ),
@@ -96,6 +95,7 @@ class TransferFundsScreen extends Screen {
               ),
               SizedBox(height: 15.0),
               RaisedButton(
+                key: Key('submit_transfer_button'),
                 textColor: Colors.white,
                 color: Colors.black54,
                 child: Text('Submit Transfer'),

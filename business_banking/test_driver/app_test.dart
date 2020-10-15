@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:intl/intl.dart';
 import 'package:test/test.dart';
@@ -19,7 +17,7 @@ void main() {
     // transfer funds screen widgets
     final transferFundsButton = find.byValueKey('transfer_funds_button');
     final transferFundsBarTitle = find.byValueKey('transfer_funds_bar_title');
-    final fromLabel = find.byValueKey('from_label');
+    final transferFromAccountLabel = find.byValueKey('from_label');
     final fromAccountDropdown = find.byType('FromAccountsDropDown');
     final toLabel = find.byValueKey('to_label');
     final toAccountDropdown = find.byType('ToAccountsDropDown');
@@ -27,7 +25,23 @@ void main() {
     final amountTextField = find.byValueKey('amount_text_field');
     final dateLabel = find.byValueKey('date_label');
     final dateTextField = find.byValueKey('date_text_field');
-    
+    final submitTransferButton = find.byValueKey('submit_transfer_button');
+    // transfer confirmation screen widgets
+    final transferConfirmationBarTitle = find.byValueKey('transfer_confirmation_bar_title');
+    final transferConfirmationTitle = find.byValueKey('transaction_confirmation_title');
+    final transferConfirmationIdLabel = find.byValueKey('transfer_confirmation_id_label');
+    final transferConfirmationIdField = find.byValueKey('transfer_confirmation_id_field');
+    final transferConfirmationDateLabel = find.byValueKey('transfer_confirmation_date_label');
+    final transferConfirmationDateField = find.byValueKey('transfer_confirmation_date_field');
+    final transferConfirmationFromAccountLabel = find.byValueKey('transfer_confirmation_from_account_label');
+    final transferConfirmationFromAccountField = find.byValueKey('transfer_confirmation_from_account_field');
+    final transferConfirmationToAccountLabel = find.byValueKey('transfer_confirmation_to_account_label');
+    final transferConfirmationToAccountField = find.byValueKey('transfer_confirmation_to_account_field');
+    final transferConfirmationAmountLabel = find.byValueKey('transfer_confirmation_amount_label');
+    final transferConfirmationAmountField = find.byValueKey('transfer_confirmation_amount_field');
+    final transferConfirmationTypeLabel = find.byValueKey('transfer_confirmation_type_label');
+    final transferConfirmationTypeField = find.byValueKey('transfer_confirmation_type_field');
+    final anotherTransferButton = find.byValueKey('make_another_transfer_button');
     FlutterDriver driver;
     
     setUpAll(() async {
@@ -83,7 +97,7 @@ void main() {
     });
 
     test('TransferFundsScreen, check from label is displayed', () async {
-      expect(await driver.getText(fromLabel), 'From');
+      expect(await driver.getText(transferFromAccountLabel), 'From');
     });
 
     test('TransferFundsScreen, check to label is displayed', () async {
@@ -106,7 +120,7 @@ void main() {
       expect(await driver.getText(dateTextField), DateFormat('MM/dd/yyyy').format(DateTime.now()));
     });
 
-    test('TransferFundsScreen, choose from account and enter amount', () async {
+    test('TransferFundsScreen, fill transfer form and navigate to confirmation screen', () async {
       // select from account
       await driver.tap(fromAccountDropdown);
       await driver.tap(find.text('1111111111'));
@@ -125,6 +139,53 @@ void main() {
       await driver.tap(find.text('5555555555'));
       await driver.waitFor(find.text('5555555555'));
       await driver.waitFor(find.text('10.5'));
+    });
+
+    test('TransferConfirmationScreen, navigated to and app bar is displayed', () async {
+      await driver.tap(submitTransferButton);
+      await driver.waitForAbsent(submitTransferButton);
+      expect(await driver.getText(transferConfirmationBarTitle), 'Transfer Confirmation');
+    });
+
+    test('TransferConfirmationScreen, check all transfer confirmation data displayed', () async {
+      DateTime now = DateTime.now();
+      int month = now.month;
+      int year = now.year;
+      String date = '$month/16/$year';
+      expect(await driver.getText(transferConfirmationTitle), 'Transaction');
+      expect(await driver.getText(transferConfirmationIdLabel), 'Confirmation #:');
+      expect(await driver.getText(transferConfirmationIdField), '123456789');
+      expect(await driver.getText(transferConfirmationDateLabel), 'Transfer Date');
+      expect(await driver.getText(transferConfirmationDateField), date);
+      expect(await driver.getText(transferConfirmationFromAccountLabel), 'From');
+      expect(await driver.getText(transferConfirmationFromAccountField), '1111111111');
+      expect(await driver.getText(transferConfirmationToAccountLabel), 'To');
+      expect(await driver.getText(transferConfirmationToAccountField), '5555555555');
+      expect(await driver.getText(transferConfirmationAmountLabel), 'Amount');
+      expect(await driver.getText(transferConfirmationAmountField), '\$10.5');
+      expect(await driver.getText(transferConfirmationTypeLabel), 'Type');
+      expect(await driver.getText(transferConfirmationTypeField), 'Transfer');
+    });
+
+    test('TransferFundsScreen, navigating back from TransferConfirmation screen by pushing Make another transfer button', () async {
+      await driver.tap(anotherTransferButton);
+      await driver.waitForAbsent(anotherTransferButton);
+      expect(await driver.getText(transferFundsBarTitle), 'Transfer Funds');
+    });
+
+    test('TransferFundsScreen, check transfer form was reset', () async {
+      DateTime now = DateTime.now();
+      String date = '${now.month}/${now.day}/${now.year}';
+      await driver.waitFor(find.text('Select a From Account'));
+      await driver.waitFor(find.text('Select a To Account'));
+      expect(await driver.getText(amountTextField), '');
+      expect(await driver.getText(dateTextField), date);
+    });
+
+    test('CashAccountScreen, navigating back from TransferFundsScreen, check to find correct app bar', () async {
+      await driver.tap(find.pageBack());
+      await driver.waitForAbsent(transferFundsBarTitle);
+      expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
   });
 }
