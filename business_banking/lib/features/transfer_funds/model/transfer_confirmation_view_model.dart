@@ -10,14 +10,13 @@ class TransferConfirmationViewModel extends Equatable implements ViewModel {
   final DateTime date;
   final String id;
 
-  TransferConfirmationViewModel({
-    // todo assert the way as asserts without dropping coverage
-    @required this.fromAccount,
-    @required this.toAccount,
-    @required this.amount,
-    @required this.date,
-    @required this.id,
-  });
+  TransferConfirmationViewModel(
+      {this.fromAccount, this.toAccount, this.amount, this.date, this.id})
+      : assert(fromAccount != null &&
+            toAccount != null &&
+            amount != null &&
+            date is DateTime &&
+            id != null);
 
   @override
   List<Object> get props => [fromAccount, toAccount, amount, date, id];

@@ -120,9 +120,8 @@ class TransferFundsUseCase extends UseCase {
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 
-  void updateAmount(String value) {
-    var amount = double.tryParse(value);
-    if (amount != null && amount > 0) {
+  void updateAmount(double amount) {
+    if (amount > 0) {
       final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
       final updatedEntity = entity.merge(amount: amount);
       ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);

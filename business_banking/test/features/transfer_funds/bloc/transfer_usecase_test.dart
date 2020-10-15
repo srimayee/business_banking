@@ -38,7 +38,7 @@ void main() {
 
     // testing updateAmount method
     // valid amount
-    useCase.updateAmount('23.50');
+    useCase.updateAmount(23.50);
     expect(
         model,
         TransferFundsViewModel(
@@ -49,18 +49,7 @@ void main() {
             amount: 23.50));
 
     // invalid amount
-    useCase.updateAmount('-2.4');
-    expect(
-        model,
-        TransferFundsViewModel(
-            fromAccounts: ['1111111111', '2222222222', '3333333333'],
-            toAccounts: ['4444444444', '5555555555', '6666666666'],
-            fromAccount: '1111111111',
-            toAccount: '5555555555',
-            amount: 23.50));
-
-    // invalid amount
-    useCase.updateAmount('abc');
+    useCase.updateAmount(-2.4);
     expect(
         model,
         TransferFundsViewModel(

@@ -3,6 +3,7 @@ import 'package:business_banking/features/transfer_funds/ui/transfer_screen_widg
 import 'package:business_banking/features/transfer_funds/ui/transfer_screen_widgets/to_accounts_dropdown.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class TransferFundsScreen extends Screen {
@@ -58,6 +59,9 @@ class TransferFundsScreen extends Screen {
                 onSubmitted: (String value) {
                   onChangeAmount(value);
                 },
+                // onChanged: (String value) {
+                //   onChangeAmount(value);
+                // },
                 keyboardType: TextInputType.number,
                 controller: TextEditingController()
                   ..text =

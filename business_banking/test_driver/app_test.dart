@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:intl/intl.dart';
 import 'package:test/test.dart';
@@ -18,9 +20,9 @@ void main() {
     final transferFundsButton = find.byValueKey('transfer_funds_button');
     final transferFundsBarTitle = find.byValueKey('transfer_funds_bar_title');
     final fromLabel = find.byValueKey('from_label');
-    final fromAccountDropdown = find.byValueKey('from_account_dropdown');
+    final fromAccountDropdown = find.byType('FromAccountsDropDown');
     final toLabel = find.byValueKey('to_label');
-    final toAccountDropdown = find.byValueKey('to_account_dropdown');
+    final toAccountDropdown = find.byValueKey('ToAccountsDropDown');
     final amountLabel = find.byValueKey('amount_label');
     final amountTextField = find.byValueKey('amount_text_field');
     final dateLabel = find.byValueKey('date_label');
@@ -104,10 +106,23 @@ void main() {
       expect(await driver.getText(dateTextField), DateFormat('MM/dd/yyyy').format(DateTime.now()));
     });
 
-    test('TransferFundsScreen, choose from account', () async {
-      // await driver.tap(fromAccountDropdown);
-      await driver.tap(find.byValueKey('accounts_from_1'));
-      print('selected from account');
+    test('TransferFundsScreen, choose from account and enter amount', () async {
+      await driver.tap(fromAccountDropdown);
+      await driver.tap(find.text('1111111111'));
+      await driver.waitFor(find.text('1111111111'));
+      print('account from selected');
+      await driver.tap(amountTextField);
+      print('selected amount text field');
+      await driver.enterText('10.5');
+      print('entered amount');
+      await driver.waitFor(find.text('10.5'));
     });
+
+    // test('TransferFundsScreen, choose to account', () async {
+    //   sleep(Duration(seconds: 2));
+    //   await driver.tap(toAccountDropdown);
+    //   await driver.tap(find.text('5555555555'));
+    //   await driver.waitFor(find.text('5555555555'));
+    // });
   });
 }

@@ -79,7 +79,7 @@ void main() {
 
     // Providing the Amount Value and send through the pipe
     // to receiver.
-    bloc.amountPipe.send('25.4');
+    bloc.amountPipe.send(25.4);
   }, timeout: Timeout(Duration(seconds: 3)));
 
   test('testing DatePipe', () async {

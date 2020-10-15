@@ -63,8 +63,11 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
     bloc.toAccountPipe.send(selectedToAccount);
   }
 
-  void _onChangeAmount(TransferFundsBloc bloc, String amount) {
-    bloc.amountPipe.send(amount);
+  void _onChangeAmount(TransferFundsBloc bloc, String amountString) {
+    double amount = double.tryParse(amountString);
+    if (amount != null) {
+      bloc.amountPipe.send(amount);
+    }
   }
 
   void _onChangeDate(TransferFundsBloc bloc, DateTime date) {

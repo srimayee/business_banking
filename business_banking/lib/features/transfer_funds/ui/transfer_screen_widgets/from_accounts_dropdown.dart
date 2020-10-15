@@ -6,7 +6,7 @@ class FromAccountsDropDown extends StatelessWidget {
   final Function onChangeSelectedFromAccount;
   final Key key;
 
-  FromAccountsDropDown({@required this.key, @required this.viewModel, @required this.onChangeSelectedFromAccount});
+  FromAccountsDropDown({this.key, this.viewModel, this.onChangeSelectedFromAccount});
 
   @override
   Widget build(BuildContext context) {
