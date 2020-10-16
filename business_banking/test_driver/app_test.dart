@@ -130,10 +130,8 @@ void main() {
       await driver.tap(find.text('16'));
       await driver.tap(find.text('OK'));
       // enter amount 10.5
-      await driver.setTextEntryEmulation(enabled: false);
-      await driver.requestData("prepare");
       await driver.tap(amountTextField);
-      await driver.requestData('type transfer amount 10.5');
+      await driver.enterText('10.5');
       // choose to account
       await driver.tap(toAccountDropdown);
       await driver.tap(find.text('5555555555'));

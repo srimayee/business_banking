@@ -24,6 +24,9 @@ class TransferFundsScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = TextEditingController();
+    _controller.text = viewModel.amount;
+    _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -55,16 +58,14 @@ class TransferFundsScreen extends Screen {
               SizedBox(height: 15.0),
               TextField(
                 key: Key('amount_text_field'),
-                onSubmitted: (String value) {
+                onChanged: (String value) {
                   onChangeAmount(value);
                 },
-                // onChanged: (String value) {
-                //   onChangeAmount(value);
-                // },
                 keyboardType: TextInputType.number,
-                controller: TextEditingController()
-                  ..text =
-                      viewModel.amount == 0 ? '' : viewModel.amount.toString(),
+                controller: _controller,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}')),
+                ],
                 decoration: InputDecoration(
                   isDense: true,
                   prefixIcon: Text('\$ '),

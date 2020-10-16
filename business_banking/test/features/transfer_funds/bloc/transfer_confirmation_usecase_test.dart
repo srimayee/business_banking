@@ -12,7 +12,7 @@ void main() {
     TransferFundsEntity entity = TransferFundsEntity(
         fromAccount: '1111111111',
         toAccount: '4444444444',
-        amount: 25.6,
+        amount: '25.6',
         date: date,
         fromAccounts: ['1111111111', '2222222222', '3333333333'],
         toAccounts: ['4444444444', '5555555555', '6666666666'],
@@ -32,7 +32,7 @@ void main() {
         TransferConfirmationViewModel(
             fromAccount: '1111111111',
             toAccount: '4444444444',
-            amount: 25.6,
+            amount: '25.6',
             date: date,
             id: '123456789'));
 

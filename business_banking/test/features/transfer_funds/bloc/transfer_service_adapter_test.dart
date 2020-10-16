@@ -21,8 +21,8 @@ void main() {
 
     // testing createRequest method
     DateTime date = DateTime.now();
-    final entity1 = new TransferFundsEntity(fromAccount: '1111111111', toAccount: '4444444444', amount: 25.5, date: date);
+    final entity1 = new TransferFundsEntity(fromAccount: '1111111111', toAccount: '4444444444', amount: '25.5', date: date);
     TransferFundsRequestModel model = serviceAdapter.createRequest(entity1);
-    expect(model, TransferFundsRequestModel(fromAccount: '1111111111', toAccount: '4444444444', amount: 25.5, date: date));
+    expect(model, TransferFundsRequestModel(fromAccount: '1111111111', toAccount: '4444444444', amount: '25.5', date: date));
   });
 }

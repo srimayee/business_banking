@@ -11,7 +11,7 @@ class TransferFundsBloc extends Bloc {
   final transferFundsViewModelPipe = Pipe<TransferFundsViewModel>();
   final fromAccountPipe = Pipe<String>();
   final toAccountPipe = Pipe<String>();
-  final amountPipe = Pipe<double>();
+  final amountPipe = Pipe<String>();
   final datePipe = Pipe<DateTime>();
   final submitPipe = EventPipe();
   final resetServiceStatusPipe = EventPipe();
@@ -47,7 +47,7 @@ class TransferFundsBloc extends Bloc {
     _fundsUseCase.updateToAccount(toAccount);
   }
 
-  void amountPipeHandler(double amount) {
+  void amountPipeHandler(String amount) {
     _fundsUseCase.updateAmount(amount);
   }
 

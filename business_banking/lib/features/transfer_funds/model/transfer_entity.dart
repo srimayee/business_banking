@@ -4,7 +4,7 @@ class TransferFundsEntity extends Entity{
   final String id;
   final String fromAccount;
   final String toAccount;
-  final double amount;
+  final String amount;
   final DateTime date;
   final List<String> fromAccounts;
   final List<String> toAccounts;
@@ -13,7 +13,7 @@ class TransferFundsEntity extends Entity{
       {List<EntityError> errors = const [],
         String fromAccount,
         String toAccount,
-        double amount = 0.00,
+        String amount = '',
         DateTime date,
         List<String> fromAccounts,
         List<String> toAccounts,
@@ -22,7 +22,7 @@ class TransferFundsEntity extends Entity{
         this.fromAccount = fromAccount,
         this.toAccount = toAccount,
         this.amount = amount,
-        this.date = date ?? _getLastMidnight(),// change,
+        this.date = date ?? _getLastMidnight(),
         this.fromAccounts = fromAccounts,
         this.toAccounts = toAccounts,
         this.id = id;
@@ -33,7 +33,7 @@ class TransferFundsEntity extends Entity{
   ];
 
   @override
-  merge({errors, String id, String fromAccount, String toAccount, double amount, DateTime date, List<String> fromAccounts, List<String> toAccounts}) {
+  merge({errors, String id, String fromAccount, String toAccount, String amount, DateTime date, List<String> fromAccounts, List<String> toAccounts}) {
     return TransferFundsEntity(
         errors: errors ?? this.errors,
         id: id ?? this.id,

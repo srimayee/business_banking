@@ -16,7 +16,7 @@ void main() {
         toAccount: '5555555555',
         id: '123456789',
         date: DateTime.now(),
-        amount: 10.0
+        amount: '10.0'
     );
 
     ExampleLocator()

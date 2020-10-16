@@ -65,8 +65,8 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
 
   void _onChangeAmount(TransferFundsBloc bloc, String amountString) {
     double amount = double.tryParse(amountString);
-    if (amount != null) {
-      bloc.amountPipe.send(amount);
+    if (amountString == '' || (amount != null && amount > 0)) {
+      bloc.amountPipe.send(amountString);
     }
   }
 

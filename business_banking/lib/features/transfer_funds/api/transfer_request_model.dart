@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class TransferFundsRequestModel extends Equatable implements JsonRequestModel {
   final String fromAccount;
   final String toAccount;
-  final double amount;
+  final String amount;
   final DateTime date;
 
   TransferFundsRequestModel(
@@ -19,7 +19,7 @@ class TransferFundsRequestModel extends Equatable implements JsonRequestModel {
     return {
       'fromAccount': fromAccount,
       'toAccount': toAccount,
-      'amount': amount.toString(),
+      'amount': amount,
       'date': date.toIso8601String()
     };
   }

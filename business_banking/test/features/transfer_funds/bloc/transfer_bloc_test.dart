@@ -14,7 +14,8 @@ void main() {
     final TransferFundsBloc bloc = new TransferFundsBloc();
     // Create TransferFundsViewModel Object with Data Values
     TransferFundsViewModel transferFundsViewModel = TransferFundsViewModel(
-        fromAccounts: ['1111111111', '2222222222', '3333333333']);
+        fromAccounts: ['1111111111', '2222222222', '3333333333'],
+        date: getLastMidnight());
 
     // testing transferFundsViewModelPipe
     bloc.transferFundsViewModelPipe.receive.listen(expectAsync1(
@@ -26,17 +27,16 @@ void main() {
   }, timeout: Timeout(Duration(seconds: 300)));
 
   test('testing resetViewModelPipe', () async {
-    TransferFundsEntity newTransferEntity = TransferFundsEntity(amount: 10.0, fromAccounts: ['1111111111', '2222222222', '3333333333']);
+    TransferFundsEntity newTransferEntity = TransferFundsEntity(amount: '10.0', fromAccounts: ['1111111111', '2222222222', '3333333333']);
     ExampleLocator()
         .repository
         .create<TransferFundsEntity>(newTransferEntity, (_) {}, deleteIfExists: true);
     final TransferFundsBloc bloc = new TransferFundsBloc();
     TransferFundsViewModel emptyTransferFundsViewModel = TransferFundsViewModel(
-        amount: 0.0,
-        date: DateTime.parse('1900-01-01'),
+        amount: '',
+        date: getLastMidnight(),
         fromAccounts: ['1111111111', '2222222222', '3333333333'],
-        dataStatus: DataStatus.invalid,
-        serviceStatus: ServiceStatus.success);
+        dataStatus: DataStatus.invalid);
 
     bloc.confirmationViewModelPipe.receive.listen((event) { });
     bloc.resetViewModelPipe.launch();
@@ -79,7 +79,7 @@ void main() {
 
     // Providing the Amount Value and send through the pipe
     // to receiver.
-    bloc.amountPipe.send(25.4);
+    bloc.amountPipe.send('25.4');
   }, timeout: Timeout(Duration(seconds: 3)));
 
   test('testing DatePipe', () async {
@@ -165,5 +165,11 @@ void resetEntityInRepository() {
   ExampleLocator()
       .repository
       .create<TransferFundsEntity>(entity, (_){}, deleteIfExists: true);
+}
+
+DateTime getLastMidnight() {
+  final now = DateTime.now();
+  final lastMidnight = new DateTime(now.year, now.month, now.day);
+  return lastMidnight;
 }
 

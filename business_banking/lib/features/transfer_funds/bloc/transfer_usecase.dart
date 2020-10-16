@@ -120,13 +120,14 @@ class TransferFundsUseCase extends UseCase {
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 
-  void updateAmount(double amount) {
-    if (amount > 0) {
+  void updateAmount(String amount) {
+    // var amountDouble = double.tryParse(amount);
+    // if (amount == '' || (amount != null && amountDouble > 0)) {
       final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
       final updatedEntity = entity.merge(amount: amount);
       ExampleLocator().repository.update<TransferFundsEntity>(_scope, updatedEntity);
       _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
-    }
+    // }
   }
 
   void updateDate(DateTime date) {
@@ -154,7 +155,7 @@ class TransferFundsUseCase extends UseCase {
   }
 
   DataStatus _checkEntityData(TransferFundsEntity entity) {
-    if (entity.fromAccount != null && entity.toAccount != null && entity.amount > 0) {
+    if (entity.fromAccount != null && entity.toAccount != null && entity.amount != '') {
       return DataStatus.valid;
     }
     return DataStatus.invalid;
