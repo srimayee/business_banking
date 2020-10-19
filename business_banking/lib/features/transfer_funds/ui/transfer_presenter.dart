@@ -2,7 +2,6 @@ import 'package:business_banking/features/transfer_funds/bloc/transfer_bloc.dart
 import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:business_banking/features/transfer_funds/model/transfer_view_model.dart';
 import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_widget.dart';
-import 'package:business_banking/features/transfer_funds/ui/loading_screen.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_screen_widgets/transfer_funds_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   @override
   TransferFundsScreen buildScreen(BuildContext context, TransferFundsBloc bloc,
       TransferFundsViewModel viewModel) {
-    print('TransferFundsPresenter: buildScreen() called');
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success && viewModel.dataStatus == DataStatus.valid) {
         _navigateToConfirmationScreen(context);
@@ -45,13 +43,7 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   }
 
   @override
-  Widget buildLoadingScreen(BuildContext context) {
-    return LoadingScreen('Transfer funds');
-  }
-
-  @override
   Stream<TransferFundsViewModel> getViewModelStream(TransferFundsBloc bloc) {
-    print('TransferFundsPresenter: getViewModelStream() called');
     return bloc.transferFundsViewModelPipe.receive;
   }
 

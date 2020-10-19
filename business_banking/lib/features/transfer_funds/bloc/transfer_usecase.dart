@@ -84,7 +84,6 @@ class TransferFundsUseCase extends UseCase {
         id: entity.id,
         dataStatus: _checkEntityData(entity)
     );
-    print('created new view model: ${model.toString()}');
     return model;
   }
 
