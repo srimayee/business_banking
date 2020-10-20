@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class TransferFundsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('TransferFundsWidget: build() called');
     return BlocProvider(
       create: (_) => TransferFundsBloc(),
       child: TransferFundsPresenter(),
