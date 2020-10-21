@@ -12,6 +12,12 @@ void main() {
     final accountDetailAppBar = find.byValueKey('ADappBarL4');
     final bigBalance = find.byValueKey('bigBalance');
     final depHold = find.byValueKey('depHold');
+    final helloCustomerTileText = find.byValueKey('HCTileText');
+    final helloCustomerTileButton = find.byValueKey('HCTileButton');
+    final helloCustomerDetailAppBar = find.byValueKey('HCDappBarName');
+    final helloCustomerDetailName = find.byValueKey('HCDname');
+    final helloCustomerDetailTime = find.byValueKey('HCDtime');
+    final helloCustomerBackButton = find.pageBack();
     
     FlutterDriver driver;
     
@@ -57,6 +63,30 @@ void main() {
     test('CashAccountScreen, check to find correct app bar', () async {
       await driver.tap(backButton);
       await driver.waitForAbsent(accountDetailAppBar);
+      expect(await driver.getText(cashAccountAppBar), 'Business Banking');
+    });
+
+    test('HelloCustomerScreen, Hello Joe is displayed on tile', () async {
+      expect(await driver.getText(helloCustomerTileText), 'Hello Joe');
+    });
+
+    test('HelloCustomerDetailScreen, navigate to and app bar is displayed', () async {
+      await driver.tap(helloCustomerTileButton);
+      await driver.waitForAbsent(helloCustomerTileButton);
+      expect(await driver.getText(helloCustomerDetailAppBar), 'Hello Customer');
+    });
+
+    test('HelloCustomerDetailScreen, name is displayed on screen', () async {
+      expect(await driver.getText(helloCustomerDetailName), 'Hello Joe');
+    });
+
+    test('HelloCustomerDetailScreen, time is displayed on screen', () async {
+      expect(await driver.getText(helloCustomerDetailTime), '10/20/2020 13:00');
+    });
+    
+    test('HelloCustomerScreen, check to find correct app bar', () async {
+      await driver.tap(helloCustomerBackButton);
+      await driver.waitForAbsent(helloCustomerDetailAppBar);
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
   });
