@@ -2,6 +2,52 @@
 
 A demo app to showcase the clean framework for a business banking app.
 
+## Setting up your Mockoon environment
+
+Following are the instructions for setting up your Mockoon routes for each screen.  
+*Make sure your port is set to 3001.*  
+Having these routes set correctly and having the Mockoon environment running during your tests is **essential** to these tests passing.  
+Please keep this updated regarding the information you are testing against.  
+For information on installing and setting up Mockoon, please see mockoon.md.  
+A JSON export from Mockoon of the environment can be found in the mockoon folder.
+
+### CashAccounts Screen
+
+| route | method | response |
+| --- | --- | --- |
+| /accounts/getAccounts | GET | 200 |
+
+#### JSON
+```json
+{
+ "accountType": "Cash",
+  "accountTitle": "Checking Account",
+  "accountNumber": "6542",
+  "accountBalance": 3545.54,
+  "accountStatus": "Active"
+}
+```
+
+### AccountDetail Screen
+
+| route | method | response |
+| --- | --- | --- |
+| /account-details | GET | 200 |
+
+#### JSON
+```json
+{
+  "name": "Employee Checking",
+  "lastFour": "6542",
+  "accountType": "Employee Checking",
+  "routingNum": 746395735,
+  "balance": 3545.54,
+  "begBalance": 3674.43,
+  "penTrans": -128.89,
+  "depHolds": 0.00
+}
+```
+
 ## Getting Started
 
 Commercial/Business app
@@ -12,7 +58,11 @@ Commercial/Business app
 
 -uses clean framework - 
 
-For each feature, login and hello_landing 
+login - Shrey
+hub (hello work displays) - loads after login - Maxwell
+locations - loads from a small button on login screen - Ben 
+
+For each feature, login, hello_landing and locations  
 -create a screen, view model, presenter
 -create tests so you have 100% coverage
 -bloc
