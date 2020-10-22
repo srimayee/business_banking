@@ -1,5 +1,6 @@
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/promos/ui/promos_widget.dart';
+import 'package:business_banking/features/transfer_funds/ui/transfer_card.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,9 @@ class HubScreen extends Screen {
           ),
           CashAccountsWidget(),
           SizedBox(height: 15),
-          PromosWidget(),
+          //PromosWidget(),
+          SizedBox(height: 15),
+          TransferFundsCard()
         ],
       ),
     );
