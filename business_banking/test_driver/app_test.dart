@@ -12,13 +12,13 @@ void main() {
     final accountDetailAppBar = find.byValueKey('ADappBarL4');
     final bigBalance = find.byValueKey('bigBalance');
     final depHold = find.byValueKey('depHold');
-    final helloCustomerTileText = find.byValueKey('HCTileText');
-    final helloCustomerTileButton = find.byValueKey('HCTileButton');
-    final helloCustomerDetailAppBar = find.byValueKey('HCDappBarName');
-    final helloCustomerDetailName = find.byValueKey('HCDname');
-    final helloCustomerDetailWeather = find.byValueKey('HCDweather');
-    final helloCustomerDetailAddress = find.byValueKey('HCDaddress');
-    final helloCustomerBackButton = find.pageBack();
+    final customerTileText = find.byValueKey('HCTileText');
+    final customerTileButton = find.byValueKey('HCTileButton');
+    final customerDetailAppBar = find.byValueKey('HCDappBarName');
+    final customerDetailName = find.byValueKey('HCDname');
+    final customerDetailWeather = find.byValueKey('HCDweather');
+    final customerDetailAddress = find.byValueKey('HCDaddress');
+    final customerBackButton = find.pageBack();
     
     FlutterDriver driver;
     
@@ -67,25 +67,25 @@ void main() {
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
 
-    test('HelloCustomerScreen, Hello Joe is displayed on tile', () async {
-      expect(await driver.getText(helloCustomerTileText), 'Hello Mr. Joe A');
+    test('CustomerScreen, Hello Joe is displayed on tile', () async {
+      expect(await driver.getText(customerTileText), 'Hello Mr. Joe A');
     });
 
-    test('HelloCustomerDetailScreen, navigate to and app bar is displayed', () async {
-      await driver.tap(helloCustomerTileButton);
-      await driver.waitForAbsent(helloCustomerTileButton);
-      expect(await driver.getText(helloCustomerDetailAppBar), 'Hello Customer');
+    test('CustomerDetailScreen, navigate to and app bar is displayed', () async {
+      await driver.tap(customerTileButton);
+      await driver.waitForAbsent(customerTileButton);
+      expect(await driver.getText(customerDetailAppBar), 'Hello Customer');
     });
 
-    test('HelloCustomerDetailScreen, name weather address is displayed on screen', () async {
-      expect(await driver.getText(helloCustomerDetailName), 'Hello Mr. Joe A');
-      expect(await driver.getText(helloCustomerDetailWeather), 'sunny');
-      expect(await driver.getText(helloCustomerDetailAddress), '1234 ABCD Rd, City, State 00000');
+    test('CustomerDetailScreen, name weather address is displayed on screen', () async {
+      expect(await driver.getText(customerDetailName), 'Hello Mr. Joe A');
+      expect(await driver.getText(customerDetailWeather), 'sunny');
+      expect(await driver.getText(customerDetailAddress), '1234 ABCD Rd, City, State 00000');
     });
     
-    test('HelloCustomerScreen, check to find correct app bar', () async {
-      await driver.tap(helloCustomerBackButton);
-      await driver.waitForAbsent(helloCustomerDetailAppBar);
+    test('CustomerScreen, check to find correct app bar', () async {
+      await driver.tap(customerBackButton);
+      await driver.waitForAbsent(customerDetailAppBar);
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
   });

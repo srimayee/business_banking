@@ -119,7 +119,7 @@
                     },
                     {
                         "uuid": "",
-                        "documentation": "Gets name for HelloCustomer screen",
+                        "documentation": "Gets name for Customer screen",
                         "method": "get",
                         "endpoint": "hellocustomer",
                         "responses": [
@@ -146,7 +146,7 @@
                     },
                     {
                         "uuid": "",
-                        "documentation": "Gets name for HelloCustomer screen",
+                        "documentation": "Gets name for Customer screen",
                         "method": "get",
                         "endpoint": "hellocustomer-detail",
                         "responses": [
