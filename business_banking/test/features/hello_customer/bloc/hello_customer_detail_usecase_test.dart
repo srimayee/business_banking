@@ -1,5 +1,5 @@
-import 'package:business_banking/features/hello_customer_detail/bloc/hello_customer_detail_usecase.dart';
-import 'package:business_banking/features/hello_customer_detail/model/hello_customer_detail_view_model.dart';
+import 'package:business_banking/features/hello_customer/bloc/hello_customer_detail_usecase.dart';
+import 'package:business_banking/features/hello_customer/model/hello_customer_detail_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

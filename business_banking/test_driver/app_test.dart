@@ -16,7 +16,8 @@ void main() {
     final helloCustomerTileButton = find.byValueKey('HCTileButton');
     final helloCustomerDetailAppBar = find.byValueKey('HCDappBarName');
     final helloCustomerDetailName = find.byValueKey('HCDname');
-    final helloCustomerDetailTime = find.byValueKey('HCDtime');
+    final helloCustomerDetailWeather = find.byValueKey('HCDweather');
+    final helloCustomerDetailAddress = find.byValueKey('HCDaddress');
     final helloCustomerBackButton = find.pageBack();
     
     FlutterDriver driver;
@@ -67,7 +68,7 @@ void main() {
     });
 
     test('HelloCustomerScreen, Hello Joe is displayed on tile', () async {
-      expect(await driver.getText(helloCustomerTileText), 'Hello Joe');
+      expect(await driver.getText(helloCustomerTileText), 'Hello Mr. Joe A');
     });
 
     test('HelloCustomerDetailScreen, navigate to and app bar is displayed', () async {
@@ -76,12 +77,10 @@ void main() {
       expect(await driver.getText(helloCustomerDetailAppBar), 'Hello Customer');
     });
 
-    test('HelloCustomerDetailScreen, name is displayed on screen', () async {
-      expect(await driver.getText(helloCustomerDetailName), 'Hello Joe');
-    });
-
-    test('HelloCustomerDetailScreen, time is displayed on screen', () async {
-      expect(await driver.getText(helloCustomerDetailTime), '10/20/2020 13:00');
+    test('HelloCustomerDetailScreen, name weather address is displayed on screen', () async {
+      expect(await driver.getText(helloCustomerDetailName), 'Hello Mr. Joe A');
+      expect(await driver.getText(helloCustomerDetailWeather), 'sunny');
+      expect(await driver.getText(helloCustomerDetailAddress), '1234 ABCD Rd, City, State 00000');
     });
     
     test('HelloCustomerScreen, check to find correct app bar', () async {

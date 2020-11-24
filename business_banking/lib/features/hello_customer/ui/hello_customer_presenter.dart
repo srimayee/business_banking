@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/hello_customer_detail/ui/hello_customer_detail_widget.dart';
 import 'package:business_banking/features/hello_customer/model/hello_customer_view_model.dart';
 import 'package:business_banking/features/hello_customer/bloc/hello_customer_bloc.dart';
 import 'hello_customer_screen.dart';
+import 'hello_customer_detail_widget.dart';
 
 class HelloCustomerPresenter extends Presenter<HelloCustomerBloc, HelloCustomerViewModel, HelloCustomerScreen> {
   @override

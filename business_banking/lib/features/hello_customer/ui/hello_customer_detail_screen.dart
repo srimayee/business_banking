@@ -1,4 +1,4 @@
-import 'package:business_banking/features/hello_customer_detail/model/hello_customer_detail_view_model.dart';
+import 'package:business_banking/features/hello_customer/model/hello_customer_detail_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -26,12 +26,16 @@ class HelloCustomerDetailScreen extends Screen {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Hello ${viewModel.name}",
+              "Hello ${viewModel.honrsic} ${viewModel.name}",
               key: Key("HCDname"),
             ),
             Text(
-              viewModel.currentTimeString,
-              key: Key("HCDtime"),
+              viewModel.weather,
+              key: Key("HCDweather"),
+            ),
+            Text(
+              viewModel.address,
+              key: Key("HCDaddress"),
             ),
           ],
         ),

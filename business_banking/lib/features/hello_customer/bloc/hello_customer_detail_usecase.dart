@@ -1,8 +1,8 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:business_banking/features/hello_customer_detail/bloc/hello_customer_detail_service_adapter.dart';
-import 'package:business_banking/features/hello_customer_detail/model/hello_customer_detail_entity.dart';
-import 'package:business_banking/features/hello_customer_detail/model/hello_customer_detail_view_model.dart';
+import 'package:business_banking/features/hello_customer/bloc/hello_customer_detail_service_adapter.dart';
+import 'package:business_banking/features/hello_customer/model/hello_customer_detail_entity.dart';
+import 'package:business_banking/features/hello_customer/model/hello_customer_detail_view_model.dart';
 import 'package:business_banking/locator.dart';
 
 class HelloCustomerDetailUseCase extends UseCase {
@@ -36,7 +36,6 @@ class HelloCustomerDetailUseCase extends UseCase {
 
   HelloCustomerDetailViewModel buildViewModel(
       HelloCustomerDetailEntity entity) {
-    return HelloCustomerDetailViewModel(
-        name: entity.name, currentTimeString: entity.currentTimeString);
+    return HelloCustomerDetailViewModel(customerDetailEntity: entity);
   }
 }

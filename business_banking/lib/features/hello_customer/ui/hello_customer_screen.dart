@@ -31,7 +31,7 @@ class HelloCustomerScreen extends Screen {
                   key: Key("HCTileButton"),
                   onPressed: () => navigateToHelloCustomerDetail(),
                   child: Text(
-                    "Hello ${viewModel.name}",
+                    "Hello ${viewModel.helloString}",
                     key: Key("HCTileText"),
                   ),
                 ),
