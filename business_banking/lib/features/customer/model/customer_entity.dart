@@ -11,7 +11,7 @@ class CustomerEntity extends Entity {
   final String address;
 
   CustomerEntity(
-      {List<EntityError> errors = const [],
+      {List<EntityFailure> errors = const [],
       String honorific,
       String firstName,
       String lastName,

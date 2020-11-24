@@ -8,4 +8,7 @@ class CustomerViewModel extends ViewModel {
         helloString = customerEntity.accountType == AccountType.private
             ? "${customerEntity.honorific} ${customerEntity.firstName} ${customerEntity.lastName}"
             : "${customerEntity.nickName}";
+
+  @override
+  List<Object> get props => [helloString];
 }

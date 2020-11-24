@@ -10,4 +10,7 @@ class CustomerDetailViewModel extends ViewModel {
         honorific = customerEntity.honorific,
         name = "${customerEntity.firstName} ${customerEntity.lastName}",
         address = customerEntity.address;
+
+    @override
+  List<Object> get props => [honorific, name, address];
 }

@@ -38,7 +38,7 @@ void main() {
           print(e);
           return e;
         }, (_) {}),
-        isA<GeneralServiceError>(),
+        isA<GeneralServiceFailure>(),
       );
     },
   );

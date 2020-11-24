@@ -24,12 +24,12 @@ class CustomerBloc extends Bloc {
       return customerViewModelPipe.send(viewModel);
     });
 
-    customerViewModelPipe.onListen(() => _useCase.create());
+    customerViewModelPipe.whenListenedDo(() => _useCase.create());
 
     _detailUseCase = CustomerDetailUseCase((viewModel) {
       return customerDetailViewModelPipe.send(viewModel);
     });
 
-    customerDetailViewModelPipe.onListen(() => _detailUseCase.create());
+    customerDetailViewModelPipe.whenListenedDo(() => _detailUseCase.create());
   }
 }

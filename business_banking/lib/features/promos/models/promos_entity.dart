@@ -5,7 +5,7 @@ class PromosEntity extends Entity {
   final String link;
 
   PromosEntity({
-    List<EntityError> errors = const [],
+    List<EntityFailure> errors = const [],
     this.imageUrl = '',
     this.link = '',
   }) : super(errors: errors);
