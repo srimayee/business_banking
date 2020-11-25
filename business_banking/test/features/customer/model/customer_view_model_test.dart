@@ -12,6 +12,8 @@ void main() {
             accountType: AccountType.private,
             nickName: ""));
     expect(viewModel.helloString, "Mr. Joe A");
+
+    expect(viewModel.props, [viewModel.helloString]);
   });
   test('CustomerViewModel initialize with error', () {
     try {

@@ -13,6 +13,8 @@ void main() {
     expect(viewModel.honorific, "Mr.");
     expect(viewModel.name, "Joe A");
     expect(viewModel.address, "1234 ABCD Rd, City, State 00000");
+
+    expect(viewModel.props, [viewModel.honorific, viewModel.name, viewModel.address]);
   });
   test('CustomerDetailViewModel initialize with error', () {
     try {
