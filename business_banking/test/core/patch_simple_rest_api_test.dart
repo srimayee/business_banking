@@ -24,7 +24,7 @@ void main() {
     expect(resp.type, RestResponseType.success);
     expect(resp.content, """{
   
-  "imageUrl":"https://via.placeholder.com/300",
+  "imageUrl":"http://placehold.jp/24/228B22/006400/300x300.jpg?text=a%20promo%20will%20be%20displayed%20here",
   "externalUrl": "https://www.huntington.com/"
 }""");
   });
