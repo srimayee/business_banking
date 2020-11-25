@@ -13,4 +13,7 @@ class PromosViewModel extends ViewModel {
 
   @override
   String toString() => 'PromosViewModel(imageUrl: $imageUrl, link: $link)';
+
+  @override
+  List<Object> get props => [imageUrl, link];
 }

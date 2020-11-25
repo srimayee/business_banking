@@ -15,6 +15,6 @@ class TransferFundsAccountsFromServiceAdapter extends ServiceAdapter<
   TransferFundsEntity createEntity(
       TransferFundsEntity initialEntity,
       TransferFundsAccountsFromResponseModel responseModel) {
-    return initialEntity.merge(errors: <EntityError>[], fromAccounts: responseModel.fromAccounts);
+    return initialEntity.merge(errors: <EntityFailure>[], fromAccounts: responseModel.fromAccounts);
   }
 }

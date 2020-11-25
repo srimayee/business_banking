@@ -14,7 +14,7 @@ class LoginBloc extends Bloc {
   LoginBloc({LoginService loginService}) {
     _loginUseCase =
         LoginUseCase((viewModel) => loginViewModelPipe.send(viewModel));
-    loginViewModelPipe.onListen(() {
+    loginViewModelPipe.whenListenedDo(() {
       _loginUseCase.create();
     });
     userNamePipe.receive.listen(userNameInputHandler);

@@ -10,7 +10,7 @@ class TransferFundsEntity extends Entity{
   final List<String> toAccounts;
 
   TransferFundsEntity(
-      {List<EntityError> errors = const [],
+      {List<EntityFailure> errors = const [],
         String fromAccount,
         String toAccount,
         String amount = '',

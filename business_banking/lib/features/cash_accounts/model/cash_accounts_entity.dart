@@ -6,7 +6,7 @@ class CashAccountsEntity extends Entity {
   final double balance;
   
   CashAccountsEntity(
-    {List<EntityError> errors = const [],
+    {List<EntityFailure> errors = const [],
      String name,
      String lastFour,
      this.balance = 0.00})

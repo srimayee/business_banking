@@ -5,7 +5,7 @@ class LoginEntity extends Entity {
   final String password;
 
   LoginEntity(
-      {List<EntityError> errors = const [], String userName, String password})
+      {List<EntityFailure> errors = const [], String userName, String password})
       : userName = userName ?? '',
         password = password ?? '',
         super(errors: errors);

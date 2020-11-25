@@ -28,4 +28,6 @@ class AccountDetailViewModel extends ViewModel {
               beginningBalance != null &&
               pendingTransactions != null &&
               depositHolds != null);
+  @override
+  List<Object> get props => [name, accountType];
 }

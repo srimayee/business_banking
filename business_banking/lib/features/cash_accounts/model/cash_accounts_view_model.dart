@@ -13,4 +13,6 @@ class CashAccountsViewModel extends ViewModel {
   }) : assert(name != null &&
               lastFour != null &&
               balance != null);
+  @override
+  List<Object> get props => [name, lastFour];
 }
