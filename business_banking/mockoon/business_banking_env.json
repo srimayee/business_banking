@@ -121,38 +121,11 @@
                         "uuid": "",
                         "documentation": "Gets name for Customer screen",
                         "method": "get",
-                        "endpoint": "hellocustomer",
+                        "endpoint": "customer",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"honrsic\": \"Mr.\",\n  \"firstName\": \"Joe\",\n  \"lastName\": \"A\",\n  \"accountType\": \"private\",\n  \"nickName\": \"\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Gets name for Customer screen",
-                        "method": "get",
-                        "endpoint": "hellocustomer-detail",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"honrsic\": \"Mr.\",\n  \"firstName\": \"Joe\",\n  \"lastName\": \"A\",\n  \"weather\": \"sunny\",\n  \"address\": \"1234 ABCD Rd, City, State 00000\"\n}",
+                                "body": "{\n  \"honorific\": \"Mr.\",\n  \"firstName\": \"Joe\",\n  \"lastName\": \"A\",\n  \"accountType\": \"private\",\n  \"nickName\": \"\",\n  \"address\": \"1234 ABCD Rd, City, State 00000\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
