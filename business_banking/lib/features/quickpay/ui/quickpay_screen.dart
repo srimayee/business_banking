@@ -17,7 +17,7 @@ class QuickPayScreen extends Screen {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 200,
       padding: EdgeInsets.all(5.0),
       child: Card(
         child: Padding(
@@ -35,7 +35,13 @@ class QuickPayScreen extends Screen {
                     title: Text('Email'),
                     subtitle: Text(viewModel.email),
                   )
-                )
+                ),
+                  RaisedButton(
+                    child: Text("Send Money"),
+                    onPressed: () {
+                      navigateToMakePayment();
+                    },
+                  )
               ])
         ),
       ),
