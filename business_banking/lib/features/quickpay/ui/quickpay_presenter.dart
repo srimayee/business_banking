@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'quickpay_screen.dart';
 import 'package:business_banking/features/quickpay/bloc/quickpay_bloc.dart';
 import 'package:business_banking/features/quickpay/model/quickpay_view_model.dart';
+import 'package:business_banking/features/request_money/ui/request_money_widget.dart';
 
 class QuickPayPresenter extends Presenter<QuickPayBloc, QuickPayViewModel, QuickPayScreen> {
   @override
@@ -27,8 +28,8 @@ class QuickPayPresenter extends Presenter<QuickPayBloc, QuickPayViewModel, Quick
     Navigator.push(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(name: 'payment'),
-        builder: (context){},
+        settings: RouteSettings(name: 'request_money'),
+        builder: (context) => RequestMoneyWidget()
       ),
     );
   }

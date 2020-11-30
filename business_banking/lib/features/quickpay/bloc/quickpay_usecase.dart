@@ -16,25 +16,18 @@ class QuickPayUseCase extends UseCase {
       : assert(viewModelCallBack != null), _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    print("usecase create");
     _scope = ExampleLocator().repository.containsScope<QuickPayEntity>();
     if (_scope == null) {
-      print("failing to create scope");
       final newQuickPayEntity = QuickPayEntity();
       _scope = ExampleLocator()
       .repository
       .create<QuickPayEntity>(newQuickPayEntity, _notifySubscribers);
     } else {
-      print("creating scope successfully");
       _scope.subscription = _notifySubscribers;
     }
-    print("finish creating entity ");
-
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, QuickPayServiceAdapter());
-
-    print("finish running service adapter");
   }
 
   void _notifySubscribers(entity) {

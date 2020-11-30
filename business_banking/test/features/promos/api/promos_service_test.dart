@@ -34,13 +34,13 @@ void main() {
       final eitherResponse = await service.request(requestModel: requestModel);
 
       expect(eitherResponse.isLeft, isTrue);
-//      expect(
-//        eitherResponse.fold((e) {
-//          print(e);
-//          return e;
-//        }, (_) {}),
-//        isA<GeneralServiceError>(),
-//      );
+      expect(
+        eitherResponse.fold((e) {
+          print(e);
+          return e;
+        }, (_) {}),
+        isA<GeneralServiceFailure>(),
+      );
     },
   );
 }

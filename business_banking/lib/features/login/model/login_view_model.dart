@@ -10,7 +10,7 @@ class LoginViewModel extends ViewModel {
       : assert(username != null && password != null);
 
   @override
-  List<Object> get props => [username, password, serviceStatus];
+  List<Object> get props => [username, password, serviceStatus, dataStatus];
 }
 
 enum ServiceStatus { success, fail, unknown }

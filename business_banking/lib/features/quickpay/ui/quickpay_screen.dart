@@ -37,7 +37,7 @@ class QuickPayScreen extends Screen {
                   )
                 ),
                   RaisedButton(
-                    child: Text("Send Money"),
+                    child: Text("Request Money"),
                     onPressed: () {
                       navigateToMakePayment();
                     },
