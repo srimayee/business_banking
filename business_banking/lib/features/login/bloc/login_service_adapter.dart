@@ -17,6 +17,6 @@ class LoginServiceAdapter extends ServiceAdapter<LoginEntity,
 
   @override
   LoginEntity createEntity(initialEntity, responseModel) {
-    return initialEntity.merge(errors: <EntityError>[]);
+    return initialEntity.merge(errors: <EntityFailure>[]);
   }
 }

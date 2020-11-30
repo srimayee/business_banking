@@ -11,7 +11,7 @@ class AccountDetailEntity extends Entity {
   final double depositHolds;
 
   AccountDetailEntity(
-      {List<EntityError> errors = const [],
+      {List<EntityFailure> errors = const [],
       String name,
       String lastFour,
       String accountType,

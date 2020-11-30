@@ -21,12 +21,12 @@ class TransferFundsBloc extends Bloc {
   TransferFundsBloc() {
     _fundsUseCase = TransferFundsUseCase(
             (viewModel) => transferFundsViewModelPipe.send(viewModel));
-    transferFundsViewModelPipe.onListen(() {
+    transferFundsViewModelPipe.whenListenedDo(() {
       _fundsUseCase.create();
     });
 
     _confirmationUseCase = TransferConfirmationUseCase((viewModel) => confirmationViewModelPipe.send(viewModel));
-    confirmationViewModelPipe.onListen(() {
+    confirmationViewModelPipe.whenListenedDo(() {
       _confirmationUseCase.create();
     });
 

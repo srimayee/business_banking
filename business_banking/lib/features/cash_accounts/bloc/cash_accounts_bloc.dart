@@ -15,6 +15,6 @@ class CashAccountsBloc extends Bloc {
 
   CashAccountsBloc({CashAccountsService cashAccountsService}) {
     _useCase = CashAccountsUseCase((viewModel) => cashAccountsViewModelPipe.send(viewModel));
-    cashAccountsViewModelPipe.onListen(() => _useCase.create());
+    cashAccountsViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 }

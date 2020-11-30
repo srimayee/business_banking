@@ -7,7 +7,7 @@ class CashAccountsBlocMock extends Fake implements CashAccountsBloc {
   Pipe<CashAccountsViewModel> cashAccountsViewModelPipe = Pipe<CashAccountsViewModel>();
 
   CashAccountsBlocMock() {
-    cashAccountsViewModelPipe.onListen(() {
+    cashAccountsViewModelPipe.whenListenedDo(() {
       cashAccountsViewModelPipe.send(CashAccountsViewModel(
           name: 'Employee Checking',
           lastFour: '6542',

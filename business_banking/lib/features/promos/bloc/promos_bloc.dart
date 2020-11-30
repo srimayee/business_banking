@@ -10,7 +10,7 @@ class PromosBloc extends Bloc {
 
   PromosBloc({PromosService promosService}) {
     _useCase = PromosUseCase((viewModel) => promosViewModelPipe.send(viewModel));
-    promosViewModelPipe.onListen(() => _useCase.create());
+    promosViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 
   @override
