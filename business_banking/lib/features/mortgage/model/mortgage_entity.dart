@@ -6,13 +6,13 @@ class MortgageEntity extends Entity {
   final double outstandingPrincipal;
   final double interestRate;
 
-  MortgageEntity(
-      {List<EntityFailure> errors = const [],
-      DateTime monthlyPaymentDue,
-      double monthlyAmountDue,
-      double outstandingPrincipal,
-      double interestRate})
-      : monthlyPaymentDue = monthlyPaymentDue ?? DateTime.now(),
+  MortgageEntity({
+    List<EntityFailure> errors = const [],
+    DateTime monthlyPaymentDue,
+    double monthlyAmountDue,
+    double outstandingPrincipal,
+    double interestRate,
+  })  : monthlyPaymentDue = monthlyPaymentDue ?? DateTime.now(),
         monthlyAmountDue = monthlyAmountDue ?? 0.00,
         outstandingPrincipal = outstandingPrincipal ?? 0.00,
         interestRate = interestRate,

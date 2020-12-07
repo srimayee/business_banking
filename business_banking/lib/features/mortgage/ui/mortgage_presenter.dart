@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../bloc/mortgage_bloc.dart';
 import '../model/mortgage_view_model.dart';
 import 'mortgage_screen.dart';
+import '../../mortgage_detail/ui/mortgage_detail_widget.dart';
 
 class MortgagePresenter
     extends Presenter<MortgageBloc, MortgageViewModel, MortgageScreen> {
@@ -23,7 +24,12 @@ class MortgagePresenter
   }
 
   void _navigateToMortgageDetail(BuildContext context) {
-    // TODO: build mortgage detail
-    print('NAV TO MORTGAGE DETAIL');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        settings: RouteSettings(name: 'MortgageDetailWidget'),
+        builder: (context) => MortgageDetailWidget(),
+      ),
+    );
   }
 }

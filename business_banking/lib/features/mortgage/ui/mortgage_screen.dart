@@ -11,6 +11,41 @@ class MortgageScreen extends Screen {
       : assert(viewModel != null);
   @override
   Widget build(BuildContext context) {
-    return Text(viewModel.monthlyAmountDue.toString());
+    return GestureDetector(
+        child: MortgageCard(viewModel: viewModel),
+        onTap: () {
+          navigateToMortgageDetail();
+        });
+  }
+}
+
+class MortgageCard extends StatelessWidget {
+  const MortgageCard({
+    Key key,
+    @required this.viewModel,
+  }) : super(key: key);
+
+  final MortgageViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 125,
+      width: double.infinity,
+      padding: EdgeInsets.all(5),
+      child: Card(
+        elevation: 3,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('MORTGAGE INFO'),
+            Text('Next payment amount due:'),
+            Text(
+              viewModel.monthlyAmountDue.toString(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
