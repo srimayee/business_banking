@@ -2,7 +2,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../model/mortgage_detail_view_model.dart';
+import '../../model/mortgage_detail_view_model.dart';
 
 class MortgageDetailScreen extends Screen {
   final MortgageDetailViewModel viewModel;
@@ -24,20 +24,19 @@ class MortgageDetailScreen extends Screen {
           Row(
             children: [
               Text('Loan Number: '),
-              Text(viewModel.loanNumber.toString())
+              Text(viewModel.loanNum.toString())
             ],
           ),
           Row(
             children: [
               Text('Escrow Balance: '),
-              Text(NumberFormat.simpleCurrency()
-                  .format(viewModel.escrowBalance)),
+              Text(viewModel.escrowBalanceString),
             ],
           ),
           Row(
             children: [
               Text('Fees charged: '),
-              Text(NumberFormat.simpleCurrency().format(viewModel.feesCharged))
+              Text(viewModel.feesChargedString)
             ],
           ),
         ],

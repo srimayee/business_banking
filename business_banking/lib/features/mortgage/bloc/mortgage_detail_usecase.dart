@@ -2,9 +2,9 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 import '../../../locator.dart';
-import '../model/mortgage_detail_entity.dart';
+import '../model/mortgage_entity.dart';
 import '../model/mortgage_detail_view_model.dart';
-import '../bloc/mortgage_detail_service_adapter.dart';
+import 'mortgage_service_adaptor.dart';
 
 class MortgageDetailUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
@@ -16,9 +16,9 @@ class MortgageDetailUseCase extends UseCase {
         _viewModelCallBack = viewModelCallback;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<MortgageDetailEntity>();
+    _scope = ExampleLocator().repository.containsScope<MortgageEntity>();
     if (_scope == null) {
-      final newMortgageDetailEntity = MortgageDetailEntity();
+      final newMortgageDetailEntity = MortgageEntity();
       _scope = ExampleLocator()
           .repository
           .create(newMortgageDetailEntity, _notifySubscribers);
@@ -28,18 +28,14 @@ class MortgageDetailUseCase extends UseCase {
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, MortgageDetailServiceAdapter());
+        .runServiceAdapter(_scope, MortgageServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  MortgageDetailViewModel buildViewModel(MortgageDetailEntity entity) {
-    return MortgageDetailViewModel(
-      escrowBalance: entity.escrowBalance,
-      feesCharged: entity.feesCharged,
-      loanNumber: entity.loanNumber,
-    );
+  MortgageDetailViewModel buildViewModel(MortgageEntity entity) {
+    return MortgageDetailViewModel(mortgageEntity: entity);
   }
 }

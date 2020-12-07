@@ -1,7 +1,7 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../model/mortgage_view_model.dart';
+import '../../model/mortgage_view_model.dart';
 
 class MortgageScreen extends Screen {
   final MortgageViewModel viewModel;
@@ -44,12 +44,24 @@ class MortgageCard extends StatelessWidget {
               'MORTGAGE INFO',
               key: Key('mortgageInfoCardTitle'),
             ),
-            Text('Next payment amount due:',
-                key: Key('mortgageInfoCardSubtitle')),
-            Text(
-                NumberFormat.simpleCurrency()
-                    .format(viewModel.monthlyAmountDue),
-                key: Key('mortgageInfoCardMonthlyAmountDue')),
+            Row(
+              children: [
+                Text('Next payment amount due:',
+                    key: Key('mortgageInfoCardSubtitle')),
+                Text(viewModel.monthlyAmountDue,
+                    key: Key('mortgageInfoCardMonthlyAmountDue')),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Payment amount due date:',
+                ),
+                Text(
+                  viewModel.paymentDue,
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -1,9 +1,9 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
-import '../bloc/mortgage_bloc.dart';
-import '../model/mortgage_view_model.dart';
+import '../../bloc/mortgage_bloc.dart';
+import '../../model/mortgage_view_model.dart';
 import 'mortgage_screen.dart';
-import '../../mortgage_detail/ui/mortgage_detail_widget.dart';
+import '../mortgage_detail/mortgage_detail_widget.dart';
 
 class MortgagePresenter
     extends Presenter<MortgageBloc, MortgageViewModel, MortgageScreen> {

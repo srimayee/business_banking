@@ -1,7 +1,7 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-import '../bloc/mortgage_detail_bloc.dart';
+import '../../bloc/mortgage_bloc.dart';
 import 'mortgage_detail_presenter.dart';
 
 class MortgageDetailWidget extends StatelessWidget {
@@ -10,6 +10,6 @@ class MortgageDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => MortgageDetailBloc(), child: MortgageDetailPresenter());
+        create: (_) => MortgageBloc(), child: MortgageDetailPresenter());
   }
 }

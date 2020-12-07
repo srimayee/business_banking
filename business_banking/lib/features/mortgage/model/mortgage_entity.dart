@@ -5,6 +5,9 @@ class MortgageEntity extends Entity {
   final double monthlyAmountDue;
   final double outstandingPrincipal;
   final double interestRate;
+  final double escrowBalance;
+  final double feesCharged;
+  final int loanNumber;
 
   MortgageEntity({
     List<EntityFailure> errors = const [],
@@ -12,10 +15,16 @@ class MortgageEntity extends Entity {
     double monthlyAmountDue,
     double outstandingPrincipal,
     double interestRate,
+    double escrowBalance,
+    double feesCharged,
+    int loanNumber,
   })  : monthlyPaymentDue = monthlyPaymentDue ?? DateTime.now(),
         monthlyAmountDue = monthlyAmountDue ?? 0.00,
         outstandingPrincipal = outstandingPrincipal ?? 0.00,
-        interestRate = interestRate,
+        interestRate = interestRate ?? 0.00,
+        escrowBalance = escrowBalance ?? 0.00,
+        feesCharged = feesCharged ?? 0.00,
+        loanNumber = loanNumber ?? 0000,
         super(errors: errors);
 
   @override

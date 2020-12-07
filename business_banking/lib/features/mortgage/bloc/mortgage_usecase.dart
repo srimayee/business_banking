@@ -36,11 +36,6 @@ class MortgageUseCase extends UseCase {
   }
 
   MortgageViewModel buildViewModel(MortgageEntity entity) {
-    return MortgageViewModel(
-      interestRate: entity.interestRate,
-      monthlyAmountDue: entity.monthlyAmountDue,
-      monthlyPaymentDue: entity.monthlyPaymentDue,
-      outstandingPrincipal: entity.outstandingPrincipal,
-    );
+    return MortgageViewModel(mortgageEntity: entity);
   }
 }

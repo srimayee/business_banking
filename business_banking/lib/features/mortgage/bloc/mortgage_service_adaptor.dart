@@ -16,6 +16,9 @@ class MortgageServiceAdapter extends ServiceAdapter<MortgageEntity,
       monthlyAmountDue: responseModel.monthlyAmountDue,
       monthlyPaymentDue: responseModel.monthlyPaymentDue,
       outstandingPrincipal: responseModel.outstandingPrincipal,
+      escrowBalance: responseModel.escrowBalance,
+      feesCharged: responseModel.feesCharged,
+      loanNumber: responseModel.loanNumber,
     );
   }
 }

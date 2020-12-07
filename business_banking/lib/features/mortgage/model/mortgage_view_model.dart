@@ -1,22 +1,19 @@
 import 'package:clean_framework/clean_framework.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import 'mortgage_entity.dart';
 
 class MortgageViewModel extends ViewModel {
-  final DateTime monthlyPaymentDue;
-  final double monthlyAmountDue;
-  final double outstandingPrincipal;
-  final double interestRate;
+  final String monthlyAmountDue;
+  final String paymentDue;
 
-  MortgageViewModel({
-    @required this.monthlyAmountDue,
-    @required this.monthlyPaymentDue,
-    @required this.outstandingPrincipal,
-    @required this.interestRate,
-  }) : assert(interestRate != null &&
-            monthlyAmountDue != null &&
-            outstandingPrincipal != null &&
-            monthlyPaymentDue != null);
+  MortgageViewModel({MortgageEntity mortgageEntity})
+      : assert(mortgageEntity != null),
+        this.monthlyAmountDue = NumberFormat.simpleCurrency()
+            .format(mortgageEntity.monthlyAmountDue),
+        this.paymentDue =
+            DateFormat('M/d/y').format(mortgageEntity.monthlyPaymentDue);
+
   @override
-  List<Object> get props =>
-      [monthlyPaymentDue, monthlyAmountDue, outstandingPrincipal, interestRate];
+  List<Object> get props => [monthlyAmountDue, paymentDue];
 }
