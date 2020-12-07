@@ -1,5 +1,6 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../model/mortgage_view_model.dart';
 
 class MortgageScreen extends Screen {
@@ -13,6 +14,7 @@ class MortgageScreen extends Screen {
   Widget build(BuildContext context) {
     return GestureDetector(
         child: MortgageCard(viewModel: viewModel),
+        key: Key('mortgageDetailButtonKey'),
         onTap: () {
           navigateToMortgageDetail();
         });
@@ -38,11 +40,16 @@ class MortgageCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('MORTGAGE INFO'),
-            Text('Next payment amount due:'),
             Text(
-              viewModel.monthlyAmountDue.toString(),
+              'MORTGAGE INFO',
+              key: Key('mortgageInfoCardTitle'),
             ),
+            Text('Next payment amount due:',
+                key: Key('mortgageInfoCardSubtitle')),
+            Text(
+                NumberFormat.simpleCurrency()
+                    .format(viewModel.monthlyAmountDue),
+                key: Key('mortgageInfoCardMonthlyAmountDue')),
           ],
         ),
       ),
