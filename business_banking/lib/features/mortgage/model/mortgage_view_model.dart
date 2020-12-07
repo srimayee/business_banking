@@ -7,12 +7,12 @@ class MortgageViewModel extends ViewModel {
   final double outstandingPrincipal;
   final double interestRate;
 
-  MortgageViewModel(
-      {@required this.monthlyAmountDue,
-      @required this.monthlyPaymentDue,
-      @required this.outstandingPrincipal,
-      @required this.interestRate})
-      : assert(interestRate != null &&
+  MortgageViewModel({
+    @required this.monthlyAmountDue,
+    @required this.monthlyPaymentDue,
+    @required this.outstandingPrincipal,
+    @required this.interestRate,
+  }) : assert(interestRate != null &&
             monthlyAmountDue != null &&
             outstandingPrincipal != null &&
             monthlyPaymentDue != null);
