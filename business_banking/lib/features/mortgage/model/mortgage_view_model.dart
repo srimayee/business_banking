@@ -11,8 +11,9 @@ class MortgageViewModel extends ViewModel {
       : assert(mortgageEntity != null),
         this.monthlyAmountDue = NumberFormat.simpleCurrency()
             .format(mortgageEntity.monthlyAmountDue),
-        this.paymentDue =
-            DateFormat('M/d/y').format(mortgageEntity.monthlyPaymentDue);
+        this.paymentDue = DateFormat('M/d/y').format(
+            DateTime.fromMillisecondsSinceEpoch(
+                mortgageEntity.monthlyPaymentDue * 1000));
 
   @override
   List<Object> get props => [monthlyAmountDue, paymentDue];

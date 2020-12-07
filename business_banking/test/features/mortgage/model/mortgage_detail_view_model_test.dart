@@ -11,7 +11,7 @@ void main() {
       interestRate: 3.25,
       loanNumber: 987654321,
       monthlyAmountDue: 1234.00,
-      monthlyPaymentDue: DateTime.fromMillisecondsSinceEpoch(1609459200 * 1000),
+      monthlyPaymentDue: 1609459200 * 1000,
       outstandingPrincipal: 234567.00,
     ));
     expect(viewModel.escrowBalanceString, '\$1,234.00');

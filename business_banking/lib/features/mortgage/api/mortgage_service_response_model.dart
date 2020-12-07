@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class MortgageServiceResponseModel extends Equatable
     implements JsonResponseModel {
-  final DateTime monthlyPaymentDue;
+  final int monthlyPaymentDue;
   final double monthlyAmountDue;
   final double outstandingPrincipal;
   final double interestRate;
@@ -12,9 +12,7 @@ class MortgageServiceResponseModel extends Equatable
   final int loanNumber;
 
   MortgageServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : monthlyPaymentDue = DateTime.fromMillisecondsSinceEpoch(
-                json['monthly_payment_due'] * 1000) ??
-            DateTime.now(),
+      : monthlyPaymentDue = json['monthly_payment_due'] ?? 1607352890,
         monthlyAmountDue = json['monthly_amount_due'] ?? 0.00,
         outstandingPrincipal = json['outstanding_principal'] ?? 0.00,
         interestRate = json['interest_rate'] ?? 0.00,
