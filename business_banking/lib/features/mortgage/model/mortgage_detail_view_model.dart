@@ -6,7 +6,7 @@ import 'mortgage_entity.dart';
 class MortgageDetailViewModel extends ViewModel {
   final String escrowBalanceString;
   final String feesChargedString;
-  final int loanNum;
+  final String loanNum;
 
   MortgageDetailViewModel({MortgageEntity mortgageEntity})
       : assert(mortgageEntity != null),
@@ -14,7 +14,7 @@ class MortgageDetailViewModel extends ViewModel {
             NumberFormat.simpleCurrency().format(mortgageEntity.escrowBalance),
         feesChargedString =
             NumberFormat.simpleCurrency().format(mortgageEntity.feesCharged),
-        loanNum = mortgageEntity.loanNumber;
+        loanNum = mortgageEntity.loanNumber.toString();
 
   @override
   List<Object> get props => [escrowBalanceString, feesChargedString, loanNum];

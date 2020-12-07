@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../lib/features/mortgage/ui/mortgage_card/mortgage_presenter.dart';
-import '../../../../lib/features/mortgage/ui/mortgage_card/mortgage_widget.dart';
+import 'package:business_banking/features/mortgage/ui/mortgage_card/mortgage_presenter.dart';
+import 'package:business_banking/features/mortgage/ui/mortgage_card/mortgage_widget.dart';
 
 void main() {
   testWidgets('Test mortgage widget', (tester) async {

@@ -22,10 +22,7 @@ class MortgageDetailScreen extends Screen {
       body: Column(
         children: [
           Row(
-            children: [
-              Text('Loan Number: '),
-              Text(viewModel.loanNum.toString())
-            ],
+            children: [Text('Loan Number: '), Text(viewModel.loanNum)],
           ),
           Row(
             children: [
