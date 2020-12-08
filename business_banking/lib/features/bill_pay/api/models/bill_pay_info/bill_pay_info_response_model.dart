@@ -1,4 +1,3 @@
-
 import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/account_reponse_model.dart';
 import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/biller_reponse_model.dart';
 import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/rules_response_model.dart';
@@ -19,7 +18,7 @@ class BillPayInfoResponseModel extends Equatable implements JsonResponseModel {
                 .map((i) => BillerResponseModel.fromJson(i))
                 .toList() ??
             [],
-        rules = json["rules"] ?? RulesResponseModel.fromJson({});
+        rules = RulesResponseModel.fromJson(json["rules"] ?? {});
 
   @override
   List<Object> get props => [

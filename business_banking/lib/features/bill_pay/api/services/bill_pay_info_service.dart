@@ -13,6 +13,7 @@ class BillPayInfoService extends EitherService<JsonRequestModel, BillPayInfoResp
 
   @override
   BillPayInfoResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
+    print("json response: $jsonResponse");
     return BillPayInfoResponseModel.fromJson(jsonResponse);
   }
 }
