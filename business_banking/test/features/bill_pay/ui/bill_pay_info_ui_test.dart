@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+
   testWidgets('BillPayInfoWidget, contains a presenter', (tester) async {
-    final testWidget = MaterialApp(home: BillPayInfoWidget());
+   Widget testWidget = MaterialApp(home: BillPayInfoWidget());
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
 
     expect(find.byType(BillPayInfoPresenter), findsOneWidget);
   });
-
-
 }

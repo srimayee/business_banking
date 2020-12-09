@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-12-07 15:17:54</td>
+            <td class="headerValue">2020-12-08 18:40:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -72,18 +72,18 @@
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <a name="11"><span class="lineNum">      11 </span>            :   final billPayInfoViewModelPipe = Pipe&lt;BillPayInfoViewModel&gt;();</a>
 <a name="12"><span class="lineNum">      12 </span>            : </a>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          1 :   @override</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          2 :   @override</span></a>
 <a name="14"><span class="lineNum">      14 </span>            :   void dispose() {</a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          2 :     billPayInfoViewModelPipe.dispose();</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          4 :     billPayInfoViewModelPipe.dispose();</span></a>
 <a name="16"><span class="lineNum">      16 </span>            :   }</a>
 <a name="17"><span class="lineNum">      17 </span>            : </a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          1 :   BillPayInfoBloc({BillPayInfoService billPayInfoService}) {</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          3 :     _billPayInfoUseCase = BillPayInfoUseCase((viewModel) {</span></a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          2 :       return billPayInfoViewModelPipe.send(viewModel);</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          2 :   BillPayInfoBloc({BillPayInfoService billPayInfoService}) {</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          6 :     _billPayInfoUseCase = BillPayInfoUseCase((viewModel) {</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          4 :       return billPayInfoViewModelPipe.send(viewModel);</span></a>
 <a name="21"><span class="lineNum">      21 </span>            :     });</a>
 <a name="22"><span class="lineNum">      22 </span>            : </a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          3 :     billPayInfoViewModelPipe.whenListenedDo(() {</span></a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          2 :       _billPayInfoUseCase.create();</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          6 :     billPayInfoViewModelPipe.whenListenedDo(() {</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          4 :       _billPayInfoUseCase.create();</span></a>
 <a name="25"><span class="lineNum">      25 </span>            :     });</a>
 <a name="26"><span class="lineNum">      26 </span>            :   }</a>
 <a name="27"><span class="lineNum">      27 </span>            : }</a>

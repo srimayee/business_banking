@@ -21,6 +21,7 @@ class HubScreen extends Screen {
       ),
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
+        key: Key("scroll_view"),
         child: Column(
           children: [
             Container(

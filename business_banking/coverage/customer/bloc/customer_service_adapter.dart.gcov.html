@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-12-07 15:17:54</td>
+            <td class="headerValue">2020-12-08 18:40:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -75,17 +75,17 @@
 <a name="13"><span class="lineNum">      13 </span>            :     CustomerService&gt; {</a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">         24 :   CustomerServiceAdapter() : super(CustomerService());</span></a>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          1 :   @override</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          2 :   @override</span></a>
 <a name="17"><span class="lineNum">      17 </span>            :   CustomerEntity createEntity(</a>
 <a name="18"><span class="lineNum">      18 </span>            :       CustomerEntity initialEntity,</a>
 <a name="19"><span class="lineNum">      19 </span>            :       CustomerServiceResponseModel responseModel) {</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          1 :     return CustomerEntity(</span></a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          1 :         honorific: responseModel.honorific,</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :         firstName: responseModel.firstName,</span></a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          1 :         lastName: responseModel.lastName,</span></a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          1 :         nickName: responseModel.nickName,</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          2 :         accountType: responseModel.accountType == &quot;private&quot; ? AccountType.private : AccountType.retail,</span></a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          1 :         address: responseModel.address);</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          2 :     return CustomerEntity(</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          2 :         honorific: responseModel.honorific,</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :         firstName: responseModel.firstName,</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :         lastName: responseModel.lastName,</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          2 :         nickName: responseModel.nickName,</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          4 :         accountType: responseModel.accountType == &quot;private&quot; ? AccountType.private : AccountType.retail,</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :         address: responseModel.address);</span></a>
 <a name="27"><span class="lineNum">      27 </span>            :   }</a>
 <a name="28"><span class="lineNum">      28 </span>            : }</a>
 </pre>

@@ -16,6 +16,7 @@ import 'features/bill_pay/model/bill_pay_info_entity_test.dart' as features_bill
 import 'features/bill_pay/model/bill_pay_info_view_model_test.dart' as features_bill_pay_model_bill_pay_info_view_model_test;
 import 'features/bill_pay/model/biller_entity_test.dart' as features_bill_pay_model_biller_entity_test;
 import 'features/bill_pay/model/rules_entity_test.dart' as features_bill_pay_model_rules_entity_test;
+import 'features/bill_pay/ui/bill_pay_info_ui_test.dart' as features_bill_pay_ui_bill_pay_info_ui_test;
 import 'features/cash_accounts/api/cash_accounts_service_adapter_test.dart' as features_cash_accounts_api_cash_accounts_service_adapter_test;
 import 'features/cash_accounts/api/cash_accounts_service_test.dart' as features_cash_accounts_api_cash_accounts_service_test;
 import 'features/cash_accounts/bloc/cash_accounts_bloc_test.dart' as features_cash_accounts_bloc_cash_accounts_bloc_test;
@@ -50,6 +51,7 @@ import 'features/transfer_funds/golden/transfer_funds/transfer_funds_golden_test
 
 void main() {
   core_patch_simple_rest_api_test.main();
+  features_bill_pay_ui_bill_pay_info_ui_test.main();
   features_bill_pay_model_accounts_entity_test.main();
   features_bill_pay_model_bill_pay_info_view_model_test.main();
   features_bill_pay_model_rules_entity_test.main();

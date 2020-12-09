@@ -8,12 +8,11 @@ class BillPayInfoService extends EitherService<JsonRequestModel, BillPayInfoResp
   BillPayInfoService() : super(
       method: RestMethod.get,
       restApi: ExampleLocator().api,
-      path: 'bill_pay_info'
+      path: 'bill-pay-info'
   );
 
   @override
   BillPayInfoResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
-    print("json response: $jsonResponse");
     return BillPayInfoResponseModel.fromJson(jsonResponse);
   }
 }

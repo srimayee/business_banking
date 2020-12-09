@@ -35,9 +35,6 @@ class BillPayInfoUseCase extends UseCase {
   }
 
   BillPayInfoViewModel buildViewModel(BillPayInfoEntity entity) {
-
-    print("entity has errors: ${entity.errors}");
-
     if(entity.hasErrors()) {
       return BillPayInfoViewModel(
         rules: entity.rules,
@@ -50,6 +47,7 @@ class BillPayInfoUseCase extends UseCase {
       rules: entity.rules,
       accounts: entity.accounts,
       billers: entity.billers,
+      serviceStatus: ServiceStatus.success
     );
   }
 }

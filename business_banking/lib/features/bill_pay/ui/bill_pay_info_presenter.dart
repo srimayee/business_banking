@@ -20,59 +20,51 @@ class BillPayInfoPresenter extends Presenter<BillPayInfoBloc,
   BillPayInfoScreen buildScreen(BuildContext context, BillPayInfoBloc bloc,
       BillPayInfoViewModel viewModel) {
 
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (viewModel.serviceStatus == ServiceStatus.success) {
-        return;
-      } else if (viewModel.serviceStatus == ServiceStatus.fail) {
-        print(viewModel.toString());
-        _showErrorDialog(context);
-      }
-      // } else if (viewModel.serviceStatus == ServiceStatus.unknown) {
-      //   _showInvalidDataDialog(context);
-      // }
-    });
+    // SchedulerBinding.instance.addPostFrameCallback((_) {
+    //   if (viewModel.serviceStatus == ServiceStatus.fail) {
+    //     print(viewModel.toString());
+    //     _showErrorDialog(context);
+    //   }
+    // });
 
     return BillPayInfoScreen(
       viewModel,
-      // navigateToCustomerDetail: () {
-      //   _navigateToCustomerDetail(context);
-      // },
     );
   }
 
-  void _showErrorDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Error'),
-        content: Text('Failed fetch for bill pay info'),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          )
-        ],
-      ),
-    );
-  }
+  // void _showErrorDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (_) => AlertDialog(
+  //       title: Text('Error'),
+  //       content: Text('Failed fetch for bill pay info'),
+  //       actions: <Widget>[
+  //         FlatButton(
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           child: Text('OK'),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  @override
-  Widget buildLoadingScreen(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-
-  // TODO trigger this on errors
-  @override
-  Widget buildErrorScreen(BuildContext context, Error error) {
-    return Center(
-      child: Text('error: $error'),
-    );
-  }
+  // @override
+  // Widget buildLoadingScreen(BuildContext context) {
+  //   return Center(
+  //     child: CircularProgressIndicator(),
+  //   );
+  // }
+  //
+  //
+  // // TODO trigger this on errors
+  // @override
+  // Widget buildErrorScreen(BuildContext context, Error error) {
+  //   return Center(
+  //     child: Text('error: $error'),
+  //   );
+  // }
 
 
 }

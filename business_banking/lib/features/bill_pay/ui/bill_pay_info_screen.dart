@@ -10,8 +10,6 @@ class BillPayInfoScreen extends Screen {
 
   BillPayInfoScreen(this.viewModel);
 
-  // final VoidCallback submitPayment;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,6 +23,7 @@ class BillPayInfoScreen extends Screen {
               Center(
                 child: Text(
                   'Bill Pay',
+                  key: Key("bill_pay_info_screen_title"),
                   style: TextStyle(color: Colors.lightGreen, fontSize: 30.0),
                   maxLines: 1,
                 ),
@@ -34,12 +33,17 @@ class BillPayInfoScreen extends Screen {
               ),
               Text(
                 "To Biller: ",
+                key: Key("to_biller_title"),
                 style: TextStyle(fontSize: 20),
               ),
               for (BillerEntity b in viewModel.billers)
                 RadioListTile(
-                    title: Text(b.billerName),
-                    subtitle: Text(b.accountNumber),
+                    title: Text(
+                      b.billerName,
+                      key: Key("biller: ${b.billerName}"),
+                    ),
+                    subtitle: Text(b.accountNumber,
+                        key: Key("billerAccountNumber: ${b.accountNumber}")),
                     value: false,
                     groupValue: null,
                     onChanged: null),
@@ -52,9 +56,18 @@ class BillPayInfoScreen extends Screen {
               ),
               for (AccountEntity a in viewModel.accounts)
                 RadioListTile(
-                    title: Text(a.accountTitle),
-                    subtitle: Text(a.accountNumber),
-                    secondary: Text("\$${a.accountBalance.toStringAsFixed(2)}"),
+                    title: Text(
+                      a.accountTitle,
+                      key: Key("account: ${a.accountTitle}"),
+                    ),
+                    subtitle: Text(
+                      a.accountNumber,
+                      key: Key("accountNumber: ${a.accountTitle}"),
+                    ),
+                    secondary: Text(
+                      "\$${a.accountBalance.toStringAsFixed(2)}",
+                      key: Key("accountBalance: ${a.accountTitle}"),
+                    ),
                     value: false,
                     groupValue: null,
                     onChanged: null),
@@ -62,23 +75,11 @@ class BillPayInfoScreen extends Screen {
                 height: 8,
               ),
               TextFormField(
-                // validator: (String inputValue){
-                // if(inputValue.length > 5) {
-                //   return "exceeding maximum character length";
-                // }
-                // return "";
-                // },
                 decoration: InputDecoration(
                     helperText:
                         "dollar amount: min \$${viewModel.rules.paymentMin.toStringAsFixed(2)} | max \$${viewModel.rules.paymentMax.toStringAsFixed(2)}"),
               ),
               TextFormField(
-                // validator: (String inputValue){
-                // if(inputValue.length > 5) {
-                //   return "exceeding maximum character length";
-                // }
-                // return "";
-                // },
                 decoration: InputDecoration(
                     helperText:
                         "memo (${viewModel.rules.memoLimit} character limit)"),
@@ -87,8 +88,11 @@ class BillPayInfoScreen extends Screen {
                 height: 6,
               ),
               RaisedButton(
+                key: Key("submit_bill_pay"),
                 color: Colors.green,
-                child: Text("Submit", style: TextStyle(color: Colors.white)),
+                child: Text("Submit",
+                    style: TextStyle(color: Colors.white),
+                    key: Key("submit_bill_pay_label")),
                 onPressed: () {},
               )
             ],
