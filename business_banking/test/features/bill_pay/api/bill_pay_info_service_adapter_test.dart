@@ -1,4 +1,4 @@
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/bill_pay_info_response_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/bill_pay_info_response_model.dart';
 import 'package:business_banking/features/bill_pay/bloc/bill_pay_info_service_adapter.dart';
 import 'package:business_banking/features/bill_pay/model/entities/account_entity.dart';
 import 'package:business_banking/features/bill_pay/model/entities/bill_pay_info_entity.dart';

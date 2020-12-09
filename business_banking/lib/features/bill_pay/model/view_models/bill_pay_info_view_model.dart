@@ -20,8 +20,6 @@ class BillPayInfoViewModel extends Equatable implements ViewModel {
     this.dataStatus = DataStatus.unknown,
   });
 
-  // todo add assertations
-
   @override
   List<Object> get props => [
         billers,

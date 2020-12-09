@@ -1,4 +1,4 @@
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/biller_reponse_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/biller_reponse_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class BillerEntity extends Entity {

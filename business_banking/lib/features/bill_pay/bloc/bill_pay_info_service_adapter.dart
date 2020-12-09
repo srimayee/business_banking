@@ -1,7 +1,7 @@
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/account_reponse_model.dart';
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/bill_pay_info_response_model.dart';
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/biller_reponse_model.dart';
-import 'package:business_banking/features/bill_pay/api/models/bill_pay_info/rules_response_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/account_reponse_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/bill_pay_info_response_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/biller_reponse_model.dart';
+import 'package:business_banking/features/bill_pay/api/models/rules_response_model.dart';
 import 'package:business_banking/features/bill_pay/api/services/bill_pay_info_service.dart';
 import 'package:business_banking/features/bill_pay/model/entities/account_entity.dart';
 import 'package:business_banking/features/bill_pay/model/entities/bill_pay_info_entity.dart';
