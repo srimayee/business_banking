@@ -14,6 +14,8 @@ class AccountDetailService
   @override
   AccountDetailServiceResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
+    print("JSON Response -> " + jsonResponse.toString());
+
     return AccountDetailServiceResponseModel.fromJson(jsonResponse);
   }
 }

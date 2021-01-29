@@ -2,6 +2,7 @@
 
 import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
+import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

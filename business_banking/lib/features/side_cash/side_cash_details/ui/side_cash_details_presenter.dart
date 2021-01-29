@@ -17,6 +17,12 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
       SideCashDetailsBloc bloc, SideCashDetailsViewModel viewModel) {
     return SideCashDetailsScreen(
       viewModel: viewModel,
+      toggleDetails: _toggleDetails,
+      bloc: bloc,
     );
+  }
+
+  void _toggleDetails(SideCashDetailsBloc bloc, bool isOpen) {
+    bloc.toggleDetails.send(isOpen);
   }
 }

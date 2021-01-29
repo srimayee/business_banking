@@ -7,6 +7,7 @@ void main() {
     final bloc = SideCashDetailsBloc();
     bloc.viewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<SideCashDetailsViewModel>());
+      bloc.dispose();
     }));
   });
 }

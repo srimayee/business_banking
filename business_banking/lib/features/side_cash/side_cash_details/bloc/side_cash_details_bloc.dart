@@ -7,8 +7,9 @@ class SideCashDetailsBloc extends Bloc {
   SideCashDetailsUsecase _useCase;
 
   final viewModelPipe = Pipe<SideCashDetailsViewModel>();
+  final toggleDetails = Pipe<bool>();
 
-  SideCashDetailsBloc({SideCashDetailsService billPayService}) {
+  SideCashDetailsBloc({SideCashDetailsService sideCashDetailsService}) {
     _useCase =
         SideCashDetailsUsecase((viewModel) => viewModelPipe.send(viewModel));
     viewModelPipe.whenListenedDo(() => _useCase.create());
@@ -17,5 +18,6 @@ class SideCashDetailsBloc extends Bloc {
   @override
   void dispose() {
     viewModelPipe.dispose();
+    toggleDetails.dispose();
   }
 }

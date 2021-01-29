@@ -1,3 +1,4 @@
+import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_service_adapter.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_entity.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
 import 'package:business_banking/locator.dart';
@@ -8,10 +9,9 @@ class SideCashDetailsUsecase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
   RepositoryScope _scope;
 
-  SideCashDetailsUsecase(Function(ViewModel) viewModelCallBack, {scope})
+  SideCashDetailsUsecase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
-        _viewModelCallBack = viewModelCallBack,
-        _scope = scope;
+        _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<SideCashDetailsEntity>();
@@ -22,34 +22,22 @@ class SideCashDetailsUsecase extends UseCase {
     } else {
       _scope.subscription = notifySubscribers;
     }
-    final entity =
-        ExampleLocator().repository.get<SideCashDetailsEntity>(_scope);
 
-    _viewModelCallBack(buildViewModelForServiceUpdate(entity));
+    ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope, SideCashDetailsServiceAdapter());
   }
 
   void notifySubscribers(entity) {
-    print('notify subscribers');
-    _viewModelCallBack(buildViewModelForServiceUpdate(entity));
+    _viewModelCallBack(buildViewModel(entity));
   }
 
-  SideCashDetailsViewModel buildViewModelForServiceUpdate(
-      SideCashDetailsEntity entity) {
-    return entity.hasErrors()
-        ? buildViewModelForError(entity)
-        : buildViewModelForSuccess(entity);
+  SideCashDetailsViewModel buildViewModel(SideCashDetailsEntity entity) {
+    return SideCashDetailsViewModel(
+      grossSideCashBalance: entity.grossSideCashBalance,
+      interest: entity.interest,
+      paymentMin: entity.paymentMin,
+      remainingCredit: entity.remainingCredit,
+    );
   }
-
-  SideCashDetailsViewModel buildViewModelForSuccess(
-          SideCashDetailsEntity entity) =>
-      SideCashDetailsViewModel(
-        grossSideCashBalance: entity.grossSideCashBalance,
-        interest: entity.interest,
-        paymentMin: entity.paymentMin,
-        remainingCredit: entity.remainingCredit,
-      );
-
-  SideCashDetailsViewModel buildViewModelForError(
-          SideCashDetailsEntity entity) =>
-      SideCashDetailsViewModel();
 }

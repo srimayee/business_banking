@@ -14,12 +14,11 @@ class SideCashDetailsServiceAdapter extends ServiceAdapter<
   @override
   SideCashDetailsEntity createEntity(SideCashDetailsEntity entity,
       SideCashDetailsResponseModel responseModel) {
-    print('Service adapter Entity -> ' + entity.toString());
     return SideCashDetailsEntity(
-      grossSideCashBalance: entity.grossSideCashBalance,
-      interest: entity.interest,
-      paymentMin: entity.paymentMin,
-      remainingCredit: entity.remainingCredit,
+      grossSideCashBalance: responseModel.grossSideCashBalance,
+      interest: responseModel.interest,
+      paymentMin: responseModel.paymentMin,
+      remainingCredit: responseModel.remainingCredit,
     );
   }
 }
