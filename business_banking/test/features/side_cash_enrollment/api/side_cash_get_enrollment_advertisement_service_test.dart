@@ -1,0 +1,25 @@
+
+
+import 'dart:convert';
+
+import 'package:business_banking/features/side_cash_enrollment/api/side_cash_get_enrollment_advertisement_service.dart';
+import 'package:business_banking/features/side_cash_enrollment/api/side_cash_get_enrollment_advertisment_response_model.dart';
+
+import 'package:flutter_test/flutter_test.dart';
+
+import '../side_cash_enrollment_mocks.dart';
+
+main() {
+  test('SideCashGetEnrollmentAdvertisementService success', () async {
+    final SideCashGetEnrollmentAdvertisementService service =
+    SideCashGetEnrollmentAdvertisementService();
+    final eitherResponse = await service.request();
+    expect(eitherResponse.isRight, isTrue);
+    expect(
+      eitherResponse.fold((_) {}, (m) => m),
+      SideCashGetEnrollmentAdvertisementResponseModel.fromJson(json.decode(jsonDataAdvertisement)),
+    );
+  });
+
+  //TODO determine typical failure scenarios
+}
