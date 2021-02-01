@@ -7,7 +7,7 @@ class SideCashDetailsBloc extends Bloc {
   SideCashDetailsUsecase _useCase;
 
   final viewModelPipe = Pipe<SideCashDetailsViewModel>();
-  final toggleDetails = Pipe<bool>();
+  final toggleDetails = Pipe<bool>(initialData: true);
 
   SideCashDetailsBloc({SideCashDetailsService sideCashDetailsService}) {
     _useCase =
