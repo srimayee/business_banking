@@ -6,7 +6,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../lib/locator.dart';
+import '../../../../lib/locator.dart';
 
 class DummyFunctions {
   formVMCallback(ViewModel) {}
@@ -24,13 +24,7 @@ class DummyFunctions {
   }
 }
 
-
 class MockDummyFunctions extends Mock implements DummyFunctions {}
-
-class MockExampleLocator extends Mock implements Locator {
-
-//     .containsScope<EnrollmentFormEntity>();
-}
 
 final String jsonDataAdvertisement = """
       {
@@ -39,11 +33,7 @@ final String jsonDataAdvertisement = """
       }
   """;
 
-
-String get serviceJson {
-  print("returning json");
-  try {
-    String s = """
+String get serviceJson => """
 {
   "accounts": [
     "savings-123",
@@ -52,15 +42,11 @@ String get serviceJson {
   "firstAvailableStartDate": "20210131T000000-0600"
 }
 """;
-    return s;
-  } catch (e) {
-    print("excepti0n: $e");
-  }
-}
 
-EnrollmentFormEntity initialEntity({bool accountsEmpty = false,
-  bool accountsNull = false,
-  firstAvailableStartDateNull = false}) {
+EnrollmentFormEntity initialEntity(
+    {bool accountsEmpty = false,
+    bool accountsNull = false,
+    firstAvailableStartDateNull = false}) {
   List<String> accounts = [
     "savings-123",
     "checking-234",

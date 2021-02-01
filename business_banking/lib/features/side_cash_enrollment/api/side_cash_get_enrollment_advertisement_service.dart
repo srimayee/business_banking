@@ -14,7 +14,7 @@ class SideCashGetEnrollmentAdvertisementService extends  EitherService<JsonReque
       : super(
     method: RestMethod.get,
     restApi: ExampleLocator().api,
-    path: '/get_side_cash_enrollment_advertisement',
+    path: 'get-side-cash-enrollment-advertisement',
   );
 
   @override

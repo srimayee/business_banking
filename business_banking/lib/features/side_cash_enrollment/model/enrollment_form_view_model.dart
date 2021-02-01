@@ -13,7 +13,7 @@ class EnrollmentFormViewModel extends ViewModel {
       this.selectedAccount,
       this.selectedStartDate,
       this.firstAvailableStartDate})
-   /*4*/   : assert(accounts != null && accounts?.isNotEmpty && firstAvailableStartDate != null);
+  /*4*/;
 
   //3
   @override

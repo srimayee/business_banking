@@ -5,7 +5,7 @@ import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_ge
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../side_cash_enrollment_mocks.dart';
+import '../mocks/data_and_function_mocks.dart';
 
 main() {
   group("Service adapter tests", () {

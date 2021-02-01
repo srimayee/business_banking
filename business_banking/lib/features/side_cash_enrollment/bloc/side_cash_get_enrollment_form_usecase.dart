@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../locator.dart';
 
-class SideCashGetEnrollmentFormUsecase extends UseCase {
+class SideCashEnrollmentUsecase extends UseCase {
   Function(ViewModel) formViewModelCallBack;
   Function(ViewModel) advertisementViewModelCallback;
   RepositoryScope _scope;
@@ -19,37 +19,51 @@ class SideCashGetEnrollmentFormUsecase extends UseCase {
   RepositoryScope Function() createScope;
 
   // Test 1
-  SideCashGetEnrollmentFormUsecase({
+  SideCashEnrollmentUsecase({
     @required this.formViewModelCallBack,
     @required this.advertisementViewModelCallback,
     @required this.getRepoScope,
     this.createScope,
     // Locator locator,
     // this.scope,
-  }) : assert(formViewModelCallBack != null && advertisementViewModelCallback != null);
+  }) : assert(formViewModelCallBack != null &&
+            advertisementViewModelCallback != null);
 
   // this.createScope = ()=> ExampleLocator().repository.create(EnrollmentFormEntity(accounts: [], firstAvailableStartDate: null), viewModelCallBack);
 
-  void formNotifySubscribers(entity) {
-    // Test 2
-    formViewModelCallBack(buildViewModel(entity));
-  }
-
   void advertisementNotifySubscribers(entity) {
-    print("entity: $entity");
-    print("message: ${entity.message}");
-    advertisementViewModelCallback(EnrollmentAdvertisementViewModel(message: entity.message));
+    advertisementViewModelCallback(buildAdvertisementViewModel(entity));
   }
 
-  buildViewModel(EnrollmentFormEntity entity) {
+  void formNotifySubscribers(entity) {
+    formViewModelCallBack(buildFormViewModel(entity));
+  }
+
+  EnrollmentAdvertisementViewModel buildAdvertisementViewModel(
+      EnrollmentAdvertisementEntity entity) {
+    return EnrollmentAdvertisementViewModel(message: entity.message);
+  }
+
+  EnrollmentFormViewModel buildFormViewModel(EnrollmentFormEntity entity) {
+    print("entity: $entity");
     return EnrollmentFormViewModel(
       accounts: entity.accounts,
-      firstAvailableStartDate: entity.firstAvailableStartDate,
       selectedStartDate: entity.selectedStartDate,
       selectedAccount: entity.selectedAccount,
+      firstAvailableStartDate: entity.firstAvailableStartDate,
     );
   }
 
+  //
+  // buildViewModel(EnrollmentFormEntity entity) {
+  //   return EnrollmentFormViewModel(
+  //     accounts: entity.accounts,
+  //     firstAvailableStartDate: entity.firstAvailableStartDate,
+  //     selectedStartDate: entity.selectedStartDate,
+  //     selectedAccount: entity.selectedAccount,
+  //   );
+  // }
+  //
   fetchFormData() async {
     // _scope = ExampleLocator()
     //     .repository
@@ -65,59 +79,55 @@ class SideCashGetEnrollmentFormUsecase extends UseCase {
 // TODO Try await repo().runServiceAdapter<EnrollmentFormEntity>(_scope);
   }
 
-  void createAdvertisement()async {
-    // TODO STEP 1
-    _scope = ExampleLocator().repository.containsScope<EnrollmentAdvertisementEntity>();
+  //
+  // void createAdvertisement()async {
+  //   // TODO STEP 1
+  //   _scope = ExampleLocator().repository.containsScope<EnrollmentAdvertisementEntity>();
+  //   if (_scope == null) {
+  //
+  //     _scope = ExampleLocator().repository.create<EnrollmentAdvertisementEntity>(
+  //         EnrollmentAdvertisementEntity(message: "yo"),
+  //         advertisementNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
+  //
+  //   } else {
+  //
+  //     _scope.subscription = advertisementNotifySubscribers;
+  //   }
+  //
+  //   await ExampleLocator()
+  //       .repository
+  //       .runServiceAdapter(_scope, SideCashGetEnrollmentAdvertisementServiceAdapter());
+  // }
+
+  void createAdvertisement() async {
+    _scope = ExampleLocator()
+        .repository
+        .containsScope<EnrollmentAdvertisementEntity>();
     if (_scope == null) {
-
-      _scope = ExampleLocator().repository.create<EnrollmentAdvertisementEntity>(
-          EnrollmentAdvertisementEntity(message: "yo"),
-          advertisementNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
-
+      final entity = EnrollmentAdvertisementEntity();
+      _scope = ExampleLocator()
+          .repository
+          .create<EnrollmentAdvertisementEntity>(
+              entity, advertisementNotifySubscribers);
     } else {
-
       _scope.subscription = advertisementNotifySubscribers;
     }
 
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope, SideCashGetEnrollmentAdvertisementServiceAdapter());
+    ExampleLocator().repository.runServiceAdapter(
+        _scope, SideCashGetEnrollmentAdvertisementServiceAdapter());
   }
 
-  // Test 3 TODO HOW TO TEST that this is build correctly?
-  void create() async {
-    // TODO STEP 1
+  void createForm() async {
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
-    // _scope = getRepoScope();
 
     if (_scope == null) {
-      print("scope is null");
 
-      // HOW TO pass notify subscribers (and maybe entity back)
-      // What about type definitions?
-
-      //TODO (could just use view model callback)
-
-      // TODO STEP 2
       _scope = ExampleLocator().repository.create<EnrollmentFormEntity>(
           EnrollmentFormEntity(),
           formNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
-      // _scope = createScope();
-      print("called createScope");
     } else {
-      print("scope is not null, setting notify subscribers");
-      //TODO How to track this from the tests
-
-      // TODO ALTERNATE STEP 2
       _scope.subscription = formNotifySubscribers;
     }
-    //
-    // // TODO Ideally I believe this will only ever get run once...? maybe call this at end of IF Statement
-    //
-    //
-    // // TODO SHOULD NOW CREATE SERVICE ADAPTER
-
-    // TODO STEP 3
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, SideCashGetEnrollmentFormServiceAdapter());

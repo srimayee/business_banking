@@ -5,7 +5,7 @@ import 'package:clean_framework/clean_framework.dart';
 
 class SideCashEnrollmentBloc extends Bloc {
   // Define Usecases
-  SideCashGetEnrollmentFormUsecase usecase;
+  SideCashEnrollmentUsecase usecase;
 
   // Define UI Pipes
   final enrollmentFormPipe = Pipe<EnrollmentFormViewModel>();
@@ -15,10 +15,10 @@ class SideCashEnrollmentBloc extends Bloc {
   final getEnrollmentFormRequest = EventPipe();
   final getEnrollmentAdvertisementRequest = EventPipe();
 
-  SideCashEnrollmentBloc() {
+   SideCashEnrollmentBloc() {
     // initialize usecases and link usecase callbacks to UI Pipes
     // I think you want to inject the repository into the usecase
-    usecase = SideCashGetEnrollmentFormUsecase(
+    usecase = SideCashEnrollmentUsecase(
       formViewModelCallBack: (viewModel) {
         enrollmentFormPipe.send(viewModel);
       },
@@ -28,22 +28,20 @@ class SideCashEnrollmentBloc extends Bloc {
       getRepoScope: null,
     );
 
-    enrollmentAdvertisementPipe.whenListenedDo(() {
-      usecase.createAdvertisement();
-    });
+    enrollmentAdvertisementPipe.whenListenedDo(getEnrollmentAdvertisementRequestListener);
 
-    getEnrollmentFormRequest.listen(getEnrollmentFormRequestListener);
+    enrollmentFormPipe.whenListenedDo(getEnrollmentFormRequestListener);
+
+    // getEnrollmentFormRequest.listen(getEnrollmentFormRequestListener);
     // getEnrollmentAdvertisementRequest
     //     .listen(getEnrollmentAdvertisementListener);
   }
 
-  // create listeners for event pipes that trigger usecase functions
   getEnrollmentFormRequestListener() {
-    usecase.create(); // usecase.create()
+    usecase.createForm();
   }
 
-  getEnrollmentAdvertisementListener() {
-    print("in getEnrollmentAdvertisementListener");
+  getEnrollmentAdvertisementRequestListener() {
     usecase.createAdvertisement();
   }
 

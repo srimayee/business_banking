@@ -1,7 +1,7 @@
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../side_cash_enrollment_mocks.dart';
+import '../mocks/data_and_function_mocks.dart';
 
 void main() {
 
@@ -53,20 +53,20 @@ void main() {
       ]);
     });
 
-    // Test 4
-    test("assert that list of accounts cannot be empty", () {
-      expect(() => initialEntity(accountsEmpty: true), throwsAssertionError);
-    });
-
-    // Test 5
-    test("assert that list of accounts cannot be null", () {
-      expect(() => initialEntity(accountsNull: true), throwsAssertionError);
-    });
-
-    // Test 6
-    test("assert that firstAvailableStartDate cannot be null", () {
-      expect(() => initialEntity(firstAvailableStartDateNull: true),
-          throwsAssertionError);
-    });
+    // // Test 4
+    // test("assert that list of accounts cannot be empty", () {
+    //   expect(() => initialEntity(accountsEmpty: true), throwsAssertionError);
+    // });
+    //
+    // // Test 5
+    // test("assert that list of accounts cannot be null", () {
+    //   expect(() => initialEntity(accountsNull: true), throwsAssertionError);
+    // });
+    //
+    // // Test 6
+    // test("assert that firstAvailableStartDate cannot be null", () {
+    //   expect(() => initialEntity(firstAvailableStartDateNull: true),
+    //       throwsAssertionError);
+    // });
   });
 }

@@ -1,6 +1,7 @@
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/promos/ui/promos_widget.dart';
 import 'package:business_banking/features/customer/ui/customer_widget.dart';
+import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_widget.dart';
 
 import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_advertisement/side_cash_enrollment_advertisement_feature.dart';
 
@@ -24,9 +25,10 @@ class HubScreen extends Screen {
         ),
       ),
       backgroundColor: Colors.grey[300],
-      body: Column(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
+
             child: Center(
                 child: Text(
               'Welcome John Doe',
@@ -41,6 +43,7 @@ class HubScreen extends Screen {
           SizedBox(height: 15),
           TransferFundsCard(),
           SideCashEnrollmentAdvertisementFeatureWidget(),
+          // SideCashDetailsWidget()
         ],
       ),
     );

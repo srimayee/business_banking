@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_bloc.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_advertisement/side_cash_enrollment_advertisement_screen.dart';
+import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_form/side_cash_enrollment_form_feature_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/customer/model/customer_view_model.dart';
@@ -11,26 +12,17 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
     SideCashEnrollmentBloc,
     EnrollmentAdvertisementViewModel,
     SideCashEnrollmentAdvertisementScreen> {
-  // @override
-  // Stream<CustomerViewModel> getViewModelStream(CustomerBloc bloc) {
-  //   // return Stream<CustomerViewModel>.value(CustomerViewModel());
-  //   return bloc.customerViewModelPipe.receive;
-  // }
 
-  void _navigateToEnrollmentForm(
-      SideCashEnrollmentBloc bloc, BuildContext context) {
-    bloc.getEnrollmentFormRequest.launch();
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        settings: RouteSettings(name: 'CustomerDetail'),
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: Text("enrollment form widget"),
-          ),
-        ),
-      ),
-    );
+
+  final Function() navigateToEnrollmentForm;
+
+  _navigateToEnrollmentForm(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
+  }
+
+  SideCashEnrollmentAdvertisementPresenter({this.navigateToEnrollmentForm}) {
+    print("in presenter constructor");
   }
 
   @override
@@ -45,11 +37,12 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
   @override
   SideCashEnrollmentAdvertisementScreen buildScreen(BuildContext context,
       SideCashEnrollmentBloc bloc, EnrollmentAdvertisementViewModel viewModel) {
+    print("In side cash enrollment advertisement screen");
     return SideCashEnrollmentAdvertisementScreen(
         message: viewModel.message,
-        enrollTapped: () {
-          _navigateToEnrollmentForm(bloc, context);
-        });
+        enrollTapped: (ctx) =>
+        navigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx)
+    );
   }
 
   @override

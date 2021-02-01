@@ -1,7 +1,7 @@
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../side_cash_enrollment_mocks.dart';
+import '../mocks/data_and_function_mocks.dart';
 
 void main() {
 

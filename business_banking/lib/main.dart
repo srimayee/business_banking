@@ -17,7 +17,8 @@ void main() {
 
   runApp(
     MaterialApp(
-      home: LoginFeatureWidget(),
+      // home: LoginFeatureWidget(),
+      home: HubScreen(),
       debugShowCheckedModeBanner: false,
     ),
   );

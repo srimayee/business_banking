@@ -13,7 +13,7 @@ class SideCashGetEnrollmentFormService extends  EitherService<JsonRequestModel, 
       : super(
     method: RestMethod.get,
     restApi: ExampleLocator().api,
-    path: 'get_side_cash_enrollment_form',
+    path: 'get-side-cash-enrollment-form',
   );
 
   @override

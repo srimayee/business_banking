@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:business_banking/features/side_cash_enrollment/api/side_cash_get_enrollment_advertisment_response_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../side_cash_enrollment_mocks.dart';
+import '../mocks/data_and_function_mocks.dart';
 
 main() {
 
