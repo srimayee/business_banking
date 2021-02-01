@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 class SideCashDetailsScreen extends Screen {
   final SideCashDetailsViewModel viewModel;
-  final Function toggleDetails;
+  final toggleDetails;
   final SideCashDetailsBloc bloc;
 
   SideCashDetailsScreen(
-      {@required this.viewModel, this.toggleDetails, this.bloc})
+      {@required this.viewModel, @required this.toggleDetails, this.bloc})
       : assert(() {
           return viewModel != null;
         }());
@@ -47,11 +47,10 @@ class SideCashDetailsScreen extends Screen {
               Text(viewModel.remainingCredit),
             ],
           ),
-          MaterialButton(
-            onPressed: () async {
-              print(await bloc.toggleDetails.receive.last);
-              toggleDetails(bloc, await bloc.toggleDetails.receive.last);
-            },
+          FlatButton(
+            key: Key('toggle-cash-details-button'),
+            onPressed: () async =>
+                toggleDetails(bloc, await bloc.toggleDetails.receive.last),
             child: Text('Details'),
           )
         ],

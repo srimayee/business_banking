@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mock_dummy_functions.dart';
-import '../mock_repository_scope.dart';
 
 void main() {
   group('SideCashDetailsUsecase', () {

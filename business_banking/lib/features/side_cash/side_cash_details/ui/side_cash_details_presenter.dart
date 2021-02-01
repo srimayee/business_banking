@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 
 class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
     SideCashDetailsViewModel, SideCashDetailsScreen> {
+  final toggleDetailsFunc;
+  SideCashDetailsPresenter({this.toggleDetailsFunc});
+
   @override
   Stream<SideCashDetailsViewModel> getViewModelStream(
       SideCashDetailsBloc bloc) {
@@ -17,12 +20,13 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
       SideCashDetailsBloc bloc, SideCashDetailsViewModel viewModel) {
     return SideCashDetailsScreen(
       viewModel: viewModel,
-      toggleDetails: _toggleDetails,
+      toggleDetails: toggleDetailsFunc ?? toggleDetails,
       bloc: bloc,
     );
   }
 
-  void _toggleDetails(SideCashDetailsBloc bloc, bool isOpen) {
+  toggleDetails(SideCashDetailsBloc bloc, bool isOpen) {
+    print('calling toggle details -> ' + isOpen.toString());
     bloc.toggleDetails.send(isOpen);
   }
 }
