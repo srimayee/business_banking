@@ -1,3 +1,4 @@
+import 'package:business_banking/features/side_cash/get_side_cash/ui/get_side_cash_widget.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -52,7 +53,7 @@ class SideCashDetailsScreen extends Screen {
             stream: bloc.toggleDetails.receive,
             builder: (ctx, snapshot) {
               if (snapshot.data == false || snapshot.data == null) {
-                return _expandButton(snapshot.data);
+                return _expandButton(snapshot.data ?? false);
               }
               return _expandButton(snapshot.data);
             },
@@ -61,7 +62,7 @@ class SideCashDetailsScreen extends Screen {
             stream: bloc.toggleDetails.receive,
             builder: (ctx, snapshot) {
               if (snapshot.data == true) {
-                return Icon(Icons.ac_unit);
+                return GetSideCashWidget();
               }
               return Container();
             },
