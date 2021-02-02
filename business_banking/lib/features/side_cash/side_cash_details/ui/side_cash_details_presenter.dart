@@ -18,12 +18,22 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
   @override
   SideCashDetailsScreen buildScreen(BuildContext context,
       SideCashDetailsBloc bloc, SideCashDetailsViewModel viewModel) {
-    print('toggleDetails func ? ');
-    print(toggleDetailsFunc ?? toggleDetails);
     return SideCashDetailsScreen(
       viewModel: viewModel,
       toggleDetails: toggleDetailsFunc ?? toggleDetails,
       bloc: bloc,
+    );
+  }
+
+  @override
+  Widget buildLoadingScreen(BuildContext ctx) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
