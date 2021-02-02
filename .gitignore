@@ -21,5 +21,4 @@ doc/api/
 *.js.map
 
 .vscode
-
-coverage/**å
+./coverage

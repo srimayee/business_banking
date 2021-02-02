@@ -14,7 +14,6 @@ class GetSideCashUsecase extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    print('run create?');
     _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
     if (_scope == null) {
       final newGetSideCashEntity = GetSideCashEntity();
@@ -38,6 +37,18 @@ class GetSideCashUsecase extends UseCase {
           .repository
           .runServiceAdapter(_scope, GetSideCashServiceAdapter());
     }
+  }
+
+  void resetAll() {
+    final entity = ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    final GetSideCashEntity updatedEntity =
+        entity.merge(badString: null, success: false, errors: null);
+
+    ExampleLocator()
+        .repository
+        .update<GetSideCashEntity>(_scope, updatedEntity);
+    print(updatedEntity.requestSuccess);
+    notifySubscribers(updatedEntity);
   }
 
   GetSideCashViewModel buildViewModelForLocalUpdateWithError(
@@ -77,9 +88,10 @@ class GetSideCashUsecase extends UseCase {
 
   GetSideCashViewModel buildViewModel(GetSideCashEntity entity) {
     return GetSideCashViewModel(
-        amountRequested: entity.amountRequested,
-        error: entity.badStringError,
-        requestSuccess: entity.requestSuccess);
+      amountRequested: entity.amountRequested,
+      error: entity.badStringError,
+      requestSuccess: entity.requestSuccess,
+    );
   }
 
   submitGetSideCash(String amt) async {

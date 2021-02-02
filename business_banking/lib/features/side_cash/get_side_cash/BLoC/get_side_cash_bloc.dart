@@ -8,6 +8,7 @@ class GetSideCashBloc extends Bloc {
   GetSideCashUsecase _useCase;
   final viewModelPipe = Pipe<GetSideCashViewModel>();
   final requestValue = EventPipe();
+  final resetUsecase = EventPipe();
   final TextEditingController inputController = TextEditingController();
 
   GetSideCashBloc({GetSideCashService sideCashService}) {
@@ -16,6 +17,10 @@ class GetSideCashBloc extends Bloc {
     requestValue.listen(() {
       _useCase.submitGetSideCash(inputController.text);
       inputController.text = null;
+    });
+
+    resetUsecase.listen(() {
+      _useCase.resetAll();
     });
   }
 

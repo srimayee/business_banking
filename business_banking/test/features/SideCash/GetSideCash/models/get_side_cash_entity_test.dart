@@ -1,4 +1,4 @@
-import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_model.dart';
+import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
