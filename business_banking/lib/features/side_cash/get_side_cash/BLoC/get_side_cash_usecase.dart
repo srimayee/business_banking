@@ -1,5 +1,5 @@
 import 'package:business_banking/features/side_cash/get_side_cash/BLoC/get_side_cash_service_adapter.dart';
-import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_model.dart';
+import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_entity.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_view_model.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -14,6 +14,7 @@ class GetSideCashUsecase extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
+    print('run create?');
     _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
     if (_scope == null) {
       final newGetSideCashEntity = GetSideCashEntity();
@@ -45,11 +46,55 @@ class GetSideCashUsecase extends UseCase {
         error: "Must input a request amout for side cash.");
   }
 
+  void buildViewModelForValidInput() {
+    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
+    final getSideCashEntity =
+        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    final GetSideCashEntity updatedEntity =
+        getSideCashEntity.merge(badString: null);
+    ExampleLocator()
+        .repository
+        .update<GetSideCashEntity>(_scope, updatedEntity);
+    notifySubscribers(updatedEntity);
+  }
+
+  void buildViewModelForErrorInput() {
+    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
+    final getSideCashEntity =
+        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    final updatedEntity =
+        getSideCashEntity.merge(badString: "Input must contain numbers only.");
+
+    ExampleLocator()
+        .repository
+        .update<GetSideCashEntity>(_scope, updatedEntity);
+    notifySubscribers(updatedEntity);
+  }
+
   void notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));
   }
 
   GetSideCashViewModel buildViewModel(GetSideCashEntity entity) {
-    return GetSideCashViewModel();
+    return GetSideCashViewModel(
+        amountRequested: entity.amountRequested,
+        error: entity.badStringError,
+        requestSuccess: entity.requestSuccess);
+  }
+
+  submitGetSideCash(String amt) async {
+    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
+    final getSideCashEntity =
+        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+
+    final updatedEntity = getSideCashEntity.merge(amount: amt);
+
+    ExampleLocator()
+        .repository
+        .update<GetSideCashEntity>(_scope, updatedEntity);
+    print('run service adapter on submit.');
+    await ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope, GetSideCashServiceAdapter());
   }
 }

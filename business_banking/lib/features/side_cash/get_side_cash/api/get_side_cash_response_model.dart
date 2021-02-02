@@ -5,7 +5,7 @@ class GetSideCashResponseModel extends Equatable implements JsonResponseModel {
   final bool success;
 
   GetSideCashResponseModel.fromJson(Map<String, dynamic> json)
-      : success = json['success'] ?? null;
+      : success = json['success'] ?? false;
 
   @override
   List<Object> get props => [success];

@@ -1,23 +1,17 @@
+import 'package:business_banking/features/side_cash/get_side_cash/BLoC/get_side_cash_bloc.dart';
+import 'package:business_banking/features/side_cash/get_side_cash/ui/get_side_cash_presenter.dart';
+import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
+import 'package:flutter/material.dart';
+
+import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class GetSideCashWidget extends StatelessWidget {
-  const GetSideCashWidget({Key key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('Request More Side Cash'),
-        TextFormField(),
-        MaterialButton(
-          onPressed: () {},
-          child: Container(
-            padding: EdgeInsets.all(16),
-            color: Colors.green,
-            child: Text('Get Side Cash'),
-          ),
-        ),
-      ],
+  Widget build(BuildContext build) {
+    return BlocProvider<GetSideCashBloc>(
+      create: (_) => GetSideCashBloc(),
+      child: GetSideCashPresenter(),
     );
   }
 }

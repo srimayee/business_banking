@@ -8,12 +8,13 @@ class GetSideCashService
     extends EitherService<GetSideCashRequestModel, GetSideCashResponseModel> {
   GetSideCashService()
       : super(
-            method: RestMethod.post,
-            restApi: ExampleLocator().api,
-            path: 'enter_path_here_once_ready');
+          method: RestMethod.post,
+          restApi: ExampleLocator().api,
+          path: 'get-side-cash',
+        );
 
   @override
-  GetSideCashResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
-    return GetSideCashResponseModel.fromJson(jsonResponse);
+  GetSideCashResponseModel parseResponse(Map<String, dynamic> json) {
+    return GetSideCashResponseModel.fromJson(json);
   }
 }
