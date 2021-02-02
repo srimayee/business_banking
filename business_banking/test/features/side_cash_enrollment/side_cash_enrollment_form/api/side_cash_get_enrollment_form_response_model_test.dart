@@ -28,12 +28,10 @@ main() {
     test("1: parsing expected JSON", () {
       Map<String, dynamic> completeMap = json.decode(jsonData);
       List<String> expectedAccountList = ["checking-234", "savings-123"];
-      DateTime expectedStartDate = DateTime.parse("20210131T000000-0600");
 
       SideCashGetEnrollmentFormResponseModel responseModel =
           SideCashGetEnrollmentFormResponseModel.fromJson(completeMap);
       expect(responseModel.accounts, expectedAccountList);
-      expect(responseModel.firstAvailableStartDate, expectedStartDate);
     });
 
     // TODO is this what we would want to do?

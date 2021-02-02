@@ -22,7 +22,6 @@ main() {
 
       expect(entity.accounts, isNotEmpty);
       expect(entity.accounts.length, 2);
-      expect(entity.firstAvailableStartDate, DateTime.parse('20210131T000000-0600'));
 
     });
 

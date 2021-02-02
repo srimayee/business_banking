@@ -1,7 +1,11 @@
+import 'package:business_banking/features/side_cash_enrollment/api/side_cash_enrollment_completion_service.dart';
+import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_completion_service_adapter.dart';
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_advertisment_service_adapter.dart';
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_form_service_adapter.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_entity.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -13,37 +17,53 @@ import '../../../locator.dart';
 class SideCashEnrollmentUsecase extends UseCase {
   Function(ViewModel) formViewModelCallBack;
   Function(ViewModel) advertisementViewModelCallback;
+  Function(ViewModel) completionViewModelCallback;
 
   RepositoryScope _scope;
+  RepositoryScope _completionScope;
 
   // Test 1
   SideCashEnrollmentUsecase({
     @required this.formViewModelCallBack,
     @required this.advertisementViewModelCallback,
-  }) : assert(formViewModelCallBack != null &&
-            advertisementViewModelCallback != null);
+    @required this.completionViewModelCallback,
+  }) : assert(
+          formViewModelCallBack != null &&
+              advertisementViewModelCallback != null &&
+              completionViewModelCallback != null,
+        );
 
   void advertisementNotifySubscribers(entity) {
     advertisementViewModelCallback(buildAdvertisementViewModel(entity));
   }
 
   void formNotifySubscribers(entity) {
-    print("calling form view model callback in usecase");
     formViewModelCallBack(buildFormViewModel(entity));
+  }
+
+  void completionNotifySubscribers(entity) {
+    completionViewModelCallback(buildCompletionViewModel(entity));
   }
 
   EnrollmentAdvertisementViewModel buildAdvertisementViewModel(
       EnrollmentAdvertisementEntity entity) {
-    return EnrollmentAdvertisementViewModel(message: entity.message);
+    return EnrollmentAdvertisementViewModel(
+      message: entity.message,
+    );
   }
 
   EnrollmentFormViewModel buildFormViewModel(EnrollmentFormEntity entity) {
-    print("entity: $entity");
     return EnrollmentFormViewModel(
       accounts: entity.accounts,
-      selectedStartDate: entity.selectedStartDate,
       selectedAccount: entity.selectedAccount,
-      firstAvailableStartDate: entity.firstAvailableStartDate,
+    );
+  }
+
+  EnrollmentCompletionViewModel buildCompletionViewModel(
+      EnrollmentCompletionEntity entity) {
+    return EnrollmentCompletionViewModel(
+      isSuccess: entity.isSuccess,
+      message: entity.message,
     );
   }
 
@@ -88,7 +108,30 @@ class SideCashEnrollmentUsecase extends UseCase {
         ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
     final updatedForm = enrollmentForm.merge(selectedAccount: account);
 
-    ExampleLocator().repository.update<EnrollmentFormEntity>(_scope, updatedForm);
+    ExampleLocator()
+        .repository
+        .update<EnrollmentFormEntity>(_scope, updatedForm);
     formNotifySubscribers(updatedForm);
+  }
+
+  void submitEnrollmentForm() async {
+    _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
+    final enrollmentForm =
+        ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
+
+
+
+    _completionScope =
+        ExampleLocator().repository.containsScope<EnrollmentCompletionEntity>();
+
+    if (_completionScope == null) {
+      _completionScope = ExampleLocator().repository.create<
+          EnrollmentCompletionEntity>(EnrollmentCompletionEntity(),
+          completionNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
+    } else {
+      _completionScope.subscription = completionNotifySubscribers;
+    }
+    await ExampleLocator().repository.runServiceAdapter(
+        _scope, SideCashEnrollmentCompletionServiceAdapter());
   }
 }

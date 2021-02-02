@@ -1,4 +1,4 @@
-import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_form_usecase.dart';
+import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_usecase.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
@@ -11,9 +11,11 @@ import 'package:mockito/mockito.dart';
 import '../../../../lib/locator.dart';
 
 class DummyFunctions {
-  formVMCallback(ViewModel) {}
+  formVMCallback(ViewModelv ) {}
 
-  advertisementVMCallback(ViewModel) {}
+  advertisementVMCallback(ViewModelv ) {}
+
+  completionVMCallback(ViewModel v){}
 
   updateSelectedAccount(String s) {}
 }
@@ -48,23 +50,20 @@ EnrollmentAdvertisementViewModel initialAdvertisementViewModel() {
 EnrollmentFormEntity initialFormEntity(
     {bool accountsEmpty = false,
     bool accountsNull = false,
-    firstAvailableStartDateNull = false}) {
+}) {
   List<String> accounts = [
     "savings-123",
     "checking-234",
   ];
 
-  DateTime firstAvailableStartDate = DateTime.parse("20210131T000000-0600");
 
   if (accountsEmpty) accounts = [];
   if (accountsNull) accounts = null;
-  if (firstAvailableStartDateNull) firstAvailableStartDate = null;
 
   return EnrollmentFormEntity(
     accounts: accounts,
     selectedAccount: null,
-    selectedStartDate: null,
-    firstAvailableStartDate: firstAvailableStartDate,
+
   );
 }
 

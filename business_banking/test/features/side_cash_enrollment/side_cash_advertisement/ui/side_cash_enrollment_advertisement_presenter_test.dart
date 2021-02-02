@@ -12,7 +12,7 @@ import '../../mocks/mock_side_cash_enrollment_bloc.dart';
 import '../../mocks/ui_mocks.dart';
 
 main() {
-  group("Presenter Tests: ", () {
+  group("Side Cash Advertisement Presenter Tests: ", () {
     SideCashEnrollmentAdvertisementPresenter presenter;
     MockSideCashEnrollmentBloc bloc;
     MockNavigatorObserver mockNavigatorObserver;
@@ -41,29 +41,24 @@ main() {
       expect(result, isA<SideCashEnrollmentAdvertisementScreen>());
     });
 
+    // TODO AMR QUESTION
     testWidgets("navigation callback in presenter is fired", (tester) async {
       MockDummyFunctions dumbFunctions = MockDummyFunctions();
       final ctx = MockedBuildContext();
-      final presenter =
-      SideCashEnrollmentAdvertisementPresenter(
-        testNavigateToEnrollmentForm:
-        (ctx) => dumbFunctions.navigate(ctx),
+      final presenter = SideCashEnrollmentAdvertisementPresenter(
+        testNavigateToEnrollmentForm: dumbFunctions.navigate,
       );
 
-      SideCashEnrollmentAdvertisementScreen screen = presenter.buildScreen(
-          ctx, bloc, EnrollmentAdvertisementViewModel(message: "default message"));
+      SideCashEnrollmentAdvertisementScreen screen = presenter.buildScreen(ctx,
+          bloc, EnrollmentAdvertisementViewModel(message: "default message"));
       await tester.pumpWidget(_getApp(presenter));
       screen.enrollTapped(ctx);
 
       //TODO Not working
-      // verify(dumbFunctions.navigate(any)).called(1);
+      verify(dumbFunctions.navigate(any)).called(1);
       verify(mockNavigatorObserver.didPush(any, any)).called(1);
     });
 
     test("presenter gets proper EnrollmentAdvertisementViewModel", () {});
   });
 }
-
-
-
-

@@ -1,4 +1,4 @@
-import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_form_usecase.dart';
+import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_usecase.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';

@@ -7,11 +7,13 @@ import 'package:flutter/src/widgets/framework.dart';
 class SideCashEnrollmentFormScreen extends Screen {
   final EnrollmentFormViewModel formViewModel;
   final Function(String) updateSelectedAccount;
+  final Function(BuildContext) submitForm;
 
   SideCashEnrollmentFormScreen({
     @required this.formViewModel,
     @required this.updateSelectedAccount,
-  }) : assert(formViewModel != null && updateSelectedAccount != null);
+    @required this.submitForm,
+  }) : assert(formViewModel != null && updateSelectedAccount != null && submitForm != null);
 
   _buildAccountRadioButtons() {
     List<Widget> accountButtonSelectors = [];
@@ -48,7 +50,7 @@ class SideCashEnrollmentFormScreen extends Screen {
                 child: RaisedButton(
                   key: SideCashEnrollmentWidgetKeys.sideCashEnrollButton,
                   child: Text("Enroll"),
-                  onPressed: () {},
+                  onPressed: ()=> submitForm(context),
                 ),
               )
             ],

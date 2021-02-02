@@ -10,7 +10,6 @@ class SideCashEnrollmentFormFeatureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SideCashEnrollmentBloc>(
       create: (_)=>  SideCashEnrollmentBloc(),
-
       child: SideCashEnrollmentFormPresenter(),
     );
   }

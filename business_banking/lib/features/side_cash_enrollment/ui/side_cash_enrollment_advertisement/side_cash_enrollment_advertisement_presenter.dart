@@ -15,6 +15,7 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
   final Function(BuildContext) testNavigateToEnrollmentForm;
 
   _navigateToEnrollmentForm(BuildContext context, SideCashEnrollmentBloc bloc) {
+    print("trigger navigation");
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
   }
@@ -33,22 +34,14 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
     return SideCashEnrollmentAdvertisementScreen(
         message: viewModel.message,
         enrollTapped: (ctx) {
+          print("enroll tapped in buildScreen");
+          print("testNavigateToENrollmetnForm == null ${testNavigateToEnrollmentForm == null}");
           return testNavigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx, bloc);
         });
   }
 
   @override
-  Widget buildErrorScreen(BuildContext context, Error error) {
-    print("in build error screen");
-    // TODO: implement buildErrorScreen
-    return Container(
-      child: Text("error: ${error.toString()}"),
-    );
-  }
-
-  @override
   Widget buildLoadingScreen(BuildContext context) {
-    print("in build loading screen");
     return Center(child:CircularProgressIndicator());
   }
 }
