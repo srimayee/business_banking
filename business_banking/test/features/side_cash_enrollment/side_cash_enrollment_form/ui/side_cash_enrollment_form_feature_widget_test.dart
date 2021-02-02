@@ -14,7 +14,7 @@ main() {
 
 
     testWidgets("BuildWhenAvailable will create a presenter ", (tester) async {
-      final widget = SideCashEnrollmentFormFeatureWidget(bloc: SideCashEnrollmentBloc(),);
+      final widget = SideCashEnrollmentFormFeatureWidget();
       await tester.pumpWidget(widget);
       expect(find.byType(SideCashEnrollmentFormPresenter), findsOneWidget);
 

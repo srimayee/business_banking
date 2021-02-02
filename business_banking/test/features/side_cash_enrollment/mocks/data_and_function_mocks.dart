@@ -1,4 +1,6 @@
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_form_usecase.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_entity.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -34,6 +36,14 @@ String get serviceJson => """
   "firstAvailableStartDate": "20210131T000000-0600"
 }
 """;
+
+EnrollmentAdvertisementEntity initialAdvertisementEntity() {
+  return EnrollmentAdvertisementEntity(message: "Sign Up for Side Cash!");
+}
+
+EnrollmentAdvertisementViewModel initialAdvertisementViewModel() {
+  return EnrollmentAdvertisementViewModel(message: "Sign Up for Side Cash!");
+}
 
 EnrollmentFormEntity initialFormEntity(
     {bool accountsEmpty = false,

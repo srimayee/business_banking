@@ -71,8 +71,6 @@ main() {
       final ctx = MockedBuildContext();
       final presenter =
       SideCashEnrollmentFormPresenter(
-        // testNavigateToEnrollmentForm:
-        //     (ctx) => dumbFunctions.navigate(ctx),
         testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccount,
       );
 

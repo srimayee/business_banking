@@ -69,10 +69,12 @@ class SideCashEnrollmentUsecase extends UseCase {
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
 
     if (_scope == null) {
+      print("form scope == null");
       _scope = ExampleLocator().repository.create<EnrollmentFormEntity>(
           EnrollmentFormEntity(),
           formNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
     } else {
+      print("form scope != null");
       _scope.subscription = formNotifySubscribers;
     }
     await ExampleLocator()

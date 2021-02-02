@@ -16,7 +16,7 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
 
   _navigateToEnrollmentForm(BuildContext context, SideCashEnrollmentBloc bloc) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => SideCashEnrollmentFormFeatureWidget(bloc: bloc)));
+        builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
   }
 
   SideCashEnrollmentAdvertisementPresenter({this.testNavigateToEnrollmentForm});
