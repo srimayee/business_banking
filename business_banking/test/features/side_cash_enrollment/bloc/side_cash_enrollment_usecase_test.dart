@@ -40,13 +40,14 @@ main() {
     });
 
     test(
-        "2: verify view model callback is invoked when notify subscribes is provided an enrollment FORM entity",
+        "2: verify  FORM view model callback is invoked when notify subscribes is provided an enrollment FORM entity",
         () {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
-          formViewModelCallBack: mockDummyFunctions.formVMCallback,
-          advertisementViewModelCallback:
-              mockDummyFunctions.advertisementVMCallback);
+        formViewModelCallBack: mockDummyFunctions.formVMCallback,
+        advertisementViewModelCallback:
+            mockDummyFunctions.advertisementVMCallback,
+      );
 
       useCase.formNotifySubscribers(EnrollmentFormEntity(
           firstAvailableStartDate: DateTime.now(), accounts: ["", ""]));
@@ -55,7 +56,7 @@ main() {
   });
 
   // How do we include errors in the view model?
-  test("3: build View Model for service will return error model ", () async {
+  test("3: build View Models for service will return error model ", () async {
     final mockDummyFunctions = MockDummyFunctions();
     final useCase = SideCashEnrollmentUsecase(
         formViewModelCallBack: mockDummyFunctions.formVMCallback,
@@ -70,6 +71,7 @@ main() {
     final formResult = useCase.buildFormViewModel(formEntity);
     expect(formResult, isA<EnrollmentFormViewModel>());
   });
+
 
   // TODO What to test for the Create function?
   // TODO Create function does: 1) checks for scope, 2) IF null creates scope + sets notifySubscribers
@@ -94,7 +96,7 @@ main() {
     final useCase = SideCashEnrollmentUsecase(
         formViewModelCallBack: mockDummyFunctions.formVMCallback);
 
-    final EnrollmentFormEntity entity = initialEntity();
+    final EnrollmentFormEntity entity = initialFormEntity();
 
     // expect(useCase.buildViewModel(entity), initialViewModel());
   });
@@ -104,7 +106,7 @@ main() {
     final useCase = SideCashEnrollmentUsecase(
         formViewModelCallBack: mockDummyFunctions.formVMCallback);
 
-    EnrollmentFormEntity entity = initialEntity()
+    EnrollmentFormEntity entity = initialFormEntity()
       ..merge(errors: [NoConnectivityEntityFailure(), EntityFailure()]);
 
     // final result = useCase.buildViewModel(entity);
@@ -116,7 +118,7 @@ main() {
     final useCase = SideCashEnrollmentUsecase(
         formViewModelCallBack: mockDummyFunctions.formVMCallback);
 
-    EnrollmentFormEntity entity = initialEntity()
+    EnrollmentFormEntity entity = initialFormEntity()
       ..merge(
           selectedAccount: "checking-234", selectedStartDate: DateTime.now());
 
@@ -124,18 +126,6 @@ main() {
     // expect(result, isA<EnrollmentFormViewModel>());
   });
 
-  test("7: Usecase.create executes getRepositoryScope", () {
-    final mockDummyFunctions = MockDummyFunctions();
-    // final mockLocator = MockExampleLocator();
-    final useCase = SideCashEnrollmentUsecase(
-        formViewModelCallBack: mockDummyFunctions.formVMCallback,
-        getRepoScope: mockDummyFunctions.getRepoScope);
-    // useCase.create();
-    verify(mockDummyFunctions.getRepoScope()).called(1);
-
-    verifyNoMoreInteractions(mockDummyFunctions);
-  });
-  //
   test(
       "8: Usecase create goes into IF statement to create NEW SCOPE when getRepositoryScope returns null",
       () {

@@ -1,6 +1,3 @@
-
-
-
 import 'package:business_banking/features/side_cash_enrollment/api/side_cash_get_enrollment_form_response_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/api/side_cash_get_enrollment_form_service.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
@@ -12,13 +9,14 @@ class SideCashGetEnrollmentFormServiceAdapter extends ServiceAdapter<
     JsonRequestModel,
     SideCashGetEnrollmentFormResponseModel,
     SideCashGetEnrollmentFormService> {
-  SideCashGetEnrollmentFormServiceAdapter() : super(SideCashGetEnrollmentFormService());
+  SideCashGetEnrollmentFormServiceAdapter()
+      : super(SideCashGetEnrollmentFormService());
 
   @override
-  EnrollmentFormEntity createEntity(
-      EnrollmentFormEntity enrollmentFormEntity,
+  EnrollmentFormEntity createEntity(EnrollmentFormEntity enrollmentFormEntity,
       SideCashGetEnrollmentFormResponseModel responseModel) {
-    // SHOULD NOW CREATE RESPONSE MODEL TO ENSURE IT HAS THE PROPER PARAMETERS
-    return EnrollmentFormEntity(accounts: responseModel.accounts, firstAvailableStartDate: responseModel.firstAvailableStartDate);
+    return EnrollmentFormEntity(
+        accounts: responseModel.accounts,
+        firstAvailableStartDate: responseModel.firstAvailableStartDate);
   }
 }

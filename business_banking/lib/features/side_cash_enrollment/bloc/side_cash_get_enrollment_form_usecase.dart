@@ -13,29 +13,22 @@ import '../../../locator.dart';
 class SideCashEnrollmentUsecase extends UseCase {
   Function(ViewModel) formViewModelCallBack;
   Function(ViewModel) advertisementViewModelCallback;
+
   RepositoryScope _scope;
-  ExampleLocator locator;
-  Function() getRepoScope;
-  RepositoryScope Function() createScope;
 
   // Test 1
   SideCashEnrollmentUsecase({
     @required this.formViewModelCallBack,
     @required this.advertisementViewModelCallback,
-    @required this.getRepoScope,
-    this.createScope,
-    // Locator locator,
-    // this.scope,
   }) : assert(formViewModelCallBack != null &&
             advertisementViewModelCallback != null);
-
-  // this.createScope = ()=> ExampleLocator().repository.create(EnrollmentFormEntity(accounts: [], firstAvailableStartDate: null), viewModelCallBack);
 
   void advertisementNotifySubscribers(entity) {
     advertisementViewModelCallback(buildAdvertisementViewModel(entity));
   }
 
   void formNotifySubscribers(entity) {
+    print("calling form view model callback in usecase");
     formViewModelCallBack(buildFormViewModel(entity));
   }
 
@@ -53,51 +46,6 @@ class SideCashEnrollmentUsecase extends UseCase {
       firstAvailableStartDate: entity.firstAvailableStartDate,
     );
   }
-
-  //
-  // buildViewModel(EnrollmentFormEntity entity) {
-  //   return EnrollmentFormViewModel(
-  //     accounts: entity.accounts,
-  //     firstAvailableStartDate: entity.firstAvailableStartDate,
-  //     selectedStartDate: entity.selectedStartDate,
-  //     selectedAccount: entity.selectedAccount,
-  //   );
-  // }
-  //
-  fetchFormData() async {
-    // _scope = ExampleLocator()
-    //     .repository
-    //     .create<EnrollmentFormEntity>(
-    //     EnrollmentFormEntity(), notifySubscribers);
-    //TODO Try RepositoryScope _scope = repo().containsScope<EnrollmentFormEntity>();
-    if (_scope != null) {
-      // create scope
-    } else {
-      // attach notify subscribers to scope
-    }
-
-// TODO Try await repo().runServiceAdapter<EnrollmentFormEntity>(_scope);
-  }
-
-  //
-  // void createAdvertisement()async {
-  //   // TODO STEP 1
-  //   _scope = ExampleLocator().repository.containsScope<EnrollmentAdvertisementEntity>();
-  //   if (_scope == null) {
-  //
-  //     _scope = ExampleLocator().repository.create<EnrollmentAdvertisementEntity>(
-  //         EnrollmentAdvertisementEntity(message: "yo"),
-  //         advertisementNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
-  //
-  //   } else {
-  //
-  //     _scope.subscription = advertisementNotifySubscribers;
-  //   }
-  //
-  //   await ExampleLocator()
-  //       .repository
-  //       .runServiceAdapter(_scope, SideCashGetEnrollmentAdvertisementServiceAdapter());
-  // }
 
   void createAdvertisement() async {
     _scope = ExampleLocator()
@@ -121,7 +69,6 @@ class SideCashEnrollmentUsecase extends UseCase {
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
 
     if (_scope == null) {
-
       _scope = ExampleLocator().repository.create<EnrollmentFormEntity>(
           EnrollmentFormEntity(),
           formNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
@@ -131,5 +78,15 @@ class SideCashEnrollmentUsecase extends UseCase {
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, SideCashGetEnrollmentFormServiceAdapter());
+  }
+
+  void updateFormWithSelectedAccount(String account) {
+    _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
+    final enrollmentForm =
+        ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
+    final updatedForm = enrollmentForm.merge(selectedAccount: account);
+
+    ExampleLocator().repository.update<EnrollmentFormEntity>(_scope, updatedForm);
+    formNotifySubscribers(updatedForm);
   }
 }

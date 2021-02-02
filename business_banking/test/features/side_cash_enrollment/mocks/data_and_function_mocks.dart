@@ -13,15 +13,7 @@ class DummyFunctions {
 
   advertisementVMCallback(ViewModel) {}
 
-  getRepoScope() {}
-
-  RepositoryScope createScope(Function notifySubscribers) {
-    print("create scope called in dummy functions");
-
-    notifySubscribers();
-
-    print("notify subscribers called in create scope dummy");
-  }
+  updateSelectedAccount(String s) {}
 }
 
 class MockDummyFunctions extends Mock implements DummyFunctions {}
@@ -43,7 +35,7 @@ String get serviceJson => """
 }
 """;
 
-EnrollmentFormEntity initialEntity(
+EnrollmentFormEntity initialFormEntity(
     {bool accountsEmpty = false,
     bool accountsNull = false,
     firstAvailableStartDateNull = false}) {
@@ -66,7 +58,7 @@ EnrollmentFormEntity initialEntity(
   );
 }
 
-EnrollmentFormViewModel initialViewModel({
+EnrollmentFormViewModel initialFormViewModel({
   firstAvailableStartDateNull = false,
   accountsNull = false,
   accountsEmpty = false,

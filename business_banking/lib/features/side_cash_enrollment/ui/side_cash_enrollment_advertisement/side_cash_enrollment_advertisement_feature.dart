@@ -12,7 +12,7 @@ class SideCashEnrollmentAdvertisementFeatureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext build) {
     return BlocProvider<SideCashEnrollmentBloc>(
-      create: (_) => SideCashEnrollmentBloc(),
+      create: (_) => bloc ?? SideCashEnrollmentBloc(),
       child: SideCashEnrollmentAdvertisementPresenter(),
     );
   }

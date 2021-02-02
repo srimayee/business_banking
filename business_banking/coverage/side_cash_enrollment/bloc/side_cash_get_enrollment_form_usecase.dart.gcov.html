@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">39</td>
-            <td class="headerCovTableEntryLo">28.2 %</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntryMed">80.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2021-02-01 08:17:36</td>
+            <td class="headerValue">2021-02-02 09:12:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -72,119 +72,86 @@
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <a name="11"><span class="lineNum">      11 </span>            : import '../../../locator.dart';</a>
 <a name="12"><span class="lineNum">      12 </span>            : </a>
-<a name="13"><span class="lineNum">      13 </span>            : class SideCashGetEnrollmentFormUsecase extends UseCase {</a>
+<a name="13"><span class="lineNum">      13 </span>            : class SideCashEnrollmentUsecase extends UseCase {</a>
 <a name="14"><span class="lineNum">      14 </span>            :   Function(ViewModel) formViewModelCallBack;</a>
 <a name="15"><span class="lineNum">      15 </span>            :   Function(ViewModel) advertisementViewModelCallback;</a>
-<a name="16"><span class="lineNum">      16 </span>            :   RepositoryScope _scope;</a>
-<a name="17"><span class="lineNum">      17 </span>            :   ExampleLocator locator;</a>
-<a name="18"><span class="lineNum">      18 </span>            :   Function() getRepoScope;</a>
-<a name="19"><span class="lineNum">      19 </span>            :   RepositoryScope Function() createScope;</a>
-<a name="20"><span class="lineNum">      20 </span>            : </a>
-<a name="21"><span class="lineNum">      21 </span>            :   // Test 1</a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :   SideCashGetEnrollmentFormUsecase({</span></a>
-<a name="23"><span class="lineNum">      23 </span>            :     @required this.formViewModelCallBack,</a>
-<a name="24"><span class="lineNum">      24 </span>            :     @required this.advertisementViewModelCallback,</a>
-<a name="25"><span class="lineNum">      25 </span>            :     @required this.getRepoScope,</a>
-<a name="26"><span class="lineNum">      26 </span>            :     this.createScope,</a>
-<a name="27"><span class="lineNum">      27 </span>            :     // Locator locator,</a>
-<a name="28"><span class="lineNum">      28 </span>            :     // this.scope,</a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          1 :   }) : assert(formViewModelCallBack != null &amp;&amp; advertisementViewModelCallback != null);</span></a>
-<a name="30"><span class="lineNum">      30 </span>            : </a>
-<a name="31"><span class="lineNum">      31 </span>            :   // this.createScope = ()=&gt; ExampleLocator().repository.create(EnrollmentFormEntity(accounts: [], firstAvailableStartDate: null), viewModelCallBack);</a>
-<a name="32"><span class="lineNum">      32 </span>            : </a>
-<a name="33"><span class="lineNum">      33 </span><span class="lineNoCov">          0 :   void formNotifySubscribers(entity) {</span></a>
-<a name="34"><span class="lineNum">      34 </span>            :     // Test 2</a>
-<a name="35"><span class="lineNum">      35 </span><span class="lineNoCov">          0 :     formViewModelCallBack(buildViewModel(entity));</span></a>
-<a name="36"><span class="lineNum">      36 </span>            :   }</a>
-<a name="37"><span class="lineNum">      37 </span>            : </a>
-<a name="38"><span class="lineNum">      38 </span><span class="lineNoCov">          0 :   void advertisementNotifySubscribers(entity) {</span></a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineNoCov">          0 :     print(&quot;entity: $entity&quot;);</span></a>
-<a name="40"><span class="lineNum">      40 </span><span class="lineNoCov">          0 :     print(&quot;message: ${entity.message}&quot;);</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineNoCov">          0 :     advertisementViewModelCallback(EnrollmentAdvertisementViewModel(message: entity.message));</span></a>
-<a name="42"><span class="lineNum">      42 </span>            :   }</a>
-<a name="43"><span class="lineNum">      43 </span>            : </a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineNoCov">          0 :   buildViewModel(EnrollmentFormEntity entity) {</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 :     return EnrollmentFormViewModel(</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineNoCov">          0 :       accounts: entity.accounts,</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineNoCov">          0 :       firstAvailableStartDate: entity.firstAvailableStartDate,</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineNoCov">          0 :       selectedStartDate: entity.selectedStartDate,</span></a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineNoCov">          0 :       selectedAccount: entity.selectedAccount,</span></a>
-<a name="50"><span class="lineNum">      50 </span>            :     );</a>
-<a name="51"><span class="lineNum">      51 </span>            :   }</a>
-<a name="52"><span class="lineNum">      52 </span>            : </a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineNoCov">          0 :   fetchFormData() async {</span></a>
-<a name="54"><span class="lineNum">      54 </span>            :     // _scope = ExampleLocator()</a>
-<a name="55"><span class="lineNum">      55 </span>            :     //     .repository</a>
-<a name="56"><span class="lineNum">      56 </span>            :     //     .create&lt;EnrollmentFormEntity&gt;(</a>
-<a name="57"><span class="lineNum">      57 </span>            :     //     EnrollmentFormEntity(), notifySubscribers);</a>
-<a name="58"><span class="lineNum">      58 </span>            :     //TODO Try RepositoryScope _scope = repo().containsScope&lt;EnrollmentFormEntity&gt;();</a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineNoCov">          0 :     if (_scope != null) {</span></a>
-<a name="60"><span class="lineNum">      60 </span>            :       // create scope</a>
-<a name="61"><span class="lineNum">      61 </span>            :     } else {</a>
-<a name="62"><span class="lineNum">      62 </span>            :       // attach notify subscribers to scope</a>
-<a name="63"><span class="lineNum">      63 </span>            :     }</a>
-<a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span>            : // TODO Try await repo().runServiceAdapter&lt;EnrollmentFormEntity&gt;(_scope);</a>
+<a name="16"><span class="lineNum">      16 </span>            : </a>
+<a name="17"><span class="lineNum">      17 </span>            :   RepositoryScope _scope;</a>
+<a name="18"><span class="lineNum">      18 </span>            : </a>
+<a name="19"><span class="lineNum">      19 </span>            :   // Test 1</a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          4 :   SideCashEnrollmentUsecase({</span></a>
+<a name="21"><span class="lineNum">      21 </span>            :     @required this.formViewModelCallBack,</a>
+<a name="22"><span class="lineNum">      22 </span>            :     @required this.advertisementViewModelCallback,</a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          1 :   }) : assert(formViewModelCallBack != null &amp;&amp;</span></a>
+<a name="24"><span class="lineNum">      24 </span>            :             advertisementViewModelCallback != null);</a>
+<a name="25"><span class="lineNum">      25 </span>            : </a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          3 :   void advertisementNotifySubscribers(entity) {</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          9 :     advertisementViewModelCallback(buildAdvertisementViewModel(entity));</span></a>
+<a name="28"><span class="lineNum">      28 </span>            :   }</a>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          3 :   void formNotifySubscribers(entity) {</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          3 :     print(&quot;calling form view model callback in usecase&quot;);</span></a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          9 :     formViewModelCallBack(buildFormViewModel(entity));</span></a>
+<a name="33"><span class="lineNum">      33 </span>            :   }</a>
+<a name="34"><span class="lineNum">      34 </span>            : </a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          3 :   EnrollmentAdvertisementViewModel buildAdvertisementViewModel(</span></a>
+<a name="36"><span class="lineNum">      36 </span>            :       EnrollmentAdvertisementEntity entity) {</a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">          6 :     return EnrollmentAdvertisementViewModel(message: entity.message);</span></a>
+<a name="38"><span class="lineNum">      38 </span>            :   }</a>
+<a name="39"><span class="lineNum">      39 </span>            : </a>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">          3 :   EnrollmentFormViewModel buildFormViewModel(EnrollmentFormEntity entity) {</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          6 :     print(&quot;entity: $entity&quot;);</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">          3 :     return EnrollmentFormViewModel(</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">          3 :       accounts: entity.accounts,</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          3 :       selectedStartDate: entity.selectedStartDate,</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          3 :       selectedAccount: entity.selectedAccount,</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          3 :       firstAvailableStartDate: entity.firstAvailableStartDate,</span></a>
+<a name="47"><span class="lineNum">      47 </span>            :     );</a>
+<a name="48"><span class="lineNum">      48 </span>            :   }</a>
+<a name="49"><span class="lineNum">      49 </span>            : </a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          2 :   void createAdvertisement() async {</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          4 :     _scope = ExampleLocator()</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          2 :         .repository</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          2 :         .containsScope&lt;EnrollmentAdvertisementEntity&gt;();</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          2 :     if (_scope == null) {</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          2 :       final entity = EnrollmentAdvertisementEntity();</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          4 :       _scope = ExampleLocator()</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          2 :           .repository</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          2 :           .create&lt;EnrollmentAdvertisementEntity&gt;(</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          2 :               entity, advertisementNotifySubscribers);</span></a>
+<a name="60"><span class="lineNum">      60 </span>            :     } else {</a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :       _scope.subscription = advertisementNotifySubscribers;</span></a>
+<a name="62"><span class="lineNum">      62 </span>            :     }</a>
+<a name="63"><span class="lineNum">      63 </span>            : </a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">          6 :     ExampleLocator().repository.runServiceAdapter(</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          4 :         _scope, SideCashGetEnrollmentAdvertisementServiceAdapter());</span></a>
 <a name="66"><span class="lineNum">      66 </span>            :   }</a>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          1 :   void createAdvertisement()async {</span></a>
-<a name="69"><span class="lineNum">      69 </span>            :     // TODO STEP 1</a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          4 :     _scope = ExampleLocator().repository.containsScope&lt;EnrollmentAdvertisementEntity&gt;();</span></a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          1 :     if (_scope == null) {</span></a>
-<a name="72"><span class="lineNum">      72 </span>            : </a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          4 :       _scope = ExampleLocator().repository.create&lt;EnrollmentAdvertisementEntity&gt;(</span></a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          1 :           EnrollmentAdvertisementEntity(message: &quot;yo&quot;),</span></a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          1 :           advertisementNotifySubscribers); // TODO What do I do If I have no data to provide for required params?</span></a>
-<a name="76"><span class="lineNum">      76 </span>            : </a>
-<a name="77"><span class="lineNum">      77 </span>            :     } else {</a>
-<a name="78"><span class="lineNum">      78 </span>            : </a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineNoCov">          0 :       _scope.subscription = advertisementNotifySubscribers;</span></a>
-<a name="80"><span class="lineNum">      80 </span>            :     }</a>
-<a name="81"><span class="lineNum">      81 </span>            : </a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          2 :     await ExampleLocator()</span></a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">          1 :         .repository</span></a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">          3 :         .runServiceAdapter(_scope, SideCashGetEnrollmentAdvertisementServiceAdapter());</span></a>
-<a name="85"><span class="lineNum">      85 </span>            :   }</a>
-<a name="86"><span class="lineNum">      86 </span>            : </a>
-<a name="87"><span class="lineNum">      87 </span>            :   // Test 3 TODO HOW TO TEST that this is build correctly?</a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineNoCov">          0 :   void create() async {</span></a>
-<a name="89"><span class="lineNum">      89 </span>            :     // TODO STEP 1</a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineNoCov">          0 :     _scope = ExampleLocator().repository.containsScope&lt;EnrollmentFormEntity&gt;();</span></a>
-<a name="91"><span class="lineNum">      91 </span>            :     // _scope = getRepoScope();</a>
-<a name="92"><span class="lineNum">      92 </span>            : </a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineNoCov">          0 :     if (_scope == null) {</span></a>
-<a name="94"><span class="lineNum">      94 </span><span class="lineNoCov">          0 :       print(&quot;scope is null&quot;);</span></a>
-<a name="95"><span class="lineNum">      95 </span>            : </a>
-<a name="96"><span class="lineNum">      96 </span>            :       // HOW TO pass notify subscribers (and maybe entity back)</a>
-<a name="97"><span class="lineNum">      97 </span>            :       // What about type definitions?</a>
-<a name="98"><span class="lineNum">      98 </span>            : </a>
-<a name="99"><span class="lineNum">      99 </span>            :       //TODO (could just use view model callback)</a>
-<a name="100"><span class="lineNum">     100 </span>            : </a>
-<a name="101"><span class="lineNum">     101 </span>            :       // TODO STEP 2</a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineNoCov">          0 :       _scope = ExampleLocator().repository.create&lt;EnrollmentFormEntity&gt;(</span></a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineNoCov">          0 :           EnrollmentFormEntity(),</span></a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineNoCov">          0 :           formNotifySubscribers); // TODO What do I do If I have no data to provide for required params?</span></a>
-<a name="105"><span class="lineNum">     105 </span>            :       // _scope = createScope();</a>
-<a name="106"><span class="lineNum">     106 </span><span class="lineNoCov">          0 :       print(&quot;called createScope&quot;);</span></a>
-<a name="107"><span class="lineNum">     107 </span>            :     } else {</a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :       print(&quot;scope is not null, setting notify subscribers&quot;);</span></a>
-<a name="109"><span class="lineNum">     109 </span>            :       //TODO How to track this from the tests</a>
-<a name="110"><span class="lineNum">     110 </span>            : </a>
-<a name="111"><span class="lineNum">     111 </span>            :       // TODO ALTERNATE STEP 2</a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :       _scope.subscription = formNotifySubscribers;</span></a>
-<a name="113"><span class="lineNum">     113 </span>            :     }</a>
-<a name="114"><span class="lineNum">     114 </span>            :     //</a>
-<a name="115"><span class="lineNum">     115 </span>            :     // // TODO Ideally I believe this will only ever get run once...? maybe call this at end of IF Statement</a>
-<a name="116"><span class="lineNum">     116 </span>            :     //</a>
-<a name="117"><span class="lineNum">     117 </span>            :     //</a>
-<a name="118"><span class="lineNum">     118 </span>            :     // // TODO SHOULD NOW CREATE SERVICE ADAPTER</a>
-<a name="119"><span class="lineNum">     119 </span>            : </a>
-<a name="120"><span class="lineNum">     120 </span>            :     // TODO STEP 3</a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineNoCov">          0 :     await ExampleLocator()</span></a>
-<a name="122"><span class="lineNum">     122 </span><span class="lineNoCov">          0 :         .repository</span></a>
-<a name="123"><span class="lineNum">     123 </span><span class="lineNoCov">          0 :         .runServiceAdapter(_scope, SideCashGetEnrollmentFormServiceAdapter());</span></a>
-<a name="124"><span class="lineNum">     124 </span>            :   }</a>
-<a name="125"><span class="lineNum">     125 </span>            : }</a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          2 :   void createForm() async {</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          8 :     _scope = ExampleLocator().repository.containsScope&lt;EnrollmentFormEntity&gt;();</span></a>
+<a name="70"><span class="lineNum">      70 </span>            : </a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          2 :     if (_scope == null) {</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          8 :       _scope = ExampleLocator().repository.create&lt;EnrollmentFormEntity&gt;(</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          2 :           EnrollmentFormEntity(),</span></a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          2 :           formNotifySubscribers); // TODO What do I do If I have no data to provide for required params?</span></a>
+<a name="75"><span class="lineNum">      75 </span>            :     } else {</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineNoCov">          0 :       _scope.subscription = formNotifySubscribers;</span></a>
+<a name="77"><span class="lineNum">      77 </span>            :     }</a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          4 :     await ExampleLocator()</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          2 :         .repository</span></a>
+<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          6 :         .runServiceAdapter(_scope, SideCashGetEnrollmentFormServiceAdapter());</span></a>
+<a name="81"><span class="lineNum">      81 </span>            :   }</a>
+<a name="82"><span class="lineNum">      82 </span>            : </a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineNoCov">          0 :   void updateFormWithSelectedAccount(String account) {</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineNoCov">          0 :     _scope = ExampleLocator().repository.containsScope&lt;EnrollmentFormEntity&gt;();</span></a>
+<a name="85"><span class="lineNum">      85 </span>            :     final enrollmentForm =</a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineNoCov">          0 :         ExampleLocator().repository.get&lt;EnrollmentFormEntity&gt;(_scope);</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineNoCov">          0 :     final updatedForm = enrollmentForm.merge(selectedAccount: account);</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineNoCov">          0 :     print(&quot;updated form: $updatedForm&quot;);</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineNoCov">          0 :     ExampleLocator().repository.update&lt;EnrollmentFormEntity&gt;(_scope, updatedForm);</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineNoCov">          0 :     formNotifySubscribers(updatedForm);</span></a>
+<a name="91"><span class="lineNum">      91 </span>            :   }</a>
+<a name="92"><span class="lineNum">      92 </span>            : }</a>
 </pre>
       </td>
     </tr>
@@ -193,7 +160,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
   </table>
   <br>
 
