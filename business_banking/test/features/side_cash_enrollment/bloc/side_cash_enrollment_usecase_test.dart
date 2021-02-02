@@ -25,7 +25,7 @@ main() {
     });
 
     test(
-        "1: verify ADVERTISEMENT view model callback is invoked when notify subscribes is provided an enrollment ADVERTISEMENT entity",
+        "1: verify view model callback is invoked when notify subscribes is provided an enrollment ADVERTISEMENT entity",
         () {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
@@ -43,7 +43,7 @@ main() {
       verify(mockDummyFunctions.formVMCallback(any)).called(1);
 
       useCase.completionNotifySubscribers(
-          EnrollmentCompletionEntity(message: "", isSuccess: true));
+          EnrollmentFormEntity());
       verify(mockDummyFunctions.completionVMCallback(any)).called(1);
     });
 
@@ -119,10 +119,11 @@ main() {
         formViewModelCallBack: mockDummyFunctions.formVMCallback,
         advertisementViewModelCallback:
             mockDummyFunctions.advertisementVMCallback,
+        completionViewModelCallback: mockDummyFunctions.completionVMCallback,
       );
       expect(
           useCase.buildCompletionViewModel(
-              EnrollmentCompletionEntity(message: "test", isSuccess: true)),
+              EnrollmentFormEntity(submissionMessage: "test", submissionSuccess: true)),
           EnrollmentCompletionViewModel(message: "test", isSuccess: true));
     });
 
@@ -149,7 +150,7 @@ main() {
 
       EnrollmentFormEntity entity = initialFormEntity()
         ..merge(
-            selectedAccount: "checking-234", selectedStartDate: DateTime.now());
+            selectedAccount: "checking-234");
 
       // final result = useCase.buildViewModel(entity);
       // expect(result, isA<EnrollmentFormViewModel>());

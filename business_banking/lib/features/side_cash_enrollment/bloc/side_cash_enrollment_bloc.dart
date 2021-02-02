@@ -1,5 +1,6 @@
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_usecase.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
@@ -10,8 +11,10 @@ class SideCashEnrollmentBloc extends Bloc {
   // Define UI Pipes
   final enrollmentFormPipe = Pipe<EnrollmentFormViewModel>();
   final enrollmentAdvertisementPipe = Pipe<EnrollmentAdvertisementViewModel>();
+  final enrollmentCompletionPipe = Pipe<EnrollmentCompletionViewModel>();
 
   final updateFormWithSelectedAccountEventPipe = Pipe<String>();
+  // final submitFormEventPipe = EventPipe();
 
    SideCashEnrollmentBloc(/*inject usecase here? */) {
     // initialize usecases and link usecase callbacks to UI Pipes
@@ -23,6 +26,9 @@ class SideCashEnrollmentBloc extends Bloc {
       advertisementViewModelCallback: (viewModel) {
          enrollmentAdvertisementPipe.send(viewModel);
       },
+      completionViewModelCallback: (viewModel) {
+        enrollmentCompletionPipe.send(viewModel);
+      }
     );
 
     enrollmentAdvertisementPipe.whenListenedDo(getEnrollmentAdvertisementRequestListener);
@@ -30,6 +36,9 @@ class SideCashEnrollmentBloc extends Bloc {
     enrollmentFormPipe.whenListenedDo(getEnrollmentFormRequestListener);
 
     updateFormWithSelectedAccountEventPipe.receive.listen(updateFormWithSelectedAccountListener);
+    // submitFormEventPipe.receive.listen((event) { });
+
+     enrollmentCompletionPipe.whenListenedDo(submitForm);
   }
 
   getEnrollmentFormRequestListener() {
@@ -42,6 +51,11 @@ class SideCashEnrollmentBloc extends Bloc {
 
   updateFormWithSelectedAccountListener(String account) {
      usecase.updateFormWithSelectedAccount(account);
+  }
+
+  void submitForm(){
+     print("submit form is bloc called");
+     usecase.submitEnrollmentForm();
   }
 
   @override

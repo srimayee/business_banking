@@ -12,7 +12,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class SideCashEnrollmentCompletionServiceAdapter extends ServiceAdapter<
-    EnrollmentCompletionEntity,
+    EnrollmentFormEntity,
     SideCashEnrollmentCompletionRequestModel,
     SideCashEnrollmentCompletionResponseModel,
     SideCashEnrollmentCompletionService> {
@@ -20,16 +20,16 @@ class SideCashEnrollmentCompletionServiceAdapter extends ServiceAdapter<
       : super(SideCashEnrollmentCompletionService());
 
   @override
-  EnrollmentCompletionEntity createEntity(
-      EnrollmentCompletionEntity initialEntity,
+  EnrollmentFormEntity createEntity(
+      EnrollmentFormEntity initialEntity,
       SideCashEnrollmentCompletionResponseModel responseModel) {
-    return EnrollmentCompletionEntity(
-        message: responseModel.message, isSuccess: responseModel.isSuccessful);
+    return EnrollmentFormEntity(
+        submissionMessage: responseModel.message, submissionSuccess: responseModel.isSuccessful);
   }
 
   @override
   SideCashEnrollmentCompletionRequestModel createRequest(
-      EnrollmentCompletionEntity entity) {
-    return SideCashEnrollmentCompletionRequestModel();
+      EnrollmentFormEntity entity) {
+    return SideCashEnrollmentCompletionRequestModel(entity.selectedAccount);
   }
 }

@@ -3,7 +3,7 @@ import 'package:business_banking/features/promos/ui/promos_widget.dart';
 import 'package:business_banking/features/customer/ui/customer_widget.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_widget.dart';
 
-import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_advertisement/side_cash_enrollment_advertisement_feature.dart';
+import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_advertisement_feature.dart';
 
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_card_widget.dart';
 

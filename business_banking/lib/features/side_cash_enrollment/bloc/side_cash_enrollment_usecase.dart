@@ -60,10 +60,10 @@ class SideCashEnrollmentUsecase extends UseCase {
   }
 
   EnrollmentCompletionViewModel buildCompletionViewModel(
-      EnrollmentCompletionEntity entity) {
+      EnrollmentFormEntity entity) {
     return EnrollmentCompletionViewModel(
-      isSuccess: entity.isSuccess,
-      message: entity.message,
+      isSuccess: entity.submissionSuccess,
+      message: entity.submissionMessage,
     );
   }
 
@@ -120,17 +120,13 @@ class SideCashEnrollmentUsecase extends UseCase {
         ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
 
 
-
-    _completionScope =
-        ExampleLocator().repository.containsScope<EnrollmentCompletionEntity>();
-
-    if (_completionScope == null) {
-      _completionScope = ExampleLocator().repository.create<
-          EnrollmentCompletionEntity>(EnrollmentCompletionEntity(),
-          completionNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
-    } else {
-      _completionScope.subscription = completionNotifySubscribers;
-    }
+    // if (_scope == null) {
+    //   _scope = ExampleLocator().repository.create<
+    //       EnrollmentFormEntity>(EnrollmentCompletionEntity(),
+    //       completionNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
+    // } else {
+      _scope.subscription = completionNotifySubscribers;
+    // }
     await ExampleLocator().repository.runServiceAdapter(
         _scope, SideCashEnrollmentCompletionServiceAdapter());
   }
