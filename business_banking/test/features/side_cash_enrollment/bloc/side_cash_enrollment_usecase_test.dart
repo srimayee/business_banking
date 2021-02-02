@@ -1,6 +1,8 @@
-import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_get_enrollment_form_usecase.dart';
+import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_usecase.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_advertisement_view_model.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_entity.dart';
+import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_entity.dart';
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
@@ -23,35 +25,26 @@ main() {
     });
 
     test(
-        "1: verify ADVERTISEMENT view model callback is invoked when notify subscribes is provided an enrollment ADVERTISEMENT entity",
+        "1: verify view model callback is invoked when notify subscribes is provided an enrollment ADVERTISEMENT entity",
         () {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
         advertisementViewModelCallback:
             mockDummyFunctions.advertisementVMCallback,
         formViewModelCallBack: mockDummyFunctions.formVMCallback,
+        completionViewModelCallback: mockDummyFunctions.completionVMCallback,
       );
 
       useCase.advertisementNotifySubscribers(
-        EnrollmentAdvertisementEntity(message: "gello"),
-      );
-      // useCase.createAdvertisement();
+          EnrollmentAdvertisementEntity(message: "gello"));
       verify(mockDummyFunctions.advertisementVMCallback(any)).called(1);
-    });
 
-    test(
-        "2: verify  FORM view model callback is invoked when notify subscribes is provided an enrollment FORM entity",
-        () {
-      final mockDummyFunctions = MockDummyFunctions();
-      final useCase = SideCashEnrollmentUsecase(
-        formViewModelCallBack: mockDummyFunctions.formVMCallback,
-        advertisementViewModelCallback:
-            mockDummyFunctions.advertisementVMCallback,
-      );
-
-      useCase.formNotifySubscribers(EnrollmentFormEntity(
-          firstAvailableStartDate: DateTime.now(), accounts: ["", ""]));
+      useCase.formNotifySubscribers(EnrollmentFormEntity(accounts: ["", ""]));
       verify(mockDummyFunctions.formVMCallback(any)).called(1);
+
+      useCase.completionNotifySubscribers(
+          EnrollmentFormEntity());
+      verify(mockDummyFunctions.completionVMCallback(any)).called(1);
     });
 
     // How do we include errors in the view model?
@@ -115,13 +108,31 @@ main() {
 
       final EnrollmentAdvertisementEntity entity = initialAdvertisementEntity();
 
-      expect(useCase.buildAdvertisementViewModel(entity), initialAdvertisementViewModel());
+      expect(useCase.buildAdvertisementViewModel(entity),
+          initialAdvertisementViewModel());
+    });
+
+    test("buildViewModel returns proper VM for entities", () {
+      final mockDummyFunctions = MockDummyFunctions();
+      // final mockLocator = MockExampleLocator();
+      final useCase = SideCashEnrollmentUsecase(
+        formViewModelCallBack: mockDummyFunctions.formVMCallback,
+        advertisementViewModelCallback:
+            mockDummyFunctions.advertisementVMCallback,
+        completionViewModelCallback: mockDummyFunctions.completionVMCallback,
+      );
+      expect(
+          useCase.buildCompletionViewModel(
+              EnrollmentFormEntity(submissionMessage: "test", submissionSuccess: true)),
+          EnrollmentCompletionViewModel(message: "test", isSuccess: true));
     });
 
     test('5: View Model builds with Service Errors', () async {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
-          formViewModelCallBack: mockDummyFunctions.formVMCallback,advertisementViewModelCallback: mockDummyFunctions.advertisementVMCallback);
+          formViewModelCallBack: mockDummyFunctions.formVMCallback,
+          advertisementViewModelCallback:
+              mockDummyFunctions.advertisementVMCallback);
 
       EnrollmentFormEntity entity = initialFormEntity()
         ..merge(errors: [NoConnectivityEntityFailure(), EntityFailure()]);
@@ -133,11 +144,13 @@ main() {
     test("6: View Model builds with input data", () {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
-          formViewModelCallBack: mockDummyFunctions.formVMCallback, advertisementViewModelCallback: mockDummyFunctions.advertisementVMCallback);
+          formViewModelCallBack: mockDummyFunctions.formVMCallback,
+          advertisementViewModelCallback:
+              mockDummyFunctions.advertisementVMCallback);
 
       EnrollmentFormEntity entity = initialFormEntity()
         ..merge(
-            selectedAccount: "checking-234", selectedStartDate: DateTime.now());
+            selectedAccount: "checking-234");
 
       // final result = useCase.buildViewModel(entity);
       // expect(result, isA<EnrollmentFormViewModel>());

@@ -16,7 +16,7 @@ class SideCashGetEnrollmentFormServiceAdapter extends ServiceAdapter<
   EnrollmentFormEntity createEntity(EnrollmentFormEntity enrollmentFormEntity,
       SideCashGetEnrollmentFormResponseModel responseModel) {
     return EnrollmentFormEntity(
-        accounts: responseModel.accounts,
-        firstAvailableStartDate: responseModel.firstAvailableStartDate);
+      accounts: responseModel.accounts,
+    );
   }
 }
