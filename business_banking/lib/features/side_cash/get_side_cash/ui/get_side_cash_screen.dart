@@ -37,6 +37,7 @@ class GetSideCashScreen extends Screen {
         SizedBox(height: 10),
         MaterialButton(
           onPressed: () {
+            FocusScope.of(context).unfocus();
             requestSideCash(inputController.text);
           },
           child: Container(
