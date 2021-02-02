@@ -11,11 +11,9 @@ class SideCashEnrollmentBloc extends Bloc {
   final enrollmentFormPipe = Pipe<EnrollmentFormViewModel>();
   final enrollmentAdvertisementPipe = Pipe<EnrollmentAdvertisementViewModel>();
 
-  // Define Event Pipes
-  final getEnrollmentFormRequest = EventPipe();
-  final getEnrollmentAdvertisementRequest = EventPipe();
+  final updateFormWithSelectedAccountEventPipe = Pipe<String>();
 
-   SideCashEnrollmentBloc() {
+   SideCashEnrollmentBloc(/*inject usecase here? */) {
     // initialize usecases and link usecase callbacks to UI Pipes
     // I think you want to inject the repository into the usecase
     usecase = SideCashEnrollmentUsecase(
@@ -25,16 +23,13 @@ class SideCashEnrollmentBloc extends Bloc {
       advertisementViewModelCallback: (viewModel) {
          enrollmentAdvertisementPipe.send(viewModel);
       },
-      getRepoScope: null,
     );
 
     enrollmentAdvertisementPipe.whenListenedDo(getEnrollmentAdvertisementRequestListener);
 
     enrollmentFormPipe.whenListenedDo(getEnrollmentFormRequestListener);
 
-    // getEnrollmentFormRequest.listen(getEnrollmentFormRequestListener);
-    // getEnrollmentAdvertisementRequest
-    //     .listen(getEnrollmentAdvertisementListener);
+    updateFormWithSelectedAccountEventPipe.receive.listen(updateFormWithSelectedAccountListener);
   }
 
   getEnrollmentFormRequestListener() {
@@ -45,10 +40,13 @@ class SideCashEnrollmentBloc extends Bloc {
     usecase.createAdvertisement();
   }
 
+  updateFormWithSelectedAccountListener(String account) {
+     usecase.updateFormWithSelectedAccount(account);
+  }
+
   @override
   void dispose() {
-    // TODO: implement dispose
     enrollmentFormPipe.dispose();
-    getEnrollmentFormRequest.dispose();
+    enrollmentAdvertisementPipe.dispose();
   }
 }

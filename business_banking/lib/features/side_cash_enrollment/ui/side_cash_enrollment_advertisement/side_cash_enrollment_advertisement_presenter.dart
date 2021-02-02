@@ -12,37 +12,29 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
     SideCashEnrollmentBloc,
     EnrollmentAdvertisementViewModel,
     SideCashEnrollmentAdvertisementScreen> {
+  final Function(BuildContext) testNavigateToEnrollmentForm;
 
-
-  final Function() navigateToEnrollmentForm;
-
-  _navigateToEnrollmentForm(BuildContext context) {
+  _navigateToEnrollmentForm(BuildContext context, SideCashEnrollmentBloc bloc) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
   }
 
-  SideCashEnrollmentAdvertisementPresenter({this.navigateToEnrollmentForm}) {
-    print("in presenter constructor");
-  }
+  SideCashEnrollmentAdvertisementPresenter({this.testNavigateToEnrollmentForm});
 
   @override
   Stream<EnrollmentAdvertisementViewModel> getViewModelStream(
       SideCashEnrollmentBloc bloc) {
-    print("trying to call getViewModelStream");
-    // // TODO: implement getViewModelStream
-    // throw UnimplementedError();
     return bloc.enrollmentAdvertisementPipe.receive;
   }
 
   @override
   SideCashEnrollmentAdvertisementScreen buildScreen(BuildContext context,
       SideCashEnrollmentBloc bloc, EnrollmentAdvertisementViewModel viewModel) {
-    print("In side cash enrollment advertisement screen");
     return SideCashEnrollmentAdvertisementScreen(
         message: viewModel.message,
-        enrollTapped: (ctx) =>
-        navigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx)
-    );
+        enrollTapped: (ctx) {
+          return testNavigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx, bloc);
+        });
   }
 
   @override
@@ -57,7 +49,6 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
   @override
   Widget buildLoadingScreen(BuildContext context) {
     print("in build loading screen");
-    // TODO: implement buildLoadingScreen
-    return super.buildLoadingScreen(context);
+    return Center(child:CircularProgressIndicator());
   }
 }

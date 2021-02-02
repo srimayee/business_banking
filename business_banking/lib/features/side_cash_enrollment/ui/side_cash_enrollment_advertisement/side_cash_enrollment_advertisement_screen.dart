@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_bloc.dart';
+import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_keys.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class SideCashEnrollmentAdvertisementScreen extends Screen {
+  final Function(BuildContext) enrollTapped;
+  final String message;
 
- final Function(BuildContext) enrollTapped;
- final String message;
-
-  SideCashEnrollmentAdvertisementScreen({@required this.enrollTapped, @required this.message});
+  SideCashEnrollmentAdvertisementScreen(
+      {@required this.enrollTapped, @required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +26,16 @@ class SideCashEnrollmentAdvertisementScreen extends Screen {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                child: AutoSizeText(message ?? "no message passed",
-                    style: TextStyle(color: Colors.lightGreen, fontSize: 30.0)),
+                key: SideCashEnrollmentWidgetKeys
+                    .sideCashEnrollAdvertisementHeader,
+                child: AutoSizeText(
+                  message ?? "no message passed",
+                  style: TextStyle(color: Colors.lightGreen, fontSize: 30.0),
+                ),
               ),
               OutlineButton(
-                key: Key('transfer_funds_button'),
+                key: SideCashEnrollmentWidgetKeys.sideCashEnrollButton,
                 onPressed: () => enrollTapped(context),
-                // onPressed: () => Navigator.push(
-                //     context,
-                //     new MaterialPageRoute(
-                //         builder: (BuildContext context) =>
-                //         new TransferFundsWidget(),
-                //         maintainState: false)),
                 borderSide: BorderSide(
                   color: Colors.black54, //Color of the border
                   style: BorderStyle.solid, //Style of the border
@@ -52,20 +51,5 @@ class SideCashEnrollmentAdvertisementScreen extends Screen {
         ),
       ),
     );
-    // return Container(
-    //   child: Center(
-    //     child: Column(
-    //       children: [
-    //         Text(message ?? "no message passed"),
-    //         RaisedButton(
-    //           child: Text("enroll"),
-    //           onPressed: () {
-    //             enrollTapped();
-    //           },
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
