@@ -47,7 +47,6 @@ class GetSideCashUsecase extends UseCase {
     ExampleLocator()
         .repository
         .update<GetSideCashEntity>(_scope, updatedEntity);
-    print(updatedEntity.requestSuccess);
     notifySubscribers(updatedEntity);
   }
 
@@ -94,7 +93,7 @@ class GetSideCashUsecase extends UseCase {
     );
   }
 
-  submitGetSideCash(String amt) async {
+  void submitGetSideCash(String amt) async {
     _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
     final getSideCashEntity =
         ExampleLocator().repository.get<GetSideCashEntity>(_scope);
@@ -104,7 +103,6 @@ class GetSideCashUsecase extends UseCase {
     ExampleLocator()
         .repository
         .update<GetSideCashEntity>(_scope, updatedEntity);
-    print('run service adapter on submit.');
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, GetSideCashServiceAdapter());

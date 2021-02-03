@@ -7,12 +7,25 @@ class SideCashDetailsBloc extends Bloc {
   SideCashDetailsUsecase _useCase;
 
   final viewModelPipe = Pipe<SideCashDetailsViewModel>();
-  final toggleDetails = Pipe<bool>(initialData: true);
+  final toggleDetails = Pipe<bool>();
 
   SideCashDetailsBloc({SideCashDetailsService sideCashDetailsService}) {
     _useCase =
         SideCashDetailsUsecase((viewModel) => viewModelPipe.send(viewModel));
-    viewModelPipe.whenListenedDo(() => _useCase.create());
+    viewModelPipe.whenListenedDo(() {
+      _useCase.create();
+    });
+    toggleDetails.receive.listen((
+      event,
+    ) {
+      print('bloc listener -> ' + event.toString());
+      toggle(event);
+    });
+  }
+
+  void toggle(bool open) {
+    print('toggle in bloc -> ' + open.toString());
+    _useCase.toggleDetailsDropdown(open);
   }
 
   @override

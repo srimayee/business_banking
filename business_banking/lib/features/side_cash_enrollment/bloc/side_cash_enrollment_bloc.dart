@@ -16,29 +16,27 @@ class SideCashEnrollmentBloc extends Bloc {
   final updateFormWithSelectedAccountEventPipe = Pipe<String>();
   // final submitFormEventPipe = EventPipe();
 
-   SideCashEnrollmentBloc(/*inject usecase here? */) {
+  SideCashEnrollmentBloc(/*inject usecase here? */) {
     // initialize usecases and link usecase callbacks to UI Pipes
     // I think you want to inject the repository into the usecase
-    usecase = SideCashEnrollmentUsecase(
-      formViewModelCallBack: (viewModel) {
-        enrollmentFormPipe.send(viewModel);
-      },
-      advertisementViewModelCallback: (viewModel) {
-         enrollmentAdvertisementPipe.send(viewModel);
-      },
-      completionViewModelCallback: (viewModel) {
-        enrollmentCompletionPipe.send(viewModel);
-      }
-    );
+    usecase = SideCashEnrollmentUsecase(formViewModelCallBack: (viewModel) {
+      enrollmentFormPipe.send(viewModel);
+    }, advertisementViewModelCallback: (viewModel) {
+      enrollmentAdvertisementPipe.send(viewModel);
+    }, completionViewModelCallback: (viewModel) {
+      enrollmentCompletionPipe.send(viewModel);
+    });
 
-    enrollmentAdvertisementPipe.whenListenedDo(getEnrollmentAdvertisementRequestListener);
+    enrollmentAdvertisementPipe
+        .whenListenedDo(getEnrollmentAdvertisementRequestListener);
 
     enrollmentFormPipe.whenListenedDo(getEnrollmentFormRequestListener);
 
-    updateFormWithSelectedAccountEventPipe.receive.listen(updateFormWithSelectedAccountListener);
+    updateFormWithSelectedAccountEventPipe.receive
+        .listen(updateFormWithSelectedAccountListener);
     // submitFormEventPipe.receive.listen((event) { });
 
-     enrollmentCompletionPipe.whenListenedDo(submitForm);
+    enrollmentCompletionPipe.whenListenedDo(submitForm);
   }
 
   getEnrollmentFormRequestListener() {
@@ -50,12 +48,11 @@ class SideCashEnrollmentBloc extends Bloc {
   }
 
   updateFormWithSelectedAccountListener(String account) {
-     usecase.updateFormWithSelectedAccount(account);
+    usecase.updateFormWithSelectedAccount(account);
   }
 
-  void submitForm(){
-     print("submit form is bloc called");
-     usecase.submitEnrollmentForm();
+  void submitForm() {
+    usecase.submitEnrollmentForm();
   }
 
   @override

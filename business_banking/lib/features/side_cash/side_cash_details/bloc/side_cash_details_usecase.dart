@@ -34,10 +34,22 @@ class SideCashDetailsUsecase extends UseCase {
 
   SideCashDetailsViewModel buildViewModel(SideCashDetailsEntity entity) {
     return SideCashDetailsViewModel(
-      grossSideCashBalance: entity.grossSideCashBalance,
-      interest: entity.interest,
-      paymentMin: entity.paymentMin,
-      remainingCredit: entity.remainingCredit,
+      grossSideCashBalance: entity.grossSideCashBalance ?? '',
+      interest: entity.interest ?? '',
+      paymentMin: entity.paymentMin ?? '',
+      remainingCredit: entity.remainingCredit ?? '',
+      detailsOpen: entity.detailsOpen,
     );
+  }
+
+  void toggleDetailsDropdown(bool isOpen) {
+    final entity =
+        ExampleLocator().repository.get<SideCashDetailsEntity>(_scope);
+    final SideCashDetailsEntity updatedEntity = entity.merge(isOpen: isOpen);
+    ExampleLocator()
+        .repository
+        .update<SideCashDetailsEntity>(_scope, updatedEntity);
+
+    notifySubscribers(updatedEntity);
   }
 }

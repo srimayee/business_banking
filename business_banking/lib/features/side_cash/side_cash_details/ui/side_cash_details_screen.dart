@@ -17,7 +17,6 @@ class SideCashDetailsScreen extends Screen {
 
   @override
   Widget build(BuildContext build) {
-    bool isOpen = false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -49,24 +48,8 @@ class SideCashDetailsScreen extends Screen {
               Text(viewModel.remainingCredit),
             ],
           ),
-          StreamBuilder<bool>(
-            stream: bloc.toggleDetails.receive,
-            builder: (ctx, snapshot) {
-              if (snapshot.data == false || snapshot.data == null) {
-                return _expandButton(snapshot.data ?? false);
-              }
-              return _expandButton(snapshot.data);
-            },
-          ),
-          StreamBuilder<bool>(
-            stream: bloc.toggleDetails.receive,
-            builder: (ctx, snapshot) {
-              if (snapshot.data == true) {
-                return GetSideCashWidget();
-              }
-              return Container();
-            },
-          )
+          _expandButton(viewModel.detailsOpen ?? false),
+          viewModel.detailsOpen ?? false ? GetSideCashWidget() : Container(),
         ],
       ),
     );
@@ -77,8 +60,7 @@ class SideCashDetailsScreen extends Screen {
       color: Colors.green,
       key: Key('toggle-cash-details-button'),
       onPressed: () async {
-        isOpen = !isOpen;
-        toggleDetails(bloc, isOpen);
+        toggleDetails(bloc, !isOpen);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

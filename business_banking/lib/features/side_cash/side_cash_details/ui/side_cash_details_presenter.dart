@@ -38,6 +38,7 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
   }
 
   Future toggleDetails(SideCashDetailsBloc bloc, bool isOpen) async {
+    print('toggle in presenter -> ' + isOpen.toString());
     bloc.toggleDetails.send(isOpen);
   }
 }
