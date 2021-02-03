@@ -38,8 +38,12 @@ main() {
       }));
     });
 
-    // view model callback is Async
-    test("2. usecase is given a viewModel callback", () {});
+    test("update form with selected account", () {
+      final mockUsecase = MockSideCashEnrollmentUsecase();
+      final bloc = SideCashEnrollmentBloc();
+
+      bloc.updateFormWithSelectedAccountEventPipe.send("any");
+    });
 
     test("3: usecase callback triggers viewModelPipe.send", () {});
 

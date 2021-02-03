@@ -9,8 +9,11 @@ import 'package:flutter/src/widgets/framework.dart';
 class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     EnrollmentFormViewModel, SideCashEnrollmentFormScreen> {
   final Function(Function()) testUpdatedSelectedAccount;
+  final Function(BuildContext, EnrollmentFormViewModel)
+      testSubmitFormAndNavigate;
 
-  SideCashEnrollmentFormPresenter({this.testUpdatedSelectedAccount});
+  SideCashEnrollmentFormPresenter(
+      {this.testUpdatedSelectedAccount, this.testSubmitFormAndNavigate});
 
   @override
   SideCashEnrollmentFormScreen buildScreen(BuildContext context,
@@ -20,7 +23,12 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>
           updateSelectedAccount(account, bloc),
-      submitForm: (ctx) => _submitFormAndNavigate(ctx, viewModel),
+      submitForm: (ctx) {
+        if (testSubmitFormAndNavigate == null)
+          submitFormAndNavigate(ctx, viewModel);
+        else
+          testSubmitFormAndNavigate(ctx, viewModel);
+      },
     );
   }
 
@@ -40,9 +48,11 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     bloc.updateFormWithSelectedAccountEventPipe.send(accountString);
   }
 
-  _submitFormAndNavigate(
+  submitFormAndNavigate(
       BuildContext context, EnrollmentFormViewModel viewModel) {
+    print("in submit form and Navigate");
     if (viewModel.selectedAccount == null) {
+      print("inside if statement");
       showDialog(
           context: context,
           builder: (context) {

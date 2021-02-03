@@ -17,25 +17,27 @@ class SideCashEnrollmentFormScreen extends Screen {
             updateSelectedAccount != null &&
             submitForm != null);
 
-  _buildAccountRadioButtons() {
+ List<Widget> _buildAccountRadioButtons() {
     List<Widget> accountButtonSelectors = [];
-    formViewModel.accounts.forEach((accountString) {
+
+    for (String account in formViewModel.accounts) {
       accountButtonSelectors.add(
         RadioListTile<String>(
-            title: Text(accountString),
-            key: Key("side_cash_account_radio_button-$accountString"),
-            value: accountString,
+            title: Text(account),
+            key: Key("side_cash_account_radio_button-$account"),
+            value: account,
             groupValue: formViewModel.selectedAccount,
             onChanged: (selectedAccount) {
               updateSelectedAccount(selectedAccount);
             }),
       );
-    });
+    }
     return accountButtonSelectors;
   }
 
   @override
   Widget build(BuildContext context) {
+    print("in form screen build method");
     return Scaffold(
         key: SideCashEnrollmentWidgetKeys.sideCashEnrollmentFormScaffold,
         appBar: AppBar(
@@ -45,7 +47,7 @@ class SideCashEnrollmentFormScreen extends Screen {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              ..._buildAccountRadioButtons(),
+            ... _buildAccountRadioButtons(),
               Expanded(
                 child: Container(),
               ),
@@ -53,12 +55,13 @@ class SideCashEnrollmentFormScreen extends Screen {
                 child: RaisedButton(
                   key: SideCashEnrollmentWidgetKeys.sideCashFormSubmitButton,
                   child: Text("Enroll"),
-                  onPressed: () => submitForm(context),
+                  onPressed: () {
+                    return submitForm(context);
+                  },
                 ),
               )
             ],
           ),
-          //     child: Text("gasdawga")
         ));
   }
 }

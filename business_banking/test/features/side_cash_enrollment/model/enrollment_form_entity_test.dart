@@ -6,7 +6,7 @@ import '../mocks/data_and_function_mocks.dart';
 void main() {
 
   group("enrollment form entity tests", () {
-    // test 1
+
     test("initial enrollment_form_entity props test", () {
       final EnrollmentFormEntity entity = initialFormEntity();
       expect(entity.props, [
@@ -20,7 +20,7 @@ void main() {
       ]);
     });
 
-    // Test 2
+
     test("MergeWith selectAccount successfully returns a new entity", () {
       final EnrollmentFormEntity entity = initialFormEntity();
       final EnrollmentFormEntity newEntity =

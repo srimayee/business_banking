@@ -6,7 +6,7 @@ import '../mocks/data_and_function_mocks.dart';
 
 void main() {
   group("enrollment ADVERTISEMENT view model tests", () {
-    // test 1
+
     test("initial enrollment_advertisement view model props test", () {
       final EnrollmentAdvertisementViewModel vm = initialAdvertisementViewModel();
       expect(vm.props, ["Sign Up for Side Cash!"]);

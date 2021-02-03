@@ -36,6 +36,7 @@ main() {
           findsOneWidget);
     });
 
+
     testWidgets(
         "selecting an account calls presenter callback function to updateSelectedAccount()",
         (tester) async {
@@ -43,19 +44,20 @@ main() {
       final vm = initialFormViewModel();
       final widget = SideCashEnrollmentFormScreen(
         formViewModel: vm,
+        submitForm: dummyFunctions.submitForm,
         updateSelectedAccount: dummyFunctions.updateSelectedAccount,
       );
       final testApp = MaterialApp(home: Scaffold(body: widget));
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
 
-      final checkingAccountRadioTile = find.byKey(Key("account-checking-234"));
+      final checkingAccountRadioTile = find.byKey(Key("side_cash_account_radio_button-checking-234"));
       await tester.tap(checkingAccountRadioTile);
       await tester.pumpAndSettle();
 
       verify(dummyFunctions.updateSelectedAccount(any)).called(1);
 
-      final savingsAccountRadioTile = find.byKey(Key("account-savings-123"));
+      final savingsAccountRadioTile = find.byKey(Key("side_cash_account_radio_button-savings-123"));
       await tester.tap(savingsAccountRadioTile);
       await tester.pumpAndSettle();
 

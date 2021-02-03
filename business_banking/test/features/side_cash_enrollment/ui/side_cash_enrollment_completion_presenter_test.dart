@@ -44,8 +44,6 @@ main() {
       expect(result, isA<SideCashEnrollmentCompletionScreen>());
     });
 
-
-    // TODO Why does this only take 2 calls
     testWidgets('navigate to Enrollment Form page', (WidgetTester tester) async {
       await tester.pumpWidget(_getApp(presenter));
       presenter.exitFeature(MockedBuildContext());

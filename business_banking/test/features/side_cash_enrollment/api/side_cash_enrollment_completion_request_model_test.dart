@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 main() {
   group("testing request model", ()
   {
-// test parsing
     test("1: parsing expected JSON", () {
       Map<String, dynamic> completeMap =
       json.decode('{"requestedAccount": "checking-234"}');

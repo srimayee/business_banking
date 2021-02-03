@@ -87,6 +87,7 @@ void main() {
         () async {
       driver.tap(exitRegistrationButton);
       await driver.waitFor(hubAppBarText, timeout: Duration(seconds: 5));
+
       // NOT SURE IF THIS IS VALID
       await driver.waitForAbsent(find.byTooltip("Back"),
           timeout: Duration(seconds: 5));

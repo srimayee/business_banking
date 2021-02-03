@@ -11,16 +11,19 @@ import 'package:mockito/mockito.dart';
 import '../../../../lib/locator.dart';
 
 class DummyFunctions {
-  formVMCallback(ViewModelv ) {}
+  formVMCallback(ViewModel v) {}
 
-  advertisementVMCallback(ViewModelv ) {}
+  advertisementVMCallback(ViewModel v) {}
 
-  completionVMCallback(ViewModel v){}
+  completionVMCallback(ViewModel v) {}
 
   updateSelectedAccount(String s) {}
-  updateSelectedAccountWrapper( Function()) {}
+
+  updateSelectedAccountWrapper(Function()) {}
 
   submitForm(BuildContext b) {}
+
+  submitFormAndNavigate(BuildContext b, ViewModel v) {}
 
   exitFeature(BuildContext b) {}
 }
@@ -52,15 +55,14 @@ EnrollmentAdvertisementViewModel initialAdvertisementViewModel() {
   return EnrollmentAdvertisementViewModel(message: "Sign Up for Side Cash!");
 }
 
-EnrollmentFormEntity initialFormEntity(
-    {bool accountsEmpty = false,
-    bool accountsNull = false,
+EnrollmentFormEntity initialFormEntity({
+  bool accountsEmpty = false,
+  bool accountsNull = false,
 }) {
   List<String> accounts = [
     "savings-123",
     "checking-234",
   ];
-
 
   if (accountsEmpty) accounts = [];
   if (accountsNull) accounts = null;
@@ -68,12 +70,10 @@ EnrollmentFormEntity initialFormEntity(
   return EnrollmentFormEntity(
     accounts: accounts,
     selectedAccount: null,
-
   );
 }
 
 EnrollmentFormViewModel initialFormViewModel({
-  firstAvailableStartDateNull = false,
   accountsNull = false,
   accountsEmpty = false,
 }) {
@@ -82,15 +82,12 @@ EnrollmentFormViewModel initialFormViewModel({
     "checking-234",
   ];
 
-  DateTime firstAvailableStartDate = DateTime.parse("20210131T000000-0600");
 
   if (accountsEmpty) accounts = [];
   if (accountsNull) accounts = null;
-  if (firstAvailableStartDateNull) firstAvailableStartDate = null;
 
   return EnrollmentFormViewModel(
-      accounts: accounts,
-      selectedAccount: null,
-      selectedStartDate: null,
-      firstAvailableStartDate: firstAvailableStartDate);
+    accounts: accounts,
+    selectedAccount: null,
+  );
 }

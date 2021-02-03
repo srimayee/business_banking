@@ -103,7 +103,6 @@ class SideCashEnrollmentUsecase extends UseCase {
   }
 
   void updateFormWithSelectedAccount(String account) {
-    print("updateFormWithSelectedAccount in usecase called");
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
     final enrollmentForm =
         ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
@@ -121,16 +120,12 @@ class SideCashEnrollmentUsecase extends UseCase {
     //     ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
 
     if (_scope == null) {
-      print("This shouldnt happen in production");
-      print("form scope == null");
       _scope = ExampleLocator().repository.create<EnrollmentFormEntity>(
            EnrollmentFormEntity(selectedAccount: "test account"),
           completionNotifySubscribers); // TODO What do I do If I have no data to provide for required params?
     } else {
-      print("form scope != null");
       _scope.subscription = completionNotifySubscribers;
     }
-
 
     await ExampleLocator().repository.runServiceAdapter(
         _scope, SideCashEnrollmentCompletionServiceAdapter());

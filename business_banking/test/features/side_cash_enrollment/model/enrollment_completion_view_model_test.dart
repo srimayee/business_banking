@@ -3,7 +3,7 @@ import 'package:business_banking/features/side_cash_enrollment/model/enrollment_
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
-  // test 1
+
   test("initial enrollment_competion_view model props test", () {
     final EnrollmentCompletionViewModel entity = EnrollmentCompletionViewModel(
       message: "You are now enrolled",

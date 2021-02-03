@@ -90,7 +90,7 @@ main() {
       final useCase = SideCashEnrollmentUsecase(
           formViewModelCallBack: mockDummyFunctions.formVMCallback,
           advertisementViewModelCallback:
-              mockDummyFunctions.advertisementVMCallback);
+              mockDummyFunctions.advertisementVMCallback,   completionViewModelCallback: mockDummyFunctions.completionVMCallback);
 
       final EnrollmentAdvertisementEntity entity = initialAdvertisementEntity();
 

@@ -25,6 +25,7 @@ main() {
     test("assert exit feature callback cannot be null in constructor", () {
       expect(
           () => SideCashEnrollmentCompletionScreen(
+
                 viewModel: EnrollmentCompletionViewModel(
                     isSuccess: true, message: "test message"),
               ),
