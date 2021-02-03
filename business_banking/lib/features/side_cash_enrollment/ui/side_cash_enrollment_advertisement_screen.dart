@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_bloc.dart';
-import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_keys.dart';
+import 'package:business_banking/features/side_cash_enrollment/side_cash_enrollment_keys.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -26,10 +26,10 @@ class SideCashEnrollmentAdvertisementScreen extends Screen {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                key: SideCashEnrollmentWidgetKeys
-                    .sideCashEnrollAdvertisementHeader,
-                child: AutoSizeText(
+                child: Text(
                   message ?? "no message passed",
+                  key: SideCashEnrollmentWidgetKeys
+                      .sideCashEnrollAdvertisementHeader,
                   style: TextStyle(color: Colors.lightGreen, fontSize: 30.0),
                 ),
               ),

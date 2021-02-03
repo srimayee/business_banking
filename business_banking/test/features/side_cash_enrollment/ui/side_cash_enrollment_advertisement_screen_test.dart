@@ -1,5 +1,5 @@
 import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_advertisement_screen.dart';
-import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_keys.dart';
+import 'package:business_banking/features/side_cash_enrollment/side_cash_enrollment_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,7 +12,7 @@ main() {
 
     // TODO Test expected message displayed? Right now it will be hardcoded
     testWidgets("screen has correct elements", (tester) async {
-      final widget = SideCashEnrollmentAdvertisementScreen();
+      final widget = SideCashEnrollmentAdvertisementScreen(message: "Mock message");
       final testApp = MaterialApp(home: Scaffold(body: widget));
       await tester.pumpWidget(testApp);
       await tester.pumpAndSettle();
@@ -24,6 +24,7 @@ main() {
           find.byKey(
               SideCashEnrollmentWidgetKeys.sideCashEnrollButton),
           findsOneWidget);
+      expect(find.text("Mock message"), findsOneWidget);
     });
 
     testWidgets("tapping 'Enroll' tells presenter to fire navigation function",
@@ -42,6 +43,7 @@ main() {
       tester.pumpAndSettle();
 
       verify(mockFunctions.navigate(any)).called(1);
+
       // find by key +  tap button
       // verify dummy function fires
     });

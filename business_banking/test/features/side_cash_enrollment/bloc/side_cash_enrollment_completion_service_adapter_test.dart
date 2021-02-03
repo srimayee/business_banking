@@ -28,6 +28,5 @@ main() {
 
         });
 
-    // TODO Define Typical Failure Cases for Service Adapter Layer
   });
 }

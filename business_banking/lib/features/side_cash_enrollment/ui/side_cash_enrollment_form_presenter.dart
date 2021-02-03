@@ -8,9 +8,12 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     EnrollmentFormViewModel, SideCashEnrollmentFormScreen> {
-  final Function(String) testUpdatedSelectedAccount;
+  final Function(Function()) testUpdatedSelectedAccount;
+  final Function(BuildContext, EnrollmentFormViewModel)
+      testSubmitFormAndNavigate;
 
-  SideCashEnrollmentFormPresenter({this.testUpdatedSelectedAccount});
+  SideCashEnrollmentFormPresenter(
+      {this.testUpdatedSelectedAccount, this.testSubmitFormAndNavigate});
 
   @override
   SideCashEnrollmentFormScreen buildScreen(BuildContext context,
@@ -19,8 +22,13 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     return SideCashEnrollmentFormScreen(
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>
-          testUpdatedSelectedAccount ?? _updateSelectedAccount(account, bloc),
-      submitForm: (ctx) => _submitFormAndNavigate(ctx, viewModel),
+          updateSelectedAccount(account, bloc),
+      submitForm: (ctx) {
+        if (testSubmitFormAndNavigate == null)
+          submitFormAndNavigate(ctx, viewModel);
+        else
+          testSubmitFormAndNavigate(ctx, viewModel);
+      },
     );
   }
 
@@ -35,21 +43,26 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     return bloc.enrollmentFormPipe.receive;
   }
 
-  _updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
+  updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
+    print("updateSelectedAccount called in presenter");
     bloc.updateFormWithSelectedAccountEventPipe.send(accountString);
   }
 
-  _submitFormAndNavigate(
+  submitFormAndNavigate(
       BuildContext context, EnrollmentFormViewModel viewModel) {
+    print("in submit form and Navigate");
     if (viewModel.selectedAccount == null) {
+      print("inside if statement");
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
+              key: Key("enrollmentFormSubmitErrorDialog"),
               title: Text("Error"),
               content: Text("Please select an account"),
               actions: [
                 FlatButton(
+                  key: Key("dismissEnrollmentFormErrorDialogButton"),
                   child: Text("Okay"),
                   onPressed: () {
                     Navigator.pop(context);

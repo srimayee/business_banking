@@ -24,7 +24,5 @@ main() {
       expect(entity.accounts.length, 2);
 
     });
-
-    // TODO Define Typical Failure Cases for Service Adapter Layer
   });
 }

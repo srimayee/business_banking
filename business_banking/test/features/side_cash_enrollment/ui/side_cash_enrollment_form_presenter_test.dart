@@ -30,10 +30,7 @@ main() {
   //      -> tells bloc to submit form
   //      -> or tells presenter to show error dialog
 
-
-
   group("side cash enrollment form presenter tests", () {
-
     SideCashEnrollmentFormPresenter presenter;
     MockSideCashEnrollmentBloc bloc;
     MockNavigatorObserver mockNavigatorObserver;
@@ -47,46 +44,94 @@ main() {
     _getApp(Widget widget) {
       return MaterialApp(
         // navigatorKey: navigatorKey,
-        home: BlocProvider<SideCashEnrollmentBloc>(
-          create: (context) => MockSideCashEnrollmentBloc(),
-          child: widget,
+        home: Builder(
+          builder: (context) => BlocProvider<SideCashEnrollmentBloc>(
+              create: (context) => MockSideCashEnrollmentBloc(), child: widget),
         ),
         navigatorObservers: [mockNavigatorObserver],
       );
     }
 
     test("presenter renders SideCashEnrollmentFormScreen", () {
-      final result = presenter.buildScreen(MockedBuildContext(), bloc,
-          EnrollmentFormViewModel());
-
+      final result = presenter.buildScreen(
+          MockedBuildContext(), bloc, initialFormViewModel());
 
       expect(result, isA<SideCashEnrollmentFormScreen>());
     });
 
-
-
-    // TODO Come back to this
-    testWidgets("update selectedCheckingAccount callback in presenter is fired", (tester) async {
+    testWidgets(
+        "update selectedCheckingAccount callback in presenter fires off the listener in the bloc",
+        (tester) async {
       MockDummyFunctions dumbFunctions = MockDummyFunctions();
       final ctx = MockedBuildContext();
-      final presenter =
-      SideCashEnrollmentFormPresenter(
-        testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccount,
+      final presenter = SideCashEnrollmentFormPresenter(
+        testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccountWrapper,
+      );
+
+      await tester.pumpWidget(_getApp(presenter));
+
+      SideCashEnrollmentFormScreen screen =
+          presenter.buildScreen(ctx, bloc, initialFormViewModel());
+      await tester.pumpAndSettle();
+      presenter.updateSelectedAccount("test account string", bloc);
+      await tester.pumpAndSettle();
+
+      verify(bloc.updateFormWithSelectedAccountListener(any)).called(1);
+    });
+
+    // TODO Function injection doesnt seem to solve anything
+    test("submit form and navigate gets called in presenter", () {
+      MockDummyFunctions dumbFunctions = MockDummyFunctions();
+      final ctx = MockedBuildContext();
+      final presenter = SideCashEnrollmentFormPresenter(
+        testSubmitFormAndNavigate: dumbFunctions.submitFormAndNavigate,
       );
 
       SideCashEnrollmentFormScreen screen = presenter.buildScreen(
-          ctx, bloc, EnrollmentFormViewModel());
-      await tester.pumpWidget(_getApp(presenter));
+          ctx, bloc, EnrollmentFormViewModel(accounts: ["1", "2"]));
 
-      // TODO NEXT
-      //  HOW TO FIND Button and tap button to call update selectedCheckingAccount callback
+      screen.submitForm(ctx);
 
-      screen.updateSelectedAccount("A string, ya know");
-
-      // screen.enrollTapped(ctx);
-      verify(dumbFunctions.updateSelectedAccount(any)).called(1);
-
+      verify(dumbFunctions.submitFormAndNavigate(any, any));
     });
 
+    testWidgets("submit form navigates if view model selected account != null",
+        (tester) async {
+      final ctx = MockedBuildContext();
+      final presenter = SideCashEnrollmentFormPresenter();
+
+      await tester.pumpWidget(_getApp(presenter));
+
+      SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
+          EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: "2"));
+      await tester.pumpAndSettle();
+
+      presenter.submitFormAndNavigate(ctx,
+          EnrollmentFormViewModel(selectedAccount: "2", accounts: ["1", "2"]));
+      await tester.pumpAndSettle();
+
+      verify(mockNavigatorObserver.didPush(any, any)).called(1);
+    });
+
+    testWidgets(
+        "submit form DOESNT navigate if view model selected account == null",
+        (tester) async {
+      final ctx = MockedBuildContext();
+      final presenter = SideCashEnrollmentFormPresenter();
+
+      await tester.pumpWidget(_getApp(presenter));
+
+      // SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
+      //     EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: null));
+      // await tester.pumpAndSettle();
+
+      presenter.submitFormAndNavigate(ctx,
+          EnrollmentFormViewModel(selectedAccount: null, accounts: ["1", "2"]));
+      // await tester.pumpAndSettle();
+
+      expect(find.byKey(Key("enrollmentFormSubmitErrorDialog")),
+          isA<AlertDialog>());
+      // verify(mockNavigatorObserver.didPush(any, any)).called(1);
+    });
   });
 }

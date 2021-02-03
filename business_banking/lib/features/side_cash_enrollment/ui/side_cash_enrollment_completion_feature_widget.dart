@@ -4,10 +4,16 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class SideCashEnrollmentCompletionFeatureWidget extends StatelessWidget {
+
+  final SideCashEnrollmentBloc bloc;
+
+  const SideCashEnrollmentCompletionFeatureWidget({Key key, this.bloc}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SideCashEnrollmentBloc>(
-      create: (_) => SideCashEnrollmentBloc(),
+      create: (_) => bloc ?? SideCashEnrollmentBloc(),
       child: SideCashEnrollmentCompletionPresenter(),
     );
   }

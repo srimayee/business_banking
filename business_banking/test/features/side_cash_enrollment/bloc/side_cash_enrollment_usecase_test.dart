@@ -52,6 +52,7 @@ main() {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
           formViewModelCallBack: mockDummyFunctions.formVMCallback,
+          completionViewModelCallback: mockDummyFunctions.completionVMCallback,
           advertisementViewModelCallback:
               mockDummyFunctions.advertisementVMCallback);
       final advertisementEntity =
@@ -64,22 +65,6 @@ main() {
       expect(formResult, isA<EnrollmentFormViewModel>());
     });
 
-    // TODO What to test for the Create function?
-    // TODO Create function does: 1) checks for scope, 2) IF null creates scope + sets notifySubscribers
-    // TODO 3) ELSE just attaches notififySubscribers to scope, 4) Runs service adapter
-
-    // test('3: usecase.create() calls view model callback', () async {
-    //   final EnrollmentFormEntity entity = initialEntity();
-    //   ExampleLocator().repository = Repository();
-    //   ExampleLocator().repository.create<EnrollmentFormEntity>(entity, (_) {});
-    //
-    //   final mockDummyFunctions = MockDummyFunctions();
-    //   final useCase = SideCashGetEnrollmentFormUsecase(mockDummyFunctions.voidCallback);
-    //   //
-    //   // useCase.create();
-    //   // useCase.notifySubscribers(ScheduledPaymentsByMonthEntityModelList());
-    //   // verify(mockDummyFunctions.voidCallBack(any)).called(1);
-    // });
 
     test(
         "4: .buildFormViewModel accepts a Form Entity and returns a Form View Model",
@@ -88,6 +73,7 @@ main() {
 
       final useCase = SideCashEnrollmentUsecase(
           formViewModelCallBack: mockDummyFunctions.formVMCallback,
+          completionViewModelCallback: mockDummyFunctions.completionVMCallback,
           advertisementViewModelCallback:
               mockDummyFunctions.advertisementVMCallback);
 
@@ -104,7 +90,7 @@ main() {
       final useCase = SideCashEnrollmentUsecase(
           formViewModelCallBack: mockDummyFunctions.formVMCallback,
           advertisementViewModelCallback:
-              mockDummyFunctions.advertisementVMCallback);
+              mockDummyFunctions.advertisementVMCallback,   completionViewModelCallback: mockDummyFunctions.completionVMCallback);
 
       final EnrollmentAdvertisementEntity entity = initialAdvertisementEntity();
 
@@ -112,7 +98,7 @@ main() {
           initialAdvertisementViewModel());
     });
 
-    test("buildViewModel returns proper VM for entities", () {
+    test("buildCompletionViewModel returns proper VM for entities", () {
       final mockDummyFunctions = MockDummyFunctions();
       // final mockLocator = MockExampleLocator();
       final useCase = SideCashEnrollmentUsecase(
@@ -127,77 +113,21 @@ main() {
           EnrollmentCompletionViewModel(message: "test", isSuccess: true));
     });
 
-    test('5: View Model builds with Service Errors', () async {
+    test('5: Form View Model builds with Service Errors', () async {
       final mockDummyFunctions = MockDummyFunctions();
       final useCase = SideCashEnrollmentUsecase(
           formViewModelCallBack: mockDummyFunctions.formVMCallback,
+           completionViewModelCallback: mockDummyFunctions.completionVMCallback,
           advertisementViewModelCallback:
               mockDummyFunctions.advertisementVMCallback);
 
       EnrollmentFormEntity entity = initialFormEntity()
         ..merge(errors: [NoConnectivityEntityFailure(), EntityFailure()]);
 
-      // final result = useCase.buildViewModel(entity);
-      // expect(result, isA<EnrollmentFormViewModel>());
+      final result = useCase.buildFormViewModel(entity);
+      expect(result, isA<EnrollmentFormViewModel>());
     });
 
-    test("6: View Model builds with input data", () {
-      final mockDummyFunctions = MockDummyFunctions();
-      final useCase = SideCashEnrollmentUsecase(
-          formViewModelCallBack: mockDummyFunctions.formVMCallback,
-          advertisementViewModelCallback:
-              mockDummyFunctions.advertisementVMCallback);
 
-      EnrollmentFormEntity entity = initialFormEntity()
-        ..merge(
-            selectedAccount: "checking-234");
-
-      // final result = useCase.buildViewModel(entity);
-      // expect(result, isA<EnrollmentFormViewModel>());
-    });
-
-    test(
-        "8: Usecase create goes into IF statement to create NEW SCOPE when getRepositoryScope returns null",
-        () {
-      //   final mockDummyFunctions = MockDummyFunctions();
-      //   // final mockLocator = MockExampleLocator();
-      //   final useCase = SideCashGetEnrollmentFormUsecase(
-      //     viewModelCallBack: mockDummyFunctions.voidCallback,
-      //     getRepoScope: mockDummyFunctions.getRepoScope,
-      //     createScope: () =>
-      //         mockDummyFunctions.createScope(mockDummyFunctions.voidCallback),
-      //   );
-      //
-      //   // when(mockDummyFunctions.getRepoSope()).thenAnswer( null);
-      //
-      //   useCase.create();
-      //   verify(mockDummyFunctions.getRepoScope()).called(1);
-      //   verify(mockDummyFunctions.createScope(any)).called(1);
-      //   verify(mockDummyFunctions.voidCallback(any)).called(1);
-      //   verifyNoMoreInteractions(mockDummyFunctions);
-    });
-    //
-    test(
-        "9: Usecase create goes into ELSE statement to set NotifySubscribers to scope's .subscription if getRepositoryScope returns scope ",
-        () {
-      //   final mockDummyFunctions = MockDummyFunctions();
-      //   // final mockLocator = MockExampleLocator();
-      //   final useCase = SideCashGetEnrollmentFormUsecase(
-      //     viewModelCallBack: mockDummyFunctions.voidCallback,
-      //     getRepoScope: mockDummyFunctions.getRepoScope,
-      //     createScope: () => mockDummyFunctions.createScope(() {
-      //       mockDummyFunctions.voidCallback(ViewModel);
-      //     }),
-      //   );
-      //
-      //   when(mockDummyFunctions.getRepoScope()).thenReturn(RepositoryScope(any));
-      //
-      //   useCase.create();
-      //   verify(mockDummyFunctions.getRepoScope()).called(1);
-      //   verify(mockDummyFunctions
-      //           .createScope(mockDummyFunctions.voidCallback(ViewModel)))
-      //       .called(0);
-      //   verifyNoMoreInteractions(mockDummyFunctions);
-    });
   });
 }

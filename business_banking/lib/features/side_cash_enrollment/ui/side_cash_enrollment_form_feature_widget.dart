@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 
 class SideCashEnrollmentFormFeatureWidget extends StatelessWidget {
 
+  final SideCashEnrollmentBloc bloc;
+
+  const SideCashEnrollmentFormFeatureWidget({Key key, this.bloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SideCashEnrollmentBloc>(
-      create: (_)=>  SideCashEnrollmentBloc(),
+      create: (_)=>  bloc ?? SideCashEnrollmentBloc(),
       child: SideCashEnrollmentFormPresenter(),
     );
   }

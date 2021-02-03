@@ -11,11 +11,6 @@ main() {
       }
   """;
 
-  final String jsonDataNullStartDate = """
-      {
-        "accounts": ["checking-234", "savings-123"] 
-      }
-  """;
 
   final String jsonDataNullAccounts = """
       {
@@ -24,7 +19,6 @@ main() {
   """;
 
   group("testing response model", () {
-    // test parsing
     test("1: parsing expected JSON", () {
       Map<String, dynamic> completeMap = json.decode(jsonData);
       List<String> expectedAccountList = ["checking-234", "savings-123"];
@@ -34,16 +28,12 @@ main() {
       expect(responseModel.accounts, expectedAccountList);
     });
 
-    // TODO is this what we would want to do?
-    // test parsing with null required values throws assertation error
     test("2: parsing null accounts throws assertation error", () {
       Map<String, dynamic> nullAccountsMap = json.decode(jsonDataNullAccounts);
       expect(() => SideCashGetEnrollmentFormResponseModel.fromJson(nullAccountsMap), throwsAssertionError);
     });
 
-    // TODO Test if initialStartDate is null? Currently I am ?? it to DateTime.now()
 
-    // test props
     test("3: Reponse Model's props accurate", () {
       Map<String, dynamic> completeMap = json.decode(jsonData);
       List<String> expectedAccountList = ["checking-234", "savings-123"];
