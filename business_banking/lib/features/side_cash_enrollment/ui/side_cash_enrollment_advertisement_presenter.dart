@@ -8,19 +8,21 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/features/customer/model/customer_view_model.dart';
 import 'package:business_banking/features/customer/bloc/customer_bloc.dart';
 
+import '../../../main.dart';
+
+
+
+
 class SideCashEnrollmentAdvertisementPresenter extends Presenter<
     SideCashEnrollmentBloc,
     EnrollmentAdvertisementViewModel,
     SideCashEnrollmentAdvertisementScreen> {
-  final Function(BuildContext) testNavigateToEnrollmentForm;
 
-  _navigateToEnrollmentForm(BuildContext context, SideCashEnrollmentBloc bloc) {
-    print("trigger navigation");
-    Navigator.of(context).push(MaterialPageRoute(
+  navigateToEnrollmentForm(BuildContext context) {
+   navigatorKey.currentState.push(MaterialPageRoute(
         builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
   }
 
-  SideCashEnrollmentAdvertisementPresenter({this.testNavigateToEnrollmentForm});
 
   @override
   Stream<EnrollmentAdvertisementViewModel> getViewModelStream(
@@ -33,11 +35,12 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
       SideCashEnrollmentBloc bloc, EnrollmentAdvertisementViewModel viewModel) {
     return SideCashEnrollmentAdvertisementScreen(
         message: viewModel.message,
-        enrollTapped: (ctx) {
-          print("enroll tapped in buildScreen");
-          print("testNavigateToENrollmetnForm == null ${testNavigateToEnrollmentForm == null}");
-          return testNavigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx, bloc);
-        });
+        // enrollTapped: (ctx) {
+        //   print("enroll tapped in buildScreen");
+        //   print("testNavigateToENrollmetnForm == null ${testNavigateToEnrollmentForm == null}");
+        //   return testNavigateToEnrollmentForm ?? _navigateToEnrollmentForm(ctx, bloc);
+        // });
+        enrollTapped: navigateToEnrollmentForm);
   }
 
   @override

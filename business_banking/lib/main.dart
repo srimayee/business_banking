@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'locator.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
   logger().setLogLevel(LogLevel.verbose);
   SystemChrome.setSystemUIOverlayStyle(
@@ -17,6 +19,7 @@ void main() {
 
   runApp(
     MaterialApp(
+      navigatorKey: navigatorKey,
       // home: LoginFeatureWidget(),
       home: HubScreen(),
       debugShowCheckedModeBanner: false,

@@ -50,11 +50,11 @@ class SideCashEnrollmentBloc extends Bloc {
   }
 
   updateFormWithSelectedAccountListener(String account) {
+     print("updateFormWithSelectedAccountListener called in bloc");
      usecase.updateFormWithSelectedAccount(account);
   }
 
   void submitForm(){
-     print("submit form is bloc called");
      usecase.submitEnrollmentForm();
   }
 

@@ -1,22 +1,27 @@
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_form_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_form_screen.dart';
-import 'package:business_banking/features/side_cash_enrollment/ui/side_cash_enrollment_keys.dart';
+import 'package:business_banking/features/side_cash_enrollment/side_cash_enrollment_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mocks/data_and_function_mocks.dart';
+import '../mocks/ui_mocks.dart';
 
 main() {
   // TODO I Should only have to mock the VIEW MODEL... right?
 
   group('Side Cash Enrollment Form Screen tests', () {
+    MockDummyFunctions mockDummyFunctions = MockDummyFunctions();
+
     testWidgets(
         'Enrollment form screen - has the proper elements when laoded with initial view model',
         (WidgetTester tester) async {
       final vm = initialFormViewModel();
       final widget = SideCashEnrollmentFormScreen(
         formViewModel: vm,
+        submitForm: mockDummyFunctions.submitForm,
+        updateSelectedAccount: mockDummyFunctions.updateSelectedAccount,
       );
       final testApp = MaterialApp(home: Scaffold(body: widget));
       await tester.pumpWidget(testApp);
@@ -56,18 +61,40 @@ main() {
 
       verify(dummyFunctions.updateSelectedAccount(any)).called(1);
     });
-    testWidgets(
-        "selecting a date calls presenter callback function to updateSelectedStartDate",
-        (tester) {});
-    testWidgets(
-        "tapping enroll when selectedAccount != null and selectedStartDate != null calls submitForm callback in presenter",
-        (tester) {});
-    testWidgets(
-        "tapping enroll when selectedAccount != null but selectedStartDate == null calls submitForm but also show ALERT/Please Complete form",
-        (tester) {});
 
     testWidgets(
-        "tapping enroll when selectedStartDate != null but selectedAccount == null calls submitForm but also show ALERT/Please Complete form",
-        (tester) {});
+        "tapping enroll when selectedAccount  calls submitForm callback in presenter",
+        (tester) async {
+      final widget = SideCashEnrollmentFormScreen(
+        formViewModel: EnrollmentFormViewModel(
+            selectedAccount: "any", accounts: ["test1", "test2"]),
+        updateSelectedAccount: mockDummyFunctions.updateSelectedAccount,
+        submitForm: mockDummyFunctions.submitForm,
+      );
+      final testApp = MaterialApp(home: Scaffold(body: widget));
+      await tester.pumpWidget(testApp);
+      final enrollBtn =
+          find.byKey(SideCashEnrollmentWidgetKeys.sideCashFormSubmitButton);
+      await tester.tap(enrollBtn);
+      verify(mockDummyFunctions.submitForm(any)).called(1);
+    });
+
+    testWidgets(
+        "tapping a radio button   calls updateSelectedAccount callback in presenter",
+            (tester) async {
+          final widget = SideCashEnrollmentFormScreen(
+            formViewModel: EnrollmentFormViewModel(
+                selectedAccount: "any", accounts: ["test1", "test2"]),
+            updateSelectedAccount: mockDummyFunctions.updateSelectedAccount,
+            submitForm: mockDummyFunctions.submitForm,
+          );
+          final testApp = MaterialApp(home: Scaffold(body: widget));
+          await tester.pumpWidget(testApp);
+          final radioButton =
+          find.byKey(Key("side_cash_account_radio_button-test1"));
+          await tester.tap(radioButton);
+          verify(mockDummyFunctions.updateSelectedAccount(any)).called(1);
+        });
+
   });
 }

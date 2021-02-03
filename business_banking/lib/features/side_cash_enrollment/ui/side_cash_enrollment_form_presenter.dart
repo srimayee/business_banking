@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     EnrollmentFormViewModel, SideCashEnrollmentFormScreen> {
-  final Function(String) testUpdatedSelectedAccount;
+  final Function(Function()) testUpdatedSelectedAccount;
 
   SideCashEnrollmentFormPresenter({this.testUpdatedSelectedAccount});
 
@@ -19,7 +19,7 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     return SideCashEnrollmentFormScreen(
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>
-          testUpdatedSelectedAccount ?? _updateSelectedAccount(account, bloc),
+          updateSelectedAccount(account, bloc),
       submitForm: (ctx) => _submitFormAndNavigate(ctx, viewModel),
     );
   }
@@ -35,7 +35,8 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
     return bloc.enrollmentFormPipe.receive;
   }
 
-  _updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
+  updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
+    print("updateSelectedAccount called in presenter");
     bloc.updateFormWithSelectedAccountEventPipe.send(accountString);
   }
 
@@ -46,10 +47,12 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
           context: context,
           builder: (context) {
             return AlertDialog(
+              key: Key("enrollmentFormSubmitErrorDialog"),
               title: Text("Error"),
               content: Text("Please select an account"),
               actions: [
                 FlatButton(
+                  key: Key("dismissEnrollmentFormErrorDialogButton"),
                   child: Text("Okay"),
                   onPressed: () {
                     Navigator.pop(context);

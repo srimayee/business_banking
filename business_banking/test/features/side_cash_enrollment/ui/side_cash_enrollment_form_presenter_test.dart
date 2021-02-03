@@ -30,10 +30,7 @@ main() {
   //      -> tells bloc to submit form
   //      -> or tells presenter to show error dialog
 
-
-
   group("side cash enrollment form presenter tests", () {
-
     SideCashEnrollmentFormPresenter presenter;
     MockSideCashEnrollmentBloc bloc;
     MockNavigatorObserver mockNavigatorObserver;
@@ -56,26 +53,23 @@ main() {
     }
 
     test("presenter renders SideCashEnrollmentFormScreen", () {
-      final result = presenter.buildScreen(MockedBuildContext(), bloc,
-          EnrollmentFormViewModel());
-
+      final result = presenter.buildScreen(
+          MockedBuildContext(), bloc, EnrollmentFormViewModel());
 
       expect(result, isA<SideCashEnrollmentFormScreen>());
     });
 
-
-
     // TODO Come back to this
-    testWidgets("update selectedCheckingAccount callback in presenter is fired", (tester) async {
+    testWidgets("update selectedCheckingAccount callback in presenter is fired",
+        (tester) async {
       MockDummyFunctions dumbFunctions = MockDummyFunctions();
       final ctx = MockedBuildContext();
-      final presenter =
-      SideCashEnrollmentFormPresenter(
-        testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccount,
+      final presenter = SideCashEnrollmentFormPresenter(
+        testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccountWrapper,
       );
 
-      SideCashEnrollmentFormScreen screen = presenter.buildScreen(
-          ctx, bloc, EnrollmentFormViewModel());
+      SideCashEnrollmentFormScreen screen =
+          presenter.buildScreen(ctx, bloc, EnrollmentFormViewModel());
       await tester.pumpWidget(_getApp(presenter));
 
       // TODO NEXT
@@ -83,10 +77,9 @@ main() {
 
       screen.updateSelectedAccount("A string, ya know");
 
+      await tester.pumpAndSettle();
       // screen.enrollTapped(ctx);
       verify(dumbFunctions.updateSelectedAccount(any)).called(1);
-
     });
-
   });
 }

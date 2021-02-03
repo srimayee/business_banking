@@ -18,6 +18,11 @@ class DummyFunctions {
   completionVMCallback(ViewModel v){}
 
   updateSelectedAccount(String s) {}
+  updateSelectedAccountWrapper( Function()) {}
+
+  submitForm(BuildContext b) {}
+
+  exitFeature(BuildContext b) {}
 }
 
 class MockDummyFunctions extends Mock implements DummyFunctions {}

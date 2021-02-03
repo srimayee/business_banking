@@ -9,19 +9,13 @@ main() {
 
   group("SideCashEnrollmentAdvertisement feature widget tests", () {
 
-    // TODO create Mock bloc and tear down in set up and create
-    // TODO is billpay_b mock a good example?
 
-
+    // TODO WHy does this not need a material app widget
     testWidgets("BuildWhenAvailable will create a presenter ", (tester) async {
 
       final widget = SideCashEnrollmentAdvertisementFeatureWidget(bloc: SideCashEnrollmentBloc(),);
       await tester.pumpWidget(widget);
       expect(find.byType(SideCashEnrollmentAdvertisementPresenter), findsOneWidget);
-
-    });
-
-    testWidgets("BuildWhenAvailable will NOT create a presenter when feature flag is disabled", (tester) {
 
     });
 

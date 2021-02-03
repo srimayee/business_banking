@@ -6,22 +6,30 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../../main.dart';
+
 class SideCashEnrollmentCompletionPresenter extends Presenter<
     SideCashEnrollmentBloc,
     EnrollmentCompletionViewModel,
     SideCashEnrollmentCompletionScreen> {
+  final Function(BuildContext) testExitFeature;
+
+  SideCashEnrollmentCompletionPresenter({this.testExitFeature});
+
   @override
-  SideCashEnrollmentCompletionScreen buildScreen(BuildContext context,
-      SideCashEnrollmentBloc bloc, ViewModel viewModel) {
+  SideCashEnrollmentCompletionScreen buildScreen(
+      BuildContext context, SideCashEnrollmentBloc bloc, ViewModel viewModel) {
     return SideCashEnrollmentCompletionScreen(
       viewModel: viewModel,
-      exitFeature: _exitFeature,
+      exitFeature: exitFeature,
     );
   }
 
-  _exitFeature(BuildContext context) {
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-        builder: (context) => HubScreen()), (_) => false);
+  // TODO Untested
+  exitFeature(BuildContext context) {
+    print("in exitFeature");
+   Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HubScreen()), (_) => false);
   }
 
   @override
