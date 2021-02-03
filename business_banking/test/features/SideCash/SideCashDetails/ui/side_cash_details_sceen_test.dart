@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ void main() {
   group('Side Cash Details Screen', () {
     testWidgets('Side Cash Details - has the proper elements',
         (WidgetTester tester) async {
-      final completer = Completer<void>();
+      final mockFunctions = MockDummyFunctions().emptyCallback();
 
       final widget = Material(
         child: SideCashDetailsScreen(
@@ -25,7 +24,7 @@ void main() {
             paymentMin: "23.45",
             remainingCredit: "345.67",
           ),
-          toggleDetails: completer.complete,
+          toggleDetails: mockFunctions,
         ),
       );
 
@@ -34,5 +33,26 @@ void main() {
 
       expect(find.byType(FlatButton), findsNWidgets(1));
     });
+  });
+
+  testWidgets('Side Cash Details - details button open',
+      (WidgetTester tester) async {
+    final completer = Completer<void>();
+
+    final widget = Material(
+      child: SideCashDetailsScreen(
+        viewModel: SideCashDetailsViewModel(
+          grossSideCashBalance: "1234.56",
+          interest: "12.34",
+          paymentMin: "23.45",
+          remainingCredit: "345.67",
+          detailsOpen: true,
+        ),
+        toggleDetails: completer.complete,
+      ),
+    );
+
+    await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
   });
 }

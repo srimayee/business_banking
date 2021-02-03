@@ -9,6 +9,8 @@ import '../mock_dummy_functions.dart';
 
 void main() {
   group('SideCashDetailsUsecase', () {
+    final mockFunctions = MockDummyFunctions();
+
     test("will throw error if call back is null", () async {
       try {
         SideCashDetailsUsecase(null);
@@ -18,67 +20,33 @@ void main() {
     });
 
     test("will execute the callback with proper view model ", () async {
-      final mockDummyFunctions = MockDummyFunctions();
-      final usecase = SideCashDetailsUsecase(mockDummyFunctions.voidCallBack);
+      final usecase = SideCashDetailsUsecase(mockFunctions.voidCallBack);
       usecase.notifySubscribers(SideCashDetailsEntity());
-      verify(mockDummyFunctions.voidCallBack(any)).called(1);
+      verify(mockFunctions.voidCallBack(any)).called(1);
     });
 
     test("build View Model for service will return error model ", () async {
-      final mockDummyFunctions = MockDummyFunctions();
-      final usecase = SideCashDetailsUsecase(mockDummyFunctions.voidCallBack);
+      final usecase = SideCashDetailsUsecase(mockFunctions.voidCallBack);
       final entity = SideCashDetailsEntity(errors: [EntityFailure()]);
       final result = usecase.buildViewModel(entity);
       expect(result, isA<SideCashDetailsViewModel>());
     });
+    test("build View Model toggling details ", () async {
+      final usecase = SideCashDetailsUsecase(mockFunctions.voidCallBack);
+      // final entity = SideCashDetailsEntity(detailsOpen: true);
+      usecase.create(); // make sure scope is set
+      usecase.toggleDetailsDropdown(true);
+      verify(mockFunctions.voidCallBack(any)).called(1);
+    });
 
     test("build View Model for service will return success accordingly ",
         () async {
-      final mockDummyFunctions = MockDummyFunctions();
-      final usecase = SideCashDetailsUsecase(mockDummyFunctions.voidCallBack);
+      final usecase = SideCashDetailsUsecase(mockFunctions.voidCallBack);
       final entity = SideCashDetailsEntity();
       final result = usecase.buildViewModel(entity);
       expect(result, isA<SideCashDetailsViewModel>());
     });
-
-    // test('Create method with scope will invoke callback', () {
-    //   final mockFunctions = MockDummyFunctions();
-
-    //   MockRepositoryScope _scope =
-    //       ExampleLocator().repository.containsScope<SideCashDetailsEntity>();
-
-    //   if (_scope == null) {
-    //     final newSideCashDetailsEntity = SideCashDetailsEntity();
-    //     _scope = MockExampleLocator().repository.create<SideCashDetailsEntity>(
-    //         newSideCashDetailsEntity, mockFunctions.voidCallBack);
-    //   }
-
-    //   final useCase = SideCashDetailsUsecase(
-    //     mockFunctions.voidCallBack,
-    //     scope: _scope,
-    //   );
-
-    //   useCase.create();
-    //   verify(mockFunctions.voidCallBack(any)).called(1);
-    // });
-
-    // test('Create method with NO scope will invoke callback', () {
-    //   final mockFunctions = MockDummyFunctions();
-
-    //   MockRepositoryScope _scope;
-
-    //   final useCase = SideCashDetailsUsecase(
-    //     mockFunctions.voidCallBack,
-    //     scope: _scope,
-    //   );
-
-    //   useCase.create();
-    //   verify(mockFunctions.voidCallBack(any)).called(1);
-    // });
-
     test('SideCashDetailsUseCase initialize and create', () {
-      final mockFunctions = MockDummyFunctions();
-
       final usecase = SideCashDetailsUsecase((viewModel) {
         expect(viewModel, isA<SideCashDetailsViewModel>());
       });

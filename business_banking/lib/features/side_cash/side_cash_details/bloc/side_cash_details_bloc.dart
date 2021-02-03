@@ -14,17 +14,16 @@ class SideCashDetailsBloc extends Bloc {
         SideCashDetailsUsecase((viewModel) => viewModelPipe.send(viewModel));
     viewModelPipe.whenListenedDo(() {
       _useCase.create();
+      toggle(false);
     });
     toggleDetails.receive.listen((
       event,
     ) {
-      print('bloc listener -> ' + event.toString());
       toggle(event);
     });
   }
 
   void toggle(bool open) {
-    print('toggle in bloc -> ' + open.toString());
     _useCase.toggleDetailsDropdown(open);
   }
 

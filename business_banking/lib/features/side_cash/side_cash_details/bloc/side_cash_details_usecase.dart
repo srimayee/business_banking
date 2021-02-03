@@ -7,25 +7,25 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 
 class SideCashDetailsUsecase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
-  RepositoryScope _scope;
+  RepositoryScope scope;
 
   SideCashDetailsUsecase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<SideCashDetailsEntity>();
-    if (_scope == null) {
+    scope = ExampleLocator().repository.containsScope<SideCashDetailsEntity>();
+    if (scope == null) {
       final newSideCashDetailsEntity = SideCashDetailsEntity();
-      _scope = ExampleLocator().repository.create<SideCashDetailsEntity>(
+      scope = ExampleLocator().repository.create<SideCashDetailsEntity>(
           newSideCashDetailsEntity, notifySubscribers);
     } else {
-      _scope.subscription = notifySubscribers;
+      scope.subscription = notifySubscribers;
     }
 
     ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, SideCashDetailsServiceAdapter());
+        .runServiceAdapter(scope, SideCashDetailsServiceAdapter());
   }
 
   void notifySubscribers(entity) {
@@ -44,11 +44,11 @@ class SideCashDetailsUsecase extends UseCase {
 
   void toggleDetailsDropdown(bool isOpen) {
     final entity =
-        ExampleLocator().repository.get<SideCashDetailsEntity>(_scope);
+        ExampleLocator().repository.get<SideCashDetailsEntity>(scope);
     final SideCashDetailsEntity updatedEntity = entity.merge(isOpen: isOpen);
     ExampleLocator()
         .repository
-        .update<SideCashDetailsEntity>(_scope, updatedEntity);
+        .update<SideCashDetailsEntity>(scope, updatedEntity);
 
     notifySubscribers(updatedEntity);
   }

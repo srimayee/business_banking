@@ -1,3 +1,4 @@
+import 'package:business_banking/features/side_cash/get_side_cash/BLoC/get_side_cash_bloc.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/ui/get_side_cash_widget.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
@@ -48,20 +49,19 @@ class SideCashDetailsScreen extends Screen {
               Text(viewModel.remainingCredit),
             ],
           ),
-          _expandButton(viewModel.detailsOpen ?? false),
+          _expandButton(isOpen: viewModel.detailsOpen ?? false, bloc: bloc),
           viewModel.detailsOpen ?? false ? GetSideCashWidget() : Container(),
         ],
       ),
     );
   }
 
-  FlatButton _expandButton(bool isOpen) {
+  FlatButton _expandButton(
+      {@required bool isOpen, @required SideCashDetailsBloc bloc}) {
     return FlatButton(
       color: Colors.green,
       key: Key('toggle-cash-details-button'),
-      onPressed: () async {
-        toggleDetails(bloc, !isOpen);
-      },
+      onPressed: () => toggleDetails(isOpen, bloc),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

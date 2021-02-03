@@ -20,7 +20,7 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
       SideCashDetailsBloc bloc, SideCashDetailsViewModel viewModel) {
     return SideCashDetailsScreen(
       viewModel: viewModel,
-      toggleDetails: toggleDetailsFunc ?? toggleDetails,
+      toggleDetails: toggleDetails,
       bloc: bloc,
     );
   }
@@ -37,8 +37,10 @@ class SideCashDetailsPresenter extends Presenter<SideCashDetailsBloc,
     );
   }
 
-  Future toggleDetails(SideCashDetailsBloc bloc, bool isOpen) async {
-    print('toggle in presenter -> ' + isOpen.toString());
-    bloc.toggleDetails.send(isOpen);
+  Future toggleDetails(
+    bool isOpen,
+    SideCashDetailsBloc bloc,
+  ) async {
+    bloc.toggleDetails.send(!isOpen);
   }
 }

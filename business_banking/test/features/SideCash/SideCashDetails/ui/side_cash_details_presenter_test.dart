@@ -27,7 +27,7 @@ main() {
         ),
       ),
     );
-    presenter.toggleDetails(SideCashDetailsBloc(), true);
+    presenter.toggleDetails(true, SideCashDetailsBloc());
     verify(presenter.toggleDetails).called(1);
   });
 }
