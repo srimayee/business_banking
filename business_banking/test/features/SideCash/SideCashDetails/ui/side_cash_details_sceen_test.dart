@@ -1,5 +1,3 @@
-// check if navigation is called when 'View Side Cash Account" button is tapped in the HUB
-
 import 'dart:async';
 
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';

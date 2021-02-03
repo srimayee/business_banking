@@ -1,4 +1,6 @@
+import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_view_model.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
+import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_presenter.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -14,7 +16,8 @@ main() {
   });
 
   test("render SideCashDetailsScreen", () async {
-    final result = presenter.buildScreen(null, null, null);
+    final result =
+        presenter.buildScreen(null, null, SideCashDetailsViewModel());
     expect(result, isA<SideCashDetailsScreen>());
   });
 

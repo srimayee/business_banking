@@ -4,10 +4,10 @@ import 'package:business_banking/features/side_cash/get_side_cash/ui/get_side_ca
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class GetSideCashPresenter extends Presenter<GetSideCashBloc,
     GetSideCashViewModel, GetSideCashScreen> {
+  GetSideCashPresenter();
   @override
   buildScreen(BuildContext context, GetSideCashBloc bloc,
       GetSideCashViewModel viewModel) {
