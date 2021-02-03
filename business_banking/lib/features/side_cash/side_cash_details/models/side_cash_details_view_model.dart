@@ -6,12 +6,14 @@ class SideCashDetailsViewModel extends Equatable implements ViewModel {
   final String interest;
   final String paymentMin;
   final String remainingCredit;
+  final bool detailsOpen;
 
   SideCashDetailsViewModel({
     this.grossSideCashBalance,
     this.interest,
     this.paymentMin,
     this.remainingCredit,
+    this.detailsOpen,
   });
 
   @override
@@ -19,6 +21,7 @@ class SideCashDetailsViewModel extends Equatable implements ViewModel {
         this.grossSideCashBalance,
         this.interest,
         this.paymentMin,
-        this.remainingCredit
+        this.remainingCredit,
+        this.detailsOpen,
       ];
 }

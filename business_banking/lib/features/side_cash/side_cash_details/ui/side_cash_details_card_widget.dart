@@ -3,7 +3,11 @@ import 'package:business_banking/features/side_cash/side_cash_details/ui/side_ca
 import 'package:flutter/material.dart';
 
 class SideCashDetailsCardWidget extends StatelessWidget {
-  const SideCashDetailsCardWidget({Key key}) : super(key: key);
+  final Function navigationTester;
+  const SideCashDetailsCardWidget({
+    Key key,
+    this.navigationTester,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

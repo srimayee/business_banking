@@ -14,11 +14,6 @@ main() {
       await tester.pumpWidget(Material(child: SideCashDetailsWidget()));
       sideCashDetailsBloc.viewModelPipe.send(SideCashDetailsViewModel());
       await tester.pumpAndSettle(Duration(milliseconds: 100));
-
-      // expect(find.text(billPayStrings.billPayHeader), findsOneWidget);
-      // expect(find.text(billPayStrings.payBills), findsOneWidget);
-      // expect(find.text(billPayStrings.managePayees), findsOneWidget);
-      // expect(find.text(billPayStrings.scheduledPayments), findsOneWidget);
     });
   });
 }

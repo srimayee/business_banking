@@ -7,20 +7,19 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Side Cash Details Repository', () {
+    final Map<String, dynamic> resObject = {
+      'grossSideCashBalance': '1234.56',
+      'interest': '12.34',
+      'paymentMin': '23.45',
+      'remainingCredit': '345.67',
+    };
+
     final entity = SideCashDetailsServiceAdapter().createEntity(
       SideCashDetailsEntity(),
       SideCashDetailsResponseModel.fromJson(
-        json.decode('''
-        {
-          "grossSideCashBalance": "1234.56",
-          "interest": "12.34",
-          "paymentMin": "23.45",
-          "remainingCredit": "345.67",
-        }
-        '''),
+        resObject,
       ),
     );
-
     expect(entity, isNotNull);
   });
 }

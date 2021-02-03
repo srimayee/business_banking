@@ -5,6 +5,7 @@ import 'package:clean_framework/clean_framework.dart';
 class DummyFunctions {
   dynamic voidCallBack(dynamic v) {}
   dynamic navigate(BuildContext ctx) {}
+  dynamic emptyCallback() {}
 }
 
 class MockDummyFunctions extends Mock implements DummyFunctions {}

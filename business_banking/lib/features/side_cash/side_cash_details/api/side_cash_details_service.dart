@@ -16,7 +16,6 @@ class SideCashDetailsService extends EitherService<SideCashDetailsRequestModel,
   @override
   SideCashDetailsResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
-    print("JSON Response -> " + jsonResponse.toString());
     return SideCashDetailsResponseModel.fromJson(jsonResponse);
   }
 }
