@@ -18,7 +18,7 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
   @override
   SideCashEnrollmentFormScreen buildScreen(BuildContext context,
       SideCashEnrollmentBloc bloc, EnrollmentFormViewModel viewModel) {
-    print("build screen in form called");
+
     return SideCashEnrollmentFormScreen(
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>

@@ -19,12 +19,11 @@ main() {
     final mockDummyFunctions = MockDummyFunctions();
     SideCashEnrollmentAdvertisementPresenter presenter;
     MockSideCashEnrollmentBloc bloc;
-    MockNavigatorObserver mockNavigatorObserver;
+    MockNavigatorObserver mockNavigatorObserver = MockNavigatorObserver();
 
     setUpAll(() {
       presenter = SideCashEnrollmentAdvertisementPresenter();
       bloc = MockSideCashEnrollmentBloc();
-      mockNavigatorObserver = MockNavigatorObserver();
     });
 
     _getApp(Widget widget) {
@@ -63,8 +62,10 @@ main() {
     //TODO  FAILING
     testWidgets('navigate to Enrollment Form page',
         (WidgetTester tester) async {
+      final mockedContext = MockedBuildContext();
       await tester.pumpWidget(_getApp(presenter));
-      presenter.navigateToEnrollmentForm(MockedBuildContext());
+      presenter.buildScreen(mockedContext, bloc, EnrollmentAdvertisementViewModel(message: "mock message"));
+      presenter.navigateToEnrollmentForm(mockedContext);
       // verify(mockNavigatorObserver.didPush(any, any));
     });
 

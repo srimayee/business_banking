@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../SideCash/SideCashDetails/mock_dummy_functions.dart';
+import '../../SideCash/SideCashDetails/mock_navigation_observer.dart';
 
 main() {
   test("assert constructor cannot take null values", () {
@@ -25,6 +26,7 @@ main() {
 
   group("SideCashEnrollmentAdvertisement Screen Tests", () {
     final mockDummyFunctions = MockDummyFunctions();
+    final mockNavigatorObserver = MockNavigatorObserver();
 
     Widget testApp;
     setUp(() {
@@ -32,12 +34,13 @@ main() {
         message: "Mock message",
         enrollTapped: mockDummyFunctions.navigate,
       );
-      testApp = MaterialApp(home: Scaffold(body: screen));
+      testApp = MaterialApp(
+        home: Scaffold(body: screen),
+        navigatorObservers: [mockNavigatorObserver],
+      );
     });
 
-    // TODO Test expected message displayed? Right now it will be hardcoded
     testWidgets("screen has correct elements", (tester) async {
-
       await tester.pumpWidget(testApp);
       expect(
           find.byKey(
@@ -50,7 +53,6 @@ main() {
 
     testWidgets("tapping 'Enroll' tells presenter to fire navigation function",
         (tester) async {
-
       await tester.pumpWidget(testApp);
       final enrollButton =
           find.byKey(SideCashEnrollmentWidgetKeys.sideCashEnrollButton);
@@ -59,6 +61,7 @@ main() {
 
       verify(mockDummyFunctions.navigate(any)).called(1);
 
+      verify(mockNavigatorObserver.didPush(any, any));
       // find by key +  tap button
       // verify dummy function fires
     });
