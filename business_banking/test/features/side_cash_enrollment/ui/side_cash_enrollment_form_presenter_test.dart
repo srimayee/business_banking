@@ -30,7 +30,7 @@ main() {
   //      -> tells bloc to submit form
   //      -> or tells presenter to show error dialog
 
-  group("side cash enrollment form presenter tests", () {
+  group("side cash enrollment form presenter tests: ", () {
     SideCashEnrollmentFormPresenter presenter;
     MockSideCashEnrollmentBloc bloc;
     MockNavigatorObserver mockNavigatorObserver;
@@ -42,14 +42,18 @@ main() {
     });
 
     _getApp(Widget widget) {
-      return MaterialApp(
-        // navigatorKey: navigatorKey,
-        home: Builder(
-          builder: (context) => BlocProvider<SideCashEnrollmentBloc>(
-              create: (context) => MockSideCashEnrollmentBloc(), child: widget),
-        ),
-        navigatorObservers: [mockNavigatorObserver],
+      return TestableWidgetWrapper(
+        BlocProvider<SideCashEnrollmentBloc>(
+            create: (context) => MockSideCashEnrollmentBloc(), child: widget),
       );
+      // return MaterialApp(
+      //   // navigatorKey: navigatorKey,
+      //   home: Builder(
+      //     builder: (context) => BlocProvider<SideCashEnrollmentBloc>(
+      //         create: (context) => MockSideCashEnrollmentBloc(), child: widget),
+      //   ),
+      //   navigatorObservers: [mockNavigatorObserver],
+      // );
     }
 
     test("presenter renders SideCashEnrollmentFormScreen", () {
@@ -59,6 +63,7 @@ main() {
       expect(result, isA<SideCashEnrollmentFormScreen>());
     });
 
+    // TODO FAILING
     testWidgets(
         "update selectedCheckingAccount callback in presenter fires off the listener in the bloc",
         (tester) async {
@@ -79,7 +84,7 @@ main() {
       verify(bloc.updateFormWithSelectedAccountListener(any)).called(1);
     });
 
-    // TODO Function injection doesnt seem to solve anything
+    // TODO UNTESTED - actually  verify navigation occurs
     test("submit form and navigate gets called in presenter", () {
       MockDummyFunctions dumbFunctions = MockDummyFunctions();
       final ctx = MockedBuildContext();
@@ -95,42 +100,74 @@ main() {
       verify(dumbFunctions.submitFormAndNavigate(any, any));
     });
 
+    // TODO FAILING
     testWidgets("submit form navigates if view model selected account != null",
         (tester) async {
-      final ctx = MockedBuildContext();
+
+          final presenter = SideCashEnrollmentFormPresenter();
+          final ctx = MockedBuildContext();
+
+          await tester.pumpWidget(
+            MaterialApp(
+              home: BlocProvider<SideCashEnrollmentBloc>(
+                create: (context) => MockSideCashEnrollmentBloc(),
+                child: presenter,
+              ),
+              navigatorObservers: [mockNavigatorObserver],
+            ),
+          );
+      //
+      // final presenter = SideCashEnrollmentFormPresenter();
+
+      // await tester.pumpWidget(_getApp(presenter));
+
+       SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
+          EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: "2"));
+      await tester.pumpAndSettle();
+
+          print("before presenter.submitFormAndNavigate");
+      // await presenter.submitFormAndNavigate(ctx,
+      //     EnrollmentFormViewModel(selectedAccount: "2", accounts: ["1", "2"]));
+        await   screen.submitForm(ctx);
+      await tester.pumpAndSettle();
+
+      print("before verify");
+      verify(mockNavigatorObserver.didPush(any, any)).called(2);
+    });
+
+    // TODO FAILING
+    testWidgets(
+        "submit form DOESNT navigate if view model selected account == null",
+        (tester) async {
       final presenter = SideCashEnrollmentFormPresenter();
+
+      final mockObserver = MockNavigatorObserver();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (ctx) =>  BlocProvider<SideCashEnrollmentBloc>(
+              create: (context) => MockSideCashEnrollmentBloc(),
+              child: presenter,
+            ),
+          ),
+          navigatorObservers: [mockNavigatorObserver],
+        ),
+      );
+
+      final ctx = MockedBuildContext();
 
       await tester.pumpWidget(_getApp(presenter));
 
       SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
-          EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: "2"));
+          EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: null));
       await tester.pumpAndSettle();
 
-      presenter.submitFormAndNavigate(ctx,
-          EnrollmentFormViewModel(selectedAccount: "2", accounts: ["1", "2"]));
-      await tester.pumpAndSettle();
-
-      verify(mockNavigatorObserver.didPush(any, any)).called(1);
-    });
-
-    testWidgets(
-        "submit form DOESNT navigate if view model selected account == null",
-        (tester) async {
-      final ctx = MockedBuildContext();
-      final presenter = SideCashEnrollmentFormPresenter();
-
-      await tester.pumpWidget(_getApp(presenter));
-
-      // SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
-      //     EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: null));
-      // await tester.pumpAndSettle();
-
-      presenter.submitFormAndNavigate(ctx,
+      presenter.submitFormAndNavigate(MockedBuildContext(),
           EnrollmentFormViewModel(selectedAccount: null, accounts: ["1", "2"]));
       // await tester.pumpAndSettle();
 
-      expect(find.byKey(Key("enrollmentFormSubmitErrorDialog")),
-          isA<AlertDialog>());
+      // expect(find.byKey(Key("enrollmentFormSubmitErrorDialog")),
+      //     isA<AlertDialog>());
       // verify(mockNavigatorObserver.didPush(any, any)).called(1);
     });
   });

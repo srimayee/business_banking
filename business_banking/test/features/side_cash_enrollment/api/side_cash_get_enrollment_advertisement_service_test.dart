@@ -15,8 +15,12 @@ main() {
     SideCashGetEnrollmentAdvertisementService();
     final eitherResponse = await service.request();
     expect(eitherResponse.isRight, isTrue);
+    SideCashGetEnrollmentAdvertisementResponseModel response = eitherResponse.fold((_) {}, (m) => m);
+
+    expect(response.message, SideCashGetEnrollmentAdvertisementResponseModel.fromJson(json.decode(jsonDataAdvertisement)).message);
+
     expect(
-      eitherResponse.fold((_) {}, (m) => m),
+      response,
       SideCashGetEnrollmentAdvertisementResponseModel.fromJson(json.decode(jsonDataAdvertisement)),
     );
   });

@@ -20,7 +20,7 @@ main() {
             ),
           );
 
-          expect(entity.message, "sign up for side cash!");
+          expect(entity.message, "Sign Up for Side Cash!");
 
 
         });

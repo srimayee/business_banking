@@ -6,48 +6,67 @@ import 'package:business_banking/features/side_cash_enrollment/model/enrollment_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockSideCashEnrollmentUsecase extends Mock
-    implements SideCashEnrollmentUsecase {}
+class MockSideCashEnrollmentUseCase extends Mock
+    implements SideCashEnrollmentUsecase {
+
+
+}
+
+class FakeSideCashEnrollmentUsecase extends Fake implements SideCashEnrollmentUsecase {
+  @override
+  bool updateFormWithSelectedAccount(String account) {
+    print("MOCK updateFormWithSelectedAccount called");
+    return true;
+  }
+}
 
 main() {
-  group("Side Cash Enrollment Bloc Tests", () {
-    // TODO This is not mocked
+  group("Side Cash Enrollment Bloc Tests: ", () {
+    SideCashEnrollmentBloc bloc;
+    setUpAll(() {
+      bloc = SideCashEnrollmentBloc();
+    });
+    tearDownAll(() {
+      bloc.dispose();
+    });
+
     test('SideCashEnrollmentBloc gets ADVERTISEMENT view model', () {
-      final bloc = SideCashEnrollmentBloc();
       bloc.enrollmentAdvertisementPipe.receive.listen(expectAsync1((model) {
         expect(model, isA<EnrollmentAdvertisementViewModel>());
-        bloc.dispose();
       }));
     });
 
     //TODO this is not mocked
     test('SideCashEnrollmentBloc gets FORM view model', () {
-      final bloc = SideCashEnrollmentBloc();
       bloc.enrollmentFormPipe.receive.listen(expectAsync1((model) {
         expect(model, isA<EnrollmentFormViewModel>());
-        bloc.dispose();
       }));
     });
 
     //TODO this is not mocked
     test('SideCashEnrollmentBloc gets Completion view model', () {
-      final bloc = SideCashEnrollmentBloc();
       bloc.enrollmentCompletionPipe.receive.listen(expectAsync1((model) {
         expect(model, isA<EnrollmentCompletionViewModel>());
-        bloc.dispose();
       }));
     });
 
-    test("update form with selected account", () {
-      final mockUsecase = MockSideCashEnrollmentUsecase();
-      final bloc = SideCashEnrollmentBloc();
+    // TODO FAILING
+    test("update form with selected account", ()async {
+      final mockUseCase = MockSideCashEnrollmentUseCase();
+      // final fakeUseCase = FakeSideCashEnrollmentUsecase();
+      final bloc = SideCashEnrollmentBloc(testUseCase: mockUseCase);
 
-      bloc.updateFormWithSelectedAccountEventPipe.send("any");
+      bloc.updateFormWithSelectedAccountPipe.send("any");
+      print("before verify");
+
+      // expect(fakeUseCase.updateFormWithSelectedAccount("any"), true);
+      verify(mockUseCase.updateFormWithSelectedAccount(any)).called(1);
     });
 
-    test("3: usecase callback triggers viewModelPipe.send", () {});
-
-    test("3. getEnrollmentFormRequest.whenListenedTo calls usecase.create",
-        () {});
+    //
+    // test("3: usecase callback triggers viewModelPipe.send", () {});
+    //
+    // test("3. getEnrollmentFormRequest.whenListenedTo calls usecase.create",
+    //     () {});
   });
 }

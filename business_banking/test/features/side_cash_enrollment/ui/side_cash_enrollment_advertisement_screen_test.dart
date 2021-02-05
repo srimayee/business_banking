@@ -7,42 +7,57 @@ import 'package:mockito/mockito.dart';
 import '../../SideCash/SideCashDetails/mock_dummy_functions.dart';
 
 main() {
+  test("assert constructor cannot take null values", () {
+    final mockDummyFunctions = MockDummyFunctions();
+
+    expect(
+        () => SideCashEnrollmentAdvertisementScreen(
+              enrollTapped: mockDummyFunctions.navigate,
+            ),
+        throwsAssertionError);
+
+    expect(
+        () => SideCashEnrollmentAdvertisementScreen(
+              message: "test message",
+            ),
+        throwsAssertionError);
+  });
+
   group("SideCashEnrollmentAdvertisement Screen Tests", () {
     final mockDummyFunctions = MockDummyFunctions();
 
+    Widget testApp;
+    setUp(() {
+      final screen = SideCashEnrollmentAdvertisementScreen(
+        message: "Mock message",
+        enrollTapped: mockDummyFunctions.navigate,
+      );
+      testApp = MaterialApp(home: Scaffold(body: screen));
+    });
+
     // TODO Test expected message displayed? Right now it will be hardcoded
     testWidgets("screen has correct elements", (tester) async {
-      final widget = SideCashEnrollmentAdvertisementScreen(message: "Mock message");
-      final testApp = MaterialApp(home: Scaffold(body: widget));
+
       await tester.pumpWidget(testApp);
-      await tester.pumpAndSettle();
       expect(
           find.byKey(
               SideCashEnrollmentWidgetKeys.sideCashEnrollAdvertisementHeader),
           findsOneWidget);
-      expect(
-          find.byKey(
-              SideCashEnrollmentWidgetKeys.sideCashEnrollButton),
+      expect(find.byKey(SideCashEnrollmentWidgetKeys.sideCashEnrollButton),
           findsOneWidget);
       expect(find.text("Mock message"), findsOneWidget);
     });
 
     testWidgets("tapping 'Enroll' tells presenter to fire navigation function",
         (tester) async {
-      final mockFunctions = MockDummyFunctions();
-      // Load screen with dummy function
-      final widget = SideCashEnrollmentAdvertisementScreen(
-        enrollTapped: mockFunctions.navigate,
-        message: "test",
-      );
-      final testApp = MaterialApp(home: Scaffold(body: widget));
+
       await tester.pumpWidget(testApp);
       final enrollButton =
           find.byKey(SideCashEnrollmentWidgetKeys.sideCashEnrollButton);
       await tester.tap(enrollButton);
       tester.pumpAndSettle();
 
-      verify(mockFunctions.navigate(any)).called(1);
+      verify(mockDummyFunctions.navigate(any)).called(1);
 
       // find by key +  tap button
       // verify dummy function fires

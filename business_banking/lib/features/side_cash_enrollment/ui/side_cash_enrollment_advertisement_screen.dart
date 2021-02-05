@@ -9,7 +9,7 @@ class SideCashEnrollmentAdvertisementScreen extends Screen {
   final String message;
 
   SideCashEnrollmentAdvertisementScreen(
-      {@required this.enrollTapped, @required this.message});
+      {@required this.enrollTapped, @required this.message}): assert(enrollTapped != null && message != null);
 
   @override
   Widget build(BuildContext context) {

@@ -32,7 +32,7 @@ class MockDummyFunctions extends Mock implements DummyFunctions {}
 
 final String jsonDataAdvertisement = """
       {
-        "message": "sign up for side cash!"
+        "message": "Sign Up for Side Cash!"
      
       }
   """;

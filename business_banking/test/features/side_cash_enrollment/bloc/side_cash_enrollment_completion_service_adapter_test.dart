@@ -28,5 +28,21 @@ main() {
 
         });
 
+    test(
+        "MOCKED service adapter created Entity from VALID SideCashEnrollmentCompletionResponseModel",
+            () {
+          final entity = SideCashEnrollmentCompletionServiceAdapter().createEntity(
+            //TODO See Entity constructor for question about valid data
+            EnrollmentFormEntity(),
+            SideCashEnrollmentCompletionResponseModel.fromJson(
+              json.decode('{"message": "success", "isSuccessful": true}'),
+            ),
+          );
+
+          expect(entity.submissionMessage, "success");
+          expect(entity.submissionSuccess , true);
+
+        });
+
   });
 }
