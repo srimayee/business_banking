@@ -11,38 +11,38 @@ import '../mocks/ui_mocks.dart';
 main() {
   // TODO I Should only have to mock the VIEW MODEL... right?
 
-  group('Side Cash Enrollment Form Screen tests', () {
+  test("assert constructor cannot contain null values", () {
     MockDummyFunctions mockDummyFunctions = MockDummyFunctions();
 
-    test("assert View model cannot be null in constructor", () {
-      expect(
-          () => SideCashEnrollmentCompletionScreen(
-                exitFeature: mockDummyFunctions.exitFeature,
-              ),
-          throwsAssertionError);
-    });
+    expect(
+        () => SideCashEnrollmentCompletionScreen(
+              exitFeature: mockDummyFunctions.exitFeature,
+            ),
+        throwsAssertionError);
 
-    test("assert exit feature callback cannot be null in constructor", () {
-      expect(
-          () => SideCashEnrollmentCompletionScreen(
-
-                viewModel: EnrollmentCompletionViewModel(
-                    isSuccess: true, message: "test message"),
-              ),
-          throwsAssertionError);
-    });
-
-    testWidgets('Enrollment form screen - has the proper elements',
-        (WidgetTester tester) async {
-      final vm = initialFormViewModel();
-      final widget = SideCashEnrollmentCompletionScreen(
+    expect(
+        () => SideCashEnrollmentCompletionScreen(
+              viewModel: EnrollmentCompletionViewModel(
+                  isSuccess: true, message: "test message"),
+            ),
+        throwsAssertionError);
+  });
+  group('Side Cash Enrollment Form Screen tests', () {
+    MockDummyFunctions mockDummyFunctions = MockDummyFunctions();
+    Widget testWidget;
+    setUp(() {
+      final screen = SideCashEnrollmentCompletionScreen(
         viewModel: EnrollmentCompletionViewModel(
             isSuccess: true, message: "test message"),
         exitFeature: mockDummyFunctions.exitFeature,
       );
-      final testApp = MaterialApp(home: Scaffold(body: widget));
-      await tester.pumpWidget(testApp);
-      await tester.pumpAndSettle();
+      testWidget = MaterialApp(home: Scaffold(body: screen));
+    });
+
+    testWidgets('Enrollment form screen - has the proper elements',
+        (WidgetTester tester) async {
+
+      await tester.pumpWidget(testWidget);
 
       expect(find.byKey(SideCashEnrollmentWidgetKeys.successBooleanMessage),
           findsOneWidget);
@@ -58,13 +58,8 @@ main() {
 
     testWidgets("tapping Nice!  calls exitFeature callback in presenter",
         (tester) async {
-      final widget = SideCashEnrollmentCompletionScreen(
-        viewModel:
-            EnrollmentCompletionViewModel(message: "test", isSuccess: true),
-        exitFeature: mockDummyFunctions.exitFeature,
-      );
-      final testApp = MaterialApp(home: Scaffold(body: widget));
-      await tester.pumpWidget(testApp);
+
+      await tester.pumpWidget(testWidget);
       final exitButton =
           find.byKey(SideCashEnrollmentWidgetKeys.exitEnrollmentFeatureButton);
       await tester.tap(exitButton);

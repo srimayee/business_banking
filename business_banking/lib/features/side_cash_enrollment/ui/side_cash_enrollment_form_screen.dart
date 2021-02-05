@@ -17,9 +17,8 @@ class SideCashEnrollmentFormScreen extends Screen {
             updateSelectedAccount != null &&
             submitForm != null);
 
- List<Widget> _buildAccountRadioButtons() {
+  List<Widget> _buildAccountRadioButtons() {
     List<Widget> accountButtonSelectors = [];
-
     for (String account in formViewModel.accounts) {
       accountButtonSelectors.add(
         RadioListTile<String>(
@@ -47,7 +46,7 @@ class SideCashEnrollmentFormScreen extends Screen {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-            ... _buildAccountRadioButtons(),
+              ..._buildAccountRadioButtons(),
               Expanded(
                 child: Container(),
               ),

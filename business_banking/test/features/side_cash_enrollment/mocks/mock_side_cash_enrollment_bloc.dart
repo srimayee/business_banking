@@ -7,6 +7,8 @@ import 'package:mockito/mockito.dart';
 
 import 'data_and_function_mocks.dart';
 
+class MockStringPipe extends Mock implements Pipe<String>{}
+
 class MockSideCashEnrollmentBloc extends Mock implements SideCashEnrollmentBloc {
   // final viewModelPipe = Pipe<BillPayViewModel>();
   // final myPayeeViewModelPipe = Pipe<MyPayeeViewModel>();

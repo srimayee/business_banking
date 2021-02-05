@@ -20,7 +20,6 @@ class SideCashEnrollmentUsecase extends UseCase {
   Function(ViewModel) completionViewModelCallback;
 
   RepositoryScope _scope;
-  RepositoryScope _completionScope;
 
   // Test 1
   SideCashEnrollmentUsecase({
@@ -78,12 +77,14 @@ class SideCashEnrollmentUsecase extends UseCase {
           .create<EnrollmentAdvertisementEntity>(
               entity, advertisementNotifySubscribers);
     } else {
+      // TODO Untested
       _scope.subscription = advertisementNotifySubscribers;
     }
 
     ExampleLocator().repository.runServiceAdapter(
         _scope, SideCashGetEnrollmentAdvertisementServiceAdapter());
   }
+
 
   void createForm() async {
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
@@ -102,6 +103,7 @@ class SideCashEnrollmentUsecase extends UseCase {
         .runServiceAdapter(_scope, SideCashGetEnrollmentFormServiceAdapter());
   }
 
+  // TODO UNTESTED - Check how createForm() is getting hit
   void updateFormWithSelectedAccount(String account) {
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
     final enrollmentForm =
@@ -119,6 +121,7 @@ class SideCashEnrollmentUsecase extends UseCase {
     // final enrollmentForm =
     //     ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);
 
+    // TODO UNTESTED - If statement should never occur, do I need to account for it?
     if (_scope == null) {
       _scope = ExampleLocator().repository.create<EnrollmentFormEntity>(
            EnrollmentFormEntity(selectedAccount: "test account"),

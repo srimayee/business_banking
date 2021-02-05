@@ -14,7 +14,7 @@ main() {
 
       SideCashGetEnrollmentAdvertisementResponseModel responseModel =
       SideCashGetEnrollmentAdvertisementResponseModel.fromJson(completeMap);
-      expect(responseModel.message, "yooooyoyoyoy");
+      expect(responseModel.message, "Sign Up for Side Cash!");
     });
 
 
@@ -23,7 +23,7 @@ main() {
 
       SideCashGetEnrollmentAdvertisementResponseModel responseModel =
       SideCashGetEnrollmentAdvertisementResponseModel.fromJson(completeMap);
-      expect(responseModel.props, ["yooooyoyoyoy"]);
+      expect(responseModel.props, ["Sign Up for Side Cash!"]);
     });
 
   });

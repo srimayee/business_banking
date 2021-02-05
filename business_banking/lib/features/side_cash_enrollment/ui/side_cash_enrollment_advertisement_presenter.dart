@@ -10,19 +10,19 @@ import 'package:business_banking/features/customer/bloc/customer_bloc.dart';
 
 import '../../../main.dart';
 
-
-
-
 class SideCashEnrollmentAdvertisementPresenter extends Presenter<
     SideCashEnrollmentBloc,
     EnrollmentAdvertisementViewModel,
     SideCashEnrollmentAdvertisementScreen> {
 
-  navigateToEnrollmentForm(BuildContext context) {
-   navigatorKey.currentState.push(MaterialPageRoute(
-        builder: (ctx) => SideCashEnrollmentFormFeatureWidget()));
-  }
 
+  // TODO Failing
+  navigateToEnrollmentForm(BuildContext context) {
+    final route = MaterialPageRoute(
+        builder: (ctx) => SideCashEnrollmentFormFeatureWidget());
+    Navigator.of(context).push(route);
+    // navigatorKey.currentState.push();
+  }
 
   @override
   Stream<EnrollmentAdvertisementViewModel> getViewModelStream(
@@ -45,6 +45,6 @@ class SideCashEnrollmentAdvertisementPresenter extends Presenter<
 
   @override
   Widget buildLoadingScreen(BuildContext context) {
-    return Center(child:CircularProgressIndicator());
+    return Center(child: CircularProgressIndicator());
   }
 }

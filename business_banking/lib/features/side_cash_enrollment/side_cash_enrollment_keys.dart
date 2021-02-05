@@ -6,9 +6,6 @@ class SideCashEnrollmentWidgetKeys {
   static final sideCashEnrollAdvertisementHeader = Key(
       SideCashEnrollmentWidgetKeyStrings.enrollAdvertisementHeaderKeyString);
 
-  static final selectedAccountText =
-      Key(SideCashEnrollmentWidgetKeyStrings.selectedAccountTextKeyString);
-
   static final sideCashEnrollmentFormScaffold = Key(
       SideCashEnrollmentWidgetKeyStrings
           .enrollmentFormScaffoldKeyString);

@@ -18,7 +18,7 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
   @override
   SideCashEnrollmentFormScreen buildScreen(BuildContext context,
       SideCashEnrollmentBloc bloc, EnrollmentFormViewModel viewModel) {
-    print("build screen in form called");
+
     return SideCashEnrollmentFormScreen(
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>
@@ -45,7 +45,7 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
 
   updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
     print("updateSelectedAccount called in presenter");
-    bloc.updateFormWithSelectedAccountEventPipe.send(accountString);
+    bloc.updateFormWithSelectedAccountPipe.send(accountString);
   }
 
   submitFormAndNavigate(
@@ -71,13 +71,13 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
               ],
             );
           });
-      return;
-    }
+      // return;
+    } else {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (ctx) => SideCashEnrollmentCompletionFeatureWidget(),
       ),
       (route) => false,
-    );
+    );}
   }
 }
