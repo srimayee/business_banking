@@ -11,6 +11,6 @@ main() {
 
     expect(eitherResponse.isRight, isTrue);
     expect(eitherResponse.fold((_) {}, (m) => m),
-        GetSideCashResponseModel.fromJson({"confirmation": "123456789"}));
+        GetSideCashResponseModel.fromJson({"success": true}));
   });
 }

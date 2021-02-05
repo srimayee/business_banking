@@ -1,36 +1,36 @@
 import 'package:business_banking/features/side_cash/get_side_cash/BLoC/get_side_cash_usecase.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/api/get_side_cash_service.dart';
+import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_entity.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class GetSideCashBloc extends Bloc {
-  GetSideCashUsecase _useCase;
+  GetSideCashUsecase useCase;
   final viewModelPipe = Pipe<GetSideCashViewModel>();
-  final requestValue = EventPipe();
+  final requestValue = Pipe<String>();
   final resetUsecase = EventPipe();
   final TextEditingController inputController = TextEditingController();
 
   GetSideCashBloc({GetSideCashService sideCashService}) {
-    _useCase = GetSideCashUsecase((viewModel) => viewModelPipe.send(viewModel));
-    viewModelPipe.whenListenedDo(() => _useCase.create());
-    requestValue.listen(() {
-      _useCase.submitGetSideCash(inputController.text);
-      inputController.text = null;
-    });
-
-    resetUsecase.listen(() {
-      _useCase.resetAll();
-    });
+    useCase = GetSideCashUsecase((viewModel) => viewModelPipe.send(viewModel));
+    viewModelPipe.whenListenedDo(() => useCase.create());
+    requestValue.receive.listen((d) => requestSideCash());
+    resetUsecase.listen(() => useCase.resetAll());
   }
 
-  validateInput(String v) {
+  Future<GetSideCashEntity> requestSideCash() async {
+    inputController.text = null;
+    return await useCase.submitGetSideCash(inputController.text);
+  }
+
+  bool validateInput(String v) {
     bool isValid = (v.contains(RegExp(r"^-?[0-9][0-9,\.]+$")));
     if (isValid) {
-      _useCase.buildViewModelForValidInput();
+      useCase.buildViewModelForValidInput();
       return isValid;
     }
-    _useCase.buildViewModelForErrorInput();
+    useCase.buildViewModelForErrorInput();
     return isValid;
   }
 

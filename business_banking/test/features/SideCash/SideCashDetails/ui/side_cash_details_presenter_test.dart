@@ -1,4 +1,3 @@
-import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_view_model.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/bloc/side_cash_details_bloc.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
 import 'package:business_banking/features/side_cash/side_cash_details/ui/side_cash_details_presenter.dart';
@@ -8,16 +7,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../side_cash_details_mocks.dart';
+
+class MockSideCashDetialsPresenter extends Mock
+    implements SideCashDetailsPresenter {
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
+    super.toString();
+  }
+}
+
 main() {
-  SideCashDetailsPresenter presenter;
+  MockSideCashDetialsPresenter presenter;
+  SideCashDetailsBloc bloc;
 
   setUpAll(() {
-    presenter = SideCashDetailsPresenter();
+    presenter = MockSideCashDetialsPresenter();
+    bloc = SideCashDetailsBloc();
   });
 
-  test("render SideCashDetailsScreen", () async {
-    final result =
-        presenter.buildScreen(null, null, SideCashDetailsViewModel());
+  test("render SideCashDetailsScreen", () {
+    final SideCashDetailsScreen result = presenter.buildScreen(
+        MockBuildContext(),
+        bloc,
+        SideCashDetailsViewModel(
+          detailsOpen: false,
+          grossSideCashBalance: '12.34',
+          interest: '12.34',
+          paymentMin: '12',
+          remainingCredit: '12',
+        ));
+    print(result);
     expect(result, isA<SideCashDetailsScreen>());
   });
 

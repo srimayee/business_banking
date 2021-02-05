@@ -18,6 +18,7 @@ class GetSideCashScreen extends Screen {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: Key('getSideCashWidgetKey'),
       children: [
         Text('Request More Side Cash'),
         TextFormField(
@@ -33,6 +34,7 @@ class GetSideCashScreen extends Screen {
             : Text(
                 this.viewModel.error,
                 style: TextStyle(color: Colors.red, fontSize: 16),
+                key: Key('SideCashDetailsErrorMessage'),
               ),
         SizedBox(height: 10),
         MaterialButton(

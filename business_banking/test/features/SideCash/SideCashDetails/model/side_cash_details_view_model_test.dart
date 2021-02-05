@@ -1,6 +1,10 @@
 import 'package:business_banking/features/side_cash/side_cash_details/models/side_cash_details_view_model.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:flutter_test/flutter_test.dart' as testing;
+
+// ignore: must_be_immutable
+class MockSideCashDetailsViewModel extends Mock
+    implements SideCashDetailsViewModel {}
 
 void main() {
   group('SideCashDetailsViewModel test group', () {

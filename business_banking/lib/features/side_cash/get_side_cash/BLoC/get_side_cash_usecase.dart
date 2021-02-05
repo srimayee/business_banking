@@ -7,77 +7,58 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 
 class GetSideCashUsecase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
-  RepositoryScope _scope;
+  RepositoryScope scope;
+  Repository repo = ExampleLocator().repository;
 
   GetSideCashUsecase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
-    if (_scope == null) {
+    scope = repo.containsScope<GetSideCashEntity>();
+    if (scope == null) {
       final newGetSideCashEntity = GetSideCashEntity();
-      _scope = ExampleLocator()
-          .repository
-          .create<GetSideCashEntity>(newGetSideCashEntity, notifySubscribers);
+      scope = repo.create<GetSideCashEntity>(
+          newGetSideCashEntity, notifySubscribers);
     } else {
-      _scope.subscription = notifySubscribers;
+      scope.subscription = notifySubscribers;
     }
 
-    final entity = ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    final entity = repo.get<GetSideCashEntity>(scope);
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  void submit() async {
-    final entity = ExampleLocator().repository.get<GetSideCashEntity>(_scope);
-    if (entity.amountRequested == '') {
-      _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
-    } else {
-      await ExampleLocator()
-          .repository
-          .runServiceAdapter(_scope, GetSideCashServiceAdapter());
-    }
-  }
-
-  void resetAll() {
-    final entity = ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+  GetSideCashEntity resetAll() {
+    final entity = repo.get<GetSideCashEntity>(scope);
     final GetSideCashEntity updatedEntity =
-        entity.merge(badString: null, success: false, errors: null);
+        entity.merge(badString: null, success: false, errors: null, amount: '');
 
-    ExampleLocator()
-        .repository
-        .update<GetSideCashEntity>(_scope, updatedEntity);
+    repo.update<GetSideCashEntity>(scope, updatedEntity);
     notifySubscribers(updatedEntity);
+    return updatedEntity;
   }
 
-  GetSideCashViewModel buildViewModelForLocalUpdateWithError(
-      GetSideCashEntity entity) {
+  GetSideCashViewModel buildViewModelForLocalUpdateWithError() {
     return GetSideCashViewModel(
         error: "Must input a request amout for side cash.");
   }
 
   void buildViewModelForValidInput() {
-    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
-    final getSideCashEntity =
-        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    scope = repo.containsScope<GetSideCashEntity>();
+    final getSideCashEntity = repo.get<GetSideCashEntity>(scope);
     final GetSideCashEntity updatedEntity =
         getSideCashEntity.merge(badString: null);
-    ExampleLocator()
-        .repository
-        .update<GetSideCashEntity>(_scope, updatedEntity);
+    repo.update<GetSideCashEntity>(scope, updatedEntity);
     notifySubscribers(updatedEntity);
   }
 
   void buildViewModelForErrorInput() {
-    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
-    final getSideCashEntity =
-        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+    scope = repo.containsScope<GetSideCashEntity>();
+    final getSideCashEntity = repo.get<GetSideCashEntity>(scope);
     final updatedEntity =
         getSideCashEntity.merge(badString: "Input must contain numbers only.");
 
-    ExampleLocator()
-        .repository
-        .update<GetSideCashEntity>(_scope, updatedEntity);
+    repo.update<GetSideCashEntity>(scope, updatedEntity);
     notifySubscribers(updatedEntity);
   }
 
@@ -93,18 +74,19 @@ class GetSideCashUsecase extends UseCase {
     );
   }
 
-  void submitGetSideCash(String amt) async {
-    _scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
+  Future<GetSideCashEntity> submitGetSideCash(String amt) async {
+    scope = ExampleLocator().repository.containsScope<GetSideCashEntity>();
     final getSideCashEntity =
-        ExampleLocator().repository.get<GetSideCashEntity>(_scope);
+        ExampleLocator().repository.get<GetSideCashEntity>(scope);
 
-    final updatedEntity = getSideCashEntity.merge(amount: amt);
+    final GetSideCashEntity updatedEntity =
+        getSideCashEntity.merge(amount: amt);
 
-    ExampleLocator()
-        .repository
-        .update<GetSideCashEntity>(_scope, updatedEntity);
+    ExampleLocator().repository.update<GetSideCashEntity>(scope, updatedEntity);
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, GetSideCashServiceAdapter());
+        .runServiceAdapter(scope, GetSideCashServiceAdapter());
+
+    return GetSideCashEntity();
   }
 }

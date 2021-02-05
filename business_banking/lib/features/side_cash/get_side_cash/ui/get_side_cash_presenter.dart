@@ -1,3 +1,4 @@
+import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/BLoC/get_side_cash_bloc.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/model/get_side_cash_view_model.dart';
 import 'package:business_banking/features/side_cash/get_side_cash/ui/get_side_cash_screen.dart';
@@ -7,20 +8,19 @@ import 'package:flutter/scheduler.dart';
 
 class GetSideCashPresenter extends Presenter<GetSideCashBloc,
     GetSideCashViewModel, GetSideCashScreen> {
-  GetSideCashPresenter();
   @override
   buildScreen(BuildContext context, GetSideCashBloc bloc,
       GetSideCashViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.requestSuccess == true) {
-        _presentSuccess(context, bloc);
+        return presentSuccess(context, bloc);
       }
       return GetSideCashScreen(
         requestSideCash: (String amt) {
-          _requestSideCash(amt, bloc);
+          requestSideCash(amt, bloc);
         },
         onControllerChanged: (String amount) {
-          _onControllerChanged(amount, bloc);
+          onControllerChanged(amount, bloc);
         },
         viewModel: viewModel,
         inputController: bloc.inputController,
@@ -28,10 +28,10 @@ class GetSideCashPresenter extends Presenter<GetSideCashBloc,
     });
     return GetSideCashScreen(
       requestSideCash: (String amt) {
-        _requestSideCash(amt, bloc);
+        requestSideCash(amt, bloc);
       },
       onControllerChanged: (String amount) {
-        _onControllerChanged(amount, bloc);
+        onControllerChanged(amount, bloc);
       },
       viewModel: viewModel,
       inputController: bloc.inputController,
@@ -43,24 +43,25 @@ class GetSideCashPresenter extends Presenter<GetSideCashBloc,
     return bloc.viewModelPipe.receive;
   }
 
-  _presentSuccess(BuildContext context, GetSideCashBloc bloc) {
+  Future<dynamic> presentSuccess(BuildContext context, GetSideCashBloc bloc) {
     return showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (BuildContext ctx) => AlertDialog(
+        key: Key('SideCashDetailsSuccessMessage'),
         title: const Text('Side Cash Request Successful'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Awesome!"),
+            const Text("Awesome!"),
           ],
         ),
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              _resetViewModel(bloc);
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              resetViewModel(bloc);
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => HubScreen()));
             },
             textColor: Theme.of(context).primaryColor,
             child: const Text('Close'),
@@ -70,18 +71,19 @@ class GetSideCashPresenter extends Presenter<GetSideCashBloc,
     );
   }
 
-  _resetViewModel(GetSideCashBloc bloc) {
-    bloc.resetUsecase.launch();
+  bool resetViewModel(GetSideCashBloc bloc) {
+    return bloc.resetUsecase.launch();
   }
 
-  _requestSideCash(String amt, GetSideCashBloc bloc) {
+  bool requestSideCash(String amt, GetSideCashBloc bloc) {
     bool isValid = bloc.validateInput(amt);
     if (isValid) {
-      bloc.requestValue.launch();
+      return bloc.requestValue.send(amt);
     }
+    return false;
   }
 
-  _onControllerChanged(String amount, GetSideCashBloc bloc) {
-    bloc.validateInput(amount);
+  bool onControllerChanged(String amount, GetSideCashBloc bloc) {
+    return bloc.validateInput(amount);
   }
 }
