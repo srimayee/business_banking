@@ -8,15 +8,17 @@ import 'package:mockito/mockito.dart';
 
 class MockSideCashEnrollmentUseCase extends Mock
     implements SideCashEnrollmentUsecase {
+
 }
 
-class FakeSideCashEnrollmentUsecase extends Fake implements SideCashEnrollmentUsecase {
-  @override
-  bool updateFormWithSelectedAccount(String account) {
-    print("MOCK updateFormWithSelectedAccount called");
-    return true;
-  }
-}
+// class FakeSideCashEnrollmentUsecase extends Fake
+//     implements SideCashEnrollmentUsecase {
+//   @override
+//   bool updateFormWithSelectedAccount(String account) {
+//     print("MOCK updateFormWithSelectedAccount called");
+//     return true;
+//   }
+// }
 
 main() {
   group("Side Cash Enrollment Bloc Tests: ", () {
@@ -46,16 +48,10 @@ main() {
       }));
     });
 
-
-
-
     // TODO FAILING
-    test("update form with selected account", ()async {
-
+    test("update form with selected account", () async {
       // how do I link the blocs pipes to the view model callbacks in the usecase?
       final mockUseCase = MockSideCashEnrollmentUseCase();
-      // final fakeUseCase = FakeSideCashEnrollmentUsecase();
-
 
       final bloc = SideCashEnrollmentBloc(testUseCase: mockUseCase);
 
@@ -63,9 +59,8 @@ main() {
       print("before verify");
 
       // expect(fakeUseCase.updateFormWithSelectedAccount("any"), true);
-      verify(mockUseCase.updateFormWithSelectedAccount(any)).called(1);
+      // mockUseCase.updateFormWithSelectedAccount("hey hey");,
+      verify(mockUseCase.updateFormWithSelectedAccount("any")).called(1);
     });
-
-
   });
 }

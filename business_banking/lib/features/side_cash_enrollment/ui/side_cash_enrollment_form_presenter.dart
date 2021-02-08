@@ -43,7 +43,12 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
   }
 
   updateSelectedAccount(String accountString, SideCashEnrollmentBloc bloc) {
+
+    // todo test string is correct
+
+
     print("updateSelectedAccount called in presenter");
+
     bloc.updateFormWithSelectedAccountPipe.send(accountString);
   }
 

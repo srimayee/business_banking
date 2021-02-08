@@ -63,28 +63,14 @@ main() {
       expect(result, isA<SideCashEnrollmentFormScreen>());
     });
 
-    // TODO FAILING
-    testWidgets(
+    test(
         "update selectedCheckingAccount callback in presenter fires off the listener in the bloc",
-        (tester) async {
-      MockDummyFunctions dumbyFunctions = MockDummyFunctions();
-
-      // final ctx = MockedBuildContext();
-
-      final presenter = SideCashEnrollmentFormPresenter(
-        testUpdatedSelectedAccount: dumbyFunctions.updateSelectedAccountWrapper,
-      );
-
-      await tester.pumpWidget(_getApp(presenter));
-
-      // SideCashEnrollmentFormScreen screen =
-      //     presenter.buildScreen(ctx, mockBloc, initialFormViewModel());
-      // await tester.pumpAndSettle();
+        () async {
+      final presenter = SideCashEnrollmentFormPresenter();
 
       presenter.updateSelectedAccount("test account string", mockBloc);
-      await tester.pumpAndSettle();
 
-      verify(mockBloc.updateFormWithSelectedAccountListener(any)).called(1);
+      verify(mockBloc.updateFormWithSelectedAccountPipe.send("test account string")).called(1);
     });
 
     // TODO UNTESTED - actually  verify navigation occurs

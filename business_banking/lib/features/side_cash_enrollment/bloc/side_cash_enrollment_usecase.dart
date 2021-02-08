@@ -106,6 +106,7 @@ class SideCashEnrollmentUsecase extends UseCase {
 
   //
   void updateFormWithSelectedAccount(String account) {
+    print("in updateFormWithSelectedAccount");
     _scope = ExampleLocator().repository.containsScope<EnrollmentFormEntity>();
     final enrollmentForm =
         ExampleLocator().repository.get<EnrollmentFormEntity>(_scope);

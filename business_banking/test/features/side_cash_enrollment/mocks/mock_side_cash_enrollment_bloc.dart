@@ -7,7 +7,14 @@ import 'package:mockito/mockito.dart';
 
 import 'data_and_function_mocks.dart';
 
-class MockStringPipe extends Mock implements Pipe<String>{}
+class MockedStream extends Mock implements Stream<String> {}
+
+class MockStringPipe extends Mock implements Pipe<String>{
+
+  @override
+  // TODO: implement receive
+  Stream<String> get receive => MockedStream();
+}
 
 class MockSideCashEnrollmentBloc extends Mock implements SideCashEnrollmentBloc {
   // final viewModelPipe = Pipe<BillPayViewModel>();
@@ -24,7 +31,7 @@ class MockSideCashEnrollmentBloc extends Mock implements SideCashEnrollmentBloc 
   final enrollmentFormPipe = Pipe<EnrollmentFormViewModel>();
   final enrollmentAdvertisementPipe = Pipe<EnrollmentAdvertisementViewModel>();
   final enrollmentCompletionPipe = Pipe<EnrollmentCompletionViewModel>();
-  final updateFormWithSelectedAccountEventPipe = Pipe<String>();
+  final updateFormWithSelectedAccountPipe = MockStringPipe();
 
   MockSideCashEnrollmentBloc() {
     enrollmentFormPipe.whenListenedDo(() => enrollmentFormPipe.send(initialFormViewModel()));
@@ -32,17 +39,21 @@ class MockSideCashEnrollmentBloc extends Mock implements SideCashEnrollmentBloc 
       enrollmentAdvertisementPipe.send(EnrollmentAdvertisementViewModel())
     );
     enrollmentCompletionPipe.whenListenedDo(() => enrollmentCompletionPipe.send(EnrollmentCompletionViewModel()));
-    updateFormWithSelectedAccountEventPipe.receive.listen(updateFormWithSelectedAccountListener);
-  }
+    updateFormWithSelectedAccountPipe.receive.listen(updateFormWithSelectedAccountListener);
 
-  // mockUpdateFormWithSelectedAccountListener(String account) {
-  //   print("Mock mockUpdateFormWithSelectedAccountListener called in mock bloc");
-  //   print("string == $account");
-  // }
+
+    // TODO try whenListenDO
+    // updateFormWithSelectedAccountPipe.whenListenedDo(() => updateFormWithSelectedAccountListener);
+
+  }
 
   @override
   void dispose() {
     enrollmentFormPipe.dispose();
     enrollmentAdvertisementPipe.dispose();
+    enrollmentCompletionPipe.dispose();
+    updateFormWithSelectedAccountPipe.dispose();
+    // TODO dispose pipes
+
   }
 }

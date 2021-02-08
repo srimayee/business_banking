@@ -15,27 +15,26 @@ class SideCashEnrollmentBloc extends Bloc {
 
   final updateFormWithSelectedAccountPipe = Pipe<String>();
 
-   SideCashEnrollmentBloc({SideCashEnrollmentUsecase testUseCase}) {
-    usecase = testUseCase ?? SideCashEnrollmentUsecase(
-      formViewModelCallBack: (viewModel) {
-        enrollmentFormPipe.send(viewModel);
-      },
-      advertisementViewModelCallback: (viewModel) {
-         enrollmentAdvertisementPipe.send(viewModel);
-      },
-      completionViewModelCallback: (viewModel) {
-        enrollmentCompletionPipe.send(viewModel);
-      }
-    );
+  SideCashEnrollmentBloc({SideCashEnrollmentUsecase testUseCase}) {
+    usecase = testUseCase ??
+        SideCashEnrollmentUsecase(formViewModelCallBack: (viewModel) {
+          enrollmentFormPipe.send(viewModel);
+        }, advertisementViewModelCallback: (viewModel) {
+          enrollmentAdvertisementPipe.send(viewModel);
+        }, completionViewModelCallback: (viewModel) {
+          enrollmentCompletionPipe.send(viewModel);
+        });
 
-    enrollmentAdvertisementPipe.whenListenedDo(getEnrollmentAdvertisementRequestListener);
+    enrollmentAdvertisementPipe
+        .whenListenedDo(getEnrollmentAdvertisementRequestListener);
 
     enrollmentFormPipe.whenListenedDo(getEnrollmentFormRequestListener);
 
-    updateFormWithSelectedAccountPipe.receive.listen(updateFormWithSelectedAccountListener);
-    // submitFormEventPipe.receive.listen((event) { });
+    enrollmentCompletionPipe.whenListenedDo(submitForm);
 
-     enrollmentCompletionPipe.whenListenedDo(submitForm);
+    // updateFormWithSelectedAccountPipe.whenListenedDo(() => updateFormWithSelectedAccountListener);
+    updateFormWithSelectedAccountPipe.receive
+        .listen((account) => updateFormWithSelectedAccountListener(account));
   }
 
   getEnrollmentFormRequestListener() {
@@ -47,19 +46,19 @@ class SideCashEnrollmentBloc extends Bloc {
   }
 
   updateFormWithSelectedAccountListener(String account) {
-     print("updateFormWithSelectedAccountListener called in bloc");
-     usecase.updateFormWithSelectedAccount(account);
+    print("updateFormWithSelectedAccountListener called in bloc");
+    usecase.updateFormWithSelectedAccount(account);
   }
 
-  void submitForm(){
-     usecase.submitEnrollmentForm();
+  void submitForm() {
+    usecase.submitEnrollmentForm();
   }
 
   @override
   void dispose() {
     enrollmentFormPipe.dispose();
     enrollmentAdvertisementPipe.dispose();
+    enrollmentCompletionPipe.dispose();
+    updateFormWithSelectedAccountPipe.dispose();
   }
 }
-
-
