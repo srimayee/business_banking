@@ -7,9 +7,10 @@ class SideCashEnrollmentCompletionResponseModel extends JsonResponseModel {
 
   SideCashEnrollmentCompletionResponseModel.fromJson(Map<String, dynamic> json)
       : assert(json["message"] != null && json["isSuccessful"] != null),
-        message = json["message"],
+        message = json["message"]?? "default",
         isSuccessful = json["isSuccessful"];
 
   @override
   List<Object> get props => [message, isSuccessful];
 }
+

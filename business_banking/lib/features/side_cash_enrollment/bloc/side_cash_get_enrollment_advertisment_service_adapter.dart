@@ -19,12 +19,10 @@ class SideCashGetEnrollmentAdvertisementServiceAdapter extends ServiceAdapter<
   EnrollmentAdvertisementEntity createEntity(
       EnrollmentAdvertisementEntity initialEntity,
       SideCashGetEnrollmentAdvertisementResponseModel responseModel) {
-    print("in create Entity: ${responseModel.message}");
     return EnrollmentAdvertisementEntity(message: responseModel.message);
   }
   @override
   JsonRequestModel createRequest(EnrollmentAdvertisementEntity entity) {
-    // TODO: implement createRequest
     return super.createRequest(entity);
   }
 

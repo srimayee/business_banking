@@ -47,10 +47,3 @@ class EnrollmentFormEntity extends Entity {
     return mergedEntity;
   }
 }
-
-/*{
-  "accounts": ["savings-123", "checking-234"],
-  "selected_account": ""
-  "startDate": "",
-  "firstAvaiableStartDate": "20210131T000000-0600"
-}*/

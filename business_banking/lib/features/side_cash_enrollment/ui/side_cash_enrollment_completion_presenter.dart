@@ -6,7 +6,6 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../../main.dart';
 
 class SideCashEnrollmentCompletionPresenter extends Presenter<
     SideCashEnrollmentBloc,
@@ -25,6 +24,11 @@ class SideCashEnrollmentCompletionPresenter extends Presenter<
     );
   }
 
+  @override
+  Widget buildLoadingScreen(BuildContext context) {
+    return Scaffold(body: Center(child: CircularProgressIndicator()));
+  }
+
   // TODO Untested
   exitFeature(BuildContext context) {
     print("in exitFeature");
@@ -38,8 +42,5 @@ class SideCashEnrollmentCompletionPresenter extends Presenter<
     return bloc.enrollmentCompletionPipe.receive;
   }
 
-  @override
-  Widget buildLoadingScreen(BuildContext context) {
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
-  }
 }
+

@@ -12,3 +12,5 @@ class SideCashEnrollmentCompletionRequestModel extends JsonRequestModel {
     return requestMap;
   }
 }
+
+

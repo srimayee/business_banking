@@ -8,8 +8,6 @@ import 'package:mockito/mockito.dart';
 
 class MockSideCashEnrollmentUseCase extends Mock
     implements SideCashEnrollmentUsecase {
-
-
 }
 
 class FakeSideCashEnrollmentUsecase extends Fake implements SideCashEnrollmentUsecase {
@@ -36,24 +34,29 @@ main() {
       }));
     });
 
-    //TODO this is not mocked
     test('SideCashEnrollmentBloc gets FORM view model', () {
       bloc.enrollmentFormPipe.receive.listen(expectAsync1((model) {
         expect(model, isA<EnrollmentFormViewModel>());
       }));
     });
 
-    //TODO this is not mocked
     test('SideCashEnrollmentBloc gets Completion view model', () {
       bloc.enrollmentCompletionPipe.receive.listen(expectAsync1((model) {
         expect(model, isA<EnrollmentCompletionViewModel>());
       }));
     });
 
+
+
+
     // TODO FAILING
     test("update form with selected account", ()async {
+
+      // how do I link the blocs pipes to the view model callbacks in the usecase?
       final mockUseCase = MockSideCashEnrollmentUseCase();
       // final fakeUseCase = FakeSideCashEnrollmentUsecase();
+
+
       final bloc = SideCashEnrollmentBloc(testUseCase: mockUseCase);
 
       bloc.updateFormWithSelectedAccountPipe.send("any");
@@ -63,10 +66,6 @@ main() {
       verify(mockUseCase.updateFormWithSelectedAccount(any)).called(1);
     });
 
-    //
-    // test("3: usecase callback triggers viewModelPipe.send", () {});
-    //
-    // test("3. getEnrollmentFormRequest.whenListenedTo calls usecase.create",
-    //     () {});
+
   });
 }

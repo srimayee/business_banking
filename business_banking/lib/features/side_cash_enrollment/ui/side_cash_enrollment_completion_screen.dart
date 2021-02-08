@@ -1,5 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/side_cash_enrollment/bloc/side_cash_enrollment_bloc.dart';
+
 import 'package:business_banking/features/side_cash_enrollment/model/enrollment_completion_view_model.dart';
 import 'package:business_banking/features/side_cash_enrollment/side_cash_enrollment_keys.dart';
 import 'package:clean_framework/clean_framework.dart';

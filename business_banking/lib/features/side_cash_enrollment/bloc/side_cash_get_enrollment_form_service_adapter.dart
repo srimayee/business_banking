@@ -19,4 +19,5 @@ class SideCashGetEnrollmentFormServiceAdapter extends ServiceAdapter<
       accounts: responseModel.accounts,
     );
   }
+
 }

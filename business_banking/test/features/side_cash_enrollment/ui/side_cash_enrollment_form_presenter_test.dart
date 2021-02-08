@@ -32,12 +32,12 @@ main() {
 
   group("side cash enrollment form presenter tests: ", () {
     SideCashEnrollmentFormPresenter presenter;
-    MockSideCashEnrollmentBloc bloc;
+    MockSideCashEnrollmentBloc mockBloc;
     MockNavigatorObserver mockNavigatorObserver;
 
     setUpAll(() {
       presenter = SideCashEnrollmentFormPresenter();
-      bloc = MockSideCashEnrollmentBloc();
+      mockBloc = MockSideCashEnrollmentBloc();
       mockNavigatorObserver = MockNavigatorObserver();
     });
 
@@ -58,7 +58,7 @@ main() {
 
     test("presenter renders SideCashEnrollmentFormScreen", () {
       final result = presenter.buildScreen(
-          MockedBuildContext(), bloc, initialFormViewModel());
+          MockedBuildContext(), mockBloc, initialFormViewModel());
 
       expect(result, isA<SideCashEnrollmentFormScreen>());
     });
@@ -67,21 +67,24 @@ main() {
     testWidgets(
         "update selectedCheckingAccount callback in presenter fires off the listener in the bloc",
         (tester) async {
-      MockDummyFunctions dumbFunctions = MockDummyFunctions();
-      final ctx = MockedBuildContext();
+      MockDummyFunctions dumbyFunctions = MockDummyFunctions();
+
+      // final ctx = MockedBuildContext();
+
       final presenter = SideCashEnrollmentFormPresenter(
-        testUpdatedSelectedAccount: dumbFunctions.updateSelectedAccountWrapper,
+        testUpdatedSelectedAccount: dumbyFunctions.updateSelectedAccountWrapper,
       );
 
       await tester.pumpWidget(_getApp(presenter));
 
-      SideCashEnrollmentFormScreen screen =
-          presenter.buildScreen(ctx, bloc, initialFormViewModel());
-      await tester.pumpAndSettle();
-      presenter.updateSelectedAccount("test account string", bloc);
+      // SideCashEnrollmentFormScreen screen =
+      //     presenter.buildScreen(ctx, mockBloc, initialFormViewModel());
+      // await tester.pumpAndSettle();
+
+      presenter.updateSelectedAccount("test account string", mockBloc);
       await tester.pumpAndSettle();
 
-      verify(bloc.updateFormWithSelectedAccountListener(any)).called(1);
+      verify(mockBloc.updateFormWithSelectedAccountListener(any)).called(1);
     });
 
     // TODO UNTESTED - actually  verify navigation occurs
@@ -93,7 +96,7 @@ main() {
       );
 
       SideCashEnrollmentFormScreen screen = presenter.buildScreen(
-          ctx, bloc, EnrollmentFormViewModel(accounts: ["1", "2"]));
+          ctx, mockBloc, EnrollmentFormViewModel(accounts: ["1", "2"]));
 
       screen.submitForm(ctx);
 
@@ -121,7 +124,7 @@ main() {
 
       // await tester.pumpWidget(_getApp(presenter));
 
-       SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
+       SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, mockBloc,
           EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: "2"));
       await tester.pumpAndSettle();
 
@@ -158,7 +161,7 @@ main() {
 
       await tester.pumpWidget(_getApp(presenter));
 
-      SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, bloc,
+      SideCashEnrollmentFormScreen screen = presenter.buildScreen(ctx, mockBloc,
           EnrollmentFormViewModel(accounts: ["1", "2"], selectedAccount: null));
       await tester.pumpAndSettle();
 

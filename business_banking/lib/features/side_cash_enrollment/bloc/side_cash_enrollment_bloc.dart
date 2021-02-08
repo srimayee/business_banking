@@ -14,12 +14,8 @@ class SideCashEnrollmentBloc extends Bloc {
   final enrollmentCompletionPipe = Pipe<EnrollmentCompletionViewModel>();
 
   final updateFormWithSelectedAccountPipe = Pipe<String>();
-  // final submitFormEventPipe = EventPipe();
 
    SideCashEnrollmentBloc({SideCashEnrollmentUsecase testUseCase}) {
-    // initialize usecases and link usecase callbacks to UI Pipes
-    // I think you want to inject the repository into the usecase
-     print("test usecase == null ${testUseCase == null}");
     usecase = testUseCase ?? SideCashEnrollmentUsecase(
       formViewModelCallBack: (viewModel) {
         enrollmentFormPipe.send(viewModel);
@@ -65,3 +61,5 @@ class SideCashEnrollmentBloc extends Bloc {
     enrollmentAdvertisementPipe.dispose();
   }
 }
+
+

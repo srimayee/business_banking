@@ -18,7 +18,6 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
   @override
   SideCashEnrollmentFormScreen buildScreen(BuildContext context,
       SideCashEnrollmentBloc bloc, EnrollmentFormViewModel viewModel) {
-
     return SideCashEnrollmentFormScreen(
       formViewModel: viewModel,
       updateSelectedAccount: (String account) =>
@@ -73,11 +72,12 @@ class SideCashEnrollmentFormPresenter extends Presenter<SideCashEnrollmentBloc,
           });
       // return;
     } else {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (ctx) => SideCashEnrollmentCompletionFeatureWidget(),
-      ),
-      (route) => false,
-    );}
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (ctx) => SideCashEnrollmentCompletionFeatureWidget(),
+        ),
+        (route) => false,
+      );
+    }
   }
 }

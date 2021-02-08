@@ -23,3 +23,4 @@ class EnrollmentAdvertisementEntity extends Entity {
     return mergedEntity;
   }
 }
+

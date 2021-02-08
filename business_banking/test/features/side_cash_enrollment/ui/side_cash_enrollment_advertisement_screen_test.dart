@@ -40,6 +40,22 @@ main() {
       );
     });
 
+
+    testWidgets("screen has placeholder element when constructor values are null", (tester) async {
+      final screen = SideCashEnrollmentAdvertisementScreen(
+        message:null ,
+        enrollTapped: null ,
+      );
+      testApp = MaterialApp(
+        home: Scaffold(body: screen),
+        navigatorObservers: [mockNavigatorObserver],
+      );
+      await tester.pumpWidget(testApp);
+
+      expect(find.text("placeholder text"), findsOneWidget);
+
+    });
+
     testWidgets("screen has correct elements", (tester) async {
       await tester.pumpWidget(testApp);
       expect(

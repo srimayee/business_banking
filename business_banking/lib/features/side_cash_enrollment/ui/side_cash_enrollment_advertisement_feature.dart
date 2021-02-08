@@ -17,3 +17,4 @@ class SideCashEnrollmentAdvertisementFeatureWidget extends StatelessWidget {
     );
   }
 }
+
