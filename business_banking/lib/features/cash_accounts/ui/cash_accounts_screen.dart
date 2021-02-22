@@ -1,14 +1,12 @@
 import 'dart:ui';
 
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import '../../../locator.dart';
 
 class CashAccountsScreen extends Screen {
-  final CashAccountsViewModelList viewModel;
+  final CashAccountsViewModel viewModel;
   final VoidCallback navigateToAccountDetail;
 
   CashAccountsScreen(
@@ -22,117 +20,84 @@ class CashAccountsScreen extends Screen {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        AccountCard(
-          viewModel: viewModel,
-          navigateToAccountDetail: navigateToAccountDetail,
-          key: Key('cashAccountsViewModel'),
-        ),
+        GestureDetector(
+          child: AccountCard(
+            viewModel: viewModel,
+            key: Key('accountCard1'),
+          ),
+          onTap: () {
+            navigateToAccountDetail();
+          },
+        )
       ],
     );
   }
 }
 
 class AccountCard extends StatelessWidget {
-  final bool debugEnabled = false;
+  const AccountCard({
+    Key key,
+    @required this.viewModel,
+  }) : super(key: key);
 
-  const AccountCard(
-      {Key key,
-      @required this.viewModel,
-      @required this.navigateToAccountDetail})
-      : super(key: key);
-
-  final CashAccountsViewModelList viewModel;
-  final VoidCallback navigateToAccountDetail;
+  final CashAccountsViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
-    /// Locale Currency Conversion
-    /// ToDo() make this a global reference somewhere
-    var _usdCurrency = new NumberFormat("#,##0.00", "en_US");
-
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: viewModel.cashAccountEntityList.length,
-      itemBuilder: (BuildContext context, int index) {
-        final currentCashAccountViewModel =
-            viewModel.cashAccountEntityList[index];
-
-        if (debugEnabled) {
-          logger().debug('Cash Accounts UI Data: ' +
-              currentCashAccountViewModel.toString());
-        }
-
-        return Container(
-          child: InkWell(
-            onTap: () {
-              navigateToAccountDetail();
-            },
-            child: Card(
-              color: Colors.white,
-              shadowColor: Colors.grey[500],
-              elevation: 3.0,
-              key: Key('cashAccountsCard' + (index.toInt() + 1).toString()),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 18.0, horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return Container(
+      height: 125,
+      padding: EdgeInsets.all(5.0),
+      child: Card(
+        color: Colors.white,
+        shadowColor: Colors.grey[500],
+        elevation: 3.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(currentCashAccountViewModel.name,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w400),
-                            overflow: TextOverflow.ellipsis),
-                        Text("..." + currentCashAccountViewModel.lastFour,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.w400),
-                            key: Key('cashAccountsCard' +
-                                (index.toInt() + 1).toString() +
-                                'AccountNumber'))
-                      ],
+                    Expanded(
+                      child: Text(
+                        viewModel.name,
+                        style: TextStyle(
+                          fontSize: 25.0,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Balance:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text(
-                            "\$" +
-                                _usdCurrency.format(
-                                    currentCashAccountViewModel.balance),
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('cashAccountsCard' +
-                                (index.toInt() + 1).toString() +
-                                'Balance'))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Type:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text("Cash",
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('cashAccountsCard' +
-                                (index.toInt() + 1).toString() +
-                                'AccountType'))
-                      ],
+                    AutoSizeText(
+                      ' *' + viewModel.lastFour.toString(),
+                      style: TextStyle(
+                        fontSize: 25.0,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Account Balance:",
+                      style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                    ),
+                    Text(
+                      '\$' + viewModel.balance.toStringAsFixed(2),
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w300),
+                      key: Key('balance'),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

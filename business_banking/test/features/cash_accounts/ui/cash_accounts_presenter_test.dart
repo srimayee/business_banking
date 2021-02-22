@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:business_banking/features/account_detail/ui/account_detail_screen.dart';
-import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
+import 'package:business_banking/features/cash_accounts/model/cash_accounts_view_model.dart';
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,16 +10,15 @@ import 'package:flutter/material.dart';
 import '../bloc/cash_accounts_bloc_mock.dart';
 
 class CashAccountsPresenterTest extends Presenter<CashAccountsBlocMock,
-    CashAccountsViewModelList, CashAccountsScreen> {
+    CashAccountsViewModel, CashAccountsScreen> {
   @override
-  Stream<CashAccountsViewModelList> getViewModelStream(
-      CashAccountsBlocMock bloc) {
+  Stream<CashAccountsViewModel> getViewModelStream(CashAccountsBlocMock bloc) {
     return bloc.cashAccountsViewModelListPipe.receive;
   }
 
   @override
   CashAccountsScreen buildScreen(BuildContext context,
-      CashAccountsBlocMock bloc, CashAccountsViewModelList viewModel) {
+      CashAccountsBlocMock bloc, CashAccountsViewModel viewModel) {
     return CashAccountsScreen(
       viewModel: viewModel,
       navigateToAccountDetail: () {
