@@ -24,6 +24,6 @@ class AccountDetailPresenter extends Presenter<AccountDetailBloc,
   }
 
   void _navigateToCashAccounts(BuildContext context) {
-    Navigator.pop(context);
+    CFRouterScope.of(context).pop();
   }
 }

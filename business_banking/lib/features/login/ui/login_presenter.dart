@@ -1,14 +1,15 @@
-import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/bloc/login_bloc.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:business_banking/features/login/ui/login_screen.dart';
+import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   @override
-  LoginScreen buildScreen(BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
+  LoginScreen buildScreen(
+      BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
         return;
@@ -57,13 +58,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   }
 
   void _navigateToHubScreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        settings: RouteSettings(name: 'HubScreen'),
-        builder: (context) => HubScreen(),
-      ),
-    );
+    CFRouterScope.of(context).replaceWith(BusinessBankingRouter.hubRoute);
   }
 
   void _showErrorDialog(BuildContext context) {
@@ -75,7 +70,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              CFRouterScope.of(context).pop();
             },
             child: Text('OK'),
           )
@@ -93,7 +88,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              CFRouterScope.of(context).pop();
             },
             child: Text('OK'),
           )
