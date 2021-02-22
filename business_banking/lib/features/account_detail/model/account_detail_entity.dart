@@ -61,9 +61,4 @@ class AccountDetailEntity extends Entity {
         pendingTransactions: pendingTransactions ?? this.pendingTransactions,
         depositHolds: depositHolds ?? this.depositHolds);
   }
-
-  @override
-  String toString() {
-    return '$name $lastFour $accountType $routingNumber $balance $beginningBalance $pendingTransactions $depositHolds';
-  }
 }

@@ -5,12 +5,12 @@ class CashAccountsEntity extends Entity {
   final String lastFour;
   final double balance;
 
-  CashAccountsEntity(
-      {List<EntityFailure> errors = const [],
-      String name,
-      String lastFour,
-      this.balance = 0.00})
-      : name = name ?? 'Account',
+  CashAccountsEntity({
+    List<EntityFailure> errors = const [],
+    String name,
+    String lastFour,
+    this.balance = 0.00,
+  })  : name = name ?? 'Account',
         lastFour = lastFour ?? '0000',
         super(errors: errors);
 
@@ -20,14 +20,10 @@ class CashAccountsEntity extends Entity {
   @override
   merge({errors, String name, String lastFour, double balance}) {
     return CashAccountsEntity(
-        errors: errors ?? this.errors,
-        name: name ?? this.name,
-        lastFour: lastFour ?? this.lastFour,
-        balance: balance ?? this.balance);
-  }
-
-  @override
-  String toString() {
-    return "$name $lastFour $balance";
+      errors: errors ?? this.errors,
+      name: name ?? this.name,
+      lastFour: lastFour ?? this.lastFour,
+      balance: balance ?? this.balance,
+    );
   }
 }

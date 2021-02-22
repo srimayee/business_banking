@@ -48,9 +48,4 @@ class CustomerEntity extends Entity {
         accountType: accountType ?? this.accountType,
         address: address ?? this.address);
   }
-
-  @override
-  String toString() {
-    return '$honorific $firstName $lastName $nickName $accountType $address';
-  }
 }

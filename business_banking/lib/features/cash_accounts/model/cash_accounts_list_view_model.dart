@@ -2,12 +2,10 @@ import 'package:business_banking/features/cash_accounts/model/cash_accounts_enti
 import 'package:clean_framework/clean_framework.dart';
 
 class CashAccountsViewModelList extends ViewModel {
-  final List<CashAccountsEntityModel> cashAccountEntityModel;
+  final List<CashAccountsEntity> cashAccountEntityList;
 
-  CashAccountsViewModelList({this.cashAccountEntityModel});
+  CashAccountsViewModelList({this.cashAccountEntityList});
 
   @override
-  String toString() {
-    return cashAccountEntityModel.toString();
-  }
+  List<Object> get props => cashAccountEntityList;
 }

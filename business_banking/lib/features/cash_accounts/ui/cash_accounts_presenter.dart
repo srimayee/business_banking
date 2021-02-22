@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:business_banking/features/account_detail/ui/account_detail_screen.dart';
 import 'package:business_banking/features/cash_accounts/bloc/cash_accounts_bloc.dart';
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 
 import 'cash_accounts_screen.dart';
 
-
-class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsViewModelList, CashAccountsScreen> {
+class CashAccountsPresenter extends Presenter<CashAccountsBloc,
+    CashAccountsViewModelList, CashAccountsScreen> {
   @override
   Stream<CashAccountsViewModelList> getViewModelStream(CashAccountsBloc bloc) {
     return bloc.cashAccountsViewModelListPipe.receive;
@@ -17,9 +18,10 @@ class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsView
 
   @override
   CashAccountsScreen buildScreen(
-      BuildContext context,
-      CashAccountsBloc bloc,
-      CashAccountsViewModelList viewModel) {
+    BuildContext context,
+    CashAccountsBloc bloc,
+    CashAccountsViewModelList viewModel,
+  ) {
     return CashAccountsScreen(
       viewModel: viewModel,
       navigateToAccountDetail: () {
@@ -33,7 +35,11 @@ class CashAccountsPresenter extends Presenter<CashAccountsBloc, CashAccountsView
       context,
       MaterialPageRoute(
         settings: RouteSettings(name: 'AccountDetailScreen'),
-        //builder: (context) => AccountDetailScreen(),
+        builder: (context) => AccountDetailScreen(
+          //TODO: add viewmodel and navigateToCashAccounts
+          navigateToCashAccounts: () {},
+          viewModel: null,
+        ),
       ),
     );
   }

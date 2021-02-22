@@ -14,28 +14,29 @@ class CashAccountsUseCase extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator()
-        .repository
-        .containsScope<CashAccountsEntityModelList>();
+    _scope =
+        ExampleLocator().repository.containsScope<CashAccountsEntityList>();
     if (_scope == null) {
-      _scope = ExampleLocator()
-          .repository
-          .create<CashAccountsEntityModelList>(
-          CashAccountsEntityModelList(), _notifySubscribers);
+      _scope = ExampleLocator().repository.create<CashAccountsEntityList>(
+          CashAccountsEntityList(), _notifySubscribers);
     } else {
       _scope.subscription = _notifySubscribers;
     }
 
     await ExampleLocator()
-        .repository.runServiceAdapter(_scope, CashAccountsServiceAdapter());
+        .repository
+        .runServiceAdapter(_scope, CashAccountsServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  CashAccountsViewModelList buildViewModel(CashAccountsEntityModelList cashAccountsListEntityModel) {
+  CashAccountsViewModelList buildViewModel(
+    CashAccountsEntityList cashAccountsListEntityModel,
+  ) {
     return CashAccountsViewModelList(
-        cashAccountEntityModel: cashAccountsListEntityModel.cashAccountsEntityModelList);
+      cashAccountEntityList: cashAccountsListEntityModel.cashAccountsEntityList,
+    );
   }
 }

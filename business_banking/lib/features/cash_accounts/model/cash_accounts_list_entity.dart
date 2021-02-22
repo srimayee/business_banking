@@ -1,34 +1,25 @@
 import 'package:business_banking/features/cash_accounts/model/cash_accounts_entity.dart';
 import 'package:clean_framework/clean_framework.dart';
 
-class CashAccountsEntityModelList extends Entity {
+class CashAccountsEntityList extends Entity {
   /// Rest API Accounts Object.
-  final List<CashAccountsEntityModel> cashAccountsEntityModelList;
+  final List<CashAccountsEntity> cashAccountsEntityList;
 
-  CashAccountsEntityModelList(
-      {List<EntityError> errors = const [],
-      List<CashAccountsEntityModel> cashAccountsServiceResponseModelList})
-      :
-
-        /// Set Default Values.
-        cashAccountsEntityModelList =
-            cashAccountsServiceResponseModelList ?? [],
+  CashAccountsEntityList({
+    List<EntityFailure> errors = const [],
+    List<CashAccountsEntity> cashAccountsServiceResponseModelList,
+  })  : cashAccountsEntityList = cashAccountsServiceResponseModelList ?? [],
         super(errors: errors);
 
   @override
-  List<Object> get props => [errors, cashAccountsEntityModelList];
+  List<Object> get props => [errors, cashAccountsEntityList];
 
   @override
-  merge({errors, List<CashAccountsEntityModel> cashAccountEntityModel}) {
-    return CashAccountsEntityModelList(
+  merge({errors, List<CashAccountsEntity> cashAccountEntityModel}) {
+    return CashAccountsEntityList(
       errors: errors ?? this.errors,
       cashAccountsServiceResponseModelList:
-          cashAccountEntityModel ?? this.cashAccountsEntityModelList,
+          cashAccountEntityModel ?? this.cashAccountsEntityList,
     );
-  }
-
-  @override
-  String toString() {
-    return 'CashAccountsEntityModelList{cashAccountsEntityModelList: $cashAccountsEntityModelList}';
   }
 }

@@ -52,10 +52,10 @@ class AccountCard extends StatelessWidget {
 
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: viewModel.cashAccountEntityModel.length,
+      itemCount: viewModel.cashAccountEntityList.length,
       itemBuilder: (BuildContext context, int index) {
         final currentCashAccountViewModel =
-            viewModel.cashAccountEntityModel[index];
+            viewModel.cashAccountEntityList[index];
 
         if (debugEnabled) {
           logger().debug('Cash Accounts UI Data: ' +
@@ -81,14 +81,16 @@ class AccountCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(currentCashAccountViewModel.accountTitle,
+                        Text(currentCashAccountViewModel.name,
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.w400),
                             overflow: TextOverflow.ellipsis),
-                        Text("..." + currentCashAccountViewModel.accountNumber,
+                        Text("..." + currentCashAccountViewModel.lastFour,
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.w400),
-                            key: Key('cashAccountsCard' + (index.toInt() + 1).toString() + 'AccountNumber'))
+                            key: Key('cashAccountsCard' +
+                                (index.toInt() + 1).toString() +
+                                'AccountNumber'))
                       ],
                     ),
                     Row(
@@ -101,10 +103,12 @@ class AccountCard extends StatelessWidget {
                         Text(
                             "\$" +
                                 _usdCurrency.format(
-                                    currentCashAccountViewModel.accountBalance),
+                                    currentCashAccountViewModel.balance),
                             style: TextStyle(
                                 fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('cashAccountsCard' + (index.toInt() + 1).toString() + 'Balance'))
+                            key: Key('cashAccountsCard' +
+                                (index.toInt() + 1).toString() +
+                                'Balance'))
                       ],
                     ),
                     Row(
@@ -117,20 +121,9 @@ class AccountCard extends StatelessWidget {
                         Text("Cash",
                             style: TextStyle(
                                 fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('cashAccountsCard' + (index.toInt() + 1).toString() + 'AccountType'))
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Account Status:',
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            overflow: TextOverflow.ellipsis),
-                        Text(currentCashAccountViewModel.accountStatus,
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w300),
-                            key: Key('cashAccountsCard' + (index.toInt() + 1).toString() + 'AccountStatus'))
+                            key: Key('cashAccountsCard' +
+                                (index.toInt() + 1).toString() +
+                                'AccountType'))
                       ],
                     ),
                   ],

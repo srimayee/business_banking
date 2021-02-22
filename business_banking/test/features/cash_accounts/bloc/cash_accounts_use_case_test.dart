@@ -13,14 +13,11 @@ class CashAccountsUseCaseMock extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator()
-        .repository
-        .containsScope<CashAccountsEntityModelList>();
+    _scope =
+        ExampleLocator().repository.containsScope<CashAccountsEntityList>();
     if (_scope == null) {
-      _scope = ExampleLocator()
-          .repository
-          .create<CashAccountsEntityModelList>(
-          CashAccountsEntityModelList(), _notifySubscribers);
+      _scope = ExampleLocator().repository.create<CashAccountsEntityList>(
+          CashAccountsEntityList(), _notifySubscribers);
     } else {
       _scope.subscription = _notifySubscribers;
     }
@@ -35,8 +32,9 @@ class CashAccountsUseCaseMock extends UseCase {
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  CashAccountsViewModelList buildViewModel(CashAccountsEntityModelList cashAccountsListEntityModel) {
+  CashAccountsViewModelList buildViewModel(
+      CashAccountsEntityList cashAccountsEntityList) {
     return CashAccountsViewModelList(
-        cashAccountEntityModel: cashAccountsListEntityModel.cashAccountsEntityModelList);
+        cashAccountEntityList: cashAccountsEntityList.cashAccountsEntityList);
   }
 }

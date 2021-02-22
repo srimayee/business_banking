@@ -28,14 +28,9 @@ class TransferFundsViewModel extends Equatable implements ViewModel {
   List<Object> get props =>
       [fromAccount, toAccount, amount, fromAccounts, toAccounts, id, date];
 
-  @override
-  String toString() {
-    return "fromAccount: $fromAccount, toAccount: $toAccount, amount: $amount, date: $date, fromAccounts: $fromAccounts, toAccounts: $toAccounts, id: $id, dataStatus: $dataStatus, serviceStatus: $serviceStatus";
-  }
-
-  static DateTime _getLastMidnight() {
-    final now = DateTime.now();
-    final lastMidnight = new DateTime(now.year, now.month, now.day);
-    return lastMidnight;
-  }
+  // static DateTime _getLastMidnight() {
+  //   final now = DateTime.now();
+  //   final lastMidnight = new DateTime(now.year, now.month, now.day);
+  //   return lastMidnight;
+  // }
 }

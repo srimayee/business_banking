@@ -30,10 +30,10 @@ void main() {
         find.byValueKey('cashAccountsCard2AccountStatus');
 
     final cashAccountAppBar = find.byValueKey('CAappBarName');
-    final backButton = find.byValueKey('backButton');
-    final accountDetailAppBar = find.byValueKey('ADappBarL4');
-    final bigBalance = find.byValueKey('bigBalance');
-    final depHold = find.byValueKey('depHold');
+    // final backButton = find.byValueKey('backButton');
+    // final accountDetailAppBar = find.byValueKey('ADappBarL4');
+    // final bigBalance = find.byValueKey('bigBalance');
+    // final depHold = find.byValueKey('depHold');
     final customerTileText = find.byValueKey('HCTileText');
     final customerTileButton = find.byValueKey('HCTileButton');
     final customerDetailAppBar = find.byValueKey('HCDappBarName');
