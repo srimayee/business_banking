@@ -13,7 +13,7 @@ class CashAccountsPresenterTest extends Presenter<CashAccountsBlocMock,
     CashAccountsViewModel, CashAccountsScreen> {
   @override
   Stream<CashAccountsViewModel> getViewModelStream(CashAccountsBlocMock bloc) {
-    return bloc.cashAccountsViewModelListPipe.receive;
+    return bloc.cashAccountsViewModelPipe.receive;
   }
 
   @override
