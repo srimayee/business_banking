@@ -25,8 +25,8 @@
                                 "label": "",
                                 "headers": [
                                     {
-                                        "key": "",
-                                        "value": ""
+                                        "key": "Content-Type",
+                                        "value": "application/json"
                                     }
                                 ],
                                 "filePath": "",
@@ -73,7 +73,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "",
+                                "body": "{\n  \"accountTransactions\": [\n      {\n        \"transactionTitle\": \"MacBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 499.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 499.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"LinuxBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 14.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 14.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"WindowsBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 399.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 399.52\n            }\n          ]\n      }\n    ]\n}",
                                 "latency": 0,
                                 "statusCode": 400,
                                 "label": "",
@@ -93,7 +93,7 @@
                                 "uuid": "",
                                 "body": "{\n  \n  \"imageUrl\":\"https://via.placeholder.com/300\",\n  \"externalUrl\": \"https://www.huntington.com/\"\n}",
                                 "latency": 0,
-                                "statusCode": 200,
+                                "statusCode": 404,
                                 "label": "",
                                 "headers": [
                                     {
@@ -154,7 +154,7 @@
                                 "uuid": "",
                                 "body": "{\n  \"fromAccounts\": [\"1111111111\", \"2222222222\", \"3333333333\" ]\n}",
                                 "latency": 0,
-                                "statusCode": 200,
+                                "statusCode": 400,
                                 "label": "",
                                 "headers": [
                                     {
@@ -181,7 +181,7 @@
                                 "uuid": "",
                                 "body": "{\n  \"toAccounts\": [\"4444444444\", \"5555555555\", \"6666666666\" ]\n}",
                                 "latency": 0,
-                                "statusCode": 200,
+                                "statusCode": 404,
                                 "label": "",
                                 "headers": [
                                     {
@@ -218,7 +218,14 @@
                                 ],
                                 "filePath": "",
                                 "sendFileAsBody": false,
-                                "rules": [],
+                                "rules": [
+                                    {
+                                        "target": "params",
+                                        "modifier": "\"test\"",
+                                        "value": "TRUE",
+                                        "isRegex": false
+                                    }
+                                ],
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
                             },
@@ -245,12 +252,12 @@
                     }
                 ],
                 "proxyMode": false,
-                "proxyHost": "",
+                "proxyHost": "http://localhost:3000",
                 "https": false,
                 "cors": true,
                 "headers": [
                     {
-                        "key": "Content-Type",
+                        "key": "",
                         "value": "application/json"
                     }
                 ],

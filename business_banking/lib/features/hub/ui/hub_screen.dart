@@ -22,12 +22,13 @@ class HubScreen extends Screen {
       body: Column(
         children: [
           Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
             child: Center(
                 child: Text(
               'Welcome John Doe',
               style: TextStyle(fontSize: 18),
             )),
-            height: 80,
           ),
           CashAccountsWidget(),
           CustomerWidget(),
