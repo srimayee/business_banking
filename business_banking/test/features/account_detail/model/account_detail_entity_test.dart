@@ -27,4 +27,32 @@ void main() {
       'AccountDetailEntity([], Employee Checking, 6543, Employee Checking, 746395735, 3545.54, 3674.43, -128.89, 0.0)',
     );
   });
+
+  test('AccountDetailEntity merge with null errors', () {
+    final entity = AccountDetailEntity(
+      errors: [],
+      name: 'Employee Checking',
+      lastFour: '6543',
+      accountType: 'Employee Checking',
+      routingNumber: 746395735,
+      balance: 3545.54,
+      beginningBalance: 3674.43,
+      pendingTransactions: -128.89,
+      depositHolds: 0.00,
+    );
+    final merged = entity.merge(errors: null);
+    expect(merged.errors, []);
+    expect(merged.name, 'Employee Checking');
+    expect(merged.lastFour, '6543');
+    expect(merged.accountType, 'Employee Checking');
+    expect(merged.routingNumber, 746395735);
+    expect(merged.balance, 3545.54);
+    expect(merged.beginningBalance, 3674.43);
+    expect(merged.pendingTransactions, -128.89);
+    expect(merged.depositHolds, 0.00);
+    expect(
+      merged.toString(),
+      'AccountDetailEntity([], Employee Checking, 6543, Employee Checking, 746395735, 3545.54, 3674.43, -128.89, 0.0)',
+    );
+  });
 }
