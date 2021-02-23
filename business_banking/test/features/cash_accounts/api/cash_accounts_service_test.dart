@@ -9,8 +9,12 @@ void main() {
 
     expect(eitherResponse.isRight, isTrue);
     expect(
-        eitherResponse.fold((_) {}, (m) => m),
-        CashAccountsServiceResponseModel.fromJson(
-            {'type': 'Employee Checking', 'lastFour': '6542', 'balance': 3545.54}));
+      eitherResponse.fold((_) {}, (m) => m),
+      CashAccountsServiceResponseModel.fromJson({
+        'type': 'Employee Checking',
+        'lastFour': '6542',
+        'balance': 3545.54,
+      }),
+    );
   });
 }

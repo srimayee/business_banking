@@ -4,12 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('CustomerEntity properties', () {
     final entity = CustomerEntity(
-            honorific: "Mr.",
-            firstName: "Joe",
-            lastName: "A",
-            accountType: AccountType.private,
-            nickName: "",
-            address: "1234 ABCD Rd, City, State 00000");
+        honorific: "Mr.",
+        firstName: "Joe",
+        lastName: "A",
+        accountType: AccountType.private,
+        nickName: "",
+        address: "1234 ABCD Rd, City, State 00000");
     expect(entity.honorific, "Mr.");
     expect(entity.firstName, "Joe");
     expect(entity.lastName, "A");
@@ -17,17 +17,20 @@ void main() {
     expect(entity.nickName, "");
     expect(entity.address, "1234 ABCD Rd, City, State 00000");
 
-    expect(entity.toString(), "Mr. Joe A  AccountType.private 1234 ABCD Rd, City, State 00000");
+    expect(
+      entity.toString(),
+      'CustomerEntity([], Mr., Joe, A, , AccountType.private, 1234 ABCD Rd, City, State 00000)',
+    );
   });
 
   test('CustomerEntity merge with errors = null', () {
     final entity = CustomerEntity(
-            honorific: "Mr.",
-            firstName: "Joe",
-            lastName: "A",
-            accountType: AccountType.private,
-            nickName: "",
-            address: "1234 ABCD Rd, City, State 00000");
+        honorific: "Mr.",
+        firstName: "Joe",
+        lastName: "A",
+        accountType: AccountType.private,
+        nickName: "",
+        address: "1234 ABCD Rd, City, State 00000");
     entity.merge(errors: null);
     expect(entity.honorific, "Mr.");
     expect(entity.firstName, "Joe");

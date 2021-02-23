@@ -8,8 +8,7 @@ void main() {
 
     bloc.promosViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<PromosViewModel>());
-      expect(model.imageUrl,
-          'http://placehold.jp/24/228B22/006400/300x300.jpg?text=a%20promo%20will%20be%20displayed%20here');
+      expect(model.imageUrl, 'https://via.placeholder.com/300');
       expect(model.link, 'https://www.huntington.com/');
     }));
   });
