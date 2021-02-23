@@ -15,7 +15,7 @@
                         "uuid": "",
                         "documentation": "Gets info for CashAccounts screen",
                         "method": "get",
-                        "endpoint": "accounts",
+                        "endpoint": "cash_accounts",
                         "responses": [
                             {
                                 "uuid": "",
