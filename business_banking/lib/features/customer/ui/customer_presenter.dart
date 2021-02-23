@@ -10,7 +10,6 @@ class CustomerPresenter
     extends Presenter<CustomerBloc, CustomerViewModel, CustomerScreen> {
   @override
   Stream<CustomerViewModel> getViewModelStream(CustomerBloc bloc) {
-    // return Stream<CustomerViewModel>.value(CustomerViewModel());
     return bloc.customerViewModelPipe.receive;
   }
 
