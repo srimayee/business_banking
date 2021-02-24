@@ -1,11 +1,11 @@
 {
-    "source": "mockoon:1.10.0",
+    "source": "mockoon:1.11.0",
     "data": [
         {
             "type": "environment",
             "item": {
                 "uuid": "",
-                "lastMigration": 12,
+                "lastMigration": 13,
                 "name": "Business Banking Env",
                 "endpointPrefix": "",
                 "latency": 0,
@@ -25,8 +25,8 @@
                                 "label": "",
                                 "headers": [
                                     {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
+                                        "key": "",
+                                        "value": ""
                                     }
                                 ],
                                 "filePath": "",
@@ -36,7 +36,8 @@
                                 "rulesOperator": "OR"
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -63,7 +64,8 @@
                                 "rulesOperator": "OR"
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -73,7 +75,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"accountTransactions\": [\n      {\n        \"transactionTitle\": \"MacBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 499.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 499.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"LinuxBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 14.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 14.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"WindowsBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 399.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 399.52\n            }\n          ]\n      }\n    ]\n}",
+                                "body": "",
                                 "latency": 0,
                                 "statusCode": 400,
                                 "label": "",
@@ -93,7 +95,7 @@
                                 "uuid": "",
                                 "body": "{\n  \n  \"imageUrl\":\"https://via.placeholder.com/300\",\n  \"externalUrl\": \"https://www.huntington.com/\"\n}",
                                 "latency": 0,
-                                "statusCode": 404,
+                                "statusCode": 200,
                                 "label": "",
                                 "headers": [
                                     {
@@ -115,7 +117,8 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -142,7 +145,8 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -154,7 +158,7 @@
                                 "uuid": "",
                                 "body": "{\n  \"fromAccounts\": [\"1111111111\", \"2222222222\", \"3333333333\" ]\n}",
                                 "latency": 0,
-                                "statusCode": 400,
+                                "statusCode": 200,
                                 "label": "",
                                 "headers": [
                                     {
@@ -169,7 +173,8 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -181,7 +186,7 @@
                                 "uuid": "",
                                 "body": "{\n  \"toAccounts\": [\"4444444444\", \"5555555555\", \"6666666666\" ]\n}",
                                 "latency": 0,
-                                "statusCode": 404,
+                                "statusCode": 200,
                                 "label": "",
                                 "headers": [
                                     {
@@ -196,7 +201,8 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
@@ -218,14 +224,7 @@
                                 ],
                                 "filePath": "",
                                 "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "\"test\"",
-                                        "value": "TRUE",
-                                        "isRegex": false
-                                    }
-                                ],
+                                "rules": [],
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
                             },
@@ -248,16 +247,45 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "cash-accounts",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"type\": \"Employee Checking\", \n  \"lastFour\": \"6542\",\n  \"balance\": 3545.54\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
                     }
                 ],
                 "proxyMode": false,
-                "proxyHost": "http://localhost:3000",
+                "proxyHost": "",
                 "https": false,
                 "cors": true,
                 "headers": [
                     {
-                        "key": "",
+                        "key": "Content-Type",
                         "value": "application/json"
                     }
                 ],
