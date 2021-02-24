@@ -17,7 +17,5 @@ void main() {
     await tester.pump(Duration(milliseconds: 500));
 
     expect(find.byType(CustomerPresenter), findsOneWidget);
-
-    await tester.tap(find.byType(CustomerPresenter));
   });
 }
