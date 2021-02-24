@@ -18,15 +18,16 @@ void main() {
           'depHolds': 0.00
         }));
 
-    expect(entity, AccountDetailEntity(
-      name: 'Employee Checking',
-      lastFour: '6542',
-      accountType: 'Employee Checking',
-      routingNumber: 746395735,
-      balance: 3545.54,
-      beginningBalance: 3674.43,
-      pendingTransactions: -128.89,
-      depositHolds: 0.00
-    ));
+    expect(
+        entity,
+        AccountDetailEntity(
+            name: 'Employee Checking',
+            lastFour: '6542',
+            accountType: 'Employee Checking',
+            routingNumber: 746395735,
+            balance: 3545.54,
+            beginningBalance: 3674.43,
+            pendingTransactions: -128.89,
+            depositHolds: 0.00));
   });
 }

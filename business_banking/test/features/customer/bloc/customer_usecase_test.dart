@@ -3,7 +3,6 @@ import 'package:business_banking/features/customer/model/customer_view_model.dar
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
   test('CustomerUseCase initialize with error', () {
     try {
       CustomerUseCase(null);
@@ -25,6 +24,6 @@ void main() {
       expect(viewModel, isA<CustomerViewModel>());
     });
     usecase.create();
-    usecase.create();//use to trigger else in the create
+    usecase.create(); //use to trigger else in the create
   });
 }

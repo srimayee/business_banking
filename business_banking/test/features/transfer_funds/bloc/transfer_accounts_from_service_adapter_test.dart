@@ -15,14 +15,17 @@ void main() {
     expect(
         entity.fromAccounts,
         TransferFundsEntity(
-            fromAccounts: ['1111111111', '2222222222', '3333333333']).fromAccounts);
+                fromAccounts: ['1111111111', '2222222222', '3333333333'])
+            .fromAccounts);
 
     final initialEntity = TransferFundsEntity();
-    final TransferFundsEntity entity1 = await serviceAdapter.query(initialEntity);
+    final TransferFundsEntity entity1 =
+        await serviceAdapter.query(initialEntity);
 
     expect(
         entity1.fromAccounts,
         TransferFundsEntity(
-            fromAccounts: ['1111111111', '2222222222', '3333333333']).fromAccounts);
+                fromAccounts: ['1111111111', '2222222222', '3333333333'])
+            .fromAccounts);
   });
 }

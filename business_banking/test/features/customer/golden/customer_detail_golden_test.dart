@@ -9,8 +9,7 @@ void main() {
   testWidgets('CustomerDetail Golden test', (tester) async {
     final testWidget = MaterialApp(
         home: BlocProvider<CustomerBloc>(
-            create: (_) => CustomerBloc(),
-            child: CustomerDetailWidget()));
+            create: (_) => CustomerBloc(), child: CustomerDetailWidget()));
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
