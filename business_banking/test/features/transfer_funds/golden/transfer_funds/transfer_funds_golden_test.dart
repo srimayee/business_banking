@@ -9,7 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Transfer Funds Golden test', (tester) async {
-    TransferFundsEntity entity = TransferFundsEntity(fromAccounts: ['1111111111', '2222222222', '3333333333']);
+    TransferFundsEntity entity = TransferFundsEntity(
+        fromAccounts: ['1111111111', '2222222222', '3333333333']);
     ExampleLocator()
         .repository
         .create<TransferFundsEntity>(entity, (_) {}, deleteIfExists: true);
@@ -19,6 +20,7 @@ void main() {
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
-    await expectLater(find.byType(TransferFundsPresenter), matchesGoldenFile('main.png'));
+    await expectLater(
+        find.byType(TransferFundsPresenter), matchesGoldenFile('main.png'));
   });
 }

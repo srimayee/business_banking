@@ -8,8 +8,11 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('CashAccounts, with true bloc', (tester) async {
     final testWidget = MaterialApp(
-        home: BlocProvider<CashAccountsBloc>(
-            create: (_) => CashAccountsBloc(), child: CashAccountsWidget()));
+      home: BlocProvider<CashAccountsBloc>(
+        create: (_) => CashAccountsBloc(),
+        child: CashAccountsWidget(),
+      ),
+    );
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));

@@ -9,15 +9,17 @@ void main() {
 
     expect(eitherResponse.isRight, isTrue);
     expect(
-        eitherResponse.fold((_) {}, (m) => m),
-        AccountDetailServiceResponseModel.fromJson(
-            {'name': 'Employee Checking',
-             'lastFour': '6542',
-             'accountType': 'Employee Checking',
-             'routingNum': 746395735,
-             'balance': 3545.54,
-             'begBalance': 3674.43,
-             'penTrans': -128.89,
-             'depHolds': 0.00}));
+      eitherResponse.fold((_) {}, (m) => m),
+      AccountDetailServiceResponseModel.fromJson({
+        'name': 'Employee Checking',
+        'lastFour': '6542',
+        'accountType': 'Employee Checking',
+        'routingNum': 746395735,
+        'balance': 3545.54,
+        'begBalance': 3674.43,
+        'penTrans': -128.89,
+        'depHolds': 0.00,
+      }),
+    );
   });
 }

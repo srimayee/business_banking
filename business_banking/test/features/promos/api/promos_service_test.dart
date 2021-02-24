@@ -5,26 +5,20 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test(
-    'PromosService success',
-    () async {
-      final requestModel = PromosServiceRequestModel(customerId: "123");
-      final service = PromosService();
-      final eitherResponse = await service.request(requestModel: requestModel);
+  test('PromosService success', () async {
+    final requestModel = PromosServiceRequestModel(customerId: "123");
+    final service = PromosService();
+    final eitherResponse = await service.request(requestModel: requestModel);
 
-      expect(eitherResponse.isRight, isTrue);
-      expect(
-        eitherResponse.fold((_) {}, (m) => m),
-        PromosServiceResponseModel.fromJson(
-          {
-            "imageUrl":
-                "http://placehold.jp/24/228B22/006400/300x300.jpg?text=a%20promo%20will%20be%20displayed%20here",
-            "externalUrl": "https://www.huntington.com/"
-          },
-        ),
-      );
-    },
-  );
+    expect(eitherResponse.isRight, isTrue);
+    expect(
+      eitherResponse.fold((_) {}, (m) => m),
+      PromosServiceResponseModel.fromJson({
+        'imageUrl': 'https://via.placeholder.com/300',
+        'externalUrl': 'https://www.huntington.com/'
+      }),
+    );
+  });
 
   test(
     'PromosService Error',
