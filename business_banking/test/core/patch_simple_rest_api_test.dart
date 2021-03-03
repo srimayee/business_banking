@@ -24,15 +24,15 @@ void main() {
     expect(resp.type, RestResponseType.success);
     expect(resp.content, """{
   
-  "imageUrl":"http://placehold.jp/24/228B22/006400/300x300.jpg?text=a%20promo%20will%20be%20displayed%20here",
+  "imageUrl":"https://via.placeholder.com/300",
   "externalUrl": "https://www.huntington.com/"
 }""");
   });
 
   test("PatchSimpleRestAPI post call without parameters", () async {
     PatchSimpleRestApi api = PatchSimpleRestApi(baseUrl: baseUrl);
-    RestResponse resp =
-        await api.request(method: RestMethod.post, path: 'transfer-accounts-to');
+    RestResponse resp = await api.request(
+        method: RestMethod.post, path: 'transfer-accounts-to');
     expect(resp.type, RestResponseType.success);
     expect(resp.content, """{
   "toAccounts": ["4444444444", "5555555555", "6666666666" ]

@@ -6,13 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('TransferFundsServiceTest success', () async {
     final service = TransferFundsService();
-    final requestModel = new TransferFundsRequestModel(fromAccount: '1111111111', toAccount: '5555555555', amount: "1", date: DateTime.now());
+    final requestModel = new TransferFundsRequestModel(
+        fromAccount: '1111111111',
+        toAccount: '5555555555',
+        amount: "1",
+        date: DateTime.now());
     final eitherResponse = await service.request(requestModel: requestModel);
 
     expect(eitherResponse.isRight, isTrue);
-    expect(
-        eitherResponse.fold((_) {}, (m) => m),
-        TransferFundsResponseModel.fromJson({"confirmation" : "123456789"})
-    );
+    expect(eitherResponse.fold((_) {}, (m) => m),
+        TransferFundsResponseModel.fromJson({"confirmation": "123456789"}));
   });
 }

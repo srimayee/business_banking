@@ -16,8 +16,7 @@ void main() {
         toAccount: '5555555555',
         id: '123456789',
         date: DateTime.now(),
-        amount: '10.0'
-    );
+        amount: '10.0');
 
     ExampleLocator()
         .repository
@@ -25,10 +24,12 @@ void main() {
 
     final testWidget = MaterialApp(
         home: BlocProvider<TransferFundsBloc>(
-            create: (_) => TransferFundsBloc(), child: TransferFundsConfirmationWidget()));
+            create: (_) => TransferFundsBloc(),
+            child: TransferFundsConfirmationWidget()));
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
-    await expectLater(find.byType(TransferConfirmationPresenter), matchesGoldenFile('main.png'));
+    await expectLater(find.byType(TransferConfirmationPresenter),
+        matchesGoldenFile('main.png'));
   });
 }

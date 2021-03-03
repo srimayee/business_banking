@@ -10,15 +10,15 @@ class CustomerEntity extends Entity {
   final AccountType accountType;
   final String address;
 
-  CustomerEntity(
-      {List<EntityFailure> errors = const [],
-      String honorific,
-      String firstName,
-      String lastName,
-      String nickName,
-      AccountType accountType,
-      String address})
-      : this.honorific = honorific ?? "",
+  CustomerEntity({
+    List<EntityFailure> errors = const [],
+    String honorific,
+    String firstName,
+    String lastName,
+    String nickName,
+    AccountType accountType,
+    String address,
+  })  : this.honorific = honorific ?? "",
         this.firstName = firstName ?? "",
         this.lastName = lastName ?? "",
         this.nickName = nickName ?? "",
@@ -31,26 +31,23 @@ class CustomerEntity extends Entity {
       [errors, honorific, firstName, lastName, nickName, accountType, address];
 
   @override
-  merge(
-      {errors,
-      String honorific,
-      String firstName,
-      String lastName,
-      String nickName,
-      String accountType,
-      String address}) {
+  merge({
+    errors,
+    String honorific,
+    String firstName,
+    String lastName,
+    String nickName,
+    String accountType,
+    String address,
+  }) {
     return CustomerEntity(
-        errors: errors ?? this.errors,
-        honorific: honorific ?? this.honorific,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        nickName: nickName ?? this.nickName,
-        accountType: accountType ?? this.accountType,
-        address: address ?? this.address);
-  }
-
-  @override
-  String toString() {
-    return '$honorific $firstName $lastName $nickName $accountType $address';
+      errors: errors ?? this.errors,
+      honorific: honorific ?? this.honorific,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      nickName: nickName ?? this.nickName,
+      accountType: accountType ?? this.accountType,
+      address: address ?? this.address,
+    );
   }
 }

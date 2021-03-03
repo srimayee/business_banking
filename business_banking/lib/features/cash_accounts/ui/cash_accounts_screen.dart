@@ -9,7 +9,8 @@ class CashAccountsScreen extends Screen {
   final CashAccountsViewModel viewModel;
   final VoidCallback navigateToAccountDetail;
 
-  CashAccountsScreen({@required this.viewModel, @required this.navigateToAccountDetail})
+  CashAccountsScreen(
+      {@required this.viewModel, @required this.navigateToAccountDetail})
       : assert(() {
           return viewModel != null;
         }());
@@ -86,7 +87,8 @@ class AccountCard extends StatelessWidget {
                     ),
                     Text(
                       '\$' + viewModel.balance.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w300),
                       key: Key('balance'),
                     )
                   ],

@@ -1,6 +1,6 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class TransferFundsEntity extends Entity{
+class TransferFundsEntity extends Entity {
   final String id;
   final String fromAccount;
   final String toAccount;
@@ -11,15 +11,14 @@ class TransferFundsEntity extends Entity{
 
   TransferFundsEntity(
       {List<EntityFailure> errors = const [],
-        String fromAccount,
-        String toAccount,
-        String amount = '',
-        DateTime date,
-        List<String> fromAccounts,
-        List<String> toAccounts,
-        String id})
-      :
-        this.fromAccount = fromAccount,
+      String fromAccount,
+      String toAccount,
+      String amount = '',
+      DateTime date,
+      List<String> fromAccounts,
+      List<String> toAccounts,
+      String id})
+      : this.fromAccount = fromAccount,
         this.toAccount = toAccount,
         this.amount = amount,
         this.date = date ?? _getLastMidnight(),
@@ -29,11 +28,26 @@ class TransferFundsEntity extends Entity{
 
   @override
   List<Object> get props => [
-    errors, id, fromAccount, toAccount, amount, date, fromAccounts, toAccounts
-  ];
+        errors,
+        id,
+        fromAccount,
+        toAccount,
+        amount,
+        date,
+        fromAccounts,
+        toAccounts
+      ];
 
   @override
-  merge({errors, String id, String fromAccount, String toAccount, String amount, DateTime date, List<String> fromAccounts, List<String> toAccounts}) {
+  merge(
+      {errors,
+      String id,
+      String fromAccount,
+      String toAccount,
+      String amount,
+      DateTime date,
+      List<String> fromAccounts,
+      List<String> toAccounts}) {
     return TransferFundsEntity(
         errors: errors ?? this.errors,
         id: id ?? this.id,
@@ -42,13 +56,7 @@ class TransferFundsEntity extends Entity{
         amount: amount ?? this.amount,
         date: date ?? this.date,
         fromAccounts: fromAccounts ?? this.fromAccounts,
-        toAccounts: toAccounts ?? this.toAccounts
-    );
-  }
-
-  @override
-  String toString() {
-    return "$id $fromAccount $toAccount $amount $date $fromAccounts $toAccounts";
+        toAccounts: toAccounts ?? this.toAccounts);
   }
 
   static DateTime _getLastMidnight() {

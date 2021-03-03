@@ -15,14 +15,16 @@ A JSON export from Mockoon of the environment can be found in the mockoon folder
 
 | route | method | response |
 | --- | --- | --- |
-| /accounts | GET | 200 |
+| /accounts/getAccounts | GET | 200 |
 
 #### JSON
 ```json
 {
-  "type": "Employee Checking",
-  "lastFour": "6542",
-  "balance": 3545.54
+ "accountType": "Cash",
+  "accountTitle": "Checking Account",
+  "accountNumber": "6542",
+  "accountBalance": 3545.54,
+  "accountStatus": "Active"
 }
 ```
 

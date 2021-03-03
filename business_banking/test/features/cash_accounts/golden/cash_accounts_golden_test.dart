@@ -13,6 +13,7 @@ void main() {
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
-    await expectLater(find.byType(CashAccountsPresenter), matchesGoldenFile('main.png'));
+    await expectLater(
+        find.byType(CashAccountsPresenter), matchesGoldenFile('main.png'));
   });
 }

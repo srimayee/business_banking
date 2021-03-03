@@ -14,7 +14,7 @@ void main() {
       expect(model.balance.toString(), '3545.54');
     }));
   });
-  
+
   test('CashAccountsBloc gets view model, real', () {
     final bloc = CashAccountsBloc();
 

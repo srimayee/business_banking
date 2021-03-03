@@ -17,9 +17,8 @@ void main() {
     expect(
         model,
         TransferFundsViewModel(
-          fromAccounts: ['1111111111', '2222222222', '3333333333'],
-          date: defaultDate
-        ));
+            fromAccounts: ['1111111111', '2222222222', '3333333333'],
+            date: defaultDate));
 
     // testing updateFromAccount method
     await useCase.updateFromAccount('1111111111');

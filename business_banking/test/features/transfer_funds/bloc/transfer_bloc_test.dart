@@ -19,7 +19,7 @@ void main() {
 
     // testing transferFundsViewModelPipe
     bloc.transferFundsViewModelPipe.receive.listen(expectAsync1(
-          (model) {
+      (model) {
         // Are the values the same?
         expect(model, transferFundsViewModel);
       },
@@ -27,10 +27,12 @@ void main() {
   }, timeout: Timeout(Duration(seconds: 300)));
 
   test('testing resetViewModelPipe', () async {
-    TransferFundsEntity newTransferEntity = TransferFundsEntity(amount: '10.0', fromAccounts: ['1111111111', '2222222222', '3333333333']);
-    ExampleLocator()
-        .repository
-        .create<TransferFundsEntity>(newTransferEntity, (_) {}, deleteIfExists: true);
+    TransferFundsEntity newTransferEntity = TransferFundsEntity(
+        amount: '10.0',
+        fromAccounts: ['1111111111', '2222222222', '3333333333']);
+    ExampleLocator().repository.create<TransferFundsEntity>(
+        newTransferEntity, (_) {},
+        deleteIfExists: true);
     final TransferFundsBloc bloc = new TransferFundsBloc();
     TransferFundsViewModel emptyTransferFundsViewModel = TransferFundsViewModel(
         amount: '',
@@ -38,15 +40,15 @@ void main() {
         fromAccounts: ['1111111111', '2222222222', '3333333333'],
         dataStatus: DataStatus.invalid);
 
-    bloc.confirmationViewModelPipe.receive.listen((event) { });
+    bloc.confirmationViewModelPipe.receive.listen((event) {});
     bloc.resetViewModelPipe.launch();
     await Future.delayed(Duration(milliseconds: 200));
-    bloc.transferFundsViewModelPipe.receive.listen(expectAsync1(
-            (model) {
-            expect(model, emptyTransferFundsViewModel);
-        }),);
+    bloc.transferFundsViewModelPipe.receive.listen(
+      expectAsync1((model) {
+        expect(model, emptyTransferFundsViewModel);
+      }),
+    );
     // testing transferFundsViewModelPipe
-
   }, timeout: Timeout(Duration(seconds: 3)));
   // This tests the from account value sent through the pipe
   test('testing fromAccountPipe', () async {
@@ -63,6 +65,7 @@ void main() {
   test('testing toAccountPipe', () async {
     resetEntityInRepository();
     final TransferFundsBloc bloc = new TransferFundsBloc();
+
     /// Setup a Listener to receive specific pipe data
     createToAccountPipeListener(bloc);
 
@@ -164,7 +167,7 @@ void resetEntityInRepository() {
   final TransferFundsEntity entity = TransferFundsEntity();
   ExampleLocator()
       .repository
-      .create<TransferFundsEntity>(entity, (_){}, deleteIfExists: true);
+      .create<TransferFundsEntity>(entity, (_) {}, deleteIfExists: true);
 }
 
 DateTime getLastMidnight() {
@@ -172,4 +175,3 @@ DateTime getLastMidnight() {
   final lastMidnight = new DateTime(now.year, now.month, now.day);
   return lastMidnight;
 }
-

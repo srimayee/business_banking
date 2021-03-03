@@ -12,17 +12,25 @@ void main() {
   });
 
   test('Entity for transfer to send is created by service adapter', () {
-
     // testing createEntity method
-    final entity = serviceAdapter.createEntity(
-        TransferFundsEntity(),
-        TransferFundsResponseModel.fromJson({"confirmation" : "123456789"}));
+    final entity = serviceAdapter.createEntity(TransferFundsEntity(),
+        TransferFundsResponseModel.fromJson({"confirmation": "123456789"}));
     expect(entity.id, '123456789');
 
     // testing createRequest method
     DateTime date = DateTime.now();
-    final entity1 = new TransferFundsEntity(fromAccount: '1111111111', toAccount: '4444444444', amount: '25.5', date: date);
+    final entity1 = new TransferFundsEntity(
+        fromAccount: '1111111111',
+        toAccount: '4444444444',
+        amount: '25.5',
+        date: date);
     TransferFundsRequestModel model = serviceAdapter.createRequest(entity1);
-    expect(model, TransferFundsRequestModel(fromAccount: '1111111111', toAccount: '4444444444', amount: '25.5', date: date));
+    expect(
+        model,
+        TransferFundsRequestModel(
+            fromAccount: '1111111111',
+            toAccount: '4444444444',
+            amount: '25.5',
+            date: date));
   });
 }

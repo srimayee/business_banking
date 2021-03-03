@@ -20,4 +20,7 @@ doc/api/
 *.js.deps
 *.js.map
 
-.vscode
+.vscode/
+.gradle/
+.idea/
+/local.properties

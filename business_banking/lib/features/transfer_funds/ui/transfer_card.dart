@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/transfer_funds/ui/transfer_widget.dart';
+import 'package:business_banking/routes.dart';
+import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class TransferFundsCard extends StatelessWidget {
@@ -27,12 +28,8 @@ class TransferFundsCard extends StatelessWidget {
               ),
               OutlineButton(
                 key: Key('transfer_funds_button'),
-                onPressed: () => Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            new TransferFundsWidget(),
-                        maintainState: false)),
+                onPressed: () => CFRouterScope.of(context)
+                    .push(BusinessBankingRouter.transferFundsRoute),
                 borderSide: BorderSide(
                   color: Colors.black54, //Color of the border
                   style: BorderStyle.solid, //Style of the border

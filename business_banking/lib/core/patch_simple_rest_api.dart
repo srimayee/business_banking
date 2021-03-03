@@ -128,4 +128,14 @@ class PatchSimpleRestApi extends RestApi {
       );
     }
   }
+
+  @override
+  Future<RestResponse> requestBinary({
+    RestMethod method,
+    String path,
+    Map<String, dynamic> requestBody = const {},
+  }) {
+    // TODO: implement requestBinary
+    throw UnimplementedError();
+  }
 }
