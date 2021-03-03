@@ -29,6 +29,13 @@
 .pub/
 /build/
 
+# Stops tracking coverage reports. Generated from flutter test --coverage
+/coverage/
+
+# Stops tracking on failure reports. Generated from flutter test --coverage
+/test/features/*/*/*/failures/
+/test/features/*/*/failures/
+
 # Web related
 lib/generated_plugin_registrant.dart
 

@@ -1,15 +1,15 @@
 {
-    "source": "mockoon:1.10.0",
+    "source": "mockoon:1.11.0",
     "data": [
         {
             "type": "environment",
             "item": {
                 "uuid": "",
-                "lastMigration": 12,
+                "lastMigration": 13,
                 "name": "Business Banking Env",
                 "endpointPrefix": "",
                 "latency": 0,
-                "port": 3000,
+                "port": 3001,
                 "routes": [
                     {
                         "uuid": "",
@@ -19,14 +19,14 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n\t\"accounts\": [\n\t  {\n\t\t\t\"accountTitle\": \"Checking Account\",\n\t\t\t\"accountNumber\": \"6542\",\n\t\t\t\"accountBalance\": 3545.54,\n\t\t\t\"accountStatus\": \"Active\"\n\t\t},\n\t\t{\n\t\t\t\"accountTitle\": \"Savings Account\",\n\t\t\t\"accountNumber\": \"6543\",\n\t\t\t\"accountBalance\": 0.02,\n\t\t\t\"accountStatus\": \"Active\"\n\t\t}\n\t]\n}",
+                                "body": "{\n  \"type\": \"Employee Checking\",\n  \"lastFour\": \"6542\",\n  \"balance\": 3545.54\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
                                 "headers": [
                                     {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
+                                        "key": "",
+                                        "value": ""
                                     }
                                 ],
                                 "filePath": "",
@@ -34,208 +34,48 @@
                                 "rules": [],
                                 "disableTemplating": false,
                                 "rulesOperator": "OR"
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"responseCode\": 404\n}",
-                                "latency": 0,
-                                "statusCode": 404,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"responseCode\": 400\n}",
-                                "latency": 0,
-                                "statusCode": 400,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Gets info for AccountDetail screen",
+                        "method": "get",
+                        "endpoint": "account-details",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"name\": \"Employee Checking\",\n  \"lastFour\": \"6542\",\n  \"accountType\": \"Employee Checking\",\n  \"routingNum\": 746395735,\n  \"balance\": 3545.54,\n  \"begBalance\": 3674.43,\n  \"penTrans\": -128.89,\n  \"depHolds\": 0.00\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "disableTemplating": false,
+                                "rulesOperator": "OR"
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
                     },
                     {
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-                        "endpoint": "transactions/account_transactions",
+                        "endpoint": "promos/:cid",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"accountTransactions\": [\n      {\n        \"transactionTitle\": \"MacBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 499.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 499.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"LinuxBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 14.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 14.52\n            }\n          ]\n      },\n      {\n        \"transactionTitle\": \"WindowsBook Pro with Retina Display - Amazon, LLC.\",\n        \"transactionNumber\": \"00000000001\",\n        \"transactionAmount\": 399.52,\n        \"transactionId\": \"0000004354681881\",\n        \"transactionDetails\": \n            [\n              {\n                \"transactionInitiator\": \"Amazon, LLC.\",\n                \"transactionAlias\": \"Amazon Corporation\",\n                \"initiatorTelephone\": \"1-888-123-4567\",\n                \"initiatorAddressNumber\": \"410 Terry Ave N, Seattle, WA 98109\",\n                \"transactionTimestamp\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n                \"transactionPostDate\": \"2020-09-20T00:06:27+00:00\"\n              }\n            ],\n          \"transactionHolds\": \n          [\n            {\n              \"holdTitle\": \"Credit Processing Hold\",\n              \"holdInitiationDate\": \"2020-09-18T00:06:27+00:00\",\n              \"holdInitiator\": \"Huntington Bank\",\n              \"holdDescription\": \"Credit Processing 3 Day Hold\",\n              \"holdAmount\": 399.52\n            }\n          ]\n      }\n    ]\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"responseCode\": 404\n}",
-                                "latency": 0,
-                                "statusCode": 404,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"responseCode\": 400\n}",
-                                "latency": 0,
-                                "statusCode": 400,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "contact",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"banking_routing_number\": \"044000024\",\n  \"banking_contact_number\": \"1-888-888-8888\",\n  \"banking_support_email\": \"support@huntington.com\",\n  \"banking_address\":\"41 South High Street Huntington Center Columbus, OH 43287 USA\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"responseCode\": 400\n}",
+                                "body": "",
                                 "latency": 0,
                                 "statusCode": 400,
                                 "label": "",
@@ -253,34 +93,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"responseCode\": 404\n}",
-                                "latency": 0,
-                                "statusCode": 404,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "postExample",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Success\": True\n}",
+                                "body": "{\n  \n  \"imageUrl\":\"https://via.placeholder.com/300\",\n  \"externalUrl\": \"https://www.huntington.com/\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -295,19 +108,29 @@
                                 "rules": [
                                     {
                                         "target": "params",
-                                        "modifier": "\"test\"",
-                                        "value": "TRUE",
+                                        "modifier": "cid",
+                                        "value": "123",
                                         "isRegex": false
                                     }
                                 ],
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
-                            },
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Gets name for Customer screen",
+                        "method": "get",
+                        "endpoint": "customer",
+                        "responses": [
                             {
                                 "uuid": "",
-                                "body": "{}",
+                                "body": "{\n  \"honorific\": \"Mr.\",\n  \"firstName\": \"Joe\",\n  \"lastName\": \"A\",\n  \"accountType\": \"private\",\n  \"nickName\": \"\",\n  \"address\": \"1234 ABCD Rd, City, State 00000\"\n}",
                                 "latency": 0,
-                                "statusCode": 401,
+                                "statusCode": 200,
                                 "label": "",
                                 "headers": [
                                     {
@@ -322,16 +145,147 @@
                                 "disableTemplating": false
                             }
                         ],
-                        "enabled": true
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Gets accounts from for transfer funds",
+                        "method": "get",
+                        "endpoint": "transfer-accounts-from",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"fromAccounts\": [\"1111111111\", \"2222222222\", \"3333333333\" ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Gets accounts to for transfer funds",
+                        "method": "post",
+                        "endpoint": "transfer-accounts-to",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"toAccounts\": [\"4444444444\", \"5555555555\", \"6666666666\" ]\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Sends a transfer and gets confirmation",
+                        "method": "post",
+                        "endpoint": "transfer-send",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"confirmation\" : \"123456789\"\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"confirmation\" : \"Bad Request\"\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "cash-accounts",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"type\": \"Employee Checking\", \n  \"lastFour\": \"6542\",\n  \"balance\": 3545.54\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
                     }
                 ],
                 "proxyMode": false,
-                "proxyHost": "http://localhost:3000",
+                "proxyHost": "",
                 "https": false,
                 "cors": true,
                 "headers": [
                     {
-                        "key": "",
+                        "key": "Content-Type",
                         "value": "application/json"
                     }
                 ],

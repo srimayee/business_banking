@@ -1,29 +1,24 @@
 import 'package:business_banking/features/promos/api/promos_service.dart';
 import 'package:business_banking/features/promos/api/promos_service_request_model.dart';
 import 'package:business_banking/features/promos/api/promos_service_response_model.dart';
-import 'package:business_banking/locator.dart';
-import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  logger().setLogLevel(LogLevel.verbose);
-  test(
-    'PromosService success',
-    () async {
-      final requestModel = PromosServiceRequestModel(customerId: "123");
-      final service = PromosService();
-      final eitherResponse = await service.request(requestModel: requestModel);
+  test('PromosService success', () async {
+    final requestModel = PromosServiceRequestModel(customerId: "123");
+    final service = PromosService();
+    final eitherResponse = await service.request(requestModel: requestModel);
 
-      expect(eitherResponse.isRight, isTrue);
-      expect(
-        eitherResponse.fold((_) {}, (m) => m),
-        PromosServiceResponseModel.fromJson(
-          {"imageUrl": "https://via.placeholder.com/300", "externalUrl": "http://google.com/"},
-        ),
-      );
-    },
-  );
+    expect(eitherResponse.isRight, isTrue);
+    expect(
+      eitherResponse.fold((_) {}, (m) => m),
+      PromosServiceResponseModel.fromJson({
+        'imageUrl': 'https://via.placeholder.com/300',
+        'externalUrl': 'https://www.huntington.com/'
+      }),
+    );
+  });
 
   test(
     'PromosService Error',
@@ -38,7 +33,7 @@ void main() {
           print(e);
           return e;
         }, (_) {}),
-        isA<GeneralServiceError>(),
+        isA<GeneralServiceFailure>(),
       );
     },
   );

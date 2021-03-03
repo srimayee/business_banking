@@ -1,9 +1,13 @@
+import 'package:business_banking/dependency/url_launcher.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
+import 'core/patch_simple_rest_api.dart';
 
 ExampleLocator locator() => ExampleLocator();
 
 Logger logger() => ExampleLocator().logger;
+
+Future<void> openUrl(url) => ExampleLocator().urlLauncher.launchURL(url);
 
 class ExampleLocator implements Locator {
   ExampleLocator._();
@@ -19,14 +23,10 @@ class ExampleLocator implements Locator {
   @override
   Logger logger = ConsoleLogger(LogLevel.verbose);
 
+  UrlLauncher urlLauncher = UrlLauncher();
 
-  /// Points to Mockoon local instance
-  /// If you are testing on a physical device or Android Emulator
-  /// make sure to point to the proper endpoint of your local
-  /// machine: Ex: http://192.1.2.123:3001/
-  /// Just get the IP address from the localhost machine and replace the
-  /// 'localhost' value within the baseUrl.
-  SimpleRestApi api = SimpleRestApi(baseUrl: 'http://localhost:3000/');
+  PatchSimpleRestApi api = PatchSimpleRestApi(
+      baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
 
   Repository repository = Repository();
 }
