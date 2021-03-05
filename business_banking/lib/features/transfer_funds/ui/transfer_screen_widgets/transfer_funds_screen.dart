@@ -34,8 +34,7 @@ class TransferFundsScreen extends Screen {
       ),
       body: Container(
         margin: new EdgeInsets.all(15.0),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
             children: <Widget>[
               Container(
                 child: Text('From', key: Key('from_label'),),
