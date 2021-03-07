@@ -17,19 +17,14 @@ class InvestmentScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        GestureDetector(
-          child: AccountCard(
-            viewModel: viewModel,
-            key: Key('investmentCard1'),
-          ),
-          onTap: () {
-            navigateToInvestmentDetail();
-          },
-        )
-      ],
+    return GestureDetector(
+      child: AccountCard(
+        viewModel: viewModel,
+        key: Key('investmentCard1'),
+      ),
+      onTap: () {
+        navigateToInvestmentDetail();
+      },
     );
   }
 }
@@ -54,57 +49,51 @@ class AccountCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
+                      child: const Text(
                         'investment Account Balance',
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    new Icon(
+                    const Icon(
                       Icons.arrow_forward_ios_rounded,
                       color: Colors.grey,
                     )
                   ],
                 ),
               ),
-              new Container(
-                color: Colors.grey.withOpacity(.5),
-                width: MediaQuery.of(context).size.width,
-                height: 1,
+              const Divider(
+                thickness: 2,
               ),
-              new SizedBox(height: 15),
-              new Expanded(
-                child: new Center(
-                  child: new Text(
-                    "Account value / Today's net change",
-                    style: TextStyle(color: Colors.black54, fontSize: 15),
-                  ),
-                ),
+              const Text(
+                "Account value / Today's net change",
+                style: TextStyle(color: Colors.black54, fontSize: 15),
               ),
-              new Expanded(
-                child: new Text(
-                  '\$${viewModel.accountBalance}',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              new Expanded(
-                  child: Text(
-                '\$${viewModel.totalGainValue} (${viewModel.totalGainPercent}%)',
+              Text(
+                '\$${viewModel.accountBalance}',
                 style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ))
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Text(
+                  '\$${viewModel.totalGainValue} (${viewModel.totalGainPercent}%)',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              )
             ],
           ),
         ),

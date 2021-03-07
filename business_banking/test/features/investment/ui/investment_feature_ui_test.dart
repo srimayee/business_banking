@@ -8,17 +8,24 @@ import 'package:flutter_test/flutter_test.dart';
 import '../bloc/investment_bloc_mock.dart';
 
 void main() {
-  testWidgets('description', (tester) async {
-    final testWidget = MaterialApp(
+  MaterialApp testWidget;
+
+  setUp(() {
+    testWidget = MaterialApp(
       home: BlocProvider<InvestmentBlockMock>(
         create: (_) => InvestmentBlockMock(),
         child: InvestmentFeatureWidget(),
       ),
     );
+  });
 
+  testWidgets('description', (tester) async {
+    // pumpWidget calls runApp, and also triggers a frame to paint the app.
     await tester.pumpWidget(testWidget);
+    //pump trigger a rebuild since the data-loading process will happen post-runApp.
     await tester.pump(Duration(milliseconds: 500));
 
-    expect(find.byType(InvestmentPresenter), findsOneWidget);
+    final widgetType = find.byType(InvestmentPresenter);
+    expect(widgetType, findsOneWidget);
   });
 }
