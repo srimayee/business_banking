@@ -1,8 +1,12 @@
+// dart
 import 'dart:async';
+// package
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// internal
+import '../../../routes.dart';
 import '../bloc/investment_bloc.dart';
 import '../model/investment_view_model.dart';
 import 'investment_screen.dart';
@@ -33,6 +37,6 @@ class InvestmentPresenter
   }
 
   void _navigateToInvestmentDetail(BuildContext context) {
-    print('go to investment detail');
+    CFRouterScope.of(context).push(BusinessBankingRouter.investmentDetailRoute);
   }
 }

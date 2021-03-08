@@ -57,7 +57,7 @@ class AccountCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: const Text(
-                        'investment Account Balance',
+                        'Investment Account Balance',
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
