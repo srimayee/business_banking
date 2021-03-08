@@ -20,7 +20,7 @@ class InvestmentScreen extends Screen {
     return GestureDetector(
       child: AccountCard(
         viewModel: viewModel,
-        key: Key('investmentCard1'),
+        key: Key('investmentCard'),
       ),
       onTap: () {
         navigateToInvestmentDetail();

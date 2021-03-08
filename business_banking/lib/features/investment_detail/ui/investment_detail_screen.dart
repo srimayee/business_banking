@@ -37,7 +37,7 @@ class InvestmentDetailScreen extends Screen {
             onTap: () {
               navigateToAccountDetail();
             },
-            key: Key('backButton'),
+            key: Key('InvestmentDetailBackButton'),
           ),
           title: AutoSizeText(
             'INVESTMENT ACCOUNT',
