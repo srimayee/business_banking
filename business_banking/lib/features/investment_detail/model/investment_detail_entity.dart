@@ -1,5 +1,7 @@
-import 'package:business_banking/features/investment_detail/model/investment_detail_model_list.dart';
+//package
 import 'package:clean_framework/clean_framework.dart';
+//internal
+import 'investment_detail_model_list.dart';
 
 class InvestmentDetailEntity extends Entity {
   final double accountBalance;
