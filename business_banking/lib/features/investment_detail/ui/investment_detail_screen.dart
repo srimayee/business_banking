@@ -73,6 +73,7 @@ class InvestmentDetailScreen extends Screen {
                     fontSize: 24),
               ),
               ListView.separated(
+                key: Key('item-list-key'),
                 padding: EdgeInsets.only(top: 10),
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
