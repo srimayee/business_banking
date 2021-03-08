@@ -37,7 +37,7 @@ class HubScreen extends Screen {
             // SizedBox(height: 15),
             TransferFundsCard(),
             // SizedBox(height: 15),
-            QuickPayWidget(),
+            //QuickPayWidget(),
             InvestmentFeatureWidget()
           ],
         ),
