@@ -1,13 +1,13 @@
 // package
 import 'package:clean_framework/clean_framework_defaults.dart';
 // internal
-import '../model/investment_detail_model_list.dart';
+import '../model/stock_contribution_model.dart';
 
 class InvestmentDetailServiceResponseModel extends JsonResponseModel {
   double accountBalance;
   double totalGainValue;
   double totalGainPercent;
-  List<InvestmentDetailModelList> investments;
+  List<StockContributionModel> investments;
 
   InvestmentDetailServiceResponseModel(
       {this.accountBalance,
@@ -17,9 +17,9 @@ class InvestmentDetailServiceResponseModel extends JsonResponseModel {
 
   factory InvestmentDetailServiceResponseModel.fromJson(
       Map<String, dynamic> json) {
-    List<InvestmentDetailModelList> _investments = [];
+    List<StockContributionModel> _investments = [];
     json['investments'].forEach((item) {
-      _investments.add(InvestmentDetailModelList.fromJson(item));
+      _investments.add(StockContributionModel.fromJson(item));
     });
     return InvestmentDetailServiceResponseModel(
         accountBalance: json['accountBalance'] ?? 0.00,

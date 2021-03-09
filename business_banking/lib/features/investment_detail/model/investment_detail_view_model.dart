@@ -2,13 +2,13 @@
 import 'package:clean_framework/clean_framework.dart';
 import 'package:meta/meta.dart';
 //internal
-import 'investment_detail_model_list.dart';
+import 'stock_contribution_model.dart';
 
 class InvestmentDetailViewModel extends ViewModel {
   final double accountBalance;
   final double totalGainValue;
   final double totalGainPercent;
-  final List<InvestmentDetailModelList> investments;
+  final List<StockContributionModel> investments;
 
   InvestmentDetailViewModel({
     @required this.accountBalance,

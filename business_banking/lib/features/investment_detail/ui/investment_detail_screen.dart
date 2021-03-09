@@ -6,7 +6,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 // internal
 import '../model/investment_detail_view_model.dart';
-import '../model/investment_detail_model_list.dart';
+import '../model/stock_contribution_model.dart';
 
 class InvestmentDetailScreen extends Screen {
   final InvestmentDetailViewModel viewModel;
@@ -151,7 +151,7 @@ class InvestmentDetailScreen extends Screen {
     ));
   }
 
-  Widget items(InvestmentDetailModelList listModel) {
+  Widget items(StockContributionModel listModel) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -1,13 +1,13 @@
 //package
 import 'package:clean_framework/clean_framework.dart';
 //internal
-import 'investment_detail_model_list.dart';
+import 'stock_contribution_model.dart';
 
 class InvestmentDetailEntity extends Entity {
   final double accountBalance;
   final double totalGainValue;
   final double totalGainPercent;
-  final List<InvestmentDetailModelList> investments;
+  final List<StockContributionModel> investments;
 
   InvestmentDetailEntity({
     List<EntityFailure> errors = const [],
@@ -27,7 +27,7 @@ class InvestmentDetailEntity extends Entity {
       double accountBalance,
       double totalGainValue,
       double totalGainPercent,
-      List<InvestmentDetailModelList> investments}) {
+      List<StockContributionModel> investments}) {
     return InvestmentDetailEntity(
       errors: errors ?? this.errors,
       accountBalance: accountBalance ?? this.accountBalance,

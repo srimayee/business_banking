@@ -1,4 +1,5 @@
 import 'package:business_banking/features/investment_detail/model/investment_detail_view_model.dart';
+import 'package:business_banking/features/investment_detail/model/stock_contribution_model.dart';
 import 'package:test/test.dart';
 
 import 'investment_detail_bloc_mock.dart';
@@ -10,17 +11,25 @@ void main() {
     investmentDetailBlockMock = InvestmentDetailBlockMock();
   });
 
-  final tInvestment = InvestmentDetailViewModel(
+  final tDetailInvestment = InvestmentDetailViewModel(
       accountBalance: 1600.00,
       totalGainValue: -45.00,
       totalGainPercent: 43.33,
-      investments: []);
-  test('should InvestmentBloc gets model from service', () async {
-    final bloc = InvestmentDetailBlockMock();
-
-    bloc.investmentDetailViewModelPipe.receive.listen(expectAsync1((model) {
+      investments: [
+        StockContributionModel.fromJson({
+          "symbol": "CRSP",
+          "dayGainValue": 76.00,
+          "dayGainPercent": 0.33,
+          "price": 114.00,
+          "marketValue": 22800.00,
+          "count": 200
+        })
+      ]);
+  test('should DetailInvestmentBloc gets model from service', () async {
+    investmentDetailBlockMock.investmentDetailViewModelPipe.receive
+        .listen(expectAsync1((model) {
       expect(model, isA<InvestmentDetailViewModel>());
-      expect(model, tInvestment);
+      expect(model, tDetailInvestment);
     }));
   });
 }

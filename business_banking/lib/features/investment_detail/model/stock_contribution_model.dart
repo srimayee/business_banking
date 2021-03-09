@@ -1,7 +1,7 @@
 // package
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class InvestmentDetailModelList extends JsonResponseModel {
+class StockContributionModel extends JsonResponseModel {
   final String symbol;
   final double dayGainValue;
   final double dayGainPercent;
@@ -9,7 +9,7 @@ class InvestmentDetailModelList extends JsonResponseModel {
   final double marketValue;
   final int count;
 
-  InvestmentDetailModelList.fromJson(Map<String, dynamic> json)
+  StockContributionModel.fromJson(Map<String, dynamic> json)
       : symbol = json['symbol'] ?? '',
         dayGainValue = json['dayGainValue'] ?? 0.00,
         dayGainPercent = json['dayGainPercent'] ?? 0.00,
