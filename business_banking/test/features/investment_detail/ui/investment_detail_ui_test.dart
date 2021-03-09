@@ -15,14 +15,13 @@ void main() {
   InvestmentDetailBlockMock investmentDetailBlockMock;
 
   setUp(() {
+    investmentDetailBlockMock = InvestmentDetailBlockMock();
     testWidget = MaterialApp(
       home: BlocProvider<InvestmentDetailBlockMock>(
         create: (_) => InvestmentDetailBlockMock(),
         child: InvestmentDetailWidget(),
       ),
     );
-
-    investmentDetailBlockMock = InvestmentDetailBlockMock();
   });
 
   group('Investment Detail Page', () {
@@ -65,40 +64,6 @@ void main() {
 
       final Finder finder = find.text('Account Balance');
       expect(finder, findsWidgets);
-    });
-
-    testWidgets('should show Stock list on screen', (tester) async {
-      var testWidgetlist = MaterialApp(
-        home: BlocProvider<InvestmentDetailBlockMock>(
-          create: (_) => InvestmentDetailBlockMock(),
-          child: InvestmentDetailScreen(
-            viewModel:
-                investmentDetailBlockMock.investmentDetailViewModelSample,
-            navigateToAccountDetail: () {
-              print('navigate func call');
-            },
-          ),
-        ),
-      );
-      await tester.pumpWidget(testWidgetlist);
-      await tester.pump(Duration(milliseconds: 500));
-
-      await tester.pumpAndSettle();
-
-      var stockList =
-          investmentDetailBlockMock.investmentDetailViewModelSample.investments;
-
-      for (var stock in stockList) {
-        final Finder symbolFinder =
-            find.text(stock.symbol, skipOffstage: false);
-        await tester.ensureVisible(symbolFinder);
-        expect(symbolFinder, findsOneWidget);
-
-        final Finder priceFinder =
-            find.text('${stock.price}', skipOffstage: false);
-        await tester.ensureVisible(priceFinder);
-        expect(priceFinder, findsOneWidget);
-      }
     });
   });
 }
