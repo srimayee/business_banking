@@ -3,6 +3,7 @@ import 'package:business_banking/features/investment_detail/model/investment_det
 import 'package:business_banking/features/investment_detail/model/stock_contribution_model.dart';
 import 'package:business_banking/features/investment_detail/ui/investment_detail_feature_widget.dart';
 import 'package:business_banking/features/investment_detail/ui/investment_detail_presenter.dart';
+import 'package:business_banking/features/investment_detail/ui/investment_detail_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -64,6 +65,40 @@ void main() {
 
       final Finder finder = find.text('Account Balance');
       expect(finder, findsWidgets);
+    });
+
+    testWidgets('should show Stock list on screen', (tester) async {
+      var testWidgetlist = MaterialApp(
+        home: BlocProvider<InvestmentDetailBlockMock>(
+          create: (_) => InvestmentDetailBlockMock(),
+          child: InvestmentDetailScreen(
+            viewModel:
+                investmentDetailBlockMock.investmentDetailViewModelSample,
+            navigateToAccountDetail: () {
+              print('navigate func call');
+            },
+          ),
+        ),
+      );
+      await tester.pumpWidget(testWidgetlist);
+      await tester.pump(Duration(milliseconds: 500));
+
+      await tester.pumpAndSettle();
+
+      var stockList =
+          investmentDetailBlockMock.investmentDetailViewModelSample.investments;
+
+      for (var stock in stockList) {
+        final Finder symbolFinder =
+            find.text(stock.symbol, skipOffstage: false);
+        await tester.ensureVisible(symbolFinder);
+        expect(symbolFinder, findsOneWidget);
+
+        final Finder priceFinder =
+            find.text('${stock.price}', skipOffstage: false);
+        await tester.ensureVisible(priceFinder);
+        expect(priceFinder, findsOneWidget);
+      }
     });
   });
 }
