@@ -38,7 +38,7 @@ void main() {
     await didWidgetAppear('item-list-key');
 
     //CashAccountsDetailScreen, back to hub
-    final backButton = find.byKey(Key('InvestmentDetailBackButton'));
+    final backButton = find.byKey(Key('investment-detail-backButton'));
 
     await tapWithFinder(backButton);
 

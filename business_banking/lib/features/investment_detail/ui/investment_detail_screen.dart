@@ -37,7 +37,7 @@ class InvestmentDetailScreen extends Screen {
             onTap: () {
               navigateToAccountDetail();
             },
-            key: Key('InvestmentDetailBackButton'),
+            key: Key('investment-detail-backButton'),
           ),
           title: AutoSizeText(
             'INVESTMENT ACCOUNT',
@@ -92,7 +92,9 @@ class InvestmentDetailScreen extends Screen {
                       padding: EdgeInsets.only(right: 5),
                       child: Column(
                         children: [
-                          index == 0 ? titles() : Container(),
+                          index == 0
+                              ? titles(Key('detail-list-header'))
+                              : Container(),
                           items(viewModel.investments[index])
                         ],
                       ));
@@ -106,8 +108,9 @@ class InvestmentDetailScreen extends Screen {
         ));
   }
 
-  Widget titles() {
+  Widget titles(Key key) {
     return Column(
+      key: key,
       children: [
         SizedBox(
           height: 10,
