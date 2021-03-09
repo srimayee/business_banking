@@ -65,34 +65,5 @@ void main() {
       final Finder finder = find.text('Account Balance');
       expect(finder, findsWidgets);
     });
-
-    // testWidgets('should show table header at top of stock list',
-    //     (tester) async {
-    //   // pumpWidget calls runApp, and also triggers a frame to paint the app.
-    //   await tester.pumpWidget(testWidget);
-    //   //pump trigger a rebuild since the data-loading process will happen post-runApp.
-    //   await tester.pump(Duration(milliseconds: 1500));
-
-    //   final finder = find.byKey(Key('detail-list-header'));
-    //   expect(finder, findsWidgets);
-    // });
-
-    // testWidgets('should show table header at top of stock list',
-    //     (tester) async {
-    //   await tester.pumpWidget(testWidget);
-    //   //pump trigger a rebuild since the data-loading process will happen post-runApp.
-    //   await tester.pump(Duration(milliseconds: 5500));
-    //   await tester.pumpAndSettle();
-
-    //   var mockInvestments =
-    //       investmentDetailBlockMock.investmentDetailViewModelSample.investments;
-    //   // pumpWidget calls runApp, and also triggers a frame to paint the app.
-
-    //   for (var car in mockInvestments) {
-    //     final carTitleFinder = find.text(' ');
-    //     //await tester.ensureVisible(carTitleFinder);
-    //     expect(carTitleFinder, findsOneWidget);
-    //   }
-    // });
   });
 }

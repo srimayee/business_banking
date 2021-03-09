@@ -21,28 +21,26 @@ void main() {
     await didWidgetAppear('investmentCard');
     await didTextAppear('Investment Account Balance');
     await didTextAppear('Account value / Today\'s net change');
-    //CashAccountsDetailScreen, navigate to and app bar is displayed
+
     await tapWidget('investmentCard');
-    // final accountDetailAppBar = find.byKey(Key('ADappBarL4'));
     await didTextAppear('Account Balance');
 
-    await didTextAppear('\$169235.24');
-    await didTextAppear('\$-47000.16 (3.88%)');
-    // expect(tester.widget<Text>(accountDetailAppBar).data, '*6542');
-
-//CashAccountsDetailScreen, beginBalance pendingTransactions depositHolds balance type routingNum is displayed on screen
     await didTextAppear("Symbol");
     await didTextAppear("Price");
-    await didTextAppear("Market Value");
 
     await didWidgetAppear('item-list-key');
 
-    //CashAccountsDetailScreen, back to hub
+    final gesture =
+        await tester.startGesture(Offset(0, 300)); //Position of the scrollview
+    await gesture.moveBy(Offset(0, -200)); //How much to scroll by
+
     final backButton = find.byKey(Key('investment-detail-backButton'));
 
     await tapWithFinder(backButton);
 
     await tester.pumpAndSettle();
+
+    expect(backButton, findsNothing);
   });
 
   //testWidgets('description', (WidgetTester tester) async {});
