@@ -28,7 +28,6 @@ void main() {
         () async {
       final eitherResponce = await service.request();
 
-      // expect(eitherResponce.isRight, isTrue);
       expect(eitherResponce.fold((_) {}, (m) => m),
           InvestmentServiceResponseModel.fromJson(tJsonResponse));
     });

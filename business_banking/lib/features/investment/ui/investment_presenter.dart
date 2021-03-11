@@ -24,7 +24,7 @@ class InvestmentPresenter
     return InvestmentScreen(
       viewModel: viewModel,
       navigateToInvestmentDetail: () {
-        _navigateToInvestmentDetail(context, viewModel);
+        _navigateToInvestmentDetail(context);
       },
     );
   }
@@ -36,8 +36,7 @@ class InvestmentPresenter
     );
   }
 
-  void _navigateToInvestmentDetail(
-      BuildContext context, InvestmentViewModel viewModel) {
+  void _navigateToInvestmentDetail(BuildContext context) {
     CFRouterScope.of(context).push(BusinessBankingRouter.investmentDetailRoute);
   }
 }
