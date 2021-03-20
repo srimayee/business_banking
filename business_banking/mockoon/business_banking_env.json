@@ -277,6 +277,35 @@
                         ],
                         "enabled": true,
                         "randomResponse": false
+                    },
+
+                    {
+                        "uuid": "",
+                        "documentation": "generate QR code seed and expiry",
+                        "method": "get",
+                        "endpoint": "seed",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"seed\": \"2a6abu\",\n  \"expiresAt\": \"2080-02-18T23:42:30.802Z\"\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
                     }
                 ],
                 "proxyMode": false,
