@@ -4,6 +4,7 @@ import 'package:business_banking/features/quickpay/ui/quickpay_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 
 void main() {
   testWidgets('QuickPay Golden test', (tester) async {
@@ -13,6 +14,18 @@ void main() {
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
-    await expectLater(find.byType(QuickPayPresenter), matchesGoldenFile('main.png'));
+    await expectLater(
+        find.byType(QuickPayPresenter), matchesGoldenFile('main.png'));
+  });
+
+  testGoldens('golden test added to show tile asked to add to QuickPay',
+      (WidgetTester tester) async {
+    await loadAppFonts();
+    await tester.pumpWidgetBuilder(QuickPayWidget(),
+        surfaceSize: const Size(500, 700),
+        wrapper: materialAppWrapper(
+            theme: ThemeData.light(), platform: TargetPlatform.android));
+    await tester.pumpAndSettle();
+    await screenMatchesGolden(tester, 'widget_with_qr_code_tile');
   });
 }
