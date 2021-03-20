@@ -108,6 +108,24 @@ void main() {
       await driver.waitForAbsent(loginButton);
       expect(await driver.getText(cashAccountAppBar), 'Business Banking');
     });
+//I placed it at the top of the everything as all other tests for other features are failing
+    test(
+        'QRCodeGeneratorScreen, ListTile with QRCode text and Generate button displayed',
+        () async {
+      await driver.waitFor(find.text('QRCode'));
+      await driver.tap(find.text('Generate'));
+      await driver.waitFor(find.byValueKey('count_down_timer'));
+      await driver.waitFor(find.byType('QrImage'));
+    });
+
+    test(
+        'QRCodeGeneratorScreen, navigating back from QRCodeGeneratorScreen, check to find correct app bar',
+        () async {
+      await driver.tap(find.pageBack());
+      await driver.waitForAbsent(find.byType('QrImage'));
+      await driver.waitForAbsent(find.byValueKey('count_down_timer'));
+      expect(await driver.getText(cashAccountAppBar), 'Business Banking');
+    });
 
     test('CashAccountsScreen, displaying Card 1 Data', () async {
       expect(await driver.getText(cashAccountsCardOneLastFourAccountNumber),
