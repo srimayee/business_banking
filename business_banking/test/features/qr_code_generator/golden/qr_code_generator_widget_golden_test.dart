@@ -45,7 +45,7 @@ void main() {
       (WidgetTester tester) async {
     FakeAsync().run((FakeAsync async) async {
       await loadAppFonts();
-      DateTime date = DateTime.now();
+      DateTime date = DateTime.parse(DateTime.now().toIso8601String());
       date = date.subtract(Duration(seconds: 50));
       QRCodeGeneratorEntity entity = QRCodeGeneratorEntity(
         seed: '2a6abu',

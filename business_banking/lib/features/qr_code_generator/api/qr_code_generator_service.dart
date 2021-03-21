@@ -12,6 +12,7 @@ class QRCodeGeneratorService extends EitherService<JsonRequestModel,
                 ? ExampleLocator().api
                 : ExampleLocator().qrCodeSeedApi,
             path: 'seed');
+  //added to use mocked service through Mockoon in test cases
   static bool mockService;
 
   @override
