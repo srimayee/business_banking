@@ -26,6 +26,6 @@ void main() {
         wrapper: materialAppWrapper(
             theme: ThemeData.light(), platform: TargetPlatform.android));
     await tester.pumpAndSettle();
-    await screenMatchesGolden(tester, 'widget_with_qr_code_tile');
+    await screenMatchesGolden(tester, 'quick_pay_golden');
   });
 }

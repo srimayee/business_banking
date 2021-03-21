@@ -7,13 +7,11 @@ import 'package:flutter/material.dart';
 class QuickPayScreen extends Screen {
   final QuickPayViewModel viewModel;
   final VoidCallback navigateToMakePayment;
-  final VoidCallback navigateToGenerateQrCode;
 
-  QuickPayScreen(
-      {@required this.viewModel,
-      @required this.navigateToMakePayment,
-      @required this.navigateToGenerateQrCode})
-      : assert(() {
+  QuickPayScreen({
+    @required this.viewModel,
+    @required this.navigateToMakePayment,
+  }) : assert(() {
           return viewModel != null;
         }());
 
@@ -36,15 +34,6 @@ class QuickPayScreen extends Screen {
               title: Text('Email'),
               subtitle: Text(viewModel.email),
             )),
-            Expanded(
-                child: ListTile(
-                    title: Text('QRCode'),
-                    trailing: RaisedButton(
-                      child: Text("Generate"),
-                      onPressed: () {
-                        navigateToGenerateQrCode();
-                      },
-                    ))),
             RaisedButton(
               child: Text("Request Money"),
               onPressed: () {

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:business_banking/features/qr_code_generator/ui/qr_code_generator_widget.dart';
 import 'package:business_banking/features/quickpay/bloc/quickpay_bloc.dart';
 import 'package:business_banking/features/quickpay/model/quickpay_view_model.dart';
 import 'package:business_banking/features/request_money/ui/request_money_widget.dart';
@@ -25,9 +24,6 @@ class QuickPayPresenter
       navigateToMakePayment: () {
         _navigateToMakePayment(context);
       },
-      navigateToGenerateQrCode: () {
-        _navigateToGenerateQrCode(context);
-      },
     );
   }
 
@@ -37,15 +33,6 @@ class QuickPayPresenter
       MaterialPageRoute(
           settings: RouteSettings(name: 'request_money'),
           builder: (context) => RequestMoneyWidget()),
-    );
-  }
-
-  void _navigateToGenerateQrCode(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          settings: RouteSettings(name: 'seed'),
-          builder: (context) => QRCodeGeneratorWidget()),
     );
   }
 }
