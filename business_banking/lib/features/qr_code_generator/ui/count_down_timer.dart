@@ -44,7 +44,6 @@ class CountDownState extends State<CountDown> {
 
   @override
   Widget build(BuildContext context) {
-    print(_start);
     return _start <= 0
         ? Text('Expired try another')
         : Container(
