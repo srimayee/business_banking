@@ -18,7 +18,8 @@ void main() {
         find.byType(QuickPayPresenter), matchesGoldenFile('main.png'));
   });
 
-  testGoldens('golden test added to show tile asked to add to QuickPay',
+  testGoldens(
+      'golden test added to test exact image visually(another good way of writing golden tests)',
       (WidgetTester tester) async {
     await loadAppFonts();
     await tester.pumpWidgetBuilder(QuickPayWidget(),
@@ -26,6 +27,6 @@ void main() {
         wrapper: materialAppWrapper(
             theme: ThemeData.light(), platform: TargetPlatform.android));
     await tester.pumpAndSettle();
-    await screenMatchesGolden(tester, 'quick_pay_golden');
+    await screenMatchesGolden(tester, 'quickpay_golden');
   });
 }
