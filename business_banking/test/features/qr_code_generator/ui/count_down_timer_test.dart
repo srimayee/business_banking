@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockTimer extends Mock implements Timer {}
+
 
 void main() {
   Widget buildTestableWidget(Widget widget) {
