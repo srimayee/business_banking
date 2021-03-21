@@ -18,5 +18,7 @@ class QRCodeGeneratorBlocFailureMock extends Fake
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    qrCodeGeneratorViewModelPipe.dispose();
+  }
 }
