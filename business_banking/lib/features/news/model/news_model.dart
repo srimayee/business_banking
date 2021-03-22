@@ -12,7 +12,7 @@ class NewsModel {
   NewsModel.fromJson(Map<String, dynamic> json)
       : author = json['author'] ?? '',
         title = json['title'] ?? '',
-        description = json['description'] ?? '',
+        description = json['content'] ?? '',
         url = json['url'] ?? '',
         urlToImage = json['urlToImage'] ?? '',
         publishedAt = json['publishedAt'] ?? '';

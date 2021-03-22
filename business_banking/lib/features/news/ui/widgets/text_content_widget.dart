@@ -11,23 +11,17 @@ class TextContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: text,
-      child: Material(
-        type: MaterialType.transparency,
-        child: Text(
-          '${text.replaceAll(r'\', '')}',
-          style: TextStyle(
-            fontSize: 13.0,
-            fontWeight: (style == TextContentStyle.title)
-                ? FontWeight.bold
-                : FontWeight.normal,
-            color: Colors.black,
-          ),
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-        ),
+    return Text(
+      '${text.replaceAll(r'\', '')}',
+      style: TextStyle(
+        fontSize: 13.0,
+        fontWeight: (style == TextContentStyle.title)
+            ? FontWeight.bold
+            : FontWeight.normal,
+        color: Colors.black,
       ),
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

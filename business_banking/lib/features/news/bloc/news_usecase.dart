@@ -31,9 +31,6 @@ class NewsUsecase extends UseCase {
   }
 
   void _notifySubscribers(entity) {
-    _viewModelCallBack(buildViewModel(entity));
+    _viewModelCallBack( NewsViewModel(entity.allNews));
   }
-
-  NewsViewModel buildViewModel(NewsEntity entity) =>
-      NewsViewModel(entity.allNews);
 }

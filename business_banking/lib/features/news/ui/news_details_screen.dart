@@ -1,34 +1,30 @@
-import 'package:business_banking/features/news/model/news_view_model.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/news/model/news_details_view_model.dart';
 import 'package:business_banking/features/news/ui/widgets/text_content_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewsDetailsScreen extends Screen {
-  final NewsViewModel viewModel;
-  final int selectedIndex;
+  final NewsDetailsViewModel viewModel;
 
-  NewsDetailsScreen({@required this.viewModel, @required this.selectedIndex});
+  NewsDetailsScreen({@required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    String _publishedDate = DateFormat.yMMMEd()
-        .format(DateTime.parse(viewModel.allNews[selectedIndex].publishedAt));
-    final _title = viewModel.allNews[selectedIndex].title ?? '';
-    final _authorBy = viewModel.allNews[selectedIndex].author ?? '';
-    final _url = viewModel.allNews[selectedIndex].url ?? '';
-    final _urlToImage = viewModel.allNews[selectedIndex].urlToImage ?? '';
-    final _description = viewModel.allNews[selectedIndex].description ?? '';
+    String _publishedDate =
+        DateFormat.yMMMEd().format(DateTime.parse(viewModel.publishedAt));
 
-    String _author =
-        _authorBy.length > 10 ? _authorBy.substring(0, 10) : _authorBy;
+    String _author = viewModel.author.length > 10
+        ? viewModel.author.substring(0, 10)
+        : viewModel.author;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "${Uri.parse(_url).host.toUpperCase()}",
-          style: TextStyle(fontSize: 14.0),
+        title: AutoSizeText(
+          "${Uri.parse(viewModel.url).host}",
         ),
+        backgroundColor: Colors.green,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -37,13 +33,14 @@ class NewsDetailsScreen extends Screen {
           Stack(
             children: <Widget>[
               Hero(
-                tag: _urlToImage,
+                tag: viewModel.urlToImage,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(_urlToImage), fit: BoxFit.cover)),
+                          image: NetworkImage(viewModel.urlToImage),
+                          fit: BoxFit.cover)),
                 ),
               ),
             ],
@@ -54,7 +51,7 @@ class NewsDetailsScreen extends Screen {
               child: Column(
                 children: <Widget>[
                   TextContentWidget(
-                      text: _title, style: TextContentStyle.title),
+                      text: viewModel.title, style: TextContentStyle.title),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -63,7 +60,7 @@ class NewsDetailsScreen extends Screen {
                         _author,
                         style: TextStyle(fontSize: 14.0),
                       ),
-                      Icon(Icons.date_range_rounded),
+                      Icon(Icons.update_rounded),
                       Text(
                         '$_publishedDate',
                         style: TextStyle(fontSize: 14.0),
@@ -71,10 +68,11 @@ class NewsDetailsScreen extends Screen {
                     ],
                   ),
                   Divider(
-                    color: Colors.grey[700],
+                    thickness: 1.0,
+                    color: Colors.black38,
                   ),
                   Text(
-                    _description,
+                    viewModel.description,
                     style: TextStyle(fontSize: 14.0),
                   ),
                 ],
