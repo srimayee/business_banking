@@ -49,6 +49,7 @@ class NewsScreen extends Screen {
         description: viewModel.allNews[selectedIndex].description ?? '',
         url: viewModel.allNews[selectedIndex].url ?? '',
         urlToImage: viewModel.allNews[selectedIndex].urlToImage ?? '',
-        publishedAt: viewModel.allNews[selectedIndex].publishedAt ?? '');
+        publishedAt: viewModel.allNews[selectedIndex].publishedAt ?? '',
+        itemIndex: selectedIndex);
   }
 }

@@ -8,18 +8,21 @@ class NewsDetailsViewModel extends ViewModel {
   final String url;
   final String urlToImage;
   final String publishedAt;
+  final int itemIndex;
 
-  NewsDetailsViewModel(
-      {Key key,
-      @required this.author,
-      @required this.title,
-      @required this.description,
-      @required this.url,
-      @required this.urlToImage,
-      @required this.publishedAt});
+  NewsDetailsViewModel({
+    Key key,
+    @required this.author,
+    @required this.title,
+    @required this.description,
+    @required this.url,
+    @required this.urlToImage,
+    @required this.publishedAt,
+    this.itemIndex = 0,
+  });
 
   @override
   // TODO: implement props
   List<Object> get props =>
-      [author, title, description, url, urlToImage, publishedAt];
+      [author, title, description, url, urlToImage, publishedAt, itemIndex];
 }

@@ -14,7 +14,8 @@ class NewsDetailsScreen extends Screen {
   Widget build(BuildContext context) {
     String _publishedDate =
         DateFormat.yMMMEd().format(DateTime.parse(viewModel.publishedAt));
-    final hasUrl = viewModel.urlToImage != null && viewModel.urlToImage.isNotEmpty;
+    final hasUrl =
+        viewModel.urlToImage != null && viewModel.urlToImage.isNotEmpty;
 
     String _author = viewModel.author.length > 10
         ? viewModel.author.substring(0, 10)
@@ -26,6 +27,7 @@ class NewsDetailsScreen extends Screen {
           "${Uri.parse(viewModel.url).host}",
         ),
         backgroundColor: Colors.green,
+        key: Key('NewsDetailsScreenAppBar'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,9 +41,11 @@ class NewsDetailsScreen extends Screen {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
-                      image: hasUrl ? DecorationImage(
-                          image: NetworkImage(viewModel.urlToImage),
-                          fit: BoxFit.cover) : null),
+                      image: hasUrl
+                          ? DecorationImage(
+                              image: NetworkImage(viewModel.urlToImage),
+                              fit: BoxFit.cover)
+                          : null),
                 ),
               ),
             ],
@@ -52,7 +56,10 @@ class NewsDetailsScreen extends Screen {
               child: Column(
                 children: <Widget>[
                   TextContentWidget(
-                      text: viewModel.title, style: TextContentStyle.title),
+                    text: viewModel.title,
+                    style: TextContentStyle.title,
+                    key: Key("NewsDetailsTitle"),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -60,11 +67,13 @@ class NewsDetailsScreen extends Screen {
                       Text(
                         _author,
                         style: TextStyle(fontSize: 14.0),
+                        key: Key("NewsDetailsAuthor"),
                       ),
                       Icon(Icons.update_rounded),
                       Text(
                         '$_publishedDate',
                         style: TextStyle(fontSize: 14.0),
+                        key: Key("NewsDetailsDate"),
                       ),
                     ],
                   ),
@@ -75,6 +84,7 @@ class NewsDetailsScreen extends Screen {
                   Text(
                     viewModel.description,
                     style: TextStyle(fontSize: 14.0),
+                    key: Key("NewsDetailsDesc"),
                   ),
                 ],
               ),
