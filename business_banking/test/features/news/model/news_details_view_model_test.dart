@@ -9,14 +9,16 @@ void main() {
         description: 'description',
         url: 'url',
         urlToImage: 'urlToImage',
-        publishedAt: 'publishedAt');
-    expect(viewModel.props, ['author','title','description','url','urlToImage','publishedAt']);
-    expect(viewModel.stringify, false);
+        publishedAt: 'publishedAt',
+        itemIndex: 0);
+    expect(viewModel.props, ['author','title','description','url','urlToImage','publishedAt', 0]);
+    expect(viewModel.stringify, true);
     expect(viewModel.author, 'author');
     expect(viewModel.title, 'title');
     expect(viewModel.description, 'description');
     expect(viewModel.url, 'url');
     expect(viewModel.urlToImage, 'urlToImage');
     expect(viewModel.publishedAt, 'publishedAt');
+    expect(viewModel.itemIndex, 0);
   });
 }

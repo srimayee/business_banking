@@ -18,8 +18,9 @@ void main() {
         description: 'description',
         url: 'url',
         urlToImage: '',
-        publishedAt: '2021-03-22T14:26:50Z');
-    final disclosureAction = find.byKey(Key('disclosureAction'));
+        publishedAt: '2021-03-22T14:26:50Z',
+    itemIndex: 0);
+    final disclosureAction = find.byKey(Key('disclosureAction0'));
     final testWidget = MaterialApp(home: Scaffold(body: NewsRowWidget(viewModel: viewModel,)),
     navigatorObservers: [mockObserver],);
     await tester.pumpWidget(testWidget);

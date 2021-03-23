@@ -11,7 +11,7 @@ void main() {
     ]);
 
     expect(viewModel.props, [viewModel.allNews]);
-    expect(viewModel.stringify, false);
+    expect(viewModel.stringify, true);
     expect(viewModel.allNews[0].author, 'author');
     expect(viewModel.allNews[0].title, 'title');
     expect(viewModel.allNews[0].description, 'description');
