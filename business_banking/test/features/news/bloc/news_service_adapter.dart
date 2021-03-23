@@ -5,8 +5,7 @@ import 'package:business_banking/features/news/model/news_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test(
-      'SERVICE ADAPTER TEST: On Success NewsEntity must be initiated and created', () {
+  test('SERVICE ADAPTER TEST: On Success NewsEntity must be initiated and created', () {
     final entity = NewsServiceAdapter().createEntity(
         NewsEntity(),
         NewsJsonResponseModel.fromJson({

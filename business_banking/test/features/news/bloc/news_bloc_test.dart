@@ -13,6 +13,7 @@ void main() {
     bloc.dispose();
   });
 
+  //prerequisite - Mockoon 'news' api should be running
   test('BLOC TEST: On success NewsBloc gets model of type NewsViewModel.', () {
     bloc.newsViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<NewsViewModel>());

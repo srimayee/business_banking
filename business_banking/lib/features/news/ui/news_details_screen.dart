@@ -14,6 +14,7 @@ class NewsDetailsScreen extends Screen {
   Widget build(BuildContext context) {
     String _publishedDate =
         DateFormat.yMMMEd().format(DateTime.parse(viewModel.publishedAt));
+    final hasUrl = viewModel.urlToImage != null && viewModel.urlToImage.isNotEmpty;
 
     String _author = viewModel.author.length > 10
         ? viewModel.author.substring(0, 10)
@@ -38,9 +39,9 @@ class NewsDetailsScreen extends Screen {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: hasUrl ? DecorationImage(
                           image: NetworkImage(viewModel.urlToImage),
-                          fit: BoxFit.cover)),
+                          fit: BoxFit.cover) : null),
                 ),
               ),
             ],

@@ -28,7 +28,7 @@ void main() {
           'author', 'title', 'description', 'url', 'urlToImage', 'publishedAt')
     ]);
     final merged =
-    entity.merge(errors: <EntityFailure>[GeneralEntityFailure()]);
+        entity.merge(errors: <EntityFailure>[GeneralEntityFailure()]);
     expect(merged.hasErrors(), true);
   });
 }

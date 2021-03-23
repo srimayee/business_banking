@@ -6,9 +6,8 @@ import 'package:test/test.dart';
 
 void main() {
   logger().setLogLevel(LogLevel.verbose);
-
-  test(
-      'API TESTS:On success news service should return Instance of NewsJsonResponseModel', () async {
+  //prerequisite - Mockoon 'news' api should be running
+  test('API TESTS:On success news service should return Instance of NewsJsonResponseModel', () async {
     final service = NewsService();
     final eitherResponse = await service.request();
     expect(eitherResponse.isRight, isTrue);

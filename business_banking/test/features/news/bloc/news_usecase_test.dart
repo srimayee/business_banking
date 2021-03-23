@@ -5,13 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test(
       'USECASE TEST: On success NewsUsecase create should publish NewsViewModel',
-          () async {
-        NewsUsecase useCase = NewsUsecase((viewModel) {
-          expect(viewModel, isA<NewsViewModel>());
-        });
-        useCase.create();
-        useCase.create();
-      });
+      () async {
+    NewsUsecase useCase = NewsUsecase((viewModel) {
+      expect(viewModel, isA<NewsViewModel>());
+    });
+    useCase.create();
+    useCase.create();
+  });
 
   test('USECASE TEST: Should assert when callback is null', () async {
     try {

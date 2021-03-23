@@ -19,13 +19,15 @@ class NewsScreen extends Screen {
         shadowColor: Colors.grey[500],
         elevation: 3.0,
         child: ListView(
+          key: Key('containerListView'),
           // controller: provider.controller,
           children: <Widget>[
             ListView.builder(
+              key: Key('builderListView'),
               physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 5.0),
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: viewModel.allNews.length,
               itemBuilder: (BuildContext context, int index) {
                 final _detailsViewModel = _makeDetailsViewModel(index);
                 return Padding(

@@ -7,6 +7,7 @@ class ThumbImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasUrl = imgUrl != null && imgUrl.isNotEmpty;
     return Hero(
       tag: imgUrl,
       child: Card(
@@ -27,8 +28,8 @@ class ThumbImageCard extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(5.0),
                     topRight: Radius.circular(5.0)),
-                image: DecorationImage(
-                    image: NetworkImage(imgUrl), fit: BoxFit.cover)),
+                image: hasUrl ? DecorationImage(
+                    image: NetworkImage(imgUrl), fit: BoxFit.cover) : null),
           ),
         ),
       ),

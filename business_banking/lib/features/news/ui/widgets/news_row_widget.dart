@@ -15,6 +15,7 @@ class NewsRowWidget extends StatelessWidget {
     final _authorBy = viewModel.author ?? '';
     final _urlToImage = viewModel.urlToImage ?? '';
     return InkWell(
+      key: Key('disclosureAction'),
       onTap: () {
         Navigator.push(
           context,
