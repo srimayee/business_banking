@@ -1,4 +1,3 @@
-import 'package:business_banking/features/news/model/news_details_view_model.dart';
 import 'package:business_banking/features/news/model/news_view_model.dart';
 import 'package:business_banking/features/news/ui/widgets/news_row_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -6,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class NewsScreen extends Screen {
   final NewsViewModel viewModel;
+  final Function didSelectRowAtIndex;
 
-  NewsScreen({@required this.viewModel});
+  NewsScreen({this.viewModel, this.didSelectRowAtIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class NewsScreen extends Screen {
         elevation: 3.0,
         child: ListView(
           key: Key('containerListView'),
-          // controller: provider.controller,
           children: <Widget>[
             ListView.builder(
               key: Key('builderListView'),
@@ -29,10 +28,13 @@ class NewsScreen extends Screen {
               shrinkWrap: true,
               itemCount: viewModel.allNews.length,
               itemBuilder: (BuildContext context, int index) {
-                final _detailsViewModel = _makeDetailsViewModel(index);
                 return Padding(
                   padding: EdgeInsets.all(5.0),
-                  child: NewsRowWidget(viewModel: _detailsViewModel),
+                  child: NewsRowWidget(
+                    viewModel: viewModel,
+                    didSelectRowAtIndex: didSelectRowAtIndex,
+                    rowIndex: index,
+                  ),
                 );
               },
             ),
@@ -40,16 +42,5 @@ class NewsScreen extends Screen {
         ),
       ),
     );
-  }
-
-  NewsDetailsViewModel _makeDetailsViewModel(int selectedIndex) {
-    return NewsDetailsViewModel(
-        author: viewModel.allNews[selectedIndex].author ?? '',
-        title: viewModel.allNews[selectedIndex].title ?? '',
-        description: viewModel.allNews[selectedIndex].description ?? '',
-        url: viewModel.allNews[selectedIndex].url ?? '',
-        urlToImage: viewModel.allNews[selectedIndex].urlToImage ?? '',
-        publishedAt: viewModel.allNews[selectedIndex].publishedAt ?? '',
-        itemIndex: selectedIndex);
   }
 }

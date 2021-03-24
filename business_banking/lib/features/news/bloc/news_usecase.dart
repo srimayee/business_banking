@@ -31,6 +31,24 @@ class NewsUsecase extends UseCase {
   }
 
   void _notifySubscribers(entity) {
-    _viewModelCallBack( NewsViewModel(entity.allNews));
+    _buildViewModelForServiceUpdate(entity);
+  }
+
+  _buildViewModelForServiceUpdate(NewsEntity entity) {
+    if (entity.hasErrors()) {
+      _viewModelCallBack(NewsViewModel(
+          entity.allNews, entity.selectedNews, NewsServiceStatus.fail));
+    } else {
+      _viewModelCallBack(NewsViewModel(
+          entity.allNews, entity.selectedNews, NewsServiceStatus.success));
+    }
+  }
+
+  void updateSelectedNewsWithRowIndex(int index) async {
+    final entity = ExampleLocator().repository.get<NewsEntity>(_scope);
+
+    final selectedNews = entity.selectedItem(index);
+    final updatedEntity = entity.merge(selectedNews: selectedNews);
+    ExampleLocator().repository.update<NewsEntity>(_scope, updatedEntity);
   }
 }

@@ -1,29 +1,25 @@
-import 'package:business_banking/features/news/model/news_details_view_model.dart';
-import 'package:business_banking/features/news/ui/news_details_screen.dart';
+import 'package:business_banking/features/news/model/news_view_model.dart';
 import 'package:business_banking/features/news/ui/widgets/text_content_widget.dart';
 import 'package:business_banking/features/news/ui/widgets/thumb_image_card.dart';
 import 'package:flutter/material.dart';
 
 class NewsRowWidget extends StatelessWidget {
-  final NewsDetailsViewModel viewModel;
+  final NewsViewModel viewModel;
+  final Function didSelectRowAtIndex;
+  final rowIndex;
 
-  NewsRowWidget({@required this.viewModel});
+  NewsRowWidget(
+      {@required this.viewModel, this.didSelectRowAtIndex, this.rowIndex = 0});
 
   @override
   Widget build(BuildContext context) {
-    final _title = viewModel.title ?? '';
-    final _authorBy = viewModel.author ?? '';
-    final _urlToImage = viewModel.urlToImage ?? '';
-    final uniqueKey = 'disclosureAction'+'${viewModel.itemIndex}';
+    final _title = viewModel.allNews[rowIndex].title ?? '';
+    final _authorBy = viewModel.allNews[rowIndex].author ?? '';
+    final _urlToImage = viewModel.allNews[rowIndex].urlToImage ?? '';
+    final uniqueKey = 'disclosureAction' + '${viewModel.allNews[rowIndex]}';
     return InkWell(
       key: Key(uniqueKey),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (builder) => NewsDetailsScreen(viewModel: viewModel)),
-        );
-      },
+      onTap: () => didSelectRowAtIndex(rowIndex),
       child: Container(
         height: 75.0,
         child: Row(
