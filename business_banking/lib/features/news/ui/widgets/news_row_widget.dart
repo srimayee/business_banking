@@ -16,7 +16,7 @@ class NewsRowWidget extends StatelessWidget {
     final _title = viewModel.allNews[rowIndex].title ?? '';
     final _authorBy = viewModel.allNews[rowIndex].author ?? '';
     final _urlToImage = viewModel.allNews[rowIndex].urlToImage ?? '';
-    final uniqueKey = 'disclosureAction' + '${viewModel.allNews[rowIndex]}';
+    final uniqueKey = 'disclosureAction' + '$rowIndex';
     return InkWell(
       key: Key(uniqueKey),
       onTap: () => didSelectRowAtIndex(rowIndex),

@@ -5,12 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('MODEL TEST: NewsViewModel initialize', () async {
-    final viewModel = NewsViewModel([
-      NewsModel(
-          'author', 'title', 'description', 'url', 'urlToImage', 'publishedAt')
-    ]);
+    final viewModel = NewsViewModel(
+      [
+        NewsModel('author', 'title', 'description', 'url', 'urlToImage',
+            'publishedAt'),
+      ],
+      NewsModel('selected_author', 'selected_title', 'selected_description',
+          'selected_url', 'selected_urlToImage', 'selected_publishedAt'),
+      NewsServiceStatus.unknown,
+    );
 
-    expect(viewModel.props, [viewModel.allNews]);
+    expect(viewModel.props, [viewModel.allNews, viewModel.selectedNews, viewModel.serviceStatus]);
     expect(viewModel.stringify, true);
     expect(viewModel.allNews[0].author, 'author');
     expect(viewModel.allNews[0].title, 'title');
@@ -18,6 +23,8 @@ void main() {
     expect(viewModel.allNews[0].url, 'url');
     expect(viewModel.allNews[0].urlToImage, 'urlToImage');
     expect(viewModel.allNews[0].publishedAt, 'publishedAt');
+    expect(viewModel.selectedNews, isA<NewsModel>());
+    expect(viewModel.serviceStatus, NewsServiceStatus.unknown);
   });
 
   test('MODEL TEST: NewsJsonResponseModel initialize', () async {

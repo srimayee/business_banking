@@ -1,4 +1,5 @@
 import 'package:business_banking/features/news/bloc/news_bloc.dart';
+import 'package:business_banking/features/news/model/news_details_view_model.dart';
 import 'package:business_banking/features/news/model/news_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -24,6 +25,7 @@ void main() {
       expect(model.allNews[0].url, isA<String>());
       expect(model.allNews[0].urlToImage, isA<String>());
       expect(model.allNews[0].publishedAt, '2021-03-04T19:26:00Z');
+      bloc.didSelectRowAtIndex(0);
     }));
   });
 }

@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('CustomerDetailWidget, with true bloc', (tester) async {
-    final viewModel = NewsViewModel([
-      NewsModel(
-          'author', 'title', 'description', 'url', '', 'publishedAt')
-    ]);
+  testWidgets('News Screen pumped with News bloc', (tester) async {
+    final viewModel = NewsViewModel(
+      [
+        NewsModel('author', 'title', 'description', 'url', '', 'publishedAt'),
+      ],
+      NewsModel('selected_author', 'selected_title', 'selected_description',
+          'selected_url', '', 'selected_publishedAt'),
+      NewsServiceStatus.unknown,
+    );
     final testWidget = MaterialApp(home: NewsScreen(viewModel: viewModel));
     await tester.pumpWidget(testWidget);
     await tester.pumpAndSettle();

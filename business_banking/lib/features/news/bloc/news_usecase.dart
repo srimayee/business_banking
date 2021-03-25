@@ -48,7 +48,9 @@ class NewsUsecase extends UseCase {
     final entity = ExampleLocator().repository.get<NewsEntity>(_scope);
 
     final selectedNews = entity.selectedItem(index);
-    final updatedEntity = entity.merge(selectedNews: selectedNews);
-    ExampleLocator().repository.update<NewsEntity>(_scope, updatedEntity);
+    if (selectedNews != null) {
+      final updatedEntity = entity.merge(selectedNews: selectedNews);
+      ExampleLocator().repository.update<NewsEntity>(_scope, updatedEntity);
+    }
   }
 }

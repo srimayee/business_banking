@@ -1,28 +1,27 @@
-import 'package:business_banking/features/news/model/news_details_view_model.dart';
-import 'package:business_banking/features/news/ui/news_details_screen.dart';
+import 'package:business_banking/features/news/model/news_model.dart';
+import 'package:business_banking/features/news/model/news_view_model.dart';
 import 'package:business_banking/features/news/ui/widgets/news_row_widget.dart';
 import 'package:business_banking/features/news/ui/widgets/text_content_widget.dart';
 import 'package:business_banking/features/news/ui/widgets/thumb_image_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   testWidgets('NewsRowWidget, with view model', (tester) async {
-    final mockObserver = MockNavigatorObserver();
-    final viewModel = NewsDetailsViewModel(
-        author: 'author',
-        title: 'title',
-        description: 'description',
-        url: 'url',
-        urlToImage: '',
-        publishedAt: '2021-03-22T14:26:50Z',
-    itemIndex: 0);
+    final viewModel = NewsViewModel(
+      [
+        NewsModel('author', 'title', 'description', 'url', '', 'publishedAt'),
+      ],
+      NewsModel('selected_author', 'selected_title', 'selected_description',
+          'selected_url', '', 'selected_publishedAt'),
+      NewsServiceStatus.unknown,
+    );
     final disclosureAction = find.byKey(Key('disclosureAction0'));
-    final testWidget = MaterialApp(home: Scaffold(body: NewsRowWidget(viewModel: viewModel,)),
-    navigatorObservers: [mockObserver],);
+    final testWidget = MaterialApp(
+      home: Scaffold(
+          body: NewsRowWidget(
+              viewModel: viewModel, didSelectRowAtIndex: (_) => {})),
+    );
     await tester.pumpWidget(testWidget);
     await tester.pumpAndSettle();
 
@@ -32,11 +31,7 @@ void main() {
     expect(find.byType(Row), findsNWidgets(1));
     expect(find.byType(InkWell), findsNWidgets(1));
     expect(disclosureAction, findsOneWidget);
-
-    await tester.tap(find.byType(InkWell));
-    await tester.pumpAndSettle();
-
-    verify(mockObserver.didPush(any, any));
-    expect(find.byType(NewsDetailsScreen), findsOneWidget);
+    await tester.tap(disclosureAction);
+    await tester.pump();
   });
 }
