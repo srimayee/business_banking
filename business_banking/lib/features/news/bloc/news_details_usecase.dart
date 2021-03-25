@@ -14,26 +14,24 @@ class NewsDetailsUseCase extends UseCase {
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<NewsEntity>();
-    if (_scope == null) {
-      throw AssertionError('NewsEntity does not exist');
+    if (_scope != null) {
+      _scope.subscription = _notifyNewsDetailsSubscribers;
+      final entity = ExampleLocator().repository.get<NewsEntity>(_scope);
+      _viewModelCallBack(buildViewModelForSelectedNews(entity));
     }
-
-    _scope.subscription = _notifyTransferSubscribers;
-    final entity = ExampleLocator().repository.get<NewsEntity>(_scope);
-    _viewModelCallBack(buildViewModelForSelectedNews(entity));
   }
 
-  void _notifyTransferSubscribers(entity) {
+  void _notifyNewsDetailsSubscribers(entity) {
     _viewModelCallBack(buildViewModelForSelectedNews(entity));
   }
 
   NewsDetailsViewModel buildViewModelForSelectedNews(NewsEntity entity) {
-      return NewsDetailsViewModel(
-          author: entity.selectedNews.author,
-          title: entity.selectedNews.title,
-          description: entity.selectedNews.description,
-          url: entity.selectedNews.url,
-          urlToImage: entity.selectedNews.urlToImage,
-          publishedAt: entity.selectedNews.publishedAt);
+    return NewsDetailsViewModel(
+        author: entity.selectedNews.author,
+        title: entity.selectedNews.title,
+        description: entity.selectedNews.description,
+        url: entity.selectedNews.url,
+        urlToImage: entity.selectedNews.urlToImage,
+        publishedAt: entity.selectedNews.publishedAt);
   }
 }
