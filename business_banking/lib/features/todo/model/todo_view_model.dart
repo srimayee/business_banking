@@ -2,18 +2,12 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class TodoViewModel extends ViewModel {
-  final int userId;
-  final int id;
-  final String title;
-  final bool completed;
+  final List<dynamic> todos;
 
   TodoViewModel({
-    @required this.userId,
-    @required this.id,
-    @required this.title,
-    @required this.completed,
+    @required this.todos,
   }); //assertions not required when @required syntax used...right?
 
   @override
-  List<Object> get props => [userId, id, title, completed];
+  List<Object> get props => [todos];
 }

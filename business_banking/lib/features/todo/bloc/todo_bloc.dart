@@ -14,7 +14,7 @@ class TodoBloc extends Bloc {
     todoViewModelPipe.dispose();
   }
 
-  TodoBloc({TodoService todoService}) {
+  TodoBloc({TodoService todoService}) { //why do we allow an optional named parameter that isn't even used?
     _useCase = TodoUseCase(
         (viewModel) => todoViewModelPipe.send(viewModel));
     todoViewModelPipe.whenListenedDo(() => _useCase.create());

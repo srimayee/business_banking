@@ -21,10 +21,7 @@ class TodoServiceAdapter extends ServiceAdapter<TodoEntity,
     }
 
     return todoEntityModelList.merge(
-      userId: responseModel.userId,
-      id: responseModel.id,
-      title: responseModel.title,
-      completed: responseModel.completed,
+      todos: responseModel.todos,
     );
   }
 }

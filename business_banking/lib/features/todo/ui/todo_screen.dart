@@ -13,18 +13,48 @@ class TodoScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
+    final List<dynamic> todoItems = viewModel.todos;
     return Container(
       padding: EdgeInsets.all(6),
       child: Card(
-        child: ListTile(
-          title: Text("${viewModel.title}"),
-          subtitle: Text("User ID: ${viewModel.userId}\nID: ${viewModel.id}"),
-          leading: (viewModel.completed)
-            ? CircleAvatar(backgroundColor: Colors.green, child: Icon(Icons.done, color: Colors.white,),)
-            : CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.error_outline, color: Colors.white,),),
-          contentPadding: EdgeInsets.all(8.0),
-        ),
+        elevation: 3,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            children: [
+              Text("To Do items:", style: TextStyle(fontSize: 24),),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: todoItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TodoItem(todoInfo: todoItems[index]);
+                }
+              )
+            ],
+          ),
+        )
       )
+    );
+  }
+}
+
+class TodoItem extends StatelessWidget {
+  const TodoItem({
+    Key key,
+    @required this.todoInfo
+  }) : super(key: key);
+
+  final Map<String, dynamic> todoInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text("${todoInfo["title"]}"),
+      subtitle: Text("User ID: ${todoInfo["userId"]} — Todo ID: ${todoInfo["id"]}"),
+      leading: (todoInfo["completed"])
+          ? CircleAvatar(backgroundColor: Colors.green, child: Icon(Icons.done, color: Colors.white,),)
+          : CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.error_outline, color: Colors.white,),),
     );
   }
 }

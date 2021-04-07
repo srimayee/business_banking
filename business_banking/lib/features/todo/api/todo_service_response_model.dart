@@ -2,17 +2,11 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
 class TodoServiceResponseModel extends Equatable implements JsonResponseModel {
-  final int userId;
-  final int id;
-  final String title;
-  final bool completed;
+  final List<dynamic> todos;
 
   TodoServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : userId = json['userId'] ?? 1,
-      id = json['id'] ?? 1,
-      title = json['title'] ?? "No title",
-      completed = json['completed'] ?? false;
+      : todos = json['todos'] ?? [{"userId": 1, "id": 1, "title": "No title", "completed": false}];
 
   @override
-  List<Object> get props => [userId, id, title, completed];
+  List<Object> get props => [todos];
 }

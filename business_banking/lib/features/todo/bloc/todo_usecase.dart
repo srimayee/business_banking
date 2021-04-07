@@ -36,10 +36,7 @@ class TodoUseCase extends UseCase {
     TodoEntity todoListEntityModel,
   ) {
     return TodoViewModel(
-      userId: todoListEntityModel.userId,
-      id: todoListEntityModel.id,
-      title: todoListEntityModel.title,
-      completed: todoListEntityModel.completed,
+      todos: todoListEntityModel.todos,
     );
   }
 }

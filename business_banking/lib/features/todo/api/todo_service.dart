@@ -12,7 +12,7 @@ class TodoService
     : super(
         method: RestMethod.get,
         restApi: ExampleLocator().api,
-        path: 'https://jsonplaceholder.typicode.com/todos/1'
+        path: 'todos'
       );
 
   @override
