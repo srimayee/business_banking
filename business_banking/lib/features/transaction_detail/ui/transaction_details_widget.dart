@@ -3,7 +3,7 @@ import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-import 'transaction_detail_presenter.dart';
+import 'transaction_details_presenter.dart';
 
 class TransactionDetailsWidget extends StatelessWidget {
   final bool debugEnabled = false;

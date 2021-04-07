@@ -1,22 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:business_banking/features/transaction_detail/model/transaction_details_view_model.dart';
+import 'package:business_banking/features/transaction_detail/ui/transaction_tile.dart';
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class TransactionDetailScreen extends Screen {
   final TransactionDetailsViewModel viewModel;
-  final VoidCallback navigateToTransactionDetail;
   const TransactionDetailScreen({
     @required this.viewModel,
-    @required this.navigateToTransactionDetail,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 125,
+      height: 250,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(5.0),
       child: Card(
@@ -28,14 +27,20 @@ class TransactionDetailScreen extends Screen {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              AutoSizeText('Transactions',
+                  style: TextStyle(color: Colors.lightGreen, fontSize: 30.0)),
               Expanded(
-                child: AutoSizeText('Transactions',
-                    style: TextStyle(color: Colors.lightGreen, fontSize: 30.0)),
-              ),
+                  child: ListView.builder(
+                itemCount: viewModel.transactionDetails.length,
+                itemBuilder: (context, index) {
+                  return TransactionTile(
+                      viewModel: viewModel.transactionDetails[index]);
+                },
+              )),
               RaisedButton(
                 key: Key('transaction_details_button'),
                 onPressed: () => CFRouterScope.of(context)
-                    .push(BusinessBankingRouter.transferFundsRoute),
+                    .push(BusinessBankingRouter.transactionDetailsChartRoute),
                 child: Text(
                   'View Details',
                   style: TextStyle(color: Colors.black54),
