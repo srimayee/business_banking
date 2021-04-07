@@ -36,6 +36,6 @@ class TransactionDetailsUseCase extends UseCase {
 
   TransactionDetailsViewModel buildViewModel(TransactionDetailsEntity entity) {
     return TransactionDetailsViewModel(
-        name: entity.name, email: entity.name, imageUrl: '');
+        transactionDetails: entity.transactionDetails);
   }
 }

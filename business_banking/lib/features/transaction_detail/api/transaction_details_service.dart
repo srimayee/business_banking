@@ -2,10 +2,10 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:business_banking/locator.dart';
 
-import 'transaction_detail_service_response_model.dart';
+import 'transaction_details_service_response_model_list.dart';
 
 class TransactionDetailsService extends EitherService<JsonRequestModel,
-    TransactionDetailsServiceResponseModel> {
+    TransactionDetailServiceResponseModelList> {
   TransactionDetailsService()
       : super(
             method: RestMethod.get,
@@ -13,8 +13,8 @@ class TransactionDetailsService extends EitherService<JsonRequestModel,
             path: 'account-transactions');
 
   @override
-  TransactionDetailsServiceResponseModel parseResponse(
+  TransactionDetailServiceResponseModelList parseResponse(
       Map<String, dynamic> jsonResponse) {
-    return TransactionDetailsServiceResponseModel.fromJson(jsonResponse);
+    return TransactionDetailServiceResponseModelList.fromJson(jsonResponse);
   }
 }
