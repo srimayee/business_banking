@@ -1,15 +1,13 @@
+import 'package:business_banking/features/transaction_detail/model/transaction_details_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class TransactionDetailsViewModel extends ViewModel {
-  final String name;
-  final String email;
-  final String imageUrl;
+  final List<TransactionDetailsModel> transactionDetails;
 
-  TransactionDetailsViewModel(
-      {@required this.name, @required this.email, @required this.imageUrl})
-      : assert(name != null && email != null && imageUrl != null);
+  TransactionDetailsViewModel({@required this.transactionDetails})
+      : assert(transactionDetails != null);
 
   @override
-  List<Object> get props => [name, email, imageUrl];
+  List<Object> get props => [transactionDetails];
 }
