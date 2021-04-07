@@ -1,5 +1,5 @@
 {
-    "source": "mockoon:1.11.0",
+    "source": "mockoon:1.12.0",
     "data": [
         {
             "type": "environment",
@@ -11,34 +11,6 @@
                 "latency": 0,
                 "port": 3001,
                 "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Gets info for CashAccounts screen",
-                        "method": "get",
-                        "endpoint": "cash_accounts",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"type\": \"Employee Checking\",\n  \"lastFour\": \"6542\",\n  \"balance\": 3545.54\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
                     {
                         "uuid": "",
                         "documentation": "Gets info for AccountDetail screen",
@@ -268,6 +240,29 @@
                                         "value": ""
                                     }
                                 ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "quickpay",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"name\": \"Sam Parks\", \n  \"email\": \"sam.parks@capco.com\",\n  \"imageUrl\": \"\"\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
                                 "filePath": "",
                                 "sendFileAsBody": false,
                                 "rules": [],
