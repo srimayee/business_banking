@@ -224,7 +224,7 @@
                     },
                     {
                         "uuid": "",
-                        "documentation": "",
+                        "documentation": "Gets info for CashAccounts screen",
                         "method": "get",
                         "endpoint": "cash-accounts",
                         "responses": [
@@ -259,6 +259,29 @@
                             {
                                 "uuid": "",
                                 "body": "{\n  \"name\": \"Sam Parks\", \n  \"email\": \"sam.parks@capco.com\",\n  \"imageUrl\": \"\"\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "get",
+                        "endpoint": "account-transactions",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"accountTransactions\":\n  [\n    {\n    \"transactionTitle\" : \"Boots\",\n        \"transactionCategory\" : \"shopping\",\n        \"transactionAmount\" :\"9.99\",\n        \"transactionId\" : \"0000000\"\n    }\n    ]\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
