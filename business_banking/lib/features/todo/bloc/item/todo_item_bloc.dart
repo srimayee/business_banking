@@ -15,7 +15,6 @@ class TodoItemBloc extends Bloc {
   }
 
   TodoItemBloc({int index, TodoItemService todoService}) {
-    print("in bloc index = $index");
     _useCase = TodoItemUseCase(
       index,
       (viewModel) => todoItemViewModelPipe.send(viewModel));

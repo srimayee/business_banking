@@ -16,7 +16,6 @@ class TodoItemWidget extends StatelessWidget {
     if (debugEnabled) {
       logger().debug("Widget Built");
     }
-    print("in widget: index = $index");
     return new BlocProvider<TodoItemBloc>(
       create: (_) => new TodoItemBloc(index: index),
       child: new TodoItemPresenter(),

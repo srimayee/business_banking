@@ -15,7 +15,6 @@ class TodoItemPresenter extends Presenter<TodoItemBloc, TodoItemViewModel, TodoI
 
   @override TodoItemScreen buildScreen(BuildContext context, TodoItemBloc bloc,
       TodoItemViewModel viewModel) {
-    print("build todo item screen");
     return TodoItemScreen(
       viewModel: viewModel,
     );

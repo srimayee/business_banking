@@ -25,12 +25,15 @@ class TodoScreen extends Screen {
           child: Column(
             children: [
               Text("To Do items:", style: TextStyle(fontSize: 24),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Additional text is shown for each widget below so that you can tell that each is building yet only the last successfully shows a todo item"),
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: viewModel.count,
                 itemBuilder: (BuildContext context, int index) {
-                  print(index);
                   return Column(
                     children: [
                       Text("This is the ${index}th widget"),
