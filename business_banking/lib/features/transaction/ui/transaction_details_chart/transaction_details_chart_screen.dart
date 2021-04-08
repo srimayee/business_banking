@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/transaction_detail/model/transaction_details_view_model.dart';
+import 'package:business_banking/features/transaction/model/transaction_details_view_model.dart';
 import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';

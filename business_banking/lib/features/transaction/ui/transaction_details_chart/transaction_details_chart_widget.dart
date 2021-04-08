@@ -1,11 +1,11 @@
-import 'package:business_banking/features/transaction_detail/bloc/transaction_details_bloc.dart';
+import 'package:business_banking/features/transaction/bloc/transaction_details_bloc.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-import 'transaction_details_presenter.dart';
+import 'transaction_details_chart_presenter.dart';
 
-class TransactionDetailsWidget extends StatelessWidget {
+class TransactionDetailsChartWidget extends StatelessWidget {
   final bool debugEnabled = false;
 
   @override
@@ -16,7 +16,7 @@ class TransactionDetailsWidget extends StatelessWidget {
 
     return BlocProvider<TransactionDetailsBloc>(
       create: (_) => TransactionDetailsBloc(),
-      child: TransactionDetailPresenter(),
+      child: TransactionDetailsChartPresenter(),
     );
   }
 }

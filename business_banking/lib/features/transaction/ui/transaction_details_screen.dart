@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/transaction_detail/model/transaction_details_view_model.dart';
-import 'package:business_banking/features/transaction_detail/ui/transaction_tile.dart';
+import 'package:business_banking/features/transaction/model/transaction_details_view_model.dart';
+import 'package:business_banking/features/transaction/ui/transaction_tile.dart';
+
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,13 @@ class TransactionDetailScreen extends Screen {
               AutoSizeText('Transactions',
                   style: TextStyle(color: Colors.lightGreen, fontSize: 30.0)),
               Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
                 itemCount: viewModel.transactionDetails.length,
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: Theme.of(context).accentColor,
+                  );
+                },
                 itemBuilder: (context, index) {
                   return TransactionTile(
                       viewModel: viewModel.transactionDetails[index]);

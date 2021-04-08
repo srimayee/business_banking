@@ -1,5 +1,5 @@
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
-import 'package:business_banking/features/transaction_detail/ui/transaction_details_widget.dart';
+import 'package:business_banking/features/transaction/ui/transaction_details_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_card.dart';
 import 'package:business_banking/features/quickpay/ui/quickpay_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -33,11 +33,12 @@ class HubScreen extends Screen {
           CashAccountsWidget(),
           //PromosWidget(),
           SizedBox(height: 15),
-          TransactionDetailsWidget(),
-          SizedBox(height: 15),
+          Expanded(child: TransactionDetailsWidget()),
+          SizedBox(height: 30),
+          /*  SizedBox(height: 15),
           TransferFundsCard(),
           SizedBox(height: 15),
-          QuickPayWidget(),
+          QuickPayWidget(), */
         ],
       ),
     );

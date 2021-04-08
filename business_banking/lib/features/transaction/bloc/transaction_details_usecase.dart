@@ -1,13 +1,12 @@
-import 'package:business_banking/features/transaction_detail/bloc/transaction_details_service_adapter.dart';
-import 'package:business_banking/features/transaction_detail/model/transaction_details_entity.dart';
-import 'package:business_banking/features/transaction_detail/model/transaction_details_view_model.dart';
+import 'package:business_banking/features/transaction/bloc/transaction_details_service_adapter.dart';
+import 'package:business_banking/features/transaction/model/transaction_details_entity.dart';
+import 'package:business_banking/features/transaction/model/transaction_details_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:business_banking/locator.dart';
 
 class TransactionDetailsUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
-
   RepositoryScope _scope;
 
   TransactionDetailsUseCase(Function(ViewModel) viewModelCallBack)
