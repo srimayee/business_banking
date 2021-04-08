@@ -36,7 +36,7 @@ class TodoUseCase extends UseCase {
     TodoEntity todoListEntityModel,
   ) {
     return TodoViewModel(
-      todos: todoListEntityModel.todos,
+      count: todoListEntityModel.count,
     );
   }
 }

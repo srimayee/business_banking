@@ -1,22 +1,22 @@
 import 'package:clean_framework/clean_framework.dart';
 
 class TodoEntity extends Entity {
-  final List<dynamic> todos;
+  final int count;
 
   TodoEntity({
     List<EntityFailure> errors = const [],
-    List<dynamic> todos,
-  })  : todos = todos ?? [{"userId": 1, "id": 1, "title": "No title", "completed": false}],
+    int count,
+  })  : count = count ?? 0,
         super(errors: errors);
 
   @override
-  List<Object> get props => [errors, todos];
+  List<Object> get props => [errors, count];
 
   @override
-  merge({errors, List<dynamic> todos}) {
+  merge({errors, int count}) {
     return TodoEntity(
       errors: errors ?? this.errors,
-      todos: todos ?? this.todos,
+      count: count ?? this.count,
     );
   }
 }

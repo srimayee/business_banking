@@ -21,7 +21,7 @@ class TodoServiceAdapter extends ServiceAdapter<TodoEntity,
     }
 
     return todoEntityModelList.merge(
-      todos: responseModel.todos,
+      count: responseModel.count,
     );
   }
 }

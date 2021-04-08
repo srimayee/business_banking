@@ -2,11 +2,11 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
 class TodoServiceResponseModel extends Equatable implements JsonResponseModel {
-  final List<dynamic> todos;
+  final int count;
 
   TodoServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : todos = json['todos'] ?? [{"userId": 1, "id": 1, "title": "No title", "completed": false}];
+      : count = json['todos']?.length ?? 0;
 
   @override
-  List<Object> get props => [todos];
+  List<Object> get props => [count];
 }
