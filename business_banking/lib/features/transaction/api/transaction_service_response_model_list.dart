@@ -1,17 +1,17 @@
-import 'package:business_banking/features/transaction/api/transaction_details_service_response_model.dart';
+import 'package:business_banking/features/transaction/api/transaction_service_response_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class TransactionDetailServiceResponseModelList extends Equatable
+class TransactionServiceResponseModelList extends Equatable
     implements JsonResponseModel {
-  final List<TransactionDetailsServiceResponseModel>
+  final List<TransactionServiceResponseModel>
       transactionDetailEntityModelResponseList;
 
-  TransactionDetailServiceResponseModelList.fromJson(Map<String, dynamic> json)
+  TransactionServiceResponseModelList.fromJson(Map<String, dynamic> json)
       : transactionDetailEntityModelResponseList =
-            List<TransactionDetailsServiceResponseModel>.from(
+            List<TransactionServiceResponseModel>.from(
                   json['accountTransactions']?.map((transactionsJSONObject) =>
-                      TransactionDetailsServiceResponseModel.fromJson(
+                      TransactionServiceResponseModel.fromJson(
                           transactionsJSONObject)),
                 ) ??
                 [];

@@ -1,12 +1,12 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class TransactionDetailsModel extends ViewModel {
+class TransactionModel extends ViewModel {
   final String transactionTitle;
   final String transactionCategory;
   final String transactionAmount;
   final String transactionId;
 
-  TransactionDetailsModel(
+  TransactionModel(
       {this.transactionTitle,
       this.transactionCategory,
       this.transactionAmount,

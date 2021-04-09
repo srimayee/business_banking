@@ -2,11 +2,10 @@ import 'package:business_banking/features/account_detail/ui/account_detail_widge
 import 'package:business_banking/features/customer/ui/customer_detail_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
+import 'package:business_banking/features/transaction/ui/transaction_chart/transaction_chart_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'features/transaction/ui/transaction_details_chart/transaction_details_chart_widget.dart';
 
 abstract class BusinessBankingRouter {
   static const String initialRoute = '/';
@@ -35,7 +34,7 @@ abstract class BusinessBankingRouter {
         return AccountDetailWidget();
 
       case transactionDetailsChartRoute:
-        return TransactionDetailsChartWidget();
+        return TransactionChartWidget();
 
       case customerDetailRoute:
         return CustomerDetailWidget();

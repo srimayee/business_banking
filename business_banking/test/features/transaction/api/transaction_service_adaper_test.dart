@@ -1,14 +1,14 @@
-import 'package:business_banking/features/transaction/api/transaction_details_service_response_model_list.dart';
-import 'package:business_banking/features/transaction/bloc/transaction_details_service_adapter.dart';
-import 'package:business_banking/features/transaction/model/transaction_details_entity.dart';
-import 'package:business_banking/features/transaction/model/transaction_details_model.dart';
+import 'package:business_banking/features/transaction/api/transaction_service_response_model_list.dart';
+import 'package:business_banking/features/transaction/bloc/transaction_service_adapter.dart';
+import 'package:business_banking/features/transaction/model/transaction_entity.dart';
+import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Entity is created by service adapter', () {
-    final entity = TransactionDetailsServiceAdapter().createEntity(
-        TransactionDetailsEntity(),
-        TransactionDetailServiceResponseModelList.fromJson({
+    final entity = TransactionServiceAdapter().createEntity(
+        TransactionEntity(),
+        TransactionServiceResponseModelList.fromJson({
           "accountTransactions": [
             {
               "transactionTitle": "Boots",
@@ -21,8 +21,8 @@ void main() {
 
     expect(
         entity,
-        TransactionDetailsEntity(transactionDetails: [
-          TransactionDetailsModel(
+        TransactionEntity(transactionDetails: [
+          TransactionModel(
             transactionAmount: '9.99',
             transactionTitle: 'Boots',
             transactionId: '0000000',

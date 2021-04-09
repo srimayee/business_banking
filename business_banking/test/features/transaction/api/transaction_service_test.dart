@@ -1,16 +1,16 @@
-import 'package:business_banking/features/transaction/api/transaction_details_service.dart';
-import 'package:business_banking/features/transaction/api/transaction_details_service_response_model_list.dart';
+import 'package:business_banking/features/transaction/api/transaction_service.dart';
+import 'package:business_banking/features/transaction/api/transaction_service_response_model_list.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('TransactionService success', () async {
-    final service = TransactionDetailsService();
+    final service = TransactionService();
     final eitherResponse = await service.request();
 
     expect(eitherResponse.isRight, isTrue);
     expect(
         eitherResponse.fold((_) {}, (m) => m),
-        TransactionDetailServiceResponseModelList.fromJson({
+        TransactionServiceResponseModelList.fromJson({
           "accountTransactions": [
             {
               "transactionTitle": "Boots",

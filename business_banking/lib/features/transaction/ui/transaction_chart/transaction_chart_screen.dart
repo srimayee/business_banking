@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/transaction/model/transaction_details_view_model.dart';
+import 'package:business_banking/features/transaction/model/transaction_view_model.dart';
 import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-class TransactionDetailsChartScreen extends Screen {
-  final TransactionDetailsViewModel viewModel;
+class TransactionChartScreen extends Screen {
+  final TransactionViewModel viewModel;
   final VoidCallback navigateToHubScreen;
 
-  TransactionDetailsChartScreen({
+  TransactionChartScreen({
     @required this.viewModel,
     @required this.navigateToHubScreen,
   }) : assert(() {

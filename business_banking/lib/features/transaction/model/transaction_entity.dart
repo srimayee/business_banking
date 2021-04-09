@@ -1,13 +1,12 @@
+import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
-import 'transaction_details_model.dart';
+class TransactionEntity extends Entity {
+  final List<TransactionModel> transactionDetails;
 
-class TransactionDetailsEntity extends Entity {
-  final List<TransactionDetailsModel> transactionDetails;
-
-  TransactionDetailsEntity({
+  TransactionEntity({
     List<EntityFailure> errors = const [],
-    List<TransactionDetailsModel> transactionDetails = const [],
+    List<TransactionModel> transactionDetails = const [],
   })  : transactionDetails = transactionDetails,
         super(errors: errors);
 
@@ -16,7 +15,7 @@ class TransactionDetailsEntity extends Entity {
 
   @override
   merge({errors, String name, String lastFour, double balance}) {
-    return TransactionDetailsEntity(
+    return TransactionEntity(
       errors: errors ?? this.errors,
       transactionDetails: transactionDetails ?? this.transactionDetails,
     );
