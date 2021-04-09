@@ -36,7 +36,7 @@ void main() {
     expect(merged.completed, false);
     expect(
       merged.toString(),
-      'TodoItemEntity([], 1, 1, delectus aut autemto, false)',
+      'TodoItemEntity([], 1, 1, delectus aut autem, false)',
     );
   });
 }
