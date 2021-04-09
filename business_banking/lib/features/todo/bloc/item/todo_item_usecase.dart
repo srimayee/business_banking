@@ -17,11 +17,11 @@ class TodoItemUseCase extends UseCase {
         _index = index;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<TodoItemEntity>();
+    _scope = ExampleLocator().repository.containsScope<TodoItemEntity>(_index);
     if (_scope == null) {
       _scope = ExampleLocator()
           .repository
-          .create<TodoItemEntity>(TodoItemEntity(), _notifySubscribers);
+          .create<TodoItemEntity>(TodoItemEntity(), _notifySubscribers, index: _index);
     } else {
       _scope.subscription = _notifySubscribers;
     }

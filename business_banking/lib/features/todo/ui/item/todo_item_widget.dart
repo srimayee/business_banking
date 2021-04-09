@@ -16,9 +16,9 @@ class TodoItemWidget extends StatelessWidget {
     if (debugEnabled) {
       logger().debug("Widget Built");
     }
-    return new BlocProvider<TodoItemBloc>(
-      create: (_) => new TodoItemBloc(index: index),
-      child: new TodoItemPresenter(),
+    return BlocProvider<TodoItemBloc>(
+      create: (_) => TodoItemBloc(index: index),
+      child: TodoItemPresenter(),
     );
   }
 }

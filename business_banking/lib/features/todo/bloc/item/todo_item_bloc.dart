@@ -15,6 +15,9 @@ class TodoItemBloc extends Bloc {
   }
 
   TodoItemBloc({int index, TodoItemService todoService}) {
+    // EitherService.request(requestModel: createRequest(initialEntity)).then((data) {
+
+    // });
     _useCase = TodoItemUseCase(
       index,
       (viewModel) => todoItemViewModelPipe.send(viewModel));
