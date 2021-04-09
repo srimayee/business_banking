@@ -1,4 +1,4 @@
-import 'package:business_banking/features/transaction/api/transaction_detail_service_response_model.dart';
+import 'package:business_banking/features/transaction/api/transaction_details_service_response_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
