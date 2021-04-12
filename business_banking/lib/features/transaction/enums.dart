@@ -9,8 +9,6 @@ enum TransactionCategory {
   miscellaneous,
   groceries,
   shopping,
-  entertainment,
-  insurance,
   tuition,
   charity,
   service,
@@ -20,74 +18,63 @@ enum TransactionCategory {
   coffeeShop,
   movies,
   airTravel,
-  tax
 }
 
 extension TransactionCategoryExtension on TransactionCategory {
+  // ignore: missing_return
   Color get color {
     switch (this) {
       case TransactionCategory.rent:
         return Colors.blue;
         break;
       case TransactionCategory.restaurant:
-        return Colors.blue;
+        return Colors.red;
         break;
       case TransactionCategory.transportation:
-        return Colors.blue;
+        return Colors.green;
         break;
       case TransactionCategory.haircut:
-        return Colors.blue;
+        return Colors.orange;
         break;
       case TransactionCategory.utilities:
-        return Colors.blue;
+        return Colors.black;
         break;
       case TransactionCategory.miscellaneous:
-        return Colors.blue;
+        return Colors.pink;
         break;
       case TransactionCategory.groceries:
-        return Colors.blue;
+        return Colors.purple;
         break;
       case TransactionCategory.shopping:
-        return Colors.blue;
-        break;
-      case TransactionCategory.entertainment:
-        return Colors.blue;
-        break;
-      case TransactionCategory.insurance:
-        return Colors.blue;
+        return Colors.amber;
         break;
       case TransactionCategory.tuition:
-        return Colors.blue;
+        return Colors.brown;
         break;
       case TransactionCategory.charity:
-        return Colors.blue;
+        return Colors.cyan;
         break;
       case TransactionCategory.service:
-        return Colors.blue;
+        return Colors.lightBlue;
         break;
       case TransactionCategory.gas:
-        return Colors.blue;
+        return Colors.lime;
         break;
       case TransactionCategory.income:
-        return Colors.blue;
+        return Colors.yellow;
         break;
       case TransactionCategory.transfer:
-        return Colors.blue;
+        return Colors.orangeAccent;
         break;
       case TransactionCategory.coffeeShop:
-        return Colors.blue;
+        return Colors.brown;
         break;
       case TransactionCategory.movies:
-        return Colors.blue;
+        return Colors.indigo;
         break;
       case TransactionCategory.airTravel:
-        return Colors.blue;
+        return Colors.teal;
         break;
-      case TransactionCategory.tax:
-        return Colors.blue;
-        break;
-      default:
-        return Colors.blue;
     }
   }
 }

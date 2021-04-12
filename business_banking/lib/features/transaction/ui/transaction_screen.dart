@@ -35,7 +35,7 @@ class TransactionScreen extends Screen {
                 itemCount: viewModel.transactionDetails.length,
                 separatorBuilder: (context, index) {
                   return Divider(
-                    color: Theme.of(context).accentColor,
+                    color: Colors.green,
                   );
                 },
                 itemBuilder: (context, index) {

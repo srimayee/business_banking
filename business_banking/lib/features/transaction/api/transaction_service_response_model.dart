@@ -7,11 +7,15 @@ class TransactionServiceResponseModel extends Equatable
   final String transactionCategory;
   final String transactionAmount;
   final String transactionId;
+  final String payTo;
+  final int timestamp;
 
   TransactionServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : transactionTitle = json['transactionTitle'],
+      : transactionTitle = json['transactionTitle'] ?? '',
         transactionCategory = json['transactionCategory'] ?? '0',
-        transactionAmount = json['transactionAmount'],
+        transactionAmount = json['transactionAmount'] ?? '0.00',
+        payTo = json['payTo'] ?? '',
+        timestamp = json['timestamp'] ?? 1618237756,
         transactionId = json['transactionId'] ?? '000000000';
 
   @override
@@ -20,5 +24,7 @@ class TransactionServiceResponseModel extends Equatable
         transactionCategory,
         transactionAmount,
         transactionId,
+        payTo,
+        timestamp
       ];
 }

@@ -16,7 +16,9 @@ class TransactionBlocMock extends Fake implements TransactionBloc {
             transactionAmount: '9.99',
             transactionTitle: 'Boots',
             transactionId: '0000000',
-            transactionCategory: 'shopping')
+            transactionCategory: 'shopping',
+            payTo: "Merchant0",
+            date: DateTime.fromMicrosecondsSinceEpoch(1618237756))
       ]));
     });
   }

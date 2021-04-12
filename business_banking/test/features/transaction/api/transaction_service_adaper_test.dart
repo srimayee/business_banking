@@ -14,7 +14,9 @@ void main() {
               "transactionTitle": "Boots",
               "transactionCategory": "shopping",
               "transactionAmount": "9.99",
-              "transactionId": "0000000"
+              "transactionId": "0000000",
+              "payTo": "Merchant0",
+              "timestamp": 1618237756
             },
           ]
         }));
@@ -23,11 +25,12 @@ void main() {
         entity,
         TransactionEntity(transactionDetails: [
           TransactionModel(
-            transactionAmount: '9.99',
-            transactionTitle: 'Boots',
-            transactionId: '0000000',
-            transactionCategory: 'shopping',
-          )
+              transactionAmount: '9.99',
+              transactionTitle: 'Boots',
+              transactionId: '0000000',
+              transactionCategory: 'shopping',
+              payTo: "Merchant0",
+              date: DateTime.fromMicrosecondsSinceEpoch(1618237756))
         ]));
   });
 }

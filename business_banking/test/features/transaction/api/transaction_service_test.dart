@@ -7,53 +7,6 @@ void main() {
     final service = TransactionService();
     final eitherResponse = await service.request();
 
-    print(TransactionServiceResponseModelList.fromJson({
-      "accountTransactions": [
-        {
-          "transactionTitle": "Boots",
-          "transactionCategory": "shopping",
-          "transactionAmount": "9.99",
-          "transactionId": "0000000"
-        },
-        {
-          "transactionTitle": "Europe Tripe",
-          "transactionCategory": "airTravel",
-          "transactionAmount": "9.99",
-          "transactionId": "0000001"
-        },
-        {
-          "transactionTitle": "Cat in the Hat",
-          "transactionCategory": "movies",
-          "transactionAmount": "9.99",
-          "transactionId": "0000002"
-        },
-        {
-          "transactionTitle": "Olive Garden",
-          "transactionCategory": "restaurant",
-          "transactionAmount": "9.99",
-          "transactionId": "0000003"
-        },
-        {
-          "transactionTitle": "Starbucks",
-          "transactionCategory": "coffeeShop",
-          "transactionAmount": "50.99",
-          "transactionId": "0000004"
-        },
-        {
-          "transactionTitle": "Paycheck",
-          "transactionCategory": "income",
-          "transactionAmount": "2000.23",
-          "transactionId": "0000005"
-        },
-        {
-          "transactionTitle": "Gas Station",
-          "transactionCategory": "gas",
-          "transactionAmount": "200.23",
-          "transactionId": "0000006"
-        }
-      ]
-    }));
-
     expect(eitherResponse.isRight, isTrue);
     expect(
         eitherResponse.fold((_) {}, (m) => m),
@@ -63,43 +16,57 @@ void main() {
               "transactionTitle": "Boots",
               "transactionCategory": "shopping",
               "transactionAmount": "9.99",
-              "transactionId": "0000000"
+              "transactionId": "0000000",
+              "payTo": "Merchant0",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Europe Tripe",
               "transactionCategory": "airTravel",
               "transactionAmount": "9.99",
-              "transactionId": "0000001"
+              "transactionId": "0000001",
+              "payTo": "Merchant1",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Cat in the Hat",
               "transactionCategory": "movies",
               "transactionAmount": "9.99",
-              "transactionId": "0000002"
+              "transactionId": "0000002",
+              "payTo": "Merchant2",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Olive Garden",
               "transactionCategory": "restaurant",
               "transactionAmount": "9.99",
-              "transactionId": "0000003"
+              "transactionId": "0000003",
+              "payTo": "Merchant3",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Starbucks",
               "transactionCategory": "coffeeShop",
               "transactionAmount": "50.99",
-              "transactionId": "0000004"
+              "transactionId": "0000004",
+              "payTo": "Merchant4",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Paycheck",
               "transactionCategory": "income",
               "transactionAmount": "2000.23",
-              "transactionId": "0000005"
+              "transactionId": "0000005",
+              "payTo": "Merchant5",
+              "timestamp": 1618237756
             },
             {
               "transactionTitle": "Gas Station",
               "transactionCategory": "gas",
               "transactionAmount": "200.23",
-              "transactionId": "0000006"
+              "transactionId": "0000006",
+              "payTo": "Merchant6",
+              "timestamp": 1618237756
             }
           ]
         }));
