@@ -26,8 +26,8 @@ class TransactionServiceAdapter extends ServiceAdapter<TransactionEntity,
                 transactionId:
                     transactionDetailEntityModelResponse.transactionId,
                 payTo: transactionDetailEntityModelResponse.payTo,
-                date: DateTime.fromMicrosecondsSinceEpoch(
-                    transactionDetailEntityModelResponse.timestamp)))
+                date: DateTime.fromMillisecondsSinceEpoch(
+                    transactionDetailEntityModelResponse.timestamp * 1000)))
             .toList());
   }
 }
