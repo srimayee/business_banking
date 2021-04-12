@@ -258,7 +258,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"name\": \"Sam Parks\", \n  \"email\": \"sam.parks@capco.com\",\n  \"imageUrl\": \"\"\n}",
+                                "body": "{\n  \"name\": \"user name\", \n  \"email\": \"username@gmail.com\",\n  \"imageUrl\": \"\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -281,7 +281,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"accountTransactions\":\n  [\n    {\n    \"transactionTitle\" : \"Boots\",\n        \"transactionCategory\" : \"shopping\",\n        \"transactionAmount\" :\"9.99\",\n        \"transactionId\" : \"0000000\"\n    }\n    ]\n}",
+                                "body": "{\n   \"accountTransactions\":[\n      {\n         \"transactionTitle\":\"Boots\",\n         \"transactionCategory\":\"shopping\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000000\"\n      },\n      {\n         \"transactionTitle\":\"Europe Tripe\",\n         \"transactionCategory\":\"airTravel\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000001\"\n      },\n      {\n         \"transactionTitle\":\"Cat in the Hat\",\n         \"transactionCategory\":\"movies\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000002\"\n      },\n      {\n         \"transactionTitle\":\"Olive Garden\",\n         \"transactionCategory\":\"restaurant\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000003\"\n      },\n      {\n         \"transactionTitle\":\"Starbucks\",\n         \"transactionCategory\":\"coffeeShop\",\n         \"transactionAmount\":\"50.99\",\n         \"transactionId\":\"0000004\"\n      },\n      {\n         \"transactionTitle\":\"Paycheck\",\n         \"transactionCategory\":\"income\",\n         \"transactionAmount\":\"2000.23\",\n         \"transactionId\":\"0000005\"\n      },\n      {\n         \"transactionTitle\":\"Gas Station\",\n         \"transactionCategory\":\"gas\",\n         \"transactionAmount\":\"200.23\",\n         \"transactionId\":\"0000006\"\n      }\n   ]\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
