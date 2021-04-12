@@ -1,10 +1,13 @@
-import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:business_banking/features/transaction/model/transaction_view_model.dart';
-import 'package:charts_flutter/flutter.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:clean_framework/clean_framework.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../enums.dart';
 
 class TransactionChartScreen extends Screen {
   final TransactionViewModel viewModel;
@@ -35,93 +38,47 @@ class TransactionChartScreen extends Screen {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText("Transaction Pie Chart"),
+            AutoSizeText("Transaction Details"),
           ],
         ),
       ),
-      body: DonutPieChart.withRandomData(),
+      body: Card(elevation: 5.0, child: DonutPieChart(viewModel: viewModel)),
     );
   }
 }
 
 class DonutPieChart extends StatelessWidget {
-  final List<Series> seriesList;
   final bool animate;
+  final TransactionViewModel viewModel;
 
-  DonutPieChart(this.seriesList, {this.animate});
-
-  /// Creates a [PieChart] with sample data and no transition.
-  factory DonutPieChart.withSampleData() {
-    return new DonutPieChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
-    );
-  }
-
-  // EXCLUDE_FROM_GALLERY_DOCS_START
-  // This section is excluded from being copied to the gallery.
-  // It is used for creating random series data to demonstrate animation in
-  // the example app only.
-  factory DonutPieChart.withRandomData() {
-    return new DonutPieChart(_createRandomData());
-  }
-
-  /// Create random data.
-  static List<Series<LinearSales, int>> _createRandomData() {
-    final random = new Random();
-
-    final data = [
-      new LinearSales(0, random.nextInt(100)),
-      new LinearSales(1, random.nextInt(100)),
-      new LinearSales(2, random.nextInt(100)),
-      new LinearSales(3, random.nextInt(100)),
-    ];
-
-    return [
-      new Series<LinearSales, int>(
-        id: 'Sales',
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
-  }
-  // EXCLUDE_FROM_GALLERY_DOCS_END
+  DonutPieChart({this.animate, this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    return PieChart(seriesList,
+    return charts.PieChart(_generateTransactionData(),
         animate: animate,
         // Configure the width of the pie slices to 60px. The remaining space in
         // the chart will be left as a hole in the center.
-        defaultRenderer: ArcRendererConfig(arcWidth: 60));
+        defaultRenderer: charts.ArcRendererConfig(arcWidth: 50));
   }
 
   /// Create one series with sample hard coded data.
-  static List<Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 100),
-      new LinearSales(1, 75),
-      new LinearSales(2, 25),
-      new LinearSales(3, 5),
-    ];
+  List<charts.Series<TransactionModel, double>> _generateTransactionData() {
+    final List<TransactionModel> data = viewModel.transactionDetails;
 
     return [
-      Series<LinearSales, int>(
-        id: 'Sales',
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
+      charts.Series<TransactionModel, double>(
+        id: 'Transactions',
+        domainFn: (TransactionModel transaction, _) =>
+            double.parse(transaction.transactionAmount),
+        measureFn: (TransactionModel transaction, _) =>
+            double.parse(transaction.transactionAmount),
         data: data,
+        colorFn: (TransactionModel transaction, _) =>
+            charts.ColorUtil.fromDartColor(EnumToString.fromString(
+                    TransactionCategory.values, transaction.transactionCategory)
+                .color),
       )
     ];
   }
-}
-
-/// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }
