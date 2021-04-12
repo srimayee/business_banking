@@ -8,6 +8,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 
 import '../../enums.dart';
+import '../../extensions.dart';
 
 class TransactionChartScreen extends Screen {
   final TransactionViewModel viewModel;
@@ -73,9 +74,13 @@ class DonutPieChart extends StatelessWidget {
         animate: animate,
         // Configure the width of the pie slices to 60px. The remaining space in
         // the chart will be left as a hole in the center.
-        defaultRenderer: charts.ArcRendererConfig(arcWidth: 50, arcRendererDecorators: [  // <-- add this to the code
-          charts.ArcLabelDecorator() // <-- and this of course
-        ]),);
+        defaultRenderer: charts.ArcRendererConfig(arcWidth: 90,
+            arcRendererDecorators: [  // <-- add this to the code
+          charts.ArcLabelDecorator(
+              // labelPosition: charts.ArcLabelPosition.outside,
+              insideLabelStyleSpec: new charts.TextStyleSpec(fontSize: 14, color:
+              charts.Color.fromHex(code: "#FFFFFF")))
+        ],),);
   }
 
   /// Create one series with sample hard coded data.
@@ -94,7 +99,7 @@ class DonutPieChart extends StatelessWidget {
             charts.ColorUtil.fromDartColor(EnumToString.fromString(
                     TransactionCategory.values, transaction.transactionCategory)
                 .color),
-          labelAccessorFn: (TransactionModel transaction, _) => transaction.transactionCategory,
+          labelAccessorFn: (TransactionModel transaction, _) => transaction.transactionCategory.capitalize(),
       )
     ];
   }

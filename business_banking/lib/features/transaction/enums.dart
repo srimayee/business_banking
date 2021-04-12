@@ -49,7 +49,7 @@ extension TransactionCategoryExtension on TransactionCategory {
         return Colors.amber;
         break;
       case TransactionCategory.tuition:
-        return Colors.brown;
+        return Colors.blueAccent;
         break;
       case TransactionCategory.charity:
         return Colors.cyan;
