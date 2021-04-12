@@ -59,7 +59,9 @@ class DonutPieChart extends StatelessWidget {
         animate: animate,
         // Configure the width of the pie slices to 60px. The remaining space in
         // the chart will be left as a hole in the center.
-        defaultRenderer: charts.ArcRendererConfig(arcWidth: 50));
+        defaultRenderer: charts.ArcRendererConfig(arcWidth: 50, arcRendererDecorators: [  // <-- add this to the code
+          charts.ArcLabelDecorator() // <-- and this of course
+        ]),);
   }
 
   /// Create one series with sample hard coded data.
@@ -78,6 +80,7 @@ class DonutPieChart extends StatelessWidget {
             charts.ColorUtil.fromDartColor(EnumToString.fromString(
                     TransactionCategory.values, transaction.transactionCategory)
                 .color),
+          labelAccessorFn: (TransactionModel transaction, _) => transaction.transactionCategory,
       )
     ];
   }
