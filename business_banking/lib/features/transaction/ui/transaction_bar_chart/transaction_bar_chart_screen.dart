@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/transaction/enums.dart';
 import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:business_banking/features/transaction/model/transaction_view_model.dart';
 import 'package:business_banking/features/transaction/ui/category_colors.dart';
@@ -6,14 +7,13 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:clean_framework/clean_framework.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import '../../enums.dart';
-
-class TransactionChartScreen extends Screen {
+class TransactionBarChartScreen extends Screen {
   final TransactionViewModel viewModel;
   final VoidCallback navigateToHubScreen;
 
-  TransactionChartScreen({
+  TransactionBarChartScreen({
     @required this.viewModel,
     @required this.navigateToHubScreen,
   }) : assert(() {
@@ -38,7 +38,7 @@ class TransactionChartScreen extends Screen {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText("Transaction Details"),
+            AutoSizeText("Transaction Pie Chart"),
           ],
         ),
       ),
@@ -48,8 +48,8 @@ class TransactionChartScreen extends Screen {
             flex: 2,
             child: Container(
               margin: const EdgeInsets.all(8.0),
-              child: Card(
-                  elevation: 5.0, child: DonutPieChart(viewModel: viewModel)),
+              child:
+                  Card(elevation: 5.0, child: BarChart(viewModel: viewModel)),
             ),
           ),
           Expanded(
@@ -61,30 +61,33 @@ class TransactionChartScreen extends Screen {
   }
 }
 
-class DonutPieChart extends StatelessWidget {
+class BarChart extends StatelessWidget {
   final bool animate;
   final TransactionViewModel viewModel;
+  final simpleCurrencyFormatter =
+      charts.BasicNumericTickFormatterSpec.fromNumberFormat(
+          NumberFormat.compactSimpleCurrency());
 
-  const DonutPieChart({this.animate = true, this.viewModel});
+  BarChart({this.animate = true, this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    return charts.PieChart(_generateTransactionData(),
+    return charts.BarChart(_generateTransactionData(),
         animate: animate,
-        // Configure the width of the pie slices to 60px. The remaining space in
-        // the chart will be left as a hole in the center.
-        defaultRenderer: charts.ArcRendererConfig(arcWidth: 50));
+        primaryMeasureAxis:
+            charts.NumericAxisSpec(tickFormatterSpec: simpleCurrencyFormatter),
+        defaultRenderer: charts.BarRendererConfig(
+            cornerStrategy: const charts.ConstCornerStrategy(30)));
   }
 
-  /// Create one series with sample hard coded data.
-  List<charts.Series<TransactionModel, double>> _generateTransactionData() {
+  List<charts.Series<TransactionModel, String>> _generateTransactionData() {
     final List<TransactionModel> data = viewModel.transactionDetails;
 
     return [
-      charts.Series<TransactionModel, double>(
-        id: 'Transactions',
+      charts.Series<TransactionModel, String>(
+        id: 'Transactions-Bar',
         domainFn: (TransactionModel transaction, _) =>
-            double.parse(transaction.transactionAmount),
+            DateFormat('MM/dd/yyyy').format(transaction.date),
         measureFn: (TransactionModel transaction, _) =>
             double.parse(transaction.transactionAmount),
         data: data,

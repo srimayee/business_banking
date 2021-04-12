@@ -16,7 +16,7 @@ class TransactionScreen extends Screen {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 450,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.all(5.0),
       child: Card(
@@ -43,14 +43,29 @@ class TransactionScreen extends Screen {
                       viewModel: viewModel.transactionDetails[index]);
                 },
               )),
-              RaisedButton(
-                key: Key('transaction_details_button'),
-                onPressed: () => CFRouterScope.of(context)
-                    .push(BusinessBankingRouter.transactionDetailsChartRoute),
-                child: Text(
-                  'View Details',
-                  style: TextStyle(color: Colors.black54),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    key: Key('transaction_bar_button'),
+                    onPressed: () => CFRouterScope.of(context)
+                        .push(BusinessBankingRouter.transactionBarChartRoute),
+                    child: Text(
+                      'View Bar Chart',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  RaisedButton(
+                    key: Key('transaction_pie_button'),
+                    onPressed: () => CFRouterScope.of(context)
+                        .push(BusinessBankingRouter.transactionPieChartRoute),
+                    child: Text(
+                      'View Pie Chart',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                ],
               )
             ],
           ),

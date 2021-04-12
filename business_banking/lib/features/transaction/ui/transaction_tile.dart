@@ -34,7 +34,7 @@ class TransactionTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('\$' + viewModel.transactionAmount),
-                Text(DateFormat('yyyy-MM-dd').format(viewModel.date))
+                Text(DateFormat('MM/dd/yyyy').format(viewModel.date))
               ],
             ),
           ),
