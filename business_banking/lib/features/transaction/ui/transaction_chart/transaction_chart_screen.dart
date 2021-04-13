@@ -84,8 +84,8 @@ class DonutPieChart extends StatelessWidget {
               showLeaderLines: true,
               labelPosition: charts.ArcLabelPosition.auto,
               labelPadding: 1,
-              outsideLabelStyleSpec: new charts.TextStyleSpec(fontSize: 11),
-              insideLabelStyleSpec: new charts.TextStyleSpec(
+              outsideLabelStyleSpec: charts.TextStyleSpec(fontSize: 10),
+              insideLabelStyleSpec: charts.TextStyleSpec(
                   fontSize: 13,
                   color: charts.Color.fromHex(code: "#FFFFFF"),
                   lineHeight: 1))
@@ -94,7 +94,6 @@ class DonutPieChart extends StatelessWidget {
     );
   }
 
-  /// Create one series with sample hard coded data.
   List<charts.Series<TransactionModel, double>> _generateTransactionData() {
     final List<TransactionModel> data = viewModel.transactionDetails;
 
