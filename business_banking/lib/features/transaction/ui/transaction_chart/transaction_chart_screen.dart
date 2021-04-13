@@ -80,18 +80,26 @@ class DonutPieChart extends StatelessWidget {
       _generateTransactionData(),
       animate: animate,
       defaultRenderer: charts.ArcRendererConfig(
-        arcRatio: 0.45,
+        strokeWidthPx: 1,
+        arcRatio: 0.55,
+        arcLength: 2 *pi,
         arcRendererDecorators: [
           charts.ArcLabelDecorator(
               showLeaderLines: true,
               labelPosition: charts.ArcLabelPosition.auto,
               labelPadding: 0,
-              outsideLabelStyleSpec: charts.TextStyleSpec(fontSize: 10),
+              outsideLabelStyleSpec: charts.TextStyleSpec(fontSize: 9),
               insideLabelStyleSpec: charts.TextStyleSpec(
-                  fontSize: 15,
+                  fontSize: 9,
                   color: charts.Color.fromHex(code: "#FFFFFF"),
                   lineHeight: 1))
         ],
+      ),
+      layoutConfig: charts.LayoutConfig(
+        leftMarginSpec: charts.MarginSpec.fixedPixel(0),
+        topMarginSpec: charts.MarginSpec.fixedPixel(0),
+        rightMarginSpec: charts.MarginSpec.fixedPixel(0),
+        bottomMarginSpec: charts.MarginSpec.fixedPixel(0),
       ),
     );
   }
