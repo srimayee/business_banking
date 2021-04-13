@@ -82,6 +82,7 @@ extension TransactionCategoryExtension on TransactionCategory {
         break;
       case TransactionCategory.health:
         return Colors.indigoAccent;
+        break;
       case TransactionCategory.withdrawals:
         return Colors.black12;
         break;
