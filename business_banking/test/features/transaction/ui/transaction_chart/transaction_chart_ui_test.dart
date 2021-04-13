@@ -25,12 +25,14 @@ void main() {
     expect(find.byType(TransactionChartScreen), findsOneWidget);
   });
 
-  testWidgets('Transactions Pie Chart Widget Successfully Builds', (tester) async {
+  testWidgets('Transactions Pie Chart Widget Successfully Builds',
+      (tester) async {
     final testWidget = MaterialApp(
       home: BlocProvider<TransactionBloc>(
+        create: (_) => TransactionBloc(),
         child: TransactionChartWidget(),
-        ),
-      );
+      ),
+    );
 
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
