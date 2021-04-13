@@ -29,7 +29,7 @@ void main() {
     expect(find.byType(TransactionChartScreen), findsOneWidget);
   });
 
-  testWidgets('Transactions, with true bloc', (tester) async {
+  testWidgets('Transactions Pie Chart Widget Successfully Builds', (tester) async {
     final testWidget = MaterialApp(
       home: BlocProvider<TransactionBloc>(
         create: (_) => TransactionBloc(),
