@@ -54,7 +54,7 @@ class TransactionChartScreen extends Screen {
               child: Card(
                   elevation: 5.0,
                   child: Padding(
-                    padding: const EdgeInsets.all(30.0),
+                    padding: const EdgeInsets.only(left: 35, right: 35),
                     child: DonutPieChart(viewModel: viewModel),
                   )),
             ),
