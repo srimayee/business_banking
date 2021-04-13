@@ -78,9 +78,12 @@ class DonutPieChart extends StatelessWidget {
       _generateTransactionData(),
       animate: animate,
       defaultRenderer: charts.ArcRendererConfig(
+        strokeWidthPx: 0,
+
         arcRatio: 0.42,
         arcRendererDecorators: [
           charts.ArcLabelDecorator(
+
               showLeaderLines: true,
               labelPosition: charts.ArcLabelPosition.auto,
               labelPadding: 0,
