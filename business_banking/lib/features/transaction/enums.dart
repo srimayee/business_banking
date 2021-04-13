@@ -18,6 +18,9 @@ enum TransactionCategory {
   coffeeShop,
   movies,
   airTravel,
+  health,
+  subscriptions,
+  withdrawals,
 }
 
 extension TransactionCategoryExtension on TransactionCategory {
@@ -74,6 +77,16 @@ extension TransactionCategoryExtension on TransactionCategory {
         break;
       case TransactionCategory.airTravel:
         return Colors.teal;
+      case TransactionCategory.subscriptions:
+        return Colors.blueGrey;
+        break;
+      case TransactionCategory.health:
+        return Colors.indigoAccent;
+      case TransactionCategory.withdrawals:
+        return Colors.black12;
+        break;
+      default:
+        return Colors.lightGreen;
         break;
     }
   }
