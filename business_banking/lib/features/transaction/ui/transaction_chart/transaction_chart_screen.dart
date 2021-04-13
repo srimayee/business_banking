@@ -83,7 +83,6 @@ class DonutPieChart extends StatelessWidget {
         arcRatio: 0.45,
         arcRendererDecorators: [
           charts.ArcLabelDecorator(
-
               showLeaderLines: true,
               labelPosition: charts.ArcLabelPosition.auto,
               labelPadding: 0,
@@ -104,7 +103,7 @@ class DonutPieChart extends StatelessWidget {
       charts.Series<TransactionModel, double>(
         id: 'Transactions',
         domainFn: (TransactionModel transaction, _) =>
-            double.parse(transaction.transactionAmount),
+            double.parse(transaction.transactionCategory),
         measureFn: (TransactionModel transaction, _) =>
             double.parse(transaction.transactionAmount),
         data: data,
