@@ -30,7 +30,7 @@ void main() {
               transactionId: '0000000',
               transactionCategory: 'shopping',
               payTo: "Merchant0",
-              date: DateTime.fromMicrosecondsSinceEpoch(1618237756))
+              date: DateTime.fromMillisecondsSinceEpoch(1618237756 * 1000))
         ]));
   });
 }
