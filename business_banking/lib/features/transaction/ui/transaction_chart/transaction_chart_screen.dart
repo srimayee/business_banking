@@ -78,15 +78,15 @@ class DonutPieChart extends StatelessWidget {
       _generateTransactionData(),
       animate: animate,
       defaultRenderer: charts.ArcRendererConfig(
-        arcRatio: 0.5,
+        arcRatio: 0.42,
         arcRendererDecorators: [
           charts.ArcLabelDecorator(
               showLeaderLines: true,
               labelPosition: charts.ArcLabelPosition.auto,
-              labelPadding: 1,
+              labelPadding: 0,
               outsideLabelStyleSpec: charts.TextStyleSpec(fontSize: 10),
               insideLabelStyleSpec: charts.TextStyleSpec(
-                  fontSize: 13,
+                  fontSize: 15,
                   color: charts.Color.fromHex(code: "#FFFFFF"),
                   lineHeight: 1))
         ],
