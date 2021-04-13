@@ -11,6 +11,7 @@ void main() {
         TransactionServiceResponseModelList.fromJson({
           "accountTransactions": [
             {
+              "debit": true,
               "transactionTitle": "Boots",
               "transactionCategory": "shopping",
               "transactionAmount": "9.99",
@@ -25,7 +26,8 @@ void main() {
         entity,
         TransactionEntity(transactionDetails: [
           TransactionModel(
-              transactionAmount: '9.99',
+              debit: true,
+              transactionAmount: 9.99,
               transactionTitle: 'Boots',
               transactionId: '0000000',
               transactionCategory: 'shopping',

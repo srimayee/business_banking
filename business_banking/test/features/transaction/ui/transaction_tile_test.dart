@@ -10,7 +10,8 @@ void main() {
         home: Scaffold(
             body: TransactionTile(
       viewModel: TransactionModel(
-          transactionAmount: '200.23',
+          debit: true,
+          transactionAmount: 200.23,
           transactionTitle: 'Gas Station',
           transactionId: '0000006',
           transactionCategory: 'gas',

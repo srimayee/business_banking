@@ -6,7 +6,8 @@ void main() {
   test('TransactionViewModel initialize', () {
     final viewModel = TransactionViewModel(transactionDetails: [
       TransactionModel(
-          transactionAmount: '9.99',
+          debit: true,
+          transactionAmount: 9.99,
           transactionTitle: 'Boots',
           transactionId: '0000000',
           transactionCategory: 'shopping',

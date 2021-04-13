@@ -34,7 +34,7 @@ class BarChart extends StatelessWidget {
         domainFn: (TransactionModel transaction, _) =>
             DateFormat('MM/dd/yyyy').format(transaction.date),
         measureFn: (TransactionModel transaction, _) =>
-            double.parse(transaction.transactionAmount),
+            transaction.transactionAmount,
         data: data,
         colorFn: (TransactionModel transaction, _) =>
             charts.ColorUtil.fromDartColor(EnumToString.fromString(

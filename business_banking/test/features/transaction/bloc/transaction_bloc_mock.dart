@@ -13,7 +13,8 @@ class TransactionBlocMock extends Fake implements TransactionBloc {
       transactionDetailsViewModelPipe
           .send(TransactionViewModel(transactionDetails: [
         TransactionModel(
-            transactionAmount: '9.99',
+            debit: true,
+            transactionAmount: 9.99,
             transactionTitle: 'Boots',
             transactionId: '0000000',
             transactionCategory: 'shopping',

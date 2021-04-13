@@ -9,6 +9,7 @@ class TransactionServiceResponseModel extends Equatable
   final String transactionId;
   final String payTo;
   final int timestamp;
+  final bool debit;
 
   TransactionServiceResponseModel.fromJson(Map<String, dynamic> json)
       : transactionTitle = json['transactionTitle'] ?? '',
@@ -16,6 +17,7 @@ class TransactionServiceResponseModel extends Equatable
         transactionAmount = json['transactionAmount'] ?? '0.00',
         payTo = json['payTo'] ?? '',
         timestamp = json['timestamp'] ?? 1618237756,
+        debit = json['debit'] ?? false,
         transactionId = json['transactionId'] ?? '000000000';
 
   @override
@@ -25,6 +27,7 @@ class TransactionServiceResponseModel extends Equatable
         transactionAmount,
         transactionId,
         payTo,
-        timestamp
+        timestamp,
+        debit
       ];
 }

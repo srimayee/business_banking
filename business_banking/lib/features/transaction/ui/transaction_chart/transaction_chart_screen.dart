@@ -111,9 +111,9 @@ class DonutPieChart extends StatelessWidget {
       charts.Series<TransactionModel, double>(
         id: 'Transactions',
         domainFn: (TransactionModel transaction, _) =>
-            double.parse(transaction.transactionAmount),
+            transaction.transactionAmount,
         measureFn: (TransactionModel transaction, _) =>
-            double.parse(transaction.transactionAmount),
+            transaction.transactionAmount,
         data: data,
         colorFn: (TransactionModel transaction, _) =>
             charts.ColorUtil.fromDartColor(EnumToString.fromString(

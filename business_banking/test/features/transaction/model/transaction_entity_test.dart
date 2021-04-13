@@ -1,4 +1,3 @@
-import 'package:business_banking/features/customer/model/customer_entity.dart';
 import 'package:business_banking/features/transaction/model/transaction_entity.dart';
 import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,7 +6,8 @@ void main() {
   test('TransactionEntity properties', () {
     final entity = TransactionEntity(transactionDetails: [
       TransactionModel(
-          transactionAmount: '9.99',
+          debit: true,
+          transactionAmount: 9.99,
           transactionTitle: 'Boots',
           transactionId: '0000000',
           transactionCategory: 'shopping',
@@ -23,14 +23,15 @@ void main() {
 
     expect(
       entity.toString(),
-      'TransactionModel:TransactionModel(Boots, shopping, 9.99, 0000000, Merchant0, 2021-04-12 10:29:16.000)',
+      'TransactionEntity([], [TransactionModel(Boots, shopping, 9.99, 0000000, Merchant0, 2021-04-12 10:29:16.000, true)])',
     );
   });
 
   test('CustomerEntity merge with errors = null', () {
     final entity = TransactionEntity(transactionDetails: [
       TransactionModel(
-          transactionAmount: '9.99',
+          debit: true,
+          transactionAmount: 9.99,
           transactionTitle: 'Boots',
           transactionId: '0000000',
           transactionCategory: 'shopping',

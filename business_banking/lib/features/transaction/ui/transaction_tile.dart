@@ -33,7 +33,11 @@ class TransactionTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('\$' + viewModel.transactionAmount),
+                Text(
+                  '\$' + viewModel.transactionAmount.toStringAsFixed(2),
+                  style: TextStyle(
+                      color: viewModel.debit ? Colors.red : Colors.green),
+                ),
                 Text(DateFormat('MM/dd/yyyy').format(viewModel.date))
               ],
             ),

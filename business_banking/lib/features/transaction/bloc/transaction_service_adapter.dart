@@ -21,11 +21,12 @@ class TransactionServiceAdapter extends ServiceAdapter<TransactionEntity,
                     transactionDetailEntityModelResponse.transactionTitle,
                 transactionCategory:
                     transactionDetailEntityModelResponse.transactionCategory,
-                transactionAmount:
-                    transactionDetailEntityModelResponse.transactionAmount,
+                transactionAmount: double.parse(
+                    transactionDetailEntityModelResponse.transactionAmount),
                 transactionId:
                     transactionDetailEntityModelResponse.transactionId,
                 payTo: transactionDetailEntityModelResponse.payTo,
+                debit: transactionDetailEntityModelResponse.debit,
                 date: DateTime.fromMillisecondsSinceEpoch(
                     transactionDetailEntityModelResponse.timestamp * 1000)))
             .toList());
