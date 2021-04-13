@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:business_banking/features/transaction/model/transaction_model.dart';
 import 'package:business_banking/features/transaction/model/transaction_view_model.dart';
@@ -78,9 +80,7 @@ class DonutPieChart extends StatelessWidget {
       _generateTransactionData(),
       animate: animate,
       defaultRenderer: charts.ArcRendererConfig(
-        strokeWidthPx: 0,
-
-        arcRatio: 0.42,
+        arcRatio: 0.45,
         arcRendererDecorators: [
           charts.ArcLabelDecorator(
 
