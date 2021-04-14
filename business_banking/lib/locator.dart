@@ -13,8 +13,8 @@ class ExampleLocator implements Locator {
   ExampleLocator._();
 
   factory ExampleLocator() {
-    Locator.instance ??= ExampleLocator._();
-    return Locator.instance;
+    Locator.init(ExampleLocator._());
+    return Locator.getInstance();
   }
 
   @override
@@ -26,7 +26,10 @@ class ExampleLocator implements Locator {
   UrlLauncher urlLauncher = UrlLauncher();
 
   PatchSimpleRestApi api = PatchSimpleRestApi(
-      baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
+      baseUrl:
+          'http://192.168.1.64:3001/'); // Points to Mockoon instance 'http://localhost:3001/'
 
   Repository repository = Repository();
+
+  void dispose() => Locator.dispose();
 }

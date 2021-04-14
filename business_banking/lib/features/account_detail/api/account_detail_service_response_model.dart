@@ -1,8 +1,6 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:equatable/equatable.dart';
 
-class AccountDetailServiceResponseModel extends Equatable
-    implements JsonResponseModel {
+class AccountDetailServiceResponseModel extends JsonResponseModel {
   final String name;
   final String lastFour;
   final String accountType;
