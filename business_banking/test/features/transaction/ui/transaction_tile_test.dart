@@ -20,7 +20,10 @@ void main() {
     )));
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
+
     expect(find.widgetWithText(TransactionTile, "Gas Station"), findsOneWidget);
+    expect(find.widgetWithText(TransactionTile, "Gas"), findsOneWidget);
+    expect(find.widgetWithText(TransactionTile, "04/12/2021"), findsOneWidget);
     expect(find.byType(TransactionTile), findsOneWidget);
   });
 }
