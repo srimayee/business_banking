@@ -23,6 +23,7 @@ void main() {
 
     expect(find.widgetWithText(TransactionTile, "Gas Station"), findsOneWidget);
     expect(find.widgetWithText(TransactionTile, "Gas"), findsOneWidget);
+    expect(find.widgetWithText(TransactionTile, "\$200.23"), findsOneWidget);
     expect(find.widgetWithText(TransactionTile, "04/12/2021"), findsOneWidget);
     expect(find.byType(TransactionTile), findsOneWidget);
   });
