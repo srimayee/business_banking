@@ -9,7 +9,7 @@ class TransactionsJsonResponseModel implements JsonResponseModel {
   TransactionsJsonResponseModel(this.accountInfo, this.allTransactions);
 
   TransactionsJsonResponseModel.fromJson(Map<String, dynamic> json)
-      : accountInfo = json["accountInfo"],
+      : accountInfo = AccountInfo.fromJson(json["accountInfo"]),
         allTransactions = (json["postedTransactions"] as List)
             .map((i) => new PostedTransactions.fromJson(i))
             .toList();

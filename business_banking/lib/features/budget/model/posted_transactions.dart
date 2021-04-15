@@ -1,7 +1,7 @@
 class PostedTransactions {
   final String transactionDate;
   final String description;
-  final String debitAmount;
+  final double debitAmount;
   final String category;
   final String cardNumber;
 
@@ -11,7 +11,7 @@ class PostedTransactions {
   PostedTransactions.fromJson(Map<String, dynamic> json)
       : transactionDate = json['transactionDate'] ?? '',
         description = json['description'] ?? '',
-        debitAmount = json['debitAmount'] ?? '',
+        debitAmount = json['debitAmount'] ?? 0.0,
         category = json['category'] ?? '',
         cardNumber = json['cardNumber'] ?? '';
 }
