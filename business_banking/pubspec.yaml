@@ -16,10 +16,10 @@ dependencies:
   charts_flutter: ^0.10.0
 
 dev_dependencies:
-  test: ^1.16.8
-  flutter_test:
-    sdk: flutter
-  mockito: ^5.0.4 # Apache 2.0
+#  test: ^1.16.8
+#  flutter_test:
+#    sdk: flutter
+#  mockito: ^5.0.4 # Apache 2.0
   flutter_driver:
     sdk: flutter
 

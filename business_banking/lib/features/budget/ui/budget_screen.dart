@@ -8,7 +8,7 @@ class BudgetScreen extends Screen {
   final VoidCallback viewBudgetChartHandler;
 
   BudgetScreen(
-      {@required this.viewModel, @required this.viewBudgetChartHandler});
+      {required this.viewModel, required this.viewBudgetChartHandler});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class BudgetScreen extends Screen {
                   children: [
                     Expanded(
                       child: Text(
-                        viewModel.accountInfo.accountNickname,
+                        viewModel.accountInfo!.accountNickname,
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
@@ -37,7 +37,7 @@ class BudgetScreen extends Screen {
                       ),
                     ),
                     AutoSizeText(
-                      ' \$' + viewModel.accountInfo.availableBalance.toString(),
+                      ' \$' + viewModel.accountInfo!.availableBalance.toString(),
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
@@ -54,7 +54,7 @@ class BudgetScreen extends Screen {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     Text(
-                      viewModel.accountInfo.accountNumber,
+                      viewModel.accountInfo!.accountNumber,
                       style: TextStyle(fontSize: 18.0),
                     )
                   ],

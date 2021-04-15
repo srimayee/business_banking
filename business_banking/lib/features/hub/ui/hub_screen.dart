@@ -34,7 +34,7 @@ class HubScreen extends Screen {
           CashAccountsWidget(),
           //PromosWidget(),
           SizedBox(height: 15),
-          TransferFundsCard(),
+          // TransferFundsCard(),
           SizedBox(height: 15),
           QuickPayWidget(),
           BudgetWidget(),

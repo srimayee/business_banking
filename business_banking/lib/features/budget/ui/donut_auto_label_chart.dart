@@ -23,7 +23,7 @@ class DonutAutoLabelChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  DonutAutoLabelChart(this.seriesList, {this.animate});
+  DonutAutoLabelChart(this.seriesList, {required this.animate});
 
   /// Creates a [PieChart] with sample data and no transition.
   factory DonutAutoLabelChart.withSampleData() {
@@ -69,10 +69,10 @@ class DonutAutoLabelChart extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
-      new LinearSales(0, 100, 'gas'),
-      new LinearSales(1, 75, 'groceries'),
-      new LinearSales(2, 25, 'parking'),
-      new LinearSales(3, 5, 'tolls'),
+      new LinearSales(0, 100, 'gas', charts.MaterialPalette.red.shadeDefault.lighter),
+      new LinearSales(1, 75, 'groceries', charts.MaterialPalette.green.shadeDefault),
+      new LinearSales(2, 25, 'parking', charts.MaterialPalette.blue.shadeDefault),
+      new LinearSales(3, 5, 'tolls', charts.MaterialPalette.yellow.shadeDefault),
     ];
 
     return [
@@ -80,6 +80,7 @@ class DonutAutoLabelChart extends StatelessWidget {
         id: 'Sales',
         domainFn: (LinearSales sales, _) => sales.year,
         measureFn: (LinearSales sales, _) => sales.sales,
+        colorFn: (LinearSales sales, _) => sales.color,
         data: data,
         // Set a label accessor to control the text of the arc label.
         labelAccessorFn: (LinearSales row, _) => '${row.label}: ${row.sales}',
@@ -93,6 +94,7 @@ class LinearSales {
   final int year;
   final int sales;
   final String label;
+  final charts.Color color;
 
-  LinearSales(this.year, this.sales, this.label);
+  LinearSales(this.year, this.sales, this.label, this.color);
 }

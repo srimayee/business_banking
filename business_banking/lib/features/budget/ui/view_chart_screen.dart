@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class ViewChartScreen extends Screen {
   final BudgetViewModel viewModel;
 
-  ViewChartScreen({this.viewModel});
+  ViewChartScreen({required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(viewModel.accountInfo.accountNickname),
+        title: Text(viewModel.accountInfo!.accountNickname),
         backgroundColor: Colors.green,
       ),
       body: Column(
