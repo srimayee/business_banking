@@ -6,26 +6,20 @@ import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class CashAccountsUseCase extends UseCase {
-  Function(ViewModel) _viewModelCallBack;
-  RepositoryScope _scope;
-
-  CashAccountsUseCase(Function(ViewModel) viewModelCallBack)
-      : assert(viewModelCallBack != null),
+  late final ViewModelCallback<ViewModel> _viewModelCallBack;
+  CashAccountsUseCase(ViewModelCallback<ViewModel> viewModelCallBack)
+      : 
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<CashAccountsEntity>();
-    if (_scope == null) {
-      _scope = ExampleLocator()
+  
+    final scope = ExampleLocator()
           .repository
           .create<CashAccountsEntity>(CashAccountsEntity(), _notifySubscribers);
-    } else {
-      _scope.subscription = _notifySubscribers;
-    }
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, CashAccountsServiceAdapter());
+        .runServiceAdapter(scope, CashAccountsServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

@@ -5,7 +5,7 @@ class LoginEntity extends Entity {
   final String password;
 
   LoginEntity(
-      {List<EntityFailure> errors = const [], String userName, String password})
+      {List<EntityFailure> errors = const [], String? userName, String? password})
       : userName = userName ?? '',
         password = password ?? '',
         super(errors: errors);
@@ -14,7 +14,7 @@ class LoginEntity extends Entity {
   List<Object> get props => [userName, password, errors];
 
   @override
-  merge({errors, String userName, String password}) {
+  merge({errors, String? userName, String? password}) {
     return LoginEntity(
         errors: errors ?? this.errors,
         userName: userName ?? this.userName,

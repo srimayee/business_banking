@@ -5,7 +5,7 @@ import 'package:business_banking/features/transfer_funds/model/transfer_entity.d
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  TransferFundsServiceAdapter serviceAdapter;
+  late TransferFundsServiceAdapter serviceAdapter;
 
   setUp(() {
     serviceAdapter = TransferFundsServiceAdapter();

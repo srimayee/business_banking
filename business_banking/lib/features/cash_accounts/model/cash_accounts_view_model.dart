@@ -7,9 +7,9 @@ class CashAccountsViewModel extends ViewModel {
   final double balance;
 
   CashAccountsViewModel({
-    @required this.name,
-    @required this.lastFour,
-    @required this.balance,
+    required this.name,
+    required this.lastFour,
+    required this.balance,
   }) : assert(name != null && lastFour != null && balance != null);
 
   @override

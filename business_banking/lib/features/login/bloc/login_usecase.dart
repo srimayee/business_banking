@@ -7,7 +7,7 @@ import 'package:business_banking/locator.dart';
 
 class LoginUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   LoginUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
@@ -21,35 +21,35 @@ class LoginUseCase extends UseCase {
           .repository
           .create<LoginEntity>(newLoginEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
-    final entity = ExampleLocator().repository.get<LoginEntity>(_scope);
+    final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
     _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
 
   void submit() async {
-    final entity = ExampleLocator().repository.get<LoginEntity>(_scope);
+    final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
     if (entity.userName == '' || entity.password == '') {
       _viewModelCallBack(buildViewModelForLocalUpdateWithError(entity));
     } else {
       await ExampleLocator()
           .repository
-          .runServiceAdapter(_scope, LoginServiceAdapter());
+          .runServiceAdapter(_scope!, LoginServiceAdapter());
     }
   }
 
   void updateUsername(String username) async {
-    final entity = ExampleLocator().repository.get<LoginEntity>(_scope);
+    final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
     final updatedEntity = entity.merge(userName: username);
-    ExampleLocator().repository.update<LoginEntity>(_scope, updatedEntity);
+    ExampleLocator().repository.update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 
   void updatePassword(String password) async {
-    final entity = ExampleLocator().repository.get<LoginEntity>(_scope);
+    final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
 
     final updatedEntity = entity.merge(password: password);
-    ExampleLocator().repository.update<LoginEntity>(_scope, updatedEntity);
+    ExampleLocator().repository.update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 

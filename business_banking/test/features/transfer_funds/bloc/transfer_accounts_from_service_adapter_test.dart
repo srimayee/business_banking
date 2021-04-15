@@ -20,7 +20,7 @@ void main() {
 
     final initialEntity = TransferFundsEntity();
     final TransferFundsEntity entity1 =
-        await serviceAdapter.query(initialEntity);
+        await (serviceAdapter.query(initialEntity) as FutureOr<TransferFundsEntity>);
 
     expect(
         entity1.fromAccounts,

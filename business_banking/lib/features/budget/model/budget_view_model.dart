@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 enum TransactionsServiceStatus { success, fail, unknown }
 
 class BudgetViewModel extends ViewModel {
-  final AccountInfo accountInfo;
+  final AccountInfo? accountInfo;
   final List<PostedTransactions> allTransactions;
-  final TransactionsServiceStatus serviceStatus;
+  final TransactionsServiceStatus? serviceStatus;
 
   BudgetViewModel(
-      {Key key,
-      @required this.accountInfo,
-      @required this.allTransactions,
+      {Key? key,
+      required this.accountInfo,
+      required this.allTransactions,
       this.serviceStatus});
 
   @override
   // TODO: implement props
-  List<Object> get props => [accountInfo, allTransactions, serviceStatus];
+  List<Object?> get props => [accountInfo, allTransactions, serviceStatus];
 }

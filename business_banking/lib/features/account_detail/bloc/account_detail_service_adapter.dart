@@ -9,7 +9,7 @@ class AccountDetailServiceAdapter extends ServiceAdapter<AccountDetailEntity,
   AccountDetailServiceAdapter() : super(AccountDetailService());
 
   @override
-  AccountDetailEntity createEntity(AccountDetailEntity initialEntity,
+  AccountDetailEntity createEntity(AccountDetailEntity? initialEntity,
       AccountDetailServiceResponseModel responseModel) {
     return AccountDetailEntity(
         name: responseModel.name,

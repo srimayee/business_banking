@@ -8,7 +8,7 @@ import 'package:business_banking/locator.dart';
 class CustomerDetailUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   CustomerDetailUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
@@ -22,12 +22,12 @@ class CustomerDetailUseCase extends UseCase {
       _scope = ExampleLocator().repository.create<CustomerEntity>(
           newCustomerEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, CustomerServiceAdapter());
+        .runServiceAdapter(_scope!, CustomerServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

@@ -2,8 +2,8 @@ import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/posted_transactions.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class TransactionsJsonResponseModel implements JsonResponseModel {
-  final AccountInfo accountInfo;
+class TransactionsJsonResponseModel extends JsonResponseModel {
+  final AccountInfo? accountInfo;
   final List<PostedTransactions> allTransactions;
 
   TransactionsJsonResponseModel(this.accountInfo, this.allTransactions);
@@ -16,7 +16,7 @@ class TransactionsJsonResponseModel implements JsonResponseModel {
 
   @override
   // implement props
-  List<Object> get props => [accountInfo, allTransactions];
+  List<Object?> get props => [accountInfo, allTransactions];
 
   @override
   // implement stringify

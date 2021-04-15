@@ -8,7 +8,7 @@ class RequestMoneyScreen extends Screen {
   final RequestMoneyViewModel viewModel;
 
   RequestMoneyScreen(
-      {@required this.viewModel})
+      {required this.viewModel})
       : assert(() {
     return viewModel != null;
   }());

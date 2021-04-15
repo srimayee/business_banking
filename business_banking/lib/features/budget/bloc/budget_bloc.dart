@@ -4,7 +4,7 @@ import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class BudgetBloc extends Bloc {
-  BudgetUsecase _useCase;
+  late BudgetUsecase _useCase;
 
   final budgetViewModelPipe = Pipe<BudgetViewModel>();
 
@@ -13,9 +13,9 @@ class BudgetBloc extends Bloc {
     budgetViewModelPipe.dispose();
   }
 
-  BudgetBloc({TransactionsService transactionsService}) {
+  BudgetBloc({TransactionsService? transactionsService}) {
     _useCase =
-        BudgetUsecase((viewModel) => budgetViewModelPipe.send(viewModel));
+        BudgetUsecase((viewModel) => budgetViewModelPipe.send(viewModel as BudgetViewModel));
     budgetViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 }

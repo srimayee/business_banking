@@ -2,8 +2,8 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
 class LoginServiceRequestModel extends Equatable implements JsonRequestModel {
-  final String userName;
-  final String password;
+  final String? userName;
+  final String? password;
 
   LoginServiceRequestModel({this.userName, this.password});
 
@@ -13,5 +13,5 @@ class LoginServiceRequestModel extends Equatable implements JsonRequestModel {
   }
 
   @override
-  List<Object> get props => [userName, password];
+  List<Object?> get props => [userName, password];
 }

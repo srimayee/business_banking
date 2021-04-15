@@ -4,25 +4,25 @@ import 'package:clean_framework/clean_framework.dart';
 import 'account_info.dart';
 
 class BudgetEntity extends Entity {
-  final AccountInfo accountInfo;
-  final List<PostedTransactions> allTransactions;
+  final AccountInfo? accountInfo;
+  final List<PostedTransactions>? allTransactions;
 
   BudgetEntity(
       {List<EntityFailure> errors = const [],
-      List<PostedTransactions> allTransactions,
-      AccountInfo accountInfo})
-      : accountInfo = accountInfo ?? null,
+      List<PostedTransactions>? allTransactions,
+      AccountInfo? accountInfo})
+      : accountInfo = accountInfo,
         allTransactions = allTransactions ?? [],
         super(errors: errors);
 
-  @override
-  List<Object> get props => [errors, accountInfo, allTransactions];
+  // @override
+  // List<Object> get props => [errors, accountInfo, allTransactions];
 
   @override
   BudgetEntity merge({
     errors,
-    AccountInfo accountInfo,
-    List<PostedTransactions> allTransactions,
+    AccountInfo? accountInfo,
+    List<PostedTransactions>? allTransactions,
   }) {
     return BudgetEntity(
       errors: errors ?? this.errors,

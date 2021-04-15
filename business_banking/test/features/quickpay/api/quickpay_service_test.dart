@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('QuickPayService success', () async {
     final service = QuickPayService();
-    final eitherResponse = await service.request();
+    final Either<ServiceFailure, QuickPayServiceResponseModel> eitherResponse = await service.request();
 
     expect(eitherResponse.isRight, isTrue);
     expect(

@@ -8,7 +8,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class PromosUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   PromosUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
@@ -20,10 +20,10 @@ class PromosUseCase extends UseCase {
       final promosEntity = PromosEntity();
       _scope = ExampleLocator().repository.create<PromosEntity>(promosEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
 
-    await ExampleLocator().repository.runServiceAdapter(_scope, PromoServiceAdapter());
+    await ExampleLocator().repository.runServiceAdapter(_scope!, PromoServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

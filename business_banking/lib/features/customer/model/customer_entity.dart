@@ -12,12 +12,12 @@ class CustomerEntity extends Entity {
 
   CustomerEntity({
     List<EntityFailure> errors = const [],
-    String honorific,
-    String firstName,
-    String lastName,
-    String nickName,
-    AccountType accountType,
-    String address,
+    String? honorific,
+    String? firstName,
+    String? lastName,
+    String? nickName,
+    AccountType? accountType,
+    String? address,
   })  : this.honorific = honorific ?? "",
         this.firstName = firstName ?? "",
         this.lastName = lastName ?? "",
@@ -33,12 +33,12 @@ class CustomerEntity extends Entity {
   @override
   merge({
     errors,
-    String honorific,
-    String firstName,
-    String lastName,
-    String nickName,
-    String accountType,
-    String address,
+    String? honorific,
+    String? firstName,
+    String? lastName,
+    String? nickName,
+    String? accountType,
+    String? address,
   }) {
     return CustomerEntity(
       errors: errors ?? this.errors,
@@ -46,7 +46,7 @@ class CustomerEntity extends Entity {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       nickName: nickName ?? this.nickName,
-      accountType: accountType ?? this.accountType,
+      accountType: accountType as AccountType? ?? this.accountType,
       address: address ?? this.address,
     );
   }
