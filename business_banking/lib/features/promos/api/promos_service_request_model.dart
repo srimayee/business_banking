@@ -1,7 +1,7 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class PromosServiceRequestModel extends JsonRequestModel {
-  final String customerId;
+  final String? customerId;
 
   PromosServiceRequestModel({this.customerId});
 

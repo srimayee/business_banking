@@ -4,16 +4,16 @@ import 'package:business_banking/features/login/model/login_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class LoginBloc extends Bloc {
-  LoginUseCase _loginUseCase;
+  late LoginUseCase _loginUseCase;
 
   final loginViewModelPipe = Pipe<LoginViewModel>();
   final userNamePipe = Pipe<String>();
   final passwordPipe = Pipe<String>();
   final submitPipe = EventPipe();
 
-  LoginBloc({LoginService loginService}) {
+  LoginBloc({LoginService? loginService}) {
     _loginUseCase =
-        LoginUseCase((viewModel) => loginViewModelPipe.send(viewModel));
+        LoginUseCase((viewModel) => loginViewModelPipe.send(viewModel as LoginViewModel));
     loginViewModelPipe.whenListenedDo(() {
       _loginUseCase.create();
     });

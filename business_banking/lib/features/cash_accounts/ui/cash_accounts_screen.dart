@@ -10,7 +10,7 @@ class CashAccountsScreen extends Screen {
   final VoidCallback navigateToAccountDetail;
 
   CashAccountsScreen(
-      {@required this.viewModel, @required this.navigateToAccountDetail})
+      {required this.viewModel, required this.navigateToAccountDetail})
       : assert(() {
           return viewModel != null;
         }());
@@ -36,8 +36,8 @@ class CashAccountsScreen extends Screen {
 
 class AccountCard extends StatelessWidget {
   const AccountCard({
-    Key key,
-    @required this.viewModel,
+    Key? key,
+    required this.viewModel,
   }) : super(key: key);
 
   final CashAccountsViewModel viewModel;

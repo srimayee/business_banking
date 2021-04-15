@@ -7,7 +7,7 @@ ExampleLocator locator() => ExampleLocator();
 
 Logger logger() => ExampleLocator().logger;
 
-Future<void> openUrl(url) => ExampleLocator().urlLauncher.launchURL(url);
+Future<void> openUrl(url) => ExampleLocator().urlLauncher!.launchURL(url);
 
 class ExampleLocator implements Locator {
   ExampleLocator._();
@@ -23,11 +23,10 @@ class ExampleLocator implements Locator {
   @override
   Logger logger = ConsoleLogger(LogLevel.verbose);
 
-  UrlLauncher urlLauncher = UrlLauncher();
+  UrlLauncher? urlLauncher = UrlLauncher();
 
   PatchSimpleRestApi api = PatchSimpleRestApi(
-      baseUrl:
-          'http://192.168.1.64:3001/'); // Points to Mockoon instance 'http://localhost:3001/'
+      baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
 
   Repository repository = Repository();
 

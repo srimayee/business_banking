@@ -6,8 +6,8 @@ import 'customer_usecase.dart';
 import 'customer_detail_usecase.dart';
 
 class CustomerBloc extends Bloc {
-  CustomerUseCase _useCase;
-  CustomerDetailUseCase _detailUseCase;
+  late CustomerUseCase _useCase;
+  late CustomerDetailUseCase _detailUseCase;
 
   final customerViewModelPipe = Pipe<CustomerViewModel>();
   final customerDetailViewModelPipe = Pipe<CustomerDetailViewModel>();
@@ -19,15 +19,15 @@ class CustomerBloc extends Bloc {
   }
 
   CustomerBloc(
-      {CustomerService customerService}) {
+      {CustomerService? customerService}) {
     _useCase = CustomerUseCase((viewModel) {
-      return customerViewModelPipe.send(viewModel);
+      return customerViewModelPipe.send(viewModel as CustomerViewModel);
     });
 
     customerViewModelPipe.whenListenedDo(() => _useCase.create());
 
     _detailUseCase = CustomerDetailUseCase((viewModel) {
-      return customerDetailViewModelPipe.send(viewModel);
+      return customerDetailViewModelPipe.send(viewModel as CustomerDetailViewModel);
     });
 
     customerDetailViewModelPipe.whenListenedDo(() => _detailUseCase.create());

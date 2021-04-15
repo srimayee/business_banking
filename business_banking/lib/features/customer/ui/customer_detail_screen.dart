@@ -6,7 +6,7 @@ class CustomerDetailScreen extends Screen {
   final CustomerDetailViewModel viewModel;
 
   CustomerDetailScreen(
-      {@required this.viewModel})
+      {required this.viewModel})
       : assert(() {
           return viewModel != null;
         }());

@@ -10,7 +10,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
   @override
   LoginScreen buildScreen(
       BuildContext context, LoginBloc bloc, LoginViewModel viewModel) {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success) {
         return;
       } else if (viewModel.serviceStatus == ServiceStatus.fail) {

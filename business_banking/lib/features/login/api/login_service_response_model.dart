@@ -1,7 +1,7 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class LoginServiceResponseModel extends Equatable implements JsonResponseModel {
+class LoginServiceResponseModel extends JsonResponseModel {
   final bool didSucceed;
 
   LoginServiceResponseModel.fromJson(Map<String, dynamic> json)

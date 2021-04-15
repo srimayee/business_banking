@@ -18,7 +18,7 @@ class PromosEntity extends Entity {
       ];
 
   @override
-  merge({errors, String imageUrl, String link}) {
+  merge({errors, String? imageUrl, String? link}) {
     return PromosEntity(
       errors: errors ?? this.errors,
       imageUrl: imageUrl ?? this.imageUrl,

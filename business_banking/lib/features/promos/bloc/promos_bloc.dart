@@ -4,12 +4,12 @@ import 'package:business_banking/features/promos/models/promos_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class PromosBloc extends Bloc {
-  PromosUseCase _useCase;
+  late PromosUseCase _useCase;
 
   final promosViewModelPipe = Pipe<PromosViewModel>();
 
-  PromosBloc({PromosService promosService}) {
-    _useCase = PromosUseCase((viewModel) => promosViewModelPipe.send(viewModel));
+  PromosBloc({PromosService? promosService}) {
+    _useCase = PromosUseCase((viewModel) => promosViewModelPipe.send(viewModel as PromosViewModel));
     promosViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 

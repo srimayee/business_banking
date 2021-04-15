@@ -9,11 +9,11 @@ class RequestMoneyViewModel extends ViewModel {
   final String memo;
 
   RequestMoneyViewModel({
-    @required this.name,
-    @required this.email,
-    @required this.imageUrl,
-    @required this.amount,
-    @required this.memo,
+    required this.name,
+    required this.email,
+    required this.imageUrl,
+    required this.amount,
+    required this.memo,
   }) : assert(name != null &&
       email != null &&
       imageUrl != null &&

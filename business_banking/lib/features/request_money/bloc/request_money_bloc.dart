@@ -4,7 +4,7 @@ import 'package:business_banking/features/request_money/api/request_money_servic
 import 'request_money_usecase.dart';
 
 class RequestMoneyBloc extends Bloc {
-  RequestMoneyUseCase _useCase;
+  late RequestMoneyUseCase _useCase;
 
   final quickPayViewModelPipe = Pipe<RequestMoneyViewModel>();
 
@@ -13,8 +13,8 @@ class RequestMoneyBloc extends Bloc {
     quickPayViewModelPipe.dispose();
   }
 
-  RequestMoneyBloc({RequestMoneyService quickPayService}) {
-    _useCase = RequestMoneyUseCase((viewModel) => quickPayViewModelPipe.send(viewModel));
+  RequestMoneyBloc({RequestMoneyService? quickPayService}) {
+    _useCase = RequestMoneyUseCase((viewModel) => quickPayViewModelPipe.send(viewModel as RequestMoneyViewModel));
     quickPayViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 }

@@ -3,7 +3,7 @@ import 'customer_entity.dart';
 
 class CustomerViewModel extends ViewModel {
   final String helloString;
-  CustomerViewModel({CustomerEntity customerEntity})
+  CustomerViewModel({required CustomerEntity customerEntity})
       : assert(customerEntity != null),
         helloString = customerEntity.accountType == AccountType.private
             ? "${customerEntity.honorific} ${customerEntity.firstName} ${customerEntity.lastName}"

@@ -6,7 +6,6 @@ import 'cash_accounts_service_response_model.dart';
 
 class CashAccountsService
     extends EitherService<JsonRequestModel, CashAccountsServiceResponseModel> {
-  final bool debugEnabled = false;
 
   CashAccountsService()
       : super(
@@ -18,11 +17,6 @@ class CashAccountsService
   @override
   CashAccountsServiceResponseModel parseResponse(
       Map<String, dynamic> jsonResponse) {
-    /// Log JSON Response for Cash Accounts Service.
-    /// ToDo() - Set Logging only to Dev environment
-    if (debugEnabled) {
-      logger().debug('CashAccountsService JSON: ' + jsonResponse.toString());
-    }
 
     return CashAccountsServiceResponseModel.fromJson(jsonResponse);
   }

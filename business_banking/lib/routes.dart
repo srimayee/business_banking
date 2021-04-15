@@ -22,11 +22,11 @@ abstract class BusinessBankingRouter {
       case hubRoute:
         return HubScreen();
 
-      case transferFundsRoute:
-        return TransferFundsWidget();
+      // case transferFundsRoute:
+      //   return TransferFundsWidget();
 
-      case transferFundsConfirmRoute:
-        return TransferFundsConfirmationWidget();
+      // case transferFundsConfirmRoute:
+      //   return TransferFundsConfirmationWidget();
 
       case accountDetailRoute:
         return AccountDetailWidget();

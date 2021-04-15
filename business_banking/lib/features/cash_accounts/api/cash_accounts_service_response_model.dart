@@ -1,8 +1,7 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class CashAccountsServiceResponseModel extends Equatable
-    implements JsonResponseModel {
+class CashAccountsServiceResponseModel extends JsonResponseModel {
   final String name;
   final String lastFour;
   final double balance;

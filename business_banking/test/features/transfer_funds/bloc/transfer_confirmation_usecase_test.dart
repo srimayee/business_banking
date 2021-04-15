@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('testing ConfirmationUseCase', () async {
-    TransferConfirmationViewModel model;
+    TransferConfirmationViewModel? model;
     DateTime date = DateTime.now();
     TransferFundsEntity entity = TransferFundsEntity(
         fromAccount: '1111111111',
@@ -21,7 +21,7 @@ void main() {
 
     TransferConfirmationUseCase useCase =
         TransferConfirmationUseCase((viewModel) {
-      model = viewModel;
+      model = viewModel as TransferConfirmationViewModel?;
     });
 
     // testing create method
@@ -37,7 +37,7 @@ void main() {
 
     useCase.clearTransferData();
     final _scope =
-        ExampleLocator().repository.containsScope<TransferFundsEntity>();
+        ExampleLocator().repository.containsScope<TransferFundsEntity>()!;
     var clearEntity =
         ExampleLocator().repository.get<TransferFundsEntity>(_scope);
     expect(clearEntity, TransferFundsEntity(fromAccounts: entity.fromAccounts));

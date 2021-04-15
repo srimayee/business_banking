@@ -7,7 +7,7 @@ class AccountDetailScreen extends Screen {
   final AccountDetailViewModel viewModel;
   final VoidCallback navigateToCashAccounts;
 
-  AccountDetailScreen({@required this.viewModel, @required this.navigateToCashAccounts})
+  AccountDetailScreen({required this.viewModel, required this.navigateToCashAccounts})
       : assert(() {
           return viewModel != null;
         }());
@@ -31,7 +31,7 @@ class AccountDetailScreen extends Screen {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AutoSizeText(
-              viewModel.name,
+              viewModel.name!,
             ),
             Text(
               '*' + viewModel.lastFour,

@@ -7,8 +7,8 @@ class CashAccountsEntity extends Entity {
 
   CashAccountsEntity({
     List<EntityFailure> errors = const [],
-    String name,
-    String lastFour,
+    String? name,
+    String? lastFour,
     this.balance = 0.00,
   })  : name = name ?? 'Account',
         lastFour = lastFour ?? '0000',
@@ -18,7 +18,7 @@ class CashAccountsEntity extends Entity {
   List<Object> get props => [errors, name, lastFour, balance];
 
   @override
-  merge({errors, String name, String lastFour, double balance}) {
+  merge({errors, String? name, String? lastFour, double? balance}) {
     return CashAccountsEntity(
       errors: errors ?? this.errors,
       name: name ?? this.name,

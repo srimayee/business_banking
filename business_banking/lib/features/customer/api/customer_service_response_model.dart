@@ -1,8 +1,7 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class CustomerServiceResponseModel extends Equatable
-    implements JsonResponseModel {
+class CustomerServiceResponseModel extends JsonResponseModel {
   final String honorific;
   final String firstName;
   final String lastName;
@@ -19,5 +18,6 @@ class CustomerServiceResponseModel extends Equatable
         address = json['address'] ?? "";
 
   @override
-  List<Object> get props => [honorific, firstName, lastName, accountType, nickName, address];
+  List<Object> get props =>
+      [honorific, firstName, lastName, accountType, nickName, address];
 }

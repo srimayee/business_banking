@@ -1,8 +1,7 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class RequestMoneyServiceResponseModel extends Equatable
-    implements JsonResponseModel{
+class RequestMoneyServiceResponseModel extends JsonResponseModel{
   final String name;
   final String email;
   final String imageUrl;

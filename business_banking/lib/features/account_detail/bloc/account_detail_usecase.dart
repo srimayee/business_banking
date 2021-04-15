@@ -6,27 +6,22 @@ import 'package:business_banking/features/account_detail/model/account_detail_vi
 import 'package:business_banking/locator.dart';
 
 class AccountDetailUseCase extends UseCase {
-  Function(ViewModel) _viewModelCallBack;
+    late final ViewModelCallback<ViewModel> _viewModelCallBack;
 
-  RepositoryScope _scope;
-
-  AccountDetailUseCase(Function(ViewModel) viewModelCallBack)
-      : assert(viewModelCallBack != null),
+  AccountDetailUseCase(ViewModelCallback<ViewModel> viewModelCallBack)
+      : 
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<AccountDetailEntity>();
-    if (_scope == null) {
-      final newAccountDetailEntity = AccountDetailEntity();
-      _scope = ExampleLocator().repository.create<AccountDetailEntity>(
-          newAccountDetailEntity, _notifySubscribers);
-    } else {
-      _scope.subscription = _notifySubscribers;
-    }
+   
+    final scope = ExampleLocator()
+          .repository
+          .create<AccountDetailEntity>(AccountDetailEntity(), _notifySubscribers);
+
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, AccountDetailServiceAdapter());
+        .runServiceAdapter(scope, AccountDetailServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

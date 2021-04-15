@@ -8,7 +8,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class BudgetUsecase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   BudgetUsecase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
@@ -22,12 +22,12 @@ class BudgetUsecase extends UseCase {
           .repository
           .create<BudgetEntity>(newEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, BudgetServiceAdapter());
+        .runServiceAdapter(_scope!, BudgetServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -38,12 +38,12 @@ class BudgetUsecase extends UseCase {
     if (entity.hasErrors()) {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: entity.accountInfo,
-          allTransactions: entity.allTransactions,
+          allTransactions: entity.allTransactions!,
           serviceStatus: TransactionsServiceStatus.fail));
     } else {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: entity.accountInfo,
-          allTransactions: entity.allTransactions,
+          allTransactions: entity.allTransactions!,
           serviceStatus: TransactionsServiceStatus.unknown));
     }
   }
