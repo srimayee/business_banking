@@ -10,7 +10,12 @@ class ViewChartPresenter
   ViewChartScreen buildScreen(
       BuildContext context, BudgetBloc bloc, BudgetViewModel viewModel) {
     // implement buildScreen
-    return ViewChartScreen(viewModel: viewModel);
+    return ViewChartScreen(
+      viewModel: viewModel,
+      didSelectCategory: (value) {
+        _sendCategoryToPipe(bloc, value);
+      },
+    );
   }
 
   @override
@@ -24,5 +29,9 @@ class ViewChartPresenter
     return Center(
       child: CircularProgressIndicator(),
     );
+  }
+
+  void _sendCategoryToPipe(BudgetBloc bloc, String value) {
+    bloc.chosenCategoryPipe.send(value);
   }
 }

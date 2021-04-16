@@ -6,16 +6,14 @@ import 'account_info.dart';
 class BudgetEntity extends Entity {
   final AccountInfo? accountInfo;
   final List<PostedTransactions>? allTransactions;
-  final List<PostedTransactions>? filteredTransactions;
 
   BudgetEntity(
       {List<EntityFailure> errors = const [],
       List<PostedTransactions>? allTransactions,
-        List<PostedTransactions>? filteredTransactions,
+      List<PostedTransactions>? filteredTransactions,
       AccountInfo? accountInfo})
       : accountInfo = accountInfo,
         allTransactions = allTransactions ?? [],
-        filteredTransactions = filteredTransactions ?? [],
         super(errors: errors);
 
   // @override
@@ -26,17 +24,19 @@ class BudgetEntity extends Entity {
     errors,
     AccountInfo? accountInfo,
     List<PostedTransactions>? allTransactions,
-    List<PostedTransactions>? filteredTransactions,
   }) {
     return BudgetEntity(
       errors: errors ?? this.errors,
       accountInfo: accountInfo ?? this.accountInfo,
       allTransactions: allTransactions ?? this.allTransactions,
-      filteredTransactions: allTransactions ?? this.filteredTransactions,
     );
   }
 
-  List<PostedTransactions> filterWith(String category) {
-    return [allTransactions!.first];
+  List<PostedTransactions>? filterWith(String category) {
+    if (category == 'Show All') {
+      return allTransactions!;
+    } else {
+      return allTransactions!.where((i) => i.category == category).toList();
+    }
   }
 }
