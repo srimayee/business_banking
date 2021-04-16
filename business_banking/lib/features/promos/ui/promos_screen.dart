@@ -7,8 +7,7 @@ class PromosScreen extends Screen {
   final PromosViewModel viewModel;
   final Function? openUrl;
 
-  PromosScreen({required this.viewModel, this.openUrl})
-      : assert(viewModel != null);
+  PromosScreen({required this.viewModel, this.openUrl});
 
   @override
   Widget build(BuildContext context) {
