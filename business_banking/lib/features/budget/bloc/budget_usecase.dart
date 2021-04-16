@@ -44,7 +44,7 @@ class BudgetUsecase extends UseCase {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: entity.accountInfo,
           allTransactions: entity.allTransactions!,
-          serviceStatus: TransactionsServiceStatus.unknown));
+          serviceStatus: TransactionsServiceStatus.success));
     }
   }
 }

@@ -10,6 +10,7 @@ class BudgetEntity extends Entity {
   BudgetEntity(
       {List<EntityFailure> errors = const [],
       List<PostedTransactions>? allTransactions,
+      List<PostedTransactions>? filteredTransactions,
       AccountInfo? accountInfo})
       : accountInfo = accountInfo,
         allTransactions = allTransactions ?? [],
@@ -29,5 +30,13 @@ class BudgetEntity extends Entity {
       accountInfo: accountInfo ?? this.accountInfo,
       allTransactions: allTransactions ?? this.allTransactions,
     );
+  }
+
+  List<PostedTransactions>? filterWith(String category) {
+    if (category == 'Show All') {
+      return allTransactions!;
+    } else {
+      return allTransactions!.where((i) => i.category == category).toList();
+    }
   }
 }

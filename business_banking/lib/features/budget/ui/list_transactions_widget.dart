@@ -1,14 +1,14 @@
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
-import 'package:business_banking/features/budget/ui/view_chart_presenter.dart';
+import 'package:business_banking/features/budget/ui/list_transactions_presenter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-class ViewChartWidget extends StatelessWidget {
+class ListTransactionsWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext build) {
     return BlocProvider<BudgetBloc>(
       create: (_) => BudgetBloc(),
-      child: ViewChartPresenter(),
+      child: ListTransactionsPresenter(),
     );
   }
 }
