@@ -6,8 +6,8 @@ import '../model/investment_view_model.dart';
 import 'investment_usecase.dart';
 
 class InvestmentBloc extends Bloc {
+  
   late final InvestmentUseCase _useCase;
-
   final investmentViewModelPipe = Pipe<InvestmentViewModel>();
 
   @override

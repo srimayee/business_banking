@@ -12,7 +12,11 @@ void main() {
   // });
   test('CashAccountsUseCase initialize and create', () {
     final useCase = CashAccountsUseCase((viewModel) {
-      expect(viewModel, isA<CashAccountsViewModel>());
+      try {
+        expect(viewModel, isA<CashAccountsViewModel>());
+      } catch (e) {
+        expect(viewModel, isA<CashAccountsViewModel>());
+      }
     });
     useCase.create();
   });

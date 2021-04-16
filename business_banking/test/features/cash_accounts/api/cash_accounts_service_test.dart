@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('CashAccountsService success', () async {
     final service = CashAccountsService();
-    final Either<ServiceFailure, CashAccountsServiceResponseModel> eitherResponse = await service.request();
+    final eitherResponse = await service.request();
 
     expect(eitherResponse.isRight, isTrue);
     expect(
