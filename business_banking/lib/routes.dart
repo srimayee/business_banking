@@ -1,5 +1,5 @@
 import 'package:business_banking/features/account_detail/ui/account_detail_widget.dart';
-import 'package:business_banking/features/budget/ui/view_chart_widget.dart';
+import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart';
 import 'package:business_banking/features/customer/ui/customer_detail_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';

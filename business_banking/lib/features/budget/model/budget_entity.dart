@@ -10,7 +10,6 @@ class BudgetEntity extends Entity {
   BudgetEntity(
       {List<EntityFailure> errors = const [],
       List<PostedTransactions>? allTransactions,
-      List<PostedTransactions>? filteredTransactions,
       AccountInfo? accountInfo})
       : accountInfo = accountInfo,
         allTransactions = allTransactions ?? [],

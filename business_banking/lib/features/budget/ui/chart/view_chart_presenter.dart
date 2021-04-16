@@ -1,6 +1,6 @@
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
-import 'package:business_banking/features/budget/ui/view_chart_screen.dart';
+import 'package:business_banking/features/budget/ui/chart/view_chart_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 

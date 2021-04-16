@@ -1,6 +1,6 @@
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
-import 'package:business_banking/features/budget/ui/donut_auto_label_chart.dart';
-import 'package:business_banking/features/budget/ui/list_transactions_widget.dart';
+import 'package:business_banking/features/budget/ui/widgets/donut_auto_label_chart.dart';
+import 'package:business_banking/features/budget/ui/transactions_list/list_transactions_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:business_banking/features/budget/ui/budget_widget.dart';
+import 'package:business_banking/features/budget/ui/first_card/budget_widget.dart';
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/customer/ui/customer_widget.dart';
 import 'package:business_banking/features/investment/ui/investment_feature.dart';
