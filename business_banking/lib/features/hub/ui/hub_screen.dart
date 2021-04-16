@@ -39,7 +39,7 @@ class HubScreen extends Screen {
             TransferFundsCard(),
             BudgetWidget(),
             QuickPayWidget(),
-            //BudgetWidget(),
+            BudgetWidget(),
           ],
         ),
       ),

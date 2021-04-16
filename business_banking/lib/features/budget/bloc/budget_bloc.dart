@@ -30,10 +30,10 @@ class BudgetBloc extends Bloc {
     listTransactionsViewModelPipe
         .whenListenedDo(() => _listTransactionsUseCase.create());
 
-    chosenCategoryPipe.receive.listen(didApplyFilter);
+    chosenCategoryPipe.receive.listen(_didApplyFilter);
   }
 
-  void didApplyFilter(String value) {
+  void _didApplyFilter(String value) {
     _listTransactionsUseCase.applyFilter(value);
   }
 }

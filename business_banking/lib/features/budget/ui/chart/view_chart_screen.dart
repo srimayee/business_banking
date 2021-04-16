@@ -89,7 +89,7 @@ class ViewChartScreen extends Screen {
                 MediaQuery.of(context).size.width / 1.8,
               ),
             ),
-            child: DonutAutoLabelChart.withSampleData(),
+            child: DonutAutoLabelChart(seriesList: viewModel.chartData, animate: false)
           ),
           Divider(),
           OutlinedButton(
