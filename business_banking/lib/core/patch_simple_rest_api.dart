@@ -9,11 +9,11 @@ class PatchSimpleRestApi extends RestApi {
   final baseUrl;
   final bool _trustSelfSigned = true;
 
-  String _path;
-  String path;
+  String? _path;
+  String? path;
 
-  HttpClient _httpClient;
-  IOClient _ioClient;
+  HttpClient? _httpClient;
+  late IOClient _ioClient;
 
   PatchSimpleRestApi({this.baseUrl = 'http://127.0.0.1:8080/service/'}) {
     _httpClient = new HttpClient()
@@ -23,23 +23,23 @@ class PatchSimpleRestApi extends RestApi {
     _ioClient = new IOClient(_httpClient);
   }
 
-  List<String> _getVariablesFromPath({bool check = false}) {
+  List<String?> _getVariablesFromPath({bool check = false}) {
     RegExp exp = RegExp(r'{(\w+)}');
-    Iterable<RegExpMatch> matches = exp.allMatches(check ? _path : path);
+    Iterable<RegExpMatch> matches = exp.allMatches(check ? _path! : path!);
     final foundVariables =
         matches.map((m) => m.group(1)).toList(growable: false);
     return foundVariables;
   }
 
   Map<String, dynamic> _filterRequestDataAndUpdatePath(
-    List<String> variables,
+    List<String?> variables,
     Map<String, dynamic> requestData,
   ) {
     Map<String, dynamic> filteredRequestData = Map.from(requestData);
     variables.forEach((variable) {
       if (requestData.containsKey(variable)) {
         _path =
-            path.replaceAll('{$variable}', requestData[variable].toString());
+            path!.replaceAll('{$variable}', requestData[variable!].toString());
         filteredRequestData.remove(variable);
       }
     });
@@ -49,16 +49,16 @@ class PatchSimpleRestApi extends RestApi {
 
   @override
   Future<RestResponse> request(
-      {RestMethod method,
-      String path,
-      Map<String, dynamic> requestBody = const {}}) async {
+      {RestMethod? method,
+      String? path,
+      Map<String, dynamic>? requestBody = const {}}) async {
     assert(method != null && path != null && path.isNotEmpty);
 
     this.path = path;
     _path = path;
-    Map<String, dynamic> requestJSON = requestBody;
+    Map<String, dynamic>? requestJSON = requestBody;
 
-    Response response;
+    late Response response;
     Uri uri = Uri.parse(baseUrl + path);
 
     final variablesInPath = _getVariablesFromPath();
@@ -75,7 +75,7 @@ class PatchSimpleRestApi extends RestApi {
         );
       }
       requestJSON =
-          _filterRequestDataAndUpdatePath(variablesInPath, requestBody);
+          _filterRequestDataAndUpdatePath(variablesInPath, requestBody!);
       uri = Uri.parse(baseUrl + _path);
       if (_getVariablesFromPath(check: true).isNotEmpty) {
         // Some variables where not substituted by request fields
@@ -131,8 +131,8 @@ class PatchSimpleRestApi extends RestApi {
 
   @override
   Future<RestResponse> requestBinary({
-    RestMethod method,
-    String path,
+    RestMethod? method,
+    String? path,
     Map<String, dynamic> requestBody = const {},
   }) {
     // TODO: implement requestBinary

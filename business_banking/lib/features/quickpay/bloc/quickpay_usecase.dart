@@ -10,7 +10,7 @@ import 'package:business_banking/locator.dart';
 class QuickPayUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   QuickPayUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null), _viewModelCallBack = viewModelCallBack;
@@ -23,11 +23,11 @@ class QuickPayUseCase extends UseCase {
       .repository
       .create<QuickPayEntity>(newQuickPayEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, QuickPayServiceAdapter());
+        .runServiceAdapter(_scope!, QuickPayServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

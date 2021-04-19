@@ -10,14 +10,13 @@ class TransferFundsService extends EitherService<TransferFundsRequestModel,
     TransferFundsResponseModel> {
   TransferFundsService()
       : super(
-      method: RestMethod.post,
-      restApi: ExampleLocator().api,
-      path: 'transfer-send'
-  );
+            method: RestMethod.post,
+            restApi: ExampleLocator().api,
+            path: 'transfer-send');
 
   @override
   TransferFundsResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
-        stderr.writeln("parseResponse: " + jsonResponse.toString());
+    stderr.writeln("parseResponse: " + jsonResponse.toString());
     return TransferFundsResponseModel.fromJson(jsonResponse);
   }
 }

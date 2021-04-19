@@ -11,7 +11,7 @@ import 'package:mockito/mockito.dart';
 class MockUrlLauncher extends Mock implements UrlLauncher {}
 
 void main() {
-  MockUrlLauncher mockUrlLauncher;
+  MockUrlLauncher? mockUrlLauncher;
   ExampleLocator mockExampleLocator;
 
   setUp(() {
@@ -34,7 +34,7 @@ void main() {
   });
 
   testWidgets('clicking the promo will open the promo link', (tester) async {
-    when(mockUrlLauncher.launchURL(any)).thenAnswer((_) async => true);
+    when(mockUrlLauncher!.launchURL(any!)).thenAnswer((_) async => true);
 
     final testWidget = MaterialApp(
       home: Scaffold(
@@ -50,6 +50,6 @@ void main() {
 
     final promo = find.byKey(Key('network_image_container'));
     await tester.tap(promo);
-    verify(mockUrlLauncher.launchURL(any)).called(1);
+    verify(mockUrlLauncher!.launchURL(any!)).called(1);
   });
 }

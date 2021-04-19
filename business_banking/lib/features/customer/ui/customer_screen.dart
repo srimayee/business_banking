@@ -7,7 +7,7 @@ class CustomerScreen extends Screen {
   final VoidCallback navigateToCustomerDetail;
 
   CustomerScreen(
-      {@required this.viewModel, @required this.navigateToCustomerDetail})
+      {required this.viewModel, required this.navigateToCustomerDetail})
       : assert(() {
           return viewModel != null;
         }());

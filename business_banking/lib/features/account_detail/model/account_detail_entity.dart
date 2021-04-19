@@ -12,10 +12,10 @@ class AccountDetailEntity extends Entity {
 
   AccountDetailEntity({
     List<EntityFailure> errors = const [],
-    String name,
-    String lastFour,
-    String accountType,
-    int routingNumber,
+    String? name,
+    String? lastFour,
+    String? accountType,
+    int? routingNumber,
     this.balance = 0.00,
     this.beginningBalance = 0.00,
     this.pendingTransactions = 0.00,
@@ -42,14 +42,14 @@ class AccountDetailEntity extends Entity {
   @override
   AccountDetailEntity merge({
     errors,
-    String name,
-    String lastFour,
-    String accountType,
-    int routingNumber,
-    double balance,
-    double beginningBalance,
-    double pendingTransactions,
-    double depositHolds,
+    String? name,
+    String? lastFour,
+    String? accountType,
+    int? routingNumber,
+    double? balance,
+    double? beginningBalance,
+    double? pendingTransactions,
+    double? depositHolds,
   }) {
     return AccountDetailEntity(
       errors: errors ?? this.errors,

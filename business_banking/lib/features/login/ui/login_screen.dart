@@ -3,10 +3,10 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends Screen {
-  final LoginViewModel viewModel;
-  final Function onChangeUsermame;
-  final Function onChangePassword;
-  final Function onTapSubmit;
+  final LoginViewModel? viewModel;
+  final Function? onChangeUsermame;
+  final Function? onChangePassword;
+  final Function? onTapSubmit;
 
   LoginScreen({
     this.onChangeUsermame,
@@ -58,7 +58,7 @@ class LoginScreen extends Screen {
             RaisedButton(
               key: Key('login_button_key'),
               color: Colors.lightGreen,
-              onPressed: onTapSubmit,
+              onPressed: onTapSubmit as void Function()?,
               child: Text('Login', style: TextStyle(color: Colors.white)),
             ),
           ],
@@ -67,7 +67,7 @@ class LoginScreen extends Screen {
     );
   }
 
-  Widget _textFormField(Key key, String hintText, Function onChangeTextField, TextInputType textInputType) {
+  Widget _textFormField(Key key, String hintText, Function? onChangeTextField, TextInputType textInputType) {
     return TextFormField(
       key: key,
       keyboardType: textInputType,
@@ -83,7 +83,7 @@ class LoginScreen extends Screen {
         enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
       ),
       onChanged: (value) {
-        onChangeTextField(value);
+        onChangeTextField!(value);
       },
     );
   }

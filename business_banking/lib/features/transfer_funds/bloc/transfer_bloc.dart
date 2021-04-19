@@ -5,8 +5,8 @@ import 'package:business_banking/features/transfer_funds/model/transfer_view_mod
 import 'package:clean_framework/clean_framework.dart';
 
 class TransferFundsBloc extends Bloc {
-  TransferFundsUseCase _fundsUseCase;
-  TransferConfirmationUseCase _confirmationUseCase;
+  late TransferFundsUseCase _fundsUseCase;
+  late TransferConfirmationUseCase _confirmationUseCase;
 
   final transferFundsViewModelPipe = Pipe<TransferFundsViewModel>();
   final fromAccountPipe = Pipe<String>();
@@ -19,13 +19,15 @@ class TransferFundsBloc extends Bloc {
   final resetViewModelPipe = EventPipe();
 
   TransferFundsBloc() {
-    _fundsUseCase = TransferFundsUseCase(
-            (viewModel) => transferFundsViewModelPipe.send(viewModel));
+    _fundsUseCase = TransferFundsUseCase((viewModel) =>
+        transferFundsViewModelPipe.send(viewModel as TransferFundsViewModel));
     transferFundsViewModelPipe.whenListenedDo(() {
       _fundsUseCase.create();
     });
 
-    _confirmationUseCase = TransferConfirmationUseCase((viewModel) => confirmationViewModelPipe.send(viewModel));
+    _confirmationUseCase = TransferConfirmationUseCase((viewModel) =>
+        confirmationViewModelPipe
+            .send(viewModel as TransferConfirmationViewModel));
     confirmationViewModelPipe.whenListenedDo(() {
       _confirmationUseCase.create();
     });

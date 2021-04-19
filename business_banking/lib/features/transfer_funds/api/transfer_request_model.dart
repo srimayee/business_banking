@@ -1,18 +1,16 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:equatable/equatable.dart';
 
-class TransferFundsRequestModel extends Equatable implements JsonRequestModel {
+class TransferFundsRequestModel extends JsonRequestModel {
   final String fromAccount;
   final String toAccount;
   final String amount;
   final DateTime date;
 
   TransferFundsRequestModel(
-      {this.fromAccount,
-        this.toAccount,
-        this.amount,
-        this.date
-      });
+      {required this.fromAccount,
+      required this.toAccount,
+      required this.amount,
+      required this.date});
 
   @override
   Map<String, dynamic> toJson() {

@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 
 class TransferFundsCard extends StatelessWidget {
   const TransferFundsCard({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 125,
-      padding: EdgeInsets.all(5.0),
       child: Card(
         color: Colors.white,
         shadowColor: Colors.grey[500],

@@ -4,15 +4,17 @@ import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class TransferFundsAccountsToService extends EitherService<TransferFundsAccountsToRequestModel, TransferFundsAccountsToResponseModel> {
-  TransferFundsAccountsToService() : super(
-      method: RestMethod.post,
-      restApi: ExampleLocator().api,
-      path: 'transfer-accounts-to'
-  );
+class TransferFundsAccountsToService extends EitherService<
+    TransferFundsAccountsToRequestModel, TransferFundsAccountsToResponseModel> {
+  TransferFundsAccountsToService()
+      : super(
+            method: RestMethod.post,
+            restApi: ExampleLocator().api,
+            path: 'transfer-accounts-to');
 
   @override
-  TransferFundsAccountsToResponseModel parseResponse(Map<String, dynamic> jsonResponse) {
+  TransferFundsAccountsToResponseModel parseResponse(
+      Map<String, dynamic> jsonResponse) {
     return TransferFundsAccountsToResponseModel.fromJson(jsonResponse);
   }
 }

@@ -7,9 +7,9 @@ class QuickPayViewModel extends ViewModel {
   final String imageUrl;
 
   QuickPayViewModel({
-    @required this.name,
-    @required this.email,
-    @required this.imageUrl
+    required this.name,
+    required this.email,
+    required this.imageUrl
   }) : assert(name != null &&
               email != null &&
               imageUrl != null);

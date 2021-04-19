@@ -9,18 +9,20 @@ class TransferFundsAccountsToServiceAdapter extends ServiceAdapter<
     TransferFundsAccountsToRequestModel,
     TransferFundsAccountsToResponseModel,
     TransferFundsAccountsToService> {
-  TransferFundsAccountsToServiceAdapter() : super(TransferFundsAccountsToService());
-
+  TransferFundsAccountsToServiceAdapter()
+      : super(TransferFundsAccountsToService());
 
   @override
-  TransferFundsAccountsToRequestModel createRequest(TransferFundsEntity entity) {
+  TransferFundsAccountsToRequestModel createRequest(
+      TransferFundsEntity entity) {
     return TransferFundsAccountsToRequestModel(fromAccount: entity.fromAccount);
   }
 
   @override
-  TransferFundsEntity createEntity(
-      TransferFundsEntity initialEntity,
+  TransferFundsEntity createEntity(TransferFundsEntity initialEntity,
       TransferFundsAccountsToResponseModel responseModel) {
-    return initialEntity.merge(errors: <EntityFailure>[], toAccounts: responseModel.toAccounts);
+    return initialEntity.merge(
+        errors: <EntityFailure>[],
+        toAccounts: responseModel.toAccounts) as TransferFundsEntity;
   }
 }

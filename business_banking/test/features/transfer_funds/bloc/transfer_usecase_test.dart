@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('testing UseCase', () async {
-    TransferFundsViewModel model;
+    TransferFundsViewModel? model;
     TransferFundsUseCase useCase = TransferFundsUseCase((viewModel) {
-      model = viewModel;
+      model = viewModel as TransferFundsViewModel?;
     });
 
     // testing create method
@@ -65,10 +65,10 @@ void main() {
         amount: '23.50',
         date: date);
     expect(model, modelForComparing);
-    expect(model.date, modelForComparing.date);
+    expect(model!.date, modelForComparing.date);
 
     // testing submitTransfer method
     await useCase.submitTransfer();
-    expect(model.id, '123456789');
+    expect(model!.id, '123456789');
   });
 }

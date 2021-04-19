@@ -10,7 +10,7 @@ class TransferConfirmationScreen extends Screen {
   final Function navigateToTransferScreen;
 
   TransferConfirmationScreen(
-      {@required this.viewModel, @required this.navigateToTransferScreen});
+      {required this.viewModel, required this.navigateToTransferScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class TransferConfirmationScreen extends Screen {
                 ),
                 TransactionLane(
                     'Transfer Date',
-                    DateFormat('MM/dd/yyyy').format(viewModel.date),
+                    DateFormat('MM/dd/yyyy').format(viewModel.date!),
                     'transfer_confirmation_date_label',
                     'transfer_confirmation_date_field'),
                 SizedBox(
@@ -88,7 +88,7 @@ class TransferConfirmationScreen extends Screen {
                   child: Text('Make Another Transfer'),
                   color: Colors.black54,
                   textColor: Colors.white,
-                  onPressed: navigateToTransferScreen,
+                  onPressed: navigateToTransferScreen as void Function()?,
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(30.0),
                   ),
@@ -102,7 +102,7 @@ class TransferConfirmationScreen extends Screen {
 
 class TransactionLane extends StatelessWidget {
   final String label;
-  final String value;
+  final String? value;
   final String labelKey;
   final String valueFieldKey;
 
@@ -114,7 +114,7 @@ class TransactionLane extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label, style: TextStyle(fontSize: 15.0), key: Key(labelKey)),
-        Text(value, style: TextStyle(fontSize: 15.0), key: Key(valueFieldKey))
+        Text(value!, style: TextStyle(fontSize: 15.0), key: Key(valueFieldKey))
       ],
     );
   }

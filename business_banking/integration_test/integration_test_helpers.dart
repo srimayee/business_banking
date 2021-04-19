@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:business_banking/main.dart';
 
 final _helperName = "Integration test helper";
-WidgetTester _tester;
+late WidgetTester _tester;
 Future<void> startTest(WidgetTester tester) async {
   _tester = tester;
   main();
@@ -81,7 +81,7 @@ Future<void> enterText(String widgetKey, String text) async {
 }
 
 Future<void> scrollToWidget(String widgetKey,
-    {double deltaY, String scrollableWidgetKey}) async {
+    {double? deltaY, String? scrollableWidgetKey}) async {
   final Finder finder = find.byKey(Key(widgetKey));
   await _scrollTo(finder,
       deltaY: deltaY, scrollableWidgetKey: scrollableWidgetKey);
@@ -89,7 +89,7 @@ Future<void> scrollToWidget(String widgetKey,
 }
 
 Future<void> scrollToText(String text,
-    {double deltaY, String scrollableWidgetKey}) async {
+    {double? deltaY, String? scrollableWidgetKey}) async {
   final Finder finder = find.text(text);
   await _scrollTo(finder,
       deltaY: deltaY, scrollableWidgetKey: scrollableWidgetKey);
@@ -97,14 +97,14 @@ Future<void> scrollToText(String text,
 }
 
 Future<void> scrollTo(Finder finder,
-    {double deltaY, String scrollableWidgetKey}) async {
+    {double? deltaY, String? scrollableWidgetKey}) async {
   await _scrollTo(finder,
       deltaY: deltaY, scrollableWidgetKey: scrollableWidgetKey);
   _log("$_helperName: scrollTo: $finder deltaY: $deltaY");
 }
 
 Future<void> _scrollTo(Finder finder,
-    {double deltaY, String scrollableWidgetKey}) async {
+    {double? deltaY, String? scrollableWidgetKey}) async {
   var scrollFinder = scrollableWidgetKey != null
       ? find.byKey(Key(scrollableWidgetKey))
       : find.byWidgetPredicate((widget) =>
@@ -129,7 +129,7 @@ Future<void> selectDropDownList(
 }
 
 Future<bool> _expect(dynamic actual, dynamic matcher,
-    {String reason, dynamic skip}) async {
+    {String? reason, dynamic skip}) async {
   try {
     expect(actual, matcher, reason: reason, skip: skip);
     return true;

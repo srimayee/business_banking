@@ -21,12 +21,16 @@ class CashAccountsPresenter extends Presenter<CashAccountsBloc,
     return CashAccountsScreen(
       viewModel: viewModel,
       navigateToAccountDetail: () {
+
+        
         _navigateToAccountDetail(context);
       },
     );
   }
 
   void _navigateToAccountDetail(BuildContext context) {
-    CFRouterScope.of(context).push(BusinessBankingRouter.accountDetailRoute);
+
+    context.router.push(BusinessBankingRouter.accountDetailRoute);
+    //CFRouterScope.of(context).push(BusinessBankingRouter.accountDetailRoute);
   }
 }

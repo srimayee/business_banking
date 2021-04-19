@@ -10,7 +10,7 @@ import 'package:business_banking/locator.dart';
 class RequestMoneyUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   RequestMoneyUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null), _viewModelCallBack = viewModelCallBack;
@@ -23,11 +23,11 @@ class RequestMoneyUseCase extends UseCase {
           .repository
           .create<RequestMoneyEntity>(newRequestMoneyEntity, _notifySubscribers);
     } else {
-      _scope.subscription = _notifySubscribers;
+      _scope!.subscription = _notifySubscribers;
     }
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, RequestMoneyServiceAdapter());
+        .runServiceAdapter(_scope!, RequestMoneyServiceAdapter());
   }
 
   void _notifySubscribers(entity) {

@@ -9,22 +9,17 @@ import '../../../locator.dart';
 class CashAccountsServiceAdapter extends ServiceAdapter<CashAccountsEntity,
     JsonRequestModel, CashAccountsServiceResponseModel, CashAccountsService> {
   CashAccountsServiceAdapter() : super(CashAccountsService());
-  final bool debugEnabled = false;
 
   @override
   CashAccountsEntity createEntity(
       CashAccountsEntity cashAccountsEntityModelList,
       CashAccountsServiceResponseModel responseModel) {
-    /// Debug JSON Response Log
-    if (debugEnabled) {
-      logger().debug('CashAccountsEntityModelList CreateEntity: ' +
-          responseModel.toString());
-    }
+    
 
     return cashAccountsEntityModelList.merge(
       name: responseModel.name,
       balance: responseModel.balance,
       lastFour: responseModel.lastFour,
-    );
+    ) as CashAccountsEntity;
   }
 }

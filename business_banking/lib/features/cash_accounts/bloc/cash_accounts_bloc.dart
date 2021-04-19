@@ -4,7 +4,7 @@ import 'package:business_banking/features/cash_accounts/api/cash_accounts_servic
 import 'cash_accounts_usecase.dart';
 
 class CashAccountsBloc extends Bloc {
-  CashAccountsUseCase _useCase;
+  late CashAccountsUseCase _useCase;
 
   final cashAccountsViewModelPipe = Pipe<CashAccountsViewModel>();
 
@@ -13,9 +13,11 @@ class CashAccountsBloc extends Bloc {
     cashAccountsViewModelPipe.dispose();
   }
 
-  CashAccountsBloc({CashAccountsService cashAccountsService}) {
+  //CashAccountsBloc({CashAccountsService? cashAccountsService}) {
+    CashAccountsBloc() {
+
     _useCase = CashAccountsUseCase(
-        (viewModel) => cashAccountsViewModelPipe.send(viewModel));
-    cashAccountsViewModelPipe.whenListenedDo(() => _useCase.create());
+        (viewModel) => cashAccountsViewModelPipe.send(viewModel as CashAccountsViewModel));
+    cashAccountsViewModelPipe.whenListenedDo(_useCase.create);
   }
 }

@@ -1,8 +1,8 @@
 import 'package:clean_framework/clean_framework.dart';
 
 class PromosViewModel extends ViewModel {
-  final String imageUrl;
-  final String link;
+  final String? imageUrl;
+  final String? link;
 
   PromosViewModel({
     this.imageUrl,
@@ -15,5 +15,5 @@ class PromosViewModel extends ViewModel {
   String toString() => 'PromosViewModel(imageUrl: $imageUrl, link: $link)';
 
   @override
-  List<Object> get props => [imageUrl, link];
+  List<Object?> get props => [imageUrl, link];
 }

@@ -7,19 +7,19 @@ class ToAccountsDropDown extends StatelessWidget {
   final Key key;
 
   ToAccountsDropDown(
-      { @required this.key,
-        @required this.viewModel,
-        @required this.onChangeSelectedToAccount
-      });
+      {required this.key,
+      required this.viewModel,
+      required this.onChangeSelectedToAccount});
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>> _toMenuItems = buildDropdownMenuItems(viewModel.toAccounts);
+    List<DropdownMenuItem<String>>? _toMenuItems =
+        buildDropdownMenuItems(viewModel.toAccounts);
     return DropdownButton<String>(
       key: key,
       isExpanded: true,
       items: _toMenuItems,
-      onChanged: (String value) {
+      onChanged: (String? value) {
         onChangeSelectedToAccount(value);
       },
       hint: Text('Select a To Account'),
@@ -27,13 +27,13 @@ class ToAccountsDropDown extends StatelessWidget {
     );
   }
 
-  List<DropdownMenuItem<String>> buildDropdownMenuItems(List accounts) {
+  List<DropdownMenuItem<String>>? buildDropdownMenuItems(List? accounts) {
     if (accounts == null) {
       return null;
     }
-    List<DropdownMenuItem<String>> items = List();
+    List<DropdownMenuItem<String>> items = [];
     int itemIndex = 0;
-    for (String account in accounts) {
+    for (String account in accounts as Iterable<String>) {
       itemIndex++;
       items.add(
         DropdownMenuItem(

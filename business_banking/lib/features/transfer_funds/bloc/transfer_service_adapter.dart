@@ -24,7 +24,8 @@ class TransferFundsServiceAdapter extends ServiceAdapter<
   @override
   TransferFundsEntity createEntity(TransferFundsEntity initialEntity,
       TransferFundsResponseModel responseModel) {
-    return initialEntity
-        .merge(errors: <EntityFailure>[], id: responseModel.confirmation);
+    return initialEntity.merge(
+        errors: <EntityFailure>[],
+        id: responseModel.confirmation) as TransferFundsEntity;
   }
 }

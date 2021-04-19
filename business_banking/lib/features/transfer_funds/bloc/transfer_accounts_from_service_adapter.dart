@@ -9,12 +9,14 @@ class TransferFundsAccountsFromServiceAdapter extends ServiceAdapter<
     JsonRequestModel,
     TransferFundsAccountsFromResponseModel,
     TransferFundsAccountsFromService> {
-  TransferFundsAccountsFromServiceAdapter() : super(TransferFundsAccountsFromService());
+  TransferFundsAccountsFromServiceAdapter()
+      : super(TransferFundsAccountsFromService());
 
   @override
-  TransferFundsEntity createEntity(
-      TransferFundsEntity initialEntity,
+  TransferFundsEntity createEntity(TransferFundsEntity initialEntity,
       TransferFundsAccountsFromResponseModel responseModel) {
-    return initialEntity.merge(errors: <EntityFailure>[], fromAccounts: responseModel.fromAccounts);
+    return initialEntity.merge(
+        errors: <EntityFailure>[],
+        fromAccounts: responseModel.fromAccounts) as TransferFundsEntity;
   }
 }

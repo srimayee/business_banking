@@ -15,6 +15,6 @@ class PromoServiceAdapter extends ServiceAdapter<PromosEntity, PromosServiceRequ
     return initialEntity.merge(
       imageUrl: responseModel.imageUrl,
       link: responseModel.externalUrl,
-    );
+    ) as PromosEntity;
   }
 }

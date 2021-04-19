@@ -7,14 +7,14 @@ ExampleLocator locator() => ExampleLocator();
 
 Logger logger() => ExampleLocator().logger;
 
-Future<void> openUrl(url) => ExampleLocator().urlLauncher.launchURL(url);
+Future<void> openUrl(url) => ExampleLocator().urlLauncher!.launchURL(url);
 
 class ExampleLocator implements Locator {
   ExampleLocator._();
 
   factory ExampleLocator() {
-    Locator.instance ??= ExampleLocator._();
-    return Locator.instance;
+    Locator.init(ExampleLocator._());
+    return Locator.getInstance();
   }
 
   @override
@@ -23,10 +23,12 @@ class ExampleLocator implements Locator {
   @override
   Logger logger = ConsoleLogger(LogLevel.verbose);
 
-  UrlLauncher urlLauncher = UrlLauncher();
+  UrlLauncher? urlLauncher = UrlLauncher();
 
   PatchSimpleRestApi api = PatchSimpleRestApi(
       baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
 
   Repository repository = Repository();
+
+  void dispose() => Locator.dispose();
 }

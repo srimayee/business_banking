@@ -7,9 +7,9 @@ class QuickPayEntity extends Entity {
 
   QuickPayEntity(
   {List<EntityFailure> errors = const [],
-    String name,
-    String email,
-    String imageUrl})
+    String? name,
+    String? email,
+    String? imageUrl})
     : name = name ?? 'user name',
       email = email ??  'username@gmail.com',
       imageUrl = imageUrl ?? '',
@@ -20,7 +20,7 @@ class QuickPayEntity extends Entity {
     errors, name, email, imageUrl];
 
   @override
-  merge({errors, String name, String email, String imageUrl}) {
+  merge({errors, String? name, String? email, String? imageUrl}) {
     return QuickPayEntity(
       errors: errors ?? this.errors,
       name: name ?? this.name,

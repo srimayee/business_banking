@@ -4,7 +4,7 @@ import 'package:business_banking/features/quickpay/api/quickpay_service.dart';
 import 'quickpay_usecase.dart';
 
 class QuickPayBloc extends Bloc {
-  QuickPayUseCase _useCase;
+  late QuickPayUseCase _useCase;
 
   final quickPayViewModelPipe = Pipe<QuickPayViewModel>();
 
@@ -13,8 +13,8 @@ class QuickPayBloc extends Bloc {
     quickPayViewModelPipe.dispose();
   }
 
-  QuickPayBloc({QuickPayService quickPayService}) {
-    _useCase = QuickPayUseCase((viewModel) => quickPayViewModelPipe.send(viewModel));
+  QuickPayBloc({QuickPayService? quickPayService}) {
+    _useCase = QuickPayUseCase((viewModel) => quickPayViewModelPipe.send(viewModel as QuickPayViewModel));
     quickPayViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 }

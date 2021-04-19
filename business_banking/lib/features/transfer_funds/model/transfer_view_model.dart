@@ -2,14 +2,14 @@ import 'package:business_banking/features/transfer_funds/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:equatable/equatable.dart';
 
-class TransferFundsViewModel extends Equatable implements ViewModel {
-  final String fromAccount;
-  final String toAccount;
+class TransferFundsViewModel extends ViewModel {
+  final String? fromAccount;
+  final String? toAccount;
   final String amount;
-  final DateTime date;
-  final List<String> fromAccounts;
-  final List<String> toAccounts;
-  final String id;
+  final DateTime? date;
+  final List<String>? fromAccounts;
+  final List<String>? toAccounts;
+  final String? id;
   final serviceStatus;
   final dataStatus;
 
@@ -25,7 +25,7 @@ class TransferFundsViewModel extends Equatable implements ViewModel {
       this.serviceStatus = ServiceStatus.unknown});
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [fromAccount, toAccount, amount, fromAccounts, toAccounts, id, date];
 
   // static DateTime _getLastMidnight() {

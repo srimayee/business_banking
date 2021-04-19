@@ -4,7 +4,7 @@ import 'package:business_banking/features/account_detail/api/account_detail_serv
 import 'account_detail_usecase.dart';
 
 class AccountDetailBloc extends Bloc {
-  AccountDetailUseCase _useCase;
+  late AccountDetailUseCase _useCase;
 
   final accountDetailViewModelPipe = Pipe<AccountDetailViewModel>();
 
@@ -13,8 +13,8 @@ class AccountDetailBloc extends Bloc {
     accountDetailViewModelPipe.dispose();
   }
 
-  AccountDetailBloc({AccountDetailService accountDetailService}) {
-    _useCase = AccountDetailUseCase((viewModel) => accountDetailViewModelPipe.send(viewModel));
+  AccountDetailBloc({AccountDetailService? accountDetailService}) {
+    _useCase = AccountDetailUseCase((viewModel) => accountDetailViewModelPipe.send(viewModel as AccountDetailViewModel));
     accountDetailViewModelPipe.whenListenedDo(() => _useCase.create());
   }
 }

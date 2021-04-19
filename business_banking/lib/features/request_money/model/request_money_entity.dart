@@ -9,11 +9,11 @@ class RequestMoneyEntity extends Entity {
 
   RequestMoneyEntity(
       {List<EntityFailure> errors = const [],
-        String name,
-        String email,
-        String imageUrl,
-        double amount,
-        String memo})
+        String? name,
+        String? email,
+        String? imageUrl,
+        double? amount,
+        String? memo})
       : name = name ?? 'user name',
         email = email ??  'username@gmail.com',
         imageUrl = imageUrl ?? '',
@@ -26,8 +26,8 @@ class RequestMoneyEntity extends Entity {
     errors, name, email, imageUrl, amount, memo];
 
   @override
-  merge({errors, String name, String email, String imageUrl, double amount,
-        String memo}) {
+  merge({errors, String? name, String? email, String? imageUrl, double? amount,
+        String? memo}) {
     return RequestMoneyEntity(
         errors: errors ?? this.errors,
         name: name ?? this.name,

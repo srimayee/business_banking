@@ -6,7 +6,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 
 class TransferConfirmationUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
-  RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   TransferConfirmationUseCase(Function(ViewModel) viewModelCallBack)
       : assert(viewModelCallBack != null),
@@ -18,8 +18,9 @@ class TransferConfirmationUseCase extends UseCase {
       throw StateError('Transfers entity does not exist');
     }
 
-    _scope.subscription = _notifyTransferSubscribers;
-    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    _scope!.subscription = _notifyTransferSubscribers;
+    final entity =
+        ExampleLocator().repository.get<TransferFundsEntity>(_scope!);
     _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
 
@@ -27,7 +28,8 @@ class TransferConfirmationUseCase extends UseCase {
     _viewModelCallBack(buildViewModelForServiceUpdate(entity));
   }
 
-  TransferConfirmationViewModel buildViewModelForServiceUpdate(TransferFundsEntity entity) {
+  TransferConfirmationViewModel buildViewModelForServiceUpdate(
+      TransferFundsEntity entity) {
     if (entity.hasErrors()) {
       return TransferConfirmationViewModel(
           fromAccount: entity.fromAccount,
@@ -45,7 +47,8 @@ class TransferConfirmationUseCase extends UseCase {
     }
   }
 
-  TransferConfirmationViewModel buildViewModelForLocalUpdateWithError(TransferFundsEntity entity) {
+  TransferConfirmationViewModel buildViewModelForLocalUpdateWithError(
+      TransferFundsEntity entity) {
     return TransferConfirmationViewModel(
         fromAccount: entity.fromAccount,
         toAccount: entity.toAccount,
@@ -55,8 +58,11 @@ class TransferConfirmationUseCase extends UseCase {
   }
 
   void clearTransferData() {
-    final entity = ExampleLocator().repository.get<TransferFundsEntity>(_scope);
+    final entity =
+        ExampleLocator().repository.get<TransferFundsEntity>(_scope!);
     final emptyEntity = TransferFundsEntity(fromAccounts: entity.fromAccounts);
-    ExampleLocator().repository.update<TransferFundsEntity>(_scope, emptyEntity);
+    ExampleLocator()
+        .repository
+        .update<TransferFundsEntity>(_scope!, emptyEntity);
   }
 }

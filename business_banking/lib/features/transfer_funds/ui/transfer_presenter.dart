@@ -12,7 +12,7 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   @override
   TransferFundsScreen buildScreen(BuildContext context, TransferFundsBloc bloc,
       TransferFundsViewModel viewModel) {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       if (viewModel.serviceStatus == ServiceStatus.success &&
           viewModel.dataStatus == DataStatus.valid) {
         _navigateToConfirmationScreen(context);
@@ -56,7 +56,7 @@ class TransferFundsPresenter extends Presenter<TransferFundsBloc,
   }
 
   void _onChangeAmount(TransferFundsBloc bloc, String amountString) {
-    double amount = double.tryParse(amountString);
+    double? amount = double.tryParse(amountString);
     if (amountString == '' || (amount != null && amount > 0)) {
       bloc.amountPipe.send(amountString);
     }

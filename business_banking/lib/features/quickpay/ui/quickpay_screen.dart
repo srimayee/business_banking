@@ -9,7 +9,7 @@ class QuickPayScreen extends Screen {
   final VoidCallback navigateToMakePayment;
 
   QuickPayScreen(
-      {@required this.viewModel, @required this.navigateToMakePayment})
+      {required this.viewModel, required this.navigateToMakePayment})
       : assert(() {
     return viewModel != null;
   }());
