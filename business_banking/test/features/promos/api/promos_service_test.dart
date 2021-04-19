@@ -3,6 +3,8 @@ import 'package:business_banking/features/promos/api/promos_service_request_mode
 import 'package:business_banking/features/promos/api/promos_service_response_model.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:clean_framework/clean_framework.dart';
+import 'package:clean_framework/clean_framework_defaults.dart';
 
 void main() {
   test('PromosService success', () async {

@@ -17,12 +17,5 @@ void main() {
     expect(viewModel.props,
         [viewModel.honorific, viewModel.name, viewModel.address]);
   });
-  test('CustomerDetailViewModel initialize with error', () {
-    try {
-      CustomerDetailViewModel(customerEntity: null);
-      expect(false, true);
-    } catch (error) {
-      expect(error != null, true);
-    }
-  });
+
 }

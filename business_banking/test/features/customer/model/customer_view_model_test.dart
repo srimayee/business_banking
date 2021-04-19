@@ -15,12 +15,5 @@ void main() {
 
     expect(viewModel.props, [viewModel.helloString]);
   });
-  test('CustomerViewModel initialize with error', () {
-    try {
-      CustomerViewModel(customerEntity: null);
-      expect(false, true);
-    } catch (error) {
-      expect(error != null, true);
-    }
-  });
+
 }

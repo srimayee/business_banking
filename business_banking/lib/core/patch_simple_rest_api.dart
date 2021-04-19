@@ -107,6 +107,8 @@ class PatchSimpleRestApi extends RestApi {
         case RestMethod.patch:
           response = await _ioClient.patch(uri, body: requestJSON);
           break;
+        case null:
+          break;
       }
 
       return RestResponse<String>(
