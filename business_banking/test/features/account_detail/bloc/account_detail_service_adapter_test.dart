@@ -51,11 +51,5 @@ void main() {
       expect(e != null, true);
     }
   });
-  test('init response model created is null fails', () {
-    try {
-      AccountDetailServiceAdapter().createEntity(AccountDetailEntity(), null);
-    } catch (e) {
-      expect(e != null, true);
-    }
-  });
+
 }
