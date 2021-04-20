@@ -20,7 +20,7 @@ class ViewChartScreen extends Screen {
 
     _bottomSheet() {
       // to avoid multiple insertions
-      if (categoryList.first != 'Show All') {
+      if (categoryList.length > 0 && categoryList.first != 'Show All') {
         // insert
         categoryList.insert(0, 'Show All');
       }
@@ -68,7 +68,7 @@ class ViewChartScreen extends Screen {
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
-        title: Text(viewModel.accountInfo!.accountNickname),
+        title: Text(viewModel.accountInfo?.accountNickname ?? 'Account Nickname'),
         backgroundColor: Colors.green,
       ),
       body: Column(
@@ -95,7 +95,7 @@ class ViewChartScreen extends Screen {
           OutlinedButton(
             child: Text('Select Category'),
             onPressed: () {
-              _scaffoldkey.currentState!.showBottomSheet(
+              _scaffoldkey.currentState?.showBottomSheet(
                 (context) {
                   return _bottomSheet();
                 },

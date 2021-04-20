@@ -29,7 +29,7 @@ class BudgetScreen extends Screen {
                   children: [
                     Expanded(
                       child: Text(
-                        viewModel.accountInfo!.accountNickname,
+                        viewModel.accountInfo?.accountNickname ?? 'Account Nickname',
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
@@ -37,7 +37,7 @@ class BudgetScreen extends Screen {
                       ),
                     ),
                     AutoSizeText(
-                      ' \$' + viewModel.accountInfo!.availableBalance.toString(),
+                      ' \$${viewModel.accountInfo?.availableBalance ?? 0.0}',
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
@@ -54,7 +54,7 @@ class BudgetScreen extends Screen {
                       style: TextStyle(fontSize: 18.0),
                     ),
                     Text(
-                      viewModel.accountInfo!.accountNumber,
+                      viewModel.accountInfo?.accountNumber ?? '-',
                       style: TextStyle(fontSize: 18.0),
                     )
                   ],
