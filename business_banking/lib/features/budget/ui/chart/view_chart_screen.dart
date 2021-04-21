@@ -12,52 +12,54 @@ class ViewChartScreen extends Screen {
 
   ViewChartScreen({required this.viewModel, required this.actions});
 
-  @override
-  Widget build(BuildContext context) {
+  bottomSheet() {
     List<dynamic> categoryList = viewModel.allTransactions
         .map((array) => array.category)
         .toSet()
         .toList();
 
-    _bottomSheet() {
-      // to avoid multiple insertions
-      if (categoryList.length > 0 && categoryList.first != 'Show All') {
-        // insert
-        categoryList.insert(0, 'Show All');
-      }
-      return BottomSheet(
-        onClosing: () {},
-        builder: (context) {
-          return Container(
-            height: categoryList.length * 70.0,
-            color: Colors.lightGreen,
-            child: ListView(
-              children: <Widget>[
-                ButtonBar(
-                  children: <Widget>[CloseButton()],
-                ),
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: categoryList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return TextButton(
-                      onPressed: () => actions.selectCategory(categoryList[index], context),
-                      child: Text(
-                        categoryList[index],
-                        style: TextStyle(fontSize: 14.0,
-                        color: Colors.white),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      );
+    // to avoid multiple insertions
+    if (categoryList.length > 0 && categoryList.first != 'Show All') {
+      // insert
+      categoryList.insert(0, 'Show All');
     }
+    return BottomSheet(
+      onClosing: () {},
+      builder: (context) {
+        return Container(
+          height: categoryList.length * 70.0,
+          color: Colors.lightGreen,
+          child: ListView(
+            children: <Widget>[
+              ButtonBar(
+                children: <Widget>[CloseButton()],
+              ),
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: categoryList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TextButton(
+                    onPressed: () => {},
 
+                    // onPressed: () =>
+                    //     actions.selectCategory(categoryList[index], context),
+                    child: Text(
+                      categoryList[index],
+                      style: TextStyle(fontSize: 14.0, color: Colors.white),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
@@ -65,7 +67,7 @@ class ViewChartScreen extends Screen {
             Text(viewModel.accountInfo?.accountNickname ?? 'Account Nickname'),
         backgroundColor: Colors.green,
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             padding:
@@ -91,7 +93,7 @@ class ViewChartScreen extends Screen {
             onPressed: () {
               _scaffoldkey.currentState?.showBottomSheet(
                 (context) {
-                  return _bottomSheet();
+                  return bottomSheet();
                 },
               );
             },

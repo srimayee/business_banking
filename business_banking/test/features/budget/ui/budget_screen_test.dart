@@ -11,22 +11,28 @@ import 'package:mockito/mockito.dart';
 class MockBudgetFeatureActions extends Mock implements BudgetFeatureActions {}
 
 void main() {
-  testWidgets('Budget Screen pumped with test data', (tester) async {
-    final mockActions = MockBudgetFeatureActions();
-    final viewModel = BudgetViewModel(
-        accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
-        allTransactions: [],
-        chartData: []);
-    final testWidget = MaterialApp(
+  group('Budget Screen tests', () {
+    testWidgets('pumping BudgetScreen with test data', (tester) async {
+      final mockActions = MockBudgetFeatureActions();
+      final viewModel = BudgetViewModel(
+          accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
+          allTransactions: [],
+          chartData: []);
+
+      final testWidget = MaterialApp(
         home: BudgetScreen(
-      viewModel: viewModel,
-      actions: mockActions,
-    ));
-    await tester.pumpWidget(testWidget);
-    await tester.pumpAndSettle();
-    expect(find.byType(Text), findsNWidgets(5));
-    expect(find.byType(OutlinedButton), findsNWidgets(1));
-    expect(find.text("View Chart"), findsOneWidget);
-    await tester.tap(find.byType(OutlinedButton));
+          viewModel: viewModel,
+          actions: mockActions,
+        ),
+      );
+
+      await tester.pumpWidget(testWidget);
+      await tester.pumpAndSettle();
+      expect(find.byType(Text), findsNWidgets(5));
+      expect(find.text("View Chart"), findsOneWidget);
+      expect(find.text("1234567890"), findsOneWidget);
+      await tester.tap(find.byType(OutlinedButton));
+      verify(mockActions.pushViewChart(any)).called(1);
+    });
   });
 }
