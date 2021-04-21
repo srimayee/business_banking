@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:business_banking/features/budget/ui/budget_feature_actions.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class BudgetScreen extends Screen {
   final BudgetViewModel viewModel;
-  final VoidCallback viewBudgetChartHandler;
+  final BudgetFeatureActions actions;
 
   BudgetScreen(
-      {required this.viewModel, required this.viewBudgetChartHandler});
+      {required this.viewModel, required this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +72,7 @@ class BudgetScreen extends Screen {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    viewBudgetChartHandler();
-                  },
+                  onPressed: () => actions.pushViewChart(context),
                   child: Text(
                     'View Chart',
                     style: TextStyle(color: Colors.black54),
