@@ -20,8 +20,8 @@ class BudgetEntity extends Entity {
         chartData = chartData,
         super(errors: errors);
 
-  // @override
-  // List<Object> get props => [errors, accountInfo, allTransactions];
+  @override
+  List<Object> get props => [errors, accountInfo!, allTransactions!, chartData];
 
   @override
   BudgetEntity merge(
