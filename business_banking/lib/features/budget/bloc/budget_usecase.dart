@@ -55,7 +55,7 @@ class BudgetUsecase extends UseCase {
   }
 
   Future<BudgetEntity> updateViewModelWithChartData(BudgetEntity entity) async {
-    final _chartData = _createSampleData(entity);
+    final _chartData = _createChartData(entity);
 
     //updating our entity
     final updatedEntity = entity.merge(chartData: _chartData);
@@ -64,7 +64,7 @@ class BudgetUsecase extends UseCase {
     return updatedEntity;
   }
 
-  static Color segmentColorPalette(int index) {
+  static Color _segmentColorPalette(int index) {
     switch (index) {
       case 0:
         return MaterialPalette.red.shadeDefault.lighter;
@@ -88,7 +88,7 @@ class BudgetUsecase extends UseCase {
   }
 
   /// Create one series with sample hard coded data.
-  static List<Series<ChartDataModel, int>> _createSampleData(
+  static List<Series<ChartDataModel, int>> _createChartData(
       BudgetEntity entity) {
     if (entity.allTransactions!.length == 0) {
       return [];
@@ -113,7 +113,7 @@ class BudgetUsecase extends UseCase {
           .reduce((a, b) => a + b);
       // add it to our data source
       data.add(
-          ChartDataModel(i, totalAmount, category, segmentColorPalette(i)));
+          ChartDataModel(i, totalAmount, category, _segmentColorPalette(i)));
     }
 
     return [

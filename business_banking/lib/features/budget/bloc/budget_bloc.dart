@@ -7,7 +7,7 @@ import 'package:clean_framework/clean_framework.dart';
 
 class BudgetBloc extends Bloc {
   late BudgetUsecase useCase;
-  late ListTransactionsUseCase _listTransactionsUseCase;
+  late ListTransactionsUseCase listTransactionsUseCase;
 
   final budgetViewModelPipe = Pipe<BudgetViewModel>();
   final listTransactionsViewModelPipe = Pipe<ListTransactionsViewModel>();
@@ -24,16 +24,16 @@ class BudgetBloc extends Bloc {
         (viewModel) => budgetViewModelPipe.send(viewModel as BudgetViewModel));
     budgetViewModelPipe.whenListenedDo(() => useCase.create());
 
-    _listTransactionsUseCase = ListTransactionsUseCase((viewModel) =>
+    listTransactionsUseCase = ListTransactionsUseCase((viewModel) =>
         listTransactionsViewModelPipe
             .send(viewModel as ListTransactionsViewModel));
     listTransactionsViewModelPipe
-        .whenListenedDo(() => _listTransactionsUseCase.create());
+        .whenListenedDo(() => listTransactionsUseCase.create());
 
     chosenCategoryPipe.receive.listen(_didApplyFilter);
   }
 
   void _didApplyFilter(String value) {
-    _listTransactionsUseCase.applyFilter(value);
+    listTransactionsUseCase.applyFilter(value);
   }
 }

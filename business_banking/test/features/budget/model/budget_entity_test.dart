@@ -7,20 +7,32 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('BudgetViewModel gets initialized', () async {
-    final _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
+  PostedTransactions _postedTxns;
+  BudgetEntity entity;
+
+  setUp(() {
+    //dummy data
+    _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
         'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');
 
-    final entity = BudgetEntity(
+    entity = BudgetEntity(
         accountInfo: AccountInfo('1234567890', 1.00, 'Account Nickname'),
         allTransactions: [_postedTxns]);
+  });
 
+  tearDown(() {
+    entity = null;
+  });
+
+  test('initializing BudgetEntity', () async {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
       entity.allTransactions,
       entity.chartData
     ]);
+
+    //testing attributes
     expect(entity.stringify, true);
     expect(entity.accountInfo?.accountNickname, 'Account Nickname');
     expect(entity.accountInfo?.availableBalance, 1.0);
@@ -38,14 +50,7 @@ void main() {
         entity.filterWith('Wholesale Clubs'), isA<List<PostedTransactions>>());
   });
 
-  test('ENTITY TEST: On Success BudgetEntity should be merged with error', () async {
-    final _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
-        'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');
-
-    final entity = BudgetEntity(
-        accountInfo: AccountInfo('1234567890', 1.00, 'Account Nickname'),
-        allTransactions: [_postedTxns]);
-
+  test('Failed initializing BudgetEntity!', () async {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
@@ -53,6 +58,7 @@ void main() {
       entity.chartData
     ]);
 
+    //testing merge method
     final merged = entity.merge(errors: [GeneralEntityFailure()]);
     expect(merged.hasErrors(), true);
     expect(merged.errors.first, isA<GeneralEntityFailure>());
