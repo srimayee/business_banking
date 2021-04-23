@@ -14,8 +14,7 @@ class BudgetUsecase extends UseCase {
   RepositoryScope? _scope;
 
   BudgetUsecase(Function(ViewModel) viewModelCallBack)
-      : assert(viewModelCallBack != null),
-        _viewModelCallBack = viewModelCallBack;
+      : _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<BudgetEntity>();
