@@ -38,7 +38,7 @@ void main() {
         entity.filterWith('Wholesale Clubs'), isA<List<PostedTransactions>>());
   });
 
-  test('ENTITY TEST: On Success NewsEntity should be merged with error', () async {
+  test('ENTITY TEST: On Success BudgetEntity should be merged with error', () async {
     final _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
         'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');
 
