@@ -40,10 +40,8 @@ class ViewChartScreen extends Screen {
                 itemCount: categoryList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return TextButton(
-                    onPressed: () => {},
-
-                    // onPressed: () =>
-                    //     actions.selectCategory(categoryList[index], context),
+                    onPressed: () =>
+                        actions.selectCategory(categoryList[index], context),
                     child: Text(
                       categoryList[index],
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
