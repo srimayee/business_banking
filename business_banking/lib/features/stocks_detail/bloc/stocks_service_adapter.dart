@@ -1,6 +1,6 @@
-import 'package:business_banking/features/stocks/api/stocks_service.dart';
-import 'package:business_banking/features/stocks/api/stocks_service_response_model.dart';
-import 'package:business_banking/features/stocks/model/stocks_entity.dart';
+import 'package:business_banking/features/stocks_detail/api/stocks_service.dart';
+import 'package:business_banking/features/stocks_detail/api/stocks_service_response_model.dart';
+import 'package:business_banking/features/stocks_detail/model/stocks_entity.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
