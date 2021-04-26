@@ -1,32 +1,23 @@
+import 'package:business_banking/features/stocks/api/stocks_service.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class StocksEntity extends Entity {
-  final List<String> stocks;
-  final double totalValue;
+  final List<Map<String, dynamic>> stocks;
+  
 
-  StocksEntity({List<String>? stocks, this.totalValue = 0.0})
+  StocksEntity(
+      {List<EntityFailure> errors = const [],
+      List<Map<String, dynamic>>? stocks})
       : this.stocks = stocks ?? [];
 
   @override
-  List<Object> get props => [errors, stocks, totalValue];
- 
-  // final String company;
-  // final String symbol;
-  // final double atClose;
-  // final int shares;
-  // final double value;
+  List<Object> get props => [errors, stocks];
 
-  // StocksEntity(
-  //     {List<EntityFailure> errors = const [],
-  //     String? company,
-  //     String? symbol,
-  //     this.atClose = 0.0,
-  //     this.shares = 0,
-  //     this.value = 0.0})
-  //     : this.company = company ?? "",
-  //       this.symbol = symbol ?? "",
-  //       super(errors: errors);
-
-  // @override
-  // List<Object> get props => [errors, company, symbol, atClose, shares, value];
+  @override
+  StocksEntity merge({errors, List<Map<String, dynamic>>? stocks}) {
+    return StocksEntity(
+      errors: errors ?? this.errors,
+      stocks: stocks ?? this.stocks,
+    );
+  }
 }
