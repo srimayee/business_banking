@@ -1,8 +1,8 @@
-import 'package:business_banking/features/budget/model/list_transactions_view_model.dart';
+import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:flutter/material.dart';
 
 class TransactionItemWidget extends StatelessWidget {
-  final ListTransactionsViewModel viewModel;
+  final BudgetViewModel viewModel;
   final rowIndex;
 
   const TransactionItemWidget(

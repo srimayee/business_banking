@@ -49,7 +49,8 @@ main() {
     useCase.create();
   });
 
-  test('Merging BudgetEntity with chart data after updateViewModelWithChartData',
+  test(
+      'Merging BudgetEntity with chart data after updateViewModelWithChartData',
       () async {
     final _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
         'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');

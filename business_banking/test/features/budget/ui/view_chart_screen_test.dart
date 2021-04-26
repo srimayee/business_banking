@@ -39,10 +39,12 @@ void main() {
           home: ViewChartScreen(
         viewModel: viewModel,
         actions: mockActions,
-      ));
+      ),
+      );
+      // await Future.delayed(Duration(milliseconds: 200));
       await tester.pumpWidget(testWidget);
       await tester.pumpAndSettle();
-      // expect(find.text("Select Category"), findsOneWidget);
+      expect(find.text("Select Category"), findsOneWidget);
     });
   });
 }

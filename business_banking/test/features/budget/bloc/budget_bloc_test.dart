@@ -2,10 +2,8 @@
 
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
 import 'package:business_banking/features/budget/bloc/budget_usecase.dart';
-import 'package:business_banking/features/budget/bloc/list_transactions_usecase.dart';
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
-import 'package:business_banking/features/budget/model/list_transactions_view_model.dart';
 import 'package:business_banking/features/budget/model/posted_transactions.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -42,14 +40,6 @@ main() {
         bloc.budgetViewModelPipe.send(viewModel as BudgetViewModel));
     bloc.budgetViewModelPipe
         .whenListenedDo(() => bloc.budgetViewModelPipe.send(viewModel));
-
-    //initializing ListTransactionsUseCase
-    bloc.listTransactionsUseCase = ListTransactionsUseCase((viewModel) => bloc
-        .listTransactionsViewModelPipe
-        .send(viewModel as ListTransactionsViewModel));
-    bloc.listTransactionsViewModelPipe.whenListenedDo(() => bloc
-        .listTransactionsViewModelPipe
-        .send(ListTransactionsViewModel(filteredTransactions: [_posted])));
   });
 
   tearDown(() {
@@ -64,9 +54,6 @@ main() {
       expect(model, isA<BudgetViewModel>());
       expect(model.accountInfo, isA<AccountInfo>());
       expect(model.allTransactions, isA<List<PostedTransactions>>());
-    }));
-    bloc.listTransactionsViewModelPipe.receive.listen(expectAsync1((model) {
-      expect(model, isA<ListTransactionsViewModel>());
     }));
   });
 }

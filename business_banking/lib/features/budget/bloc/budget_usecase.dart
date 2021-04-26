@@ -42,12 +42,14 @@ class BudgetUsecase extends UseCase {
         _viewModelCallBack(BudgetViewModel(
             accountInfo: updatedEntity.accountInfo,
             allTransactions: updatedEntity.allTransactions!,
+            filteredTransactions: updatedEntity.filteredTransactions!,
             serviceStatus: TransactionsServiceStatus.fail,
             chartData: []));
       } else {
         _viewModelCallBack(BudgetViewModel(
             accountInfo: updatedEntity.accountInfo,
             allTransactions: updatedEntity.allTransactions!,
+            filteredTransactions: updatedEntity.filteredTransactions!,
             serviceStatus: TransactionsServiceStatus.success,
             chartData: updatedEntity.chartData));
       }
@@ -58,10 +60,27 @@ class BudgetUsecase extends UseCase {
     final _chartData = _createChartData(entity);
 
     //updating our entity
-    final updatedEntity = entity.merge(chartData: _chartData);
+    final updatedEntity = entity.merge(
+        chartData: _chartData, filteredTransactions: entity.allTransactions);
+    ExampleLocator().repository.update<BudgetEntity>(_scope!, updatedEntity);
 
     //returning updated entity
     return updatedEntity;
+  }
+
+  void applyFilter(String value) async {
+    final updatedEntity =
+        ExampleLocator().repository.get<BudgetEntity>(_scope!);
+
+    final filteredTransactions = updatedEntity.filterWith(value);
+    if (filteredTransactions != null) {
+      _viewModelCallBack(BudgetViewModel(
+          accountInfo: updatedEntity.accountInfo,
+          allTransactions: updatedEntity.allTransactions!,
+          filteredTransactions: filteredTransactions,
+          serviceStatus: TransactionsServiceStatus.success,
+          chartData: updatedEntity.chartData));
+    }
   }
 
   static Color _segmentColorPalette(int index) {
@@ -125,11 +144,11 @@ class BudgetUsecase extends UseCase {
         data: data,
         // Set a label accessor to control the text of the arc label.
         labelAccessorFn: (ChartDataModel row, _) {
-            String catCode = row.segmentLabel;
-            if (catCode.length > 8) {
-              catCode = catCode.substring(0, 8);
-            }
-            return '$catCode: \$${row.segmentTotal}';
+          String catCode = row.segmentLabel;
+          if (catCode.length > 8) {
+            catCode = catCode.substring(0, 8);
+          }
+          return '$catCode: \$${row.segmentTotal}';
         },
       )
     ];
