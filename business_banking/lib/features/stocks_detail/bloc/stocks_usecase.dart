@@ -1,5 +1,5 @@
 import 'package:business_banking/features/stocks_detail/model/stocks_entity.dart';
-import 'package:business_banking/features/stocks_detail/model/stocks_view_model.dart';
+import 'package:business_banking/features/stocks_detail/model/stocks_portfolio_view_model.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 
@@ -24,7 +24,7 @@ class StocksUseCase extends UseCase {
     _viewModelCallback(buildViewModel(entity));
   }
 
-  StocksViewModel buildViewModel(StocksEntity stocksEntity) {
-    return StocksViewModel(stocksList: stocksEntity.stocks);
+  StocksPortfolioViewModel buildViewModel(StocksEntity stocksEntity) {
+    return StocksPortfolioViewModel(stocksList: stocksEntity.stocks);
   }
 }
