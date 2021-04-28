@@ -21,7 +21,7 @@ class ViewChartPresenter
   @override
   Stream<BudgetViewModel> getViewModelStream(BudgetBloc bloc) {
     // implement getViewModelStream
-    return bloc.budgetViewModelPipe.receive;
+    return bloc.budgetChartViewModelPipe.receive;
   }
 
   @override

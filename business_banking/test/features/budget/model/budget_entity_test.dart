@@ -7,24 +7,32 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  PostedTransactions _postedTxns;
   BudgetEntity entity;
 
   setUp(() {
     //dummy data
-    _postedTxns = PostedTransactions('2021-04-04T19:00:03Z',
-        'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');
-
     entity = BudgetEntity(
-        accountInfo: AccountInfo('1234567890', 1.00, 'Account Nickname'),
-        allTransactions: [_postedTxns]);
+        accountInfo: AccountInfo(
+          '1234567890',
+          1.00,
+          'Account Nickname',
+        ),
+        allTransactions: [
+          PostedTransactions(
+            '2021-04-04T19:00:03Z',
+            'SUNRISE MINI MART',
+            2.00,
+            'Wholesale Clubs',
+            'xxxx-xxxx-xxxx-6917',
+          )
+        ]);
   });
 
   tearDown(() {
     entity = null;
   });
 
-  test('initializing BudgetEntity', () async {
+  test('testing BudgetEntity attributes', () async {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
@@ -44,13 +52,9 @@ void main() {
     expect(entity.allTransactions?.first?.debitAmount, 2.0);
     expect(entity.allTransactions?.first?.category, 'Wholesale Clubs');
     expect(entity.allTransactions?.first?.cardNumber, 'xxxx-xxxx-xxxx-6917');
-    final merged = entity.merge(errors: null);
-    expect(merged.errors, []);
-    expect(
-        entity.filterWith('Wholesale Clubs'), isA<List<PostedTransactions>>());
   });
 
-  test('Failed initializing BudgetEntity!', () async {
+  test('testing entity init failure', () async {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
@@ -62,5 +66,12 @@ void main() {
     final merged = entity.merge(errors: [GeneralEntityFailure()]);
     expect(merged.hasErrors(), true);
     expect(merged.errors.first, isA<GeneralEntityFailure>());
+  });
+
+  test('testing filter method', () async {
+    //testing merge method
+    final filteredItems = entity.filterWith('Wholesale Clubs');
+    expect(filteredItems, isA<List<PostedTransactions>>());
+    expect(filteredItems.length, 1);
   });
 }

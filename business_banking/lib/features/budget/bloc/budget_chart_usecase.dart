@@ -1,4 +1,3 @@
-import 'package:business_banking/features/budget/bloc/budget_service_adapter.dart';
 import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/model/chart_data_model.dart';
@@ -8,37 +7,30 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class BudgetUsecase extends UseCase {
+class BudgetChartUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
   RepositoryScope? _scope;
 
-  BudgetUsecase(Function(ViewModel) viewModelCallBack)
+  BudgetChartUseCase(Function(ViewModel) viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<BudgetEntity>();
-    if (_scope == null) {
-      final newEntity = BudgetEntity();
-      _scope = ExampleLocator()
-          .repository
-          .create<BudgetEntity>(newEntity, _notifySubscribers);
-    } else {
+    if (_scope != null) {
       _scope!.subscription = _notifySubscribers;
+      final entity = ExampleLocator().repository.get<BudgetEntity>(_scope!);
+      _buildViewModelWithChart(entity);
     }
-
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope!, BudgetServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
-    _buildViewModelForServiceUpdate(entity);
+    _buildViewModelWithChart(entity);
   }
 
-  _buildViewModelForServiceUpdate(BudgetEntity entity) async {
+  _buildViewModelWithChart(BudgetEntity entity) async {
     updateViewModelWithChartData(entity).then((updatedEntity) {
-      if (entity.hasErrors()) {
+      if (updatedEntity.hasErrors()) {
         _viewModelCallBack(BudgetViewModel(
             accountInfo: updatedEntity.accountInfo,
             allTransactions: updatedEntity.allTransactions!,

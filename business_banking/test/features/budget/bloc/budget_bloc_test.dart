@@ -1,59 +1,54 @@
 // @dart=2.9
 
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
-import 'package:business_banking/features/budget/bloc/budget_usecase.dart';
+import 'package:business_banking/features/budget/bloc/budget_card_usecase.dart';
+import 'package:business_banking/features/budget/bloc/budget_chart_usecase.dart';
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
-import 'package:business_banking/features/budget/model/posted_transactions.dart';
+import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockBudgetCardUseCase extends Mock implements BudgetCardUseCase {}
+
+class MockBudgetChartUseCase extends Mock implements BudgetChartUseCase {}
 
 main() {
   BudgetBloc bloc;
-  PostedTransactions _posted;
-  BudgetViewModel viewModel;
-
+  MockBudgetCardUseCase mockBudgetCardUseCase;
+  MockBudgetChartUseCase mockBudgetChartUseCase;
   setUp(() {
-    //dummy data
-    _posted = PostedTransactions(
-      '2021-04-04T19:00:03Z',
-      'SUNRISE MINI MART',
-      2.00,
-      'Wholesale Clubs',
-      'xxxx-xxxx-xxxx-6917',
-    );
-
-    viewModel = BudgetViewModel(
-        accountInfo: AccountInfo(
-          '1234567890',
-          1.00,
-          'Account Nickname',
-        ),
-        allTransactions: [
-          _posted,
-        ],
-        chartData: [],
-        serviceStatus: TransactionsServiceStatus.success);
-
-    bloc = BudgetBloc();
-    //initializing BudgetUsecase
-    bloc.useCase = BudgetUsecase((viewModel) =>
-        bloc.budgetViewModelPipe.send(viewModel as BudgetViewModel));
-    bloc.budgetViewModelPipe
-        .whenListenedDo(() => bloc.budgetViewModelPipe.send(viewModel));
+    mockBudgetCardUseCase = MockBudgetCardUseCase();
+    mockBudgetChartUseCase = MockBudgetChartUseCase();
+    bloc = BudgetBloc(
+        budgetCardUseCase: mockBudgetCardUseCase,
+        budgetChartUseCase: mockBudgetChartUseCase);
   });
 
   tearDown(() {
     bloc.dispose();
-    viewModel = null;
   });
 
-  test(
-      'block sends the BudgetViewModel to subscribed presenters when listened.',
-      () {
-    bloc.budgetViewModelPipe.receive.listen(expectAsync1((model) {
-      expect(model, isA<BudgetViewModel>());
-      expect(model.accountInfo, isA<AccountInfo>());
-      expect(model.allTransactions, isA<List<PostedTransactions>>());
-    }));
+  group('', () {
+    test('budgetCardViewModelPipe streams out BudgetViewModel to listeners.',
+        () {
+      bloc.budgetCardViewModelPipe.receive.listen((model) {
+        verify(mockBudgetCardUseCase.create()).called(1);
+      });
+    });
+
+    test('budgetChartViewModelPipe streams out BudgetViewModel to listeners.',
+        () {
+      bloc.budgetChartViewModelPipe.receive.listen((model) {
+        verify(mockBudgetCardUseCase.create()).called(1);
+      });
+    });
+
+    test('chosenCategoryPipe streams out BudgetViewModel to listeners.', () {
+      bloc.chosenCategoryPipe.send('gas');
+      bloc.budgetChartViewModelPipe.receive.listen((model) {
+        verify(mockBudgetCardUseCase.create()).called(1);
+      });
+    });
   });
 }
