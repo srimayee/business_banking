@@ -10,7 +10,12 @@ class StocksListPresenter
   @override
   StocksListScreen buildScreen(
       BuildContext context, StocksBloc bloc, StocksListViewModel viewModel) {
-    return StocksListScreen(viewModel: viewModel);
+    return StocksListScreen(
+      viewModel: viewModel,
+      onAddDeleteTapped: () {
+        _onAddDeleteTapped(bloc);
+      },
+    );
   }
 
   @override
@@ -23,5 +28,9 @@ class StocksListPresenter
     return Center(
       child: CircularProgressIndicator(),
     );
+  }
+
+  void _onAddDeleteTapped(StocksBloc bloc) {
+    bloc.deleteStockPipe.send(0);
   }
 }

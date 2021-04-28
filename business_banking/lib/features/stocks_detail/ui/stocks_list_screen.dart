@@ -4,15 +4,27 @@ import 'package:flutter/material.dart';
 
 class StocksListScreen extends Screen {
   final StocksListViewModel viewModel;
+  final Function onAddDeleteTapped;
 
-  const StocksListScreen({Key? key, required this.viewModel}) : super(key: key);
+  const StocksListScreen(
+      {Key? key, required this.viewModel, required this.onAddDeleteTapped})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green, title: Text('Stocks')),
-      body: 
-      ListView.builder(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text('Stocks'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                onAddDeleteTapped();
+              },
+              child: Text('Add/Delete'))
+        ],
+      ),
+      body: ListView.builder(
           itemCount: viewModel.stocksList.length,
           itemBuilder: (BuildContext context, int index) {
             return StockTile(stock: viewModel.stocksList[index]);

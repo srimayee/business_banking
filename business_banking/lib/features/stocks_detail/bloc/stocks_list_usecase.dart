@@ -3,20 +3,22 @@ import 'package:business_banking/features/stocks_detail/model/stocks_entity.dart
 import 'package:business_banking/features/stocks_detail/model/stocks_list_view_model.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
+import 'package:clean_framework/clean_framework_defaults.dart';
 
 class StocksListUseCase extends UseCase {
-  late final ViewModelCallback<ViewModel> _viewModelCallback;
-  StocksListUseCase(ViewModelCallback<ViewModel> viewModelCallback)
+  Function(ViewModel) _viewModelCallback;
+  StocksListUseCase(Function(ViewModel) viewModelCallback)
       : _viewModelCallback = viewModelCallback;
+  late RepositoryScope _scope;
 
   void create() async {
-    final scope = ExampleLocator()
+    _scope = ExampleLocator()
         .repository
         .create<StocksEntity>(StocksEntity(), _notifySubscribers);
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(scope, StocksServiceAdapter());
+        .runServiceAdapter(_scope, StocksServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -25,5 +27,10 @@ class StocksListUseCase extends UseCase {
 
   StocksListViewModel buildViewModel(StocksEntity stocksEntity) {
     return StocksListViewModel(stocksList: stocksEntity.stocks);
+  }
+
+  void deleteStock(int index) {
+    final entity = ExampleLocator().repository.get<StocksEntity>(_scope);
+    entity.deleteStockAtIndex(index);
   }
 }

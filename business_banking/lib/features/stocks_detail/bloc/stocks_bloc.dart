@@ -10,10 +10,13 @@ class StocksBloc extends Bloc {
   late StocksListUseCase _stocksListUseCase;
   final stocksPortfolioViewModelPipe = Pipe<StocksPortfolioViewModel>();
   final stocksListViewModelPipe = Pipe<StocksListViewModel>();
+  final deleteStockPipe = Pipe<int>();
 
   @override
   void dispose() {
     stocksPortfolioViewModelPipe.dispose();
+    stocksListViewModelPipe.dispose();
+    deleteStockPipe.dispose();
   }
 
   StocksBloc({StocksService? stocksService}) {
@@ -24,5 +27,11 @@ class StocksBloc extends Bloc {
     _stocksListUseCase = StocksListUseCase((viewModel) =>
         stocksListViewModelPipe.send(viewModel as StocksListViewModel));
     stocksListViewModelPipe.whenListenedDo(() => _stocksListUseCase.create());
+
+    deleteStockPipe.receive.listen(_deleteStock);
+  }
+
+  void _deleteStock(int index) {
+    _stocksListUseCase.deleteStock(index);
   }
 }
