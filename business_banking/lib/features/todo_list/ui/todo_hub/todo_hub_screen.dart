@@ -1,19 +1,18 @@
-import 'package:business_banking/features/todo/model/todo_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import '../../model/todo_list_view_model.dart';
 
-class TodoScreen extends Screen {
-  final TodoViewModel viewModel;
+class TodoHubScreen extends Screen {
+  final TodoListViewModel viewModel;
   final VoidCallback navigateToTodoList;
 
-  TodoScreen({required this.viewModel, required this.navigateToTodoList})
+  TodoHubScreen({required this.viewModel, required this.navigateToTodoList})
       : assert(() {
           return viewModel != null;
         }());
 
   @override
   Widget build(BuildContext context) {
-    //print(viewModel.count);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -37,7 +36,7 @@ class TodoHubCard extends StatelessWidget {
     required this.viewModel,
   }) : super(key: key);
 
-  final TodoViewModel viewModel;
+  final TodoListViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +65,7 @@ class TodoHubCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        viewModel.numberOfTodoTask.toString(),
+                        viewModel.allTodoTasks.length.toString(),
                         style: TextStyle(
                           fontSize: 20.0,
                         ),

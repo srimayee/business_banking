@@ -1,11 +1,10 @@
-import 'package:business_banking/features/todo/bloc/todo_bloc.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import '../../bloc/todo_list_bloc.dart';
+import 'todo_hub_presenter.dart';
 
-import 'todo_presenter.dart';
-
-class TodoWidget extends StatelessWidget {
+class TodoHubWidget extends StatelessWidget {
   final bool debugEnabled = false;
 
   @override
@@ -14,9 +13,9 @@ class TodoWidget extends StatelessWidget {
       logger().debug("Widget Built");
     }
 
-    return BlocProvider<TodoBloc>(
-      create: (_) => TodoBloc(),
-      child: TodoPresenter(),
+    return BlocProvider<TodoListBloc>(
+      create: (_) => TodoListBloc(),
+      child: TodoHubPresenter(),
     );
   }
 }
