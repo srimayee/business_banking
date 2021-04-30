@@ -1,5 +1,6 @@
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
+import 'package:business_banking/features/budget/ui/budget_feature_actions.dart';
 import 'package:business_banking/features/budget/ui/chart/view_chart_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -10,18 +11,17 @@ class ViewChartPresenter
   ViewChartScreen buildScreen(
       BuildContext context, BudgetBloc bloc, BudgetViewModel viewModel) {
     // implement buildScreen
+    final myActions = BudgetFeatureActions(bloc: bloc);
     return ViewChartScreen(
       viewModel: viewModel,
-      didSelectCategory: (value) {
-        _sendCategoryToPipe(bloc, value);
-      },
+      actions: myActions,
     );
   }
 
   @override
   Stream<BudgetViewModel> getViewModelStream(BudgetBloc bloc) {
     // implement getViewModelStream
-    return bloc.budgetViewModelPipe.receive;
+    return bloc.budgetChartViewModelPipe.receive;
   }
 
   @override
@@ -29,9 +29,5 @@ class ViewChartPresenter
     return Center(
       child: CircularProgressIndicator(),
     );
-  }
-
-  void _sendCategoryToPipe(BudgetBloc bloc, String value) {
-    bloc.chosenCategoryPipe.send(value);
   }
 }

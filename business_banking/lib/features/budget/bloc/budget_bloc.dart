@@ -1,39 +1,54 @@
 import 'package:business_banking/features/budget/api/transactions_service.dart';
-import 'package:business_banking/features/budget/bloc/budget_usecase.dart';
-import 'package:business_banking/features/budget/bloc/list_transactions_usecase.dart';
+import 'package:business_banking/features/budget/bloc/accounts_card_usecase.dart';
+import 'package:business_banking/features/budget/bloc/transactions_usecase.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
-import 'package:business_banking/features/budget/model/list_transactions_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class BudgetBloc extends Bloc {
-  late BudgetUsecase _useCase;
-  late ListTransactionsUseCase _listTransactionsUseCase;
-
-  final budgetViewModelPipe = Pipe<BudgetViewModel>();
-  final listTransactionsViewModelPipe = Pipe<ListTransactionsViewModel>();
+  final budgetCardViewModelPipe = Pipe<BudgetViewModel>();
+  final budgetChartViewModelPipe = Pipe<BudgetViewModel>();
   final chosenCategoryPipe = Pipe<String>();
+  final selectedRowIndexPipe = Pipe<int>();
+
+  late AccountsCardUseCase _budgetCardUseCase;
+  late TransactionsUseCase _budgetChartUseCase;
 
   @override
   void dispose() {
-    budgetViewModelPipe.dispose();
-    listTransactionsViewModelPipe.dispose();
+    budgetCardViewModelPipe.dispose();
+    budgetChartViewModelPipe.dispose();
+    chosenCategoryPipe.dispose();
+    selectedRowIndexPipe.dispose();
   }
 
-  BudgetBloc({TransactionsService? transactionsService}) {
-    _useCase = BudgetUsecase(
-        (viewModel) => budgetViewModelPipe.send(viewModel as BudgetViewModel));
-    budgetViewModelPipe.whenListenedDo(() => _useCase.create());
+  BudgetBloc({
+    AccountsCardUseCase? budgetCardUseCase,
+    TransactionsUseCase? budgetChartUseCase,
+  }) {
+    budgetCardUseCase = budgetCardUseCase ??
+        AccountsCardUseCase((viewModel) =>
+            budgetCardViewModelPipe.send(viewModel as BudgetViewModel));
+    budgetCardViewModelPipe.whenListenedDo(() => budgetCardUseCase!.create());
+    _budgetCardUseCase = budgetCardUseCase;
 
-    _listTransactionsUseCase = ListTransactionsUseCase((viewModel) =>
-        listTransactionsViewModelPipe
-            .send(viewModel as ListTransactionsViewModel));
-    listTransactionsViewModelPipe
-        .whenListenedDo(() => _listTransactionsUseCase.create());
+    budgetChartUseCase = budgetChartUseCase ??
+        TransactionsUseCase((viewModel) =>
+            budgetChartViewModelPipe.send(viewModel as BudgetViewModel));
+    budgetChartViewModelPipe.whenListenedDo(() => budgetChartUseCase!.create());
+    _budgetChartUseCase = budgetChartUseCase;
 
+    // filter event
     chosenCategoryPipe.receive.listen(_didApplyFilter);
+
+    // account selection event
+    selectedRowIndexPipe.receive.listen(didSelectRowAtIndex);
   }
 
   void _didApplyFilter(String value) {
-    _listTransactionsUseCase.applyFilter(value);
+    _budgetChartUseCase.applyFilter(value);
+  }
+
+  void didSelectRowAtIndex(int index) {
+    _budgetCardUseCase.selectedAccountWithRowIndex(index);
   }
 }

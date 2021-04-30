@@ -4,14 +4,13 @@ import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class BudgetServiceAdapter extends ServiceAdapter<BudgetEntity,
+class TransactionsServiceAdapter extends ServiceAdapter<BudgetEntity,
     JsonRequestModel, TransactionsJsonResponseModel, TransactionsService> {
-  BudgetServiceAdapter() : super(TransactionsService());
+  TransactionsServiceAdapter() : super(TransactionsService());
 
   @override
-  BudgetEntity createEntity(BudgetEntity initialEntity,
-          TransactionsJsonResponseModel responseModel) =>
-      BudgetEntity(
-          accountInfo: responseModel.accountInfo,
-          allTransactions: responseModel.allTransactions);
+  BudgetEntity createEntity(
+      BudgetEntity initialEntity, TransactionsJsonResponseModel responseModel) {
+    return initialEntity.merge(allTransactions: responseModel.allTransactions);
+  }
 }
