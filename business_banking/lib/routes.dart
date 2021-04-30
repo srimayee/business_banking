@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 
 import 'features/credit_card/ui/payment_request/credit_card_payment_request_widget.dart';
 import 'features/credit_card/ui/payment_response/credit_card_payment_response_widget.dart';
+import 'features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
+import 'features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
 import 'features/investment_detail/ui/investment_detail_feature_widget.dart';
 
 abstract class BusinessBankingRouter {
@@ -22,9 +24,12 @@ abstract class BusinessBankingRouter {
   static const String viewBudgetChartRoute = '/viewBudgetChartRoute';
   static const String investmentDetailRoute = '/investmentDetail';
   static const String creditCardDetailsRoute = '/creditCardDetails';
-  static const String creditCardPaymentRequestRoute = '/creditCardPaymentRequest';
-  static const String creditCardPaymentResponseRoute = '/creditCardPaymentResponse';
-
+  static const String creditCardPaymentRequestRoute =
+      '/creditCardPaymentRequest';
+  static const String creditCardPaymentResponseRoute =
+      '/creditCardPaymentResponse';
+  static const String depositCheckRoute = '/depositCheck';
+  static const String depositCheckConfirmRoute = '/depositCheckConfirm';
 
   static Widget generate(String name) {
     switch (name) {
@@ -61,12 +66,17 @@ abstract class BusinessBankingRouter {
       case creditCardPaymentResponseRoute:
         return CreditCardPaymentResponseWidget();
 
+      case depositCheckRoute:
+        return DepositCheckWidget();
+
+      case depositCheckConfirmRoute:
+        return DepositCheckConfirmWidget();
+
       default:
         return const PageNotFound();
     }
   }
 }
-
 
 class PageNotFound extends StatelessWidget {
   const PageNotFound();
