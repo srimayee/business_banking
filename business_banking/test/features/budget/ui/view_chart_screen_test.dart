@@ -31,7 +31,7 @@ void main() {
       final viewModel = BudgetViewModel(
           accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
           allTransactions: [_postedTxns],
-          chartData: []);
+          chartData: [], accounts: [], filteredTransactions: []);
       // final _myActions = BudgetFeatureActions(bloc: bloc);
       final mockActions = MockBudgetFeatureActions();
 

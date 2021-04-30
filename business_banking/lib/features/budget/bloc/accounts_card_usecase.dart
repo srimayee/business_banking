@@ -1,16 +1,17 @@
-import 'package:business_banking/features/budget/bloc/budget_service_adapter.dart';
 import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class BudgetCardUseCase extends UseCase {
+import 'accounts_service_adapter.dart';
+
+class AccountsCardUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
   RepositoryScope? _scope;
 
-  BudgetCardUseCase(Function(ViewModel) viewModelCallBack)
+  AccountsCardUseCase(Function(ViewModel) viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
 
   void create() async {
@@ -26,7 +27,7 @@ class BudgetCardUseCase extends UseCase {
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope!, BudgetServiceAdapter());
+        .runServiceAdapter(_scope!, AccountsServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -37,6 +38,7 @@ class BudgetCardUseCase extends UseCase {
     if (entity.hasErrors()) {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: entity.accountInfo,
+          accounts: entity.accounts!,
           allTransactions: entity.allTransactions!,
           filteredTransactions: entity.filteredTransactions!,
           serviceStatus: TransactionsServiceStatus.fail,
@@ -44,10 +46,21 @@ class BudgetCardUseCase extends UseCase {
     } else {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: entity.accountInfo,
+          accounts: entity.accounts!,
           allTransactions: entity.allTransactions!,
           filteredTransactions: entity.filteredTransactions!,
           serviceStatus: TransactionsServiceStatus.success,
           chartData: []));
+    }
+  }
+
+  void selectedAccountWithRowIndex(int index) async {
+    final entity = ExampleLocator().repository.get<BudgetEntity>(_scope!);
+
+    final _account = entity.selectedItem(index);
+    if (_account != null) {
+      final updatedEntity = entity.merge(accountInfo: _account);
+      ExampleLocator().repository.update<BudgetEntity>(_scope!, updatedEntity);
     }
   }
 }

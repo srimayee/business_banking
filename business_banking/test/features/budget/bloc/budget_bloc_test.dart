@@ -1,17 +1,17 @@
 // @dart=2.9
 
 import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
-import 'package:business_banking/features/budget/bloc/budget_card_usecase.dart';
-import 'package:business_banking/features/budget/bloc/budget_chart_usecase.dart';
+import 'package:business_banking/features/budget/bloc/accounts_card_usecase.dart';
+import 'package:business_banking/features/budget/bloc/transactions_usecase.dart';
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockBudgetCardUseCase extends Mock implements BudgetCardUseCase {}
+class MockBudgetCardUseCase extends Mock implements AccountsCardUseCase {}
 
-class MockBudgetChartUseCase extends Mock implements BudgetChartUseCase {}
+class MockBudgetChartUseCase extends Mock implements TransactionsUseCase {}
 
 main() {
   BudgetBloc bloc;
@@ -46,6 +46,13 @@ main() {
 
     test('chosenCategoryPipe streams out BudgetViewModel to listeners.', () {
       bloc.chosenCategoryPipe.send('gas');
+      bloc.budgetChartViewModelPipe.receive.listen((model) {
+        verify(mockBudgetCardUseCase.create()).called(1);
+      });
+    });
+
+    test('selectedRowIndexPipe streams out BudgetViewModel to listeners.', () {
+      bloc.selectedRowIndexPipe.send(1);
       bloc.budgetChartViewModelPipe.receive.listen((model) {
         verify(mockBudgetCardUseCase.create()).called(1);
       });

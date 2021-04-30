@@ -36,6 +36,7 @@ void main() {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
+      entity.accounts,
       entity.allTransactions,
       entity.chartData
     ]);
@@ -58,6 +59,7 @@ void main() {
     expect(entity.props, [
       entity.errors,
       entity.accountInfo,
+      entity.accounts,
       entity.allTransactions,
       entity.chartData
     ]);

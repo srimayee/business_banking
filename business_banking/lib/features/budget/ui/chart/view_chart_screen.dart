@@ -1,5 +1,6 @@
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/ui/budget_feature_actions.dart';
+import 'package:business_banking/features/budget/ui/widgets/account_info_widget.dart';
 import 'package:business_banking/features/budget/ui/widgets/list_transactions_widget.dart';
 import 'package:business_banking/features/budget/ui/widgets/donut_auto_label_chart.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -61,12 +62,15 @@ class ViewChartScreen extends Screen {
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
-        title:
-            Text(viewModel.accountInfo?.accountNickname ?? 'Account Nickname'),
+        title: Text('Account Details'),
         backgroundColor: Colors.green,
       ),
       body: ListView(
         children: [
+          AccountInfoWidget(
+              nickname: viewModel.accountInfo?.accountNickname ?? '',
+              balance: viewModel.accountInfo?.availableBalance.toString() ?? '',
+              accountNumber: viewModel.accountInfo?.accountNumber ?? ''),
           Container(
             padding:
                 const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
@@ -76,18 +80,19 @@ class ViewChartScreen extends Screen {
               style: TextStyle(fontSize: 18),
             )),
           ),
-          ConstrainedBox(
-              constraints: BoxConstraints.loose(
-                Size(
-                  double.infinity,
-                  MediaQuery.of(context).size.width / 1.8,
+          Container(
+            child: ConstrainedBox(
+                constraints: BoxConstraints.loose(
+                  Size(
+                    double.infinity,
+                    MediaQuery.of(context).size.width / 1.8,
+                  ),
                 ),
-              ),
-              child: DonutAutoLabelChart(
-                  seriesList: viewModel.chartData, animate: false)),
+                child: DonutAutoLabelChart(
+                    seriesList: viewModel.chartData, animate: false)),
+          ),
           Divider(),
           OutlinedButton(
-            child: Text('Select Category'),
             onPressed: () {
               _scaffoldkey.currentState?.showBottomSheet(
                 (context) {
@@ -95,6 +100,11 @@ class ViewChartScreen extends Screen {
                 },
               );
             },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0))),
+            ),
+            child: const Text("Select Category"),
           ),
           ListTransactionsWidget(viewModel: this.viewModel),
         ],

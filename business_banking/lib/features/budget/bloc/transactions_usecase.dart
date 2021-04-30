@@ -1,3 +1,4 @@
+import 'package:business_banking/features/budget/bloc/transactions_service_adapter.dart';
 import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/model/chart_data_model.dart';
@@ -7,21 +8,28 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class BudgetChartUseCase extends UseCase {
+class TransactionsUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
 
   RepositoryScope? _scope;
 
-  BudgetChartUseCase(Function(ViewModel) viewModelCallBack)
+  TransactionsUseCase(Function(ViewModel) viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<BudgetEntity>();
-    if (_scope != null) {
-      _scope!.subscription = _notifySubscribers;
+    if (_scope == null) {
       final entity = ExampleLocator().repository.get<BudgetEntity>(_scope!);
-      _buildViewModelWithChart(entity);
+      _scope = ExampleLocator()
+          .repository
+          .create<BudgetEntity>(entity, _notifySubscribers);
+    } else {
+      _scope!.subscription = _notifySubscribers;
     }
+
+    await ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope!, TransactionsServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -33,6 +41,7 @@ class BudgetChartUseCase extends UseCase {
       if (updatedEntity.hasErrors()) {
         _viewModelCallBack(BudgetViewModel(
             accountInfo: updatedEntity.accountInfo,
+            accounts: updatedEntity.accounts!,
             allTransactions: updatedEntity.allTransactions!,
             filteredTransactions: updatedEntity.filteredTransactions!,
             serviceStatus: TransactionsServiceStatus.fail,
@@ -40,6 +49,7 @@ class BudgetChartUseCase extends UseCase {
       } else {
         _viewModelCallBack(BudgetViewModel(
             accountInfo: updatedEntity.accountInfo,
+            accounts: updatedEntity.accounts!,
             allTransactions: updatedEntity.allTransactions!,
             filteredTransactions: updatedEntity.filteredTransactions!,
             serviceStatus: TransactionsServiceStatus.success,
@@ -68,6 +78,7 @@ class BudgetChartUseCase extends UseCase {
     if (filteredTransactions != null) {
       _viewModelCallBack(BudgetViewModel(
           accountInfo: updatedEntity.accountInfo,
+          accounts: updatedEntity.accounts!,
           allTransactions: updatedEntity.allTransactions!,
           filteredTransactions: filteredTransactions,
           serviceStatus: TransactionsServiceStatus.success,

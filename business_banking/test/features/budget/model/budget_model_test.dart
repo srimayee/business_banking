@@ -43,15 +43,20 @@ void main() {
         'SUNRISE MINI MART', 2.00, 'Wholesale Clubs', 'xxxx-xxxx-xxxx-6917');
     final viewModel = BudgetViewModel(
         accountInfo: AccountInfo('1234567890', 1.00, 'Account Nickname'),
+        accounts: [AccountInfo('1234567890', 1.00, 'Account Nickname')],
         allTransactions: [_postedTxns],
+        filteredTransactions: [_postedTxns],
         chartData: _chartData,
         serviceStatus: TransactionsServiceStatus.success);
     expect(viewModel.props, [
       viewModel.accountInfo,
+      viewModel.accounts,
       viewModel.allTransactions,
+      viewModel.filteredTransactions,
       viewModel.chartData,
       viewModel.serviceStatus
     ]);
+
     expect(viewModel.stringify, true);
     expect(viewModel.accountInfo.accountNumber, '1234567890');
     expect(viewModel.accountInfo.availableBalance, 1.00);

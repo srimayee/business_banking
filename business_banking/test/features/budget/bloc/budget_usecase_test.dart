@@ -1,7 +1,7 @@
 // @dart=2.9
 
-import 'package:business_banking/features/budget/bloc/budget_card_usecase.dart';
-import 'package:business_banking/features/budget/bloc/budget_chart_usecase.dart';
+import 'package:business_banking/features/budget/bloc/accounts_card_usecase.dart';
+import 'package:business_banking/features/budget/bloc/transactions_usecase.dart';
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
@@ -17,7 +17,7 @@ class MockBudgetEntity extends Mock implements BudgetEntity {}
 main() {
   group('BudgetCardUseCase tests', () {
     test('testing create method', () async {
-      BudgetCardUseCase useCase = BudgetCardUseCase((viewModel) {
+      AccountsCardUseCase useCase = AccountsCardUseCase((viewModel) {
         expect(viewModel, isA<BudgetViewModel>());
       });
       useCase.create();
@@ -31,7 +31,7 @@ main() {
           .create<BudgetEntity>(entity, (_) {}, deleteIfExists: true);
       // await Future.delayed(Duration(milliseconds: 200));
 
-      BudgetCardUseCase useCase = BudgetCardUseCase((viewModel) {
+      AccountsCardUseCase useCase = AccountsCardUseCase((viewModel) {
         final _scope =
             ExampleLocator().repository.containsScope<BudgetEntity>();
         final entity = ExampleLocator().repository.get<BudgetEntity>(_scope);
@@ -44,7 +44,7 @@ main() {
 
   group('', () {
     test('testing create method', () async {
-      BudgetChartUseCase useCase = BudgetChartUseCase((viewModel) {
+      TransactionsUseCase useCase = TransactionsUseCase((viewModel) {
         expect(viewModel, isA<BudgetViewModel>());
       });
       useCase.create();
@@ -58,7 +58,7 @@ main() {
           .create<BudgetEntity>(entity, (_) {}, deleteIfExists: true);
       // await Future.delayed(Duration(milliseconds: 200));
 
-      BudgetChartUseCase useCase = BudgetChartUseCase((viewModel) {
+      TransactionsUseCase useCase = TransactionsUseCase((viewModel) {
         final _scope =
             ExampleLocator().repository.containsScope<BudgetEntity>();
         final entity = ExampleLocator().repository.get<BudgetEntity>(_scope);
@@ -80,7 +80,7 @@ main() {
           .repository
           .create<BudgetEntity>(entity, (_) {}, deleteIfExists: true);
 
-      BudgetChartUseCase useCase = BudgetChartUseCase((viewModel) {
+      TransactionsUseCase useCase = TransactionsUseCase((viewModel) {
         expect(viewModel, isA<BudgetViewModel>());
       });
       useCase.create();

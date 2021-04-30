@@ -4,6 +4,7 @@ import 'package:business_banking/features/budget/ui/budget_feature_actions.dart'
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/ui/first_card/budget_screen.dart';
+import 'package:business_banking/features/budget/ui/widgets/account_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -15,9 +16,12 @@ void main() {
     testWidgets('pumping BudgetScreen with test data', (tester) async {
       final mockActions = MockBudgetFeatureActions();
       final viewModel = BudgetViewModel(
-          accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
-          allTransactions: [],
-          chartData: []);
+        accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
+        accounts:[AccountInfo('1234567890', 1.0, 'Account Nickname')],
+        allTransactions: [],
+        chartData: [],
+        filteredTransactions: [],
+      );
 
       final testWidget = MaterialApp(
         home: BudgetScreen(
@@ -28,11 +32,12 @@ void main() {
 
       await tester.pumpWidget(testWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(Text), findsNWidgets(5));
-      expect(find.text("View Chart"), findsOneWidget);
-      expect(find.text("1234567890"), findsOneWidget);
-      await tester.tap(find.byType(OutlinedButton));
-      verify(mockActions.pushViewChart(any)).called(1);
+      expect(find.byType(Card), findsOneWidget);
+      var list = find.byKey(Key('budgetAccountListView'));
+      expect(find.byType(Card), findsOneWidget);
+      expect(list, findsOneWidget);
+      var rows = find.descendant(of: list, matching: find.byType(AccountRowWidget));
+      expect(rows, findsOneWidget);
     });
   });
 }

@@ -13,7 +13,8 @@ class BudgetFeatureActions {
     Navigator.pop(context);
   }
 
-  void pushViewChart(BuildContext context) {
+  void pushViewChart(BuildContext context, int rowIndex) {
+    bloc.selectedRowIndexPipe.send(rowIndex);
     CFRouterScope.of(context).push(BusinessBankingRouter.viewBudgetChartRoute);
   }
 }
