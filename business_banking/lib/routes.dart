@@ -1,5 +1,6 @@
 import 'package:business_banking/features/account_detail/ui/account_detail_widget.dart';
 import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart';
+import 'package:business_banking/features/credit_card/ui/credit_card_details/credit_card_details_widget.dart';
 import 'package:business_banking/features/customer/ui/customer_detail_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
@@ -7,6 +8,8 @@ import 'package:business_banking/features/transfer_funds/ui/confirmation/transfe
 import 'package:business_banking/features/transfer_funds/ui/transfer_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'features/credit_card/ui/payment_request/credit_card_payment_request_widget.dart';
+import 'features/credit_card/ui/payment_response/credit_card_payment_response_widget.dart';
 import 'features/investment_detail/ui/investment_detail_feature_widget.dart';
 
 abstract class BusinessBankingRouter {
@@ -18,6 +21,10 @@ abstract class BusinessBankingRouter {
   static const String customerDetailRoute = '/customerDetail';
   static const String viewBudgetChartRoute = '/viewBudgetChartRoute';
   static const String investmentDetailRoute = '/investmentDetail';
+  static const String creditCardDetailsRoute = '/creditCardDetails';
+  static const String creditCardPaymentRequestRoute = '/creditCardPaymentRequest';
+  static const String creditCardPaymentResponseRoute = '/creditCardPaymentResponse';
+
 
   static Widget generate(String name) {
     switch (name) {
@@ -45,11 +52,21 @@ abstract class BusinessBankingRouter {
       case investmentDetailRoute:
         return InvestmentDetailWidget();
 
+      case creditCardDetailsRoute:
+        return CreditCardDetailsWidget();
+
+      case creditCardPaymentRequestRoute:
+        return CreditCardPaymentRequestWidget();
+
+      case creditCardPaymentResponseRoute:
+        return CreditCardPaymentResponseWidget();
+
       default:
         return const PageNotFound();
     }
   }
 }
+
 
 class PageNotFound extends StatelessWidget {
   const PageNotFound();

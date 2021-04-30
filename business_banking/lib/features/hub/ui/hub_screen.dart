@@ -1,6 +1,6 @@
 import 'package:business_banking/features/budget/ui/first_card/budget_widget.dart';
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
-import 'package:business_banking/features/customer/ui/customer_widget.dart';
+import 'package:business_banking/features/credit_card/ui/credit_card/credit_card_widget.dart';
 import 'package:business_banking/features/investment/ui/investment_feature.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_card.dart';
 import 'package:business_banking/features/quickpay/ui/quickpay_widget.dart';
@@ -34,6 +34,7 @@ class HubScreen extends Screen {
               )),
             ),
             CashAccountsWidget(),
+            CreditCardWidget(),
             InvestmentFeatureWidget(),
             //PromosWidget(),
             TransferFundsCard(),
