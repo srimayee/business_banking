@@ -1,8 +1,5 @@
 import 'package:clean_framework/clean_framework.dart';
 
-import 'credit_card_payment_response_view_model.dart';
-import '../credit_card_view_model.dart';
-
 class CreditCardPaymentResponseEntity extends Entity {
   final String number;
   final String name;
@@ -11,15 +8,15 @@ class CreditCardPaymentResponseEntity extends Entity {
   final String paymentStatus;
   final String reasonRejected;
 
-  CreditCardPaymentResponseEntity({
-    List<EntityFailure> errors = const [],
-    String? number,
-    String? name,
-    String? lastFour,
-    double? paymentValue,
-    String? paymentStatus,
-    String? reasonRejected
-  })  : number = number ?? '',
+  CreditCardPaymentResponseEntity(
+      {List<EntityFailure> errors = const [],
+      String? number,
+      String? name,
+      String? lastFour,
+      double? paymentValue,
+      String? paymentStatus,
+      String? reasonRejected})
+      : number = number ?? '',
         name = name ?? '',
         lastFour = lastFour ?? '',
         paymentValue = paymentValue ?? 0.00,

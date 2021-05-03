@@ -1,5 +1,4 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/model/1st_hub_card/deposit_check_card_view_model.dart';
 import 'package:business_banking/features/deposit_check/model/2nd_data_entry/deposit_check_view_model.dart';
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
 import 'package:business_banking/features/deposit_check/model/enums.dart';

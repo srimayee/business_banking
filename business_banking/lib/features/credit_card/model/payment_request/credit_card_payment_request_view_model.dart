@@ -1,8 +1,6 @@
 import 'package:clean_framework/clean_framework.dart';
-import 'package:flutter/cupertino.dart';
 
 class CreditCardPaymentRequestViewModel extends ViewModel {
-
   final String number;
   final String name;
   final String lastFour;
@@ -36,7 +34,6 @@ class CreditCardPaymentRequestViewModel extends ViewModel {
         paymentValue,
       ];
 
-
   static CreditCardPaymentRequestViewModel merge(
     CreditCardPaymentRequestViewModel viewModel, {
     double? paymentValue,
@@ -52,5 +49,4 @@ class CreditCardPaymentRequestViewModel extends ViewModel {
       paymentValue: paymentValue ?? viewModel.paymentValue,
     );
   }
-
 }

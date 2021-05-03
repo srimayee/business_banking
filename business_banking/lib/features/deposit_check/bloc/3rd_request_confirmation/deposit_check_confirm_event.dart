@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
-
 abstract class DepositCheckConfirmEvent extends Equatable {}
 
 class ResetDepositCheckViewModelEvent implements DepositCheckConfirmEvent {

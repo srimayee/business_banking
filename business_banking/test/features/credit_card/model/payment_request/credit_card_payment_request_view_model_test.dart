@@ -1,6 +1,4 @@
 import 'package:business_banking/features/credit_card/model/payment_request/credit_card_payment_request_view_model.dart';
-import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

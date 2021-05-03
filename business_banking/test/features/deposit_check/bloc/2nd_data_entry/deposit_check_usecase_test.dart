@@ -7,9 +7,6 @@ import 'package:business_banking/features/deposit_check/model/account_info_struc
 import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-//import 'package:test/test.dart';
-
-import '../deposit_check_bloc_mock.dart';
 
 class MockPermissionHandlerPlugin extends Mock
     implements PermissionHandlerPlugin {

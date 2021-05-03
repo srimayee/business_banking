@@ -4,7 +4,6 @@ import 'package:business_banking/features/budget/bloc/budget_bloc.dart';
 import 'package:business_banking/features/budget/model/account_info.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/model/posted_transactions.dart';
-import 'package:business_banking/features/budget/ui/budget_feature_actions.dart';
 import 'package:business_banking/features/budget/ui/chart/view_chart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,15 +30,17 @@ void main() {
       final viewModel = BudgetViewModel(
           accountInfo: AccountInfo('1234567890', 1.0, 'Account Nickname'),
           allTransactions: [_postedTxns],
-          chartData: [], accounts: [], filteredTransactions: []);
+          chartData: [],
+          accounts: [],
+          filteredTransactions: []);
       // final _myActions = BudgetFeatureActions(bloc: bloc);
       final mockActions = MockBudgetFeatureActions();
 
       final testWidget = MaterialApp(
-          home: ViewChartScreen(
-        viewModel: viewModel,
-        actions: mockActions,
-      ),
+        home: ViewChartScreen(
+          viewModel: viewModel,
+          actions: mockActions,
+        ),
       );
       // await Future.delayed(Duration(milliseconds: 200));
       await tester.pumpWidget(testWidget);
