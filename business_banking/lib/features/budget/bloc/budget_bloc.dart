@@ -3,11 +3,12 @@ import 'package:business_banking/features/budget/bloc/transactions_usecase.dart'
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
+import '../ui/budget_feature_events.dart';
+
 class BudgetBloc extends Bloc {
   final budgetCardViewModelPipe = Pipe<BudgetViewModel>();
   final budgetChartViewModelPipe = Pipe<BudgetViewModel>();
-  final chosenCategoryPipe = Pipe<String>();
-  final selectedRowIndexPipe = Pipe<int>();
+  final budgetEvent = Pipe<BudgetEvent>();
 
   late AccountsCardUseCase _budgetCardUseCase;
   late TransactionsUseCase _budgetChartUseCase;
@@ -16,8 +17,7 @@ class BudgetBloc extends Bloc {
   void dispose() {
     budgetCardViewModelPipe.dispose();
     budgetChartViewModelPipe.dispose();
-    chosenCategoryPipe.dispose();
-    selectedRowIndexPipe.dispose();
+    budgetEvent.dispose();
   }
 
   BudgetBloc({
@@ -37,17 +37,14 @@ class BudgetBloc extends Bloc {
     _budgetChartUseCase = budgetChartUseCase;
 
     // filter event
-    chosenCategoryPipe.receive.listen(_didApplyFilter);
-
-    // account selection event
-    selectedRowIndexPipe.receive.listen(didSelectRowAtIndex);
+    budgetEvent.receive.listen(budgetEventHandler);
   }
 
-  void _didApplyFilter(String value) {
-    _budgetChartUseCase.applyFilter(value);
-  }
-
-  void didSelectRowAtIndex(int index) {
-    _budgetCardUseCase.selectedAccountWithRowIndex(index);
+  void budgetEventHandler(BudgetEvent eventType) {
+    if (eventType is ApplyFilter) {
+      _budgetChartUseCase.applyFilter(eventType.value);
+    } else if (eventType is SelectAccount) {
+      _budgetCardUseCase.selectedAccountWithRowIndex(eventType.value);
+    }
   }
 }
