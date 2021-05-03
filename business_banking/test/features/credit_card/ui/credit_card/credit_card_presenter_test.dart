@@ -3,19 +3,18 @@
 import 'package:business_banking/features/credit_card/bloc/credit_card_bloc.dart';
 import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
 import 'package:business_banking/features/credit_card/ui/credit_card/credit_card_presenter.dart';
-import 'package:business_banking/features/credit_card/ui/credit_card/credit_card_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class CreditCardBlocMock extends Mock implements CreditCardBloc {
-  final creditCardViewEventsPipe = Pipe<CreditCardViewEvents>(canSendDuplicateData: true);
+  final creditCardViewEventsPipe =
+      Pipe<CreditCardViewEvents>(canSendDuplicateData: true);
   final creditCardViewModelPipe = Pipe<CreditCardViewModel>();
 }
 
 void main() {
-
   CreditCardBlocMock bloc;
   CreditCardPresenter presenter;
   Widget testWidget;
@@ -36,13 +35,11 @@ void main() {
     testWidget = null;
   });
 
-
   testWidgets('CreditCardPresenter initialization', (tester) async {
     await tester.pumpWidget(testWidget);
     await tester.pump(Duration(milliseconds: 500));
     expect(find.byType(CreditCardPresenter), findsOneWidget);
   });
-
 
   /*
   testWidgets('CreditCardPresenter navigate to details screen', (tester) async {
@@ -73,9 +70,4 @@ void main() {
     expect(eventReceived, isA<CreditCardViewEventNavigateToDetailsScreen>());
   });
   */
-
-
-
-
-
 }

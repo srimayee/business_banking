@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
 import 'package:clean_framework/clean_framework.dart';
 

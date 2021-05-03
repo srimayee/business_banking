@@ -1,6 +1,4 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_presenter.dart';
-import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_widget.dart';
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_presenter.dart';
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
 import 'package:clean_framework/clean_framework.dart';

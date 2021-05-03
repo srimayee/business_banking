@@ -121,7 +121,8 @@ void main() {
     test('CashAccountsScreen, displaying Card 2 Data', () async {
       expect(await driver!.getText(cashAccountsCardTwoLastFourAccountNumber),
           '...6543');
-      expect(await driver!.getText(cashAccountsCardTwoAccountBalance), '\$0.02');
+      expect(
+          await driver!.getText(cashAccountsCardTwoAccountBalance), '\$0.02');
       expect(await driver!.getText(cashAccountsCardTwoAccountType), 'Cash');
       expect(await driver!.getText(cashAccountsCardTwoAccountStatus), 'Active');
     });
@@ -221,11 +222,11 @@ void main() {
       int year = now.year;
       String date = '$month/16/$year';
       expect(await driver!.getText(transferConfirmationTitle), 'Transaction');
-      expect(
-          await driver!.getText(transferConfirmationIdLabel), 'Confirmation #:');
+      expect(await driver!.getText(transferConfirmationIdLabel),
+          'Confirmation #:');
       expect(await driver!.getText(transferConfirmationIdField), '123456789');
-      expect(
-          await driver!.getText(transferConfirmationDateLabel), 'Transfer Date');
+      expect(await driver!.getText(transferConfirmationDateLabel),
+          'Transfer Date');
       expect(await driver!.getText(transferConfirmationDateField), date);
       expect(
           await driver!.getText(transferConfirmationFromAccountLabel), 'From');

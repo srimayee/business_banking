@@ -58,9 +58,8 @@ class AccountsCardUseCase extends UseCase {
     final entity = ExampleLocator().repository.get<BudgetEntity>(_scope!);
 
     final _account = entity.selectedItem(index);
-    if (_account != null) {
-      final updatedEntity = entity.merge(accountInfo: _account);
-      ExampleLocator().repository.update<BudgetEntity>(_scope!, updatedEntity);
-    }
+
+    final updatedEntity = entity.merge(accountInfo: _account);
+    ExampleLocator().repository.update<BudgetEntity>(_scope!, updatedEntity);
   }
 }

@@ -1,8 +1,7 @@
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
+import 'package:business_banking/features/budget/ui/widgets/transactionI_tem_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
-
-import 'package:business_banking/features/budget/ui/widgets/transactionI_tem_widget.dart';
 
 class ListTransactionsWidget extends Screen {
   final BudgetViewModel viewModel;
@@ -19,7 +18,7 @@ class ListTransactionsWidget extends Screen {
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: (viewModel.filteredTransactions != null) ? viewModel.filteredTransactions.length : 0,
+            itemCount: viewModel.filteredTransactions.length,
             itemBuilder: (BuildContext context, int index) {
               return TransactionItemWidget(
                   viewModel: viewModel, rowIndex: index);

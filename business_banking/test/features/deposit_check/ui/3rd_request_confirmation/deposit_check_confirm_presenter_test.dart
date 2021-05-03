@@ -1,6 +1,4 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_presenter.dart';
-import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_widget.dart';
 import 'package:business_banking/features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_presenter.dart';
 import 'package:business_banking/features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
