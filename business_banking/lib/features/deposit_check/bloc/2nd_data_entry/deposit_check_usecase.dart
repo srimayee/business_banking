@@ -49,9 +49,18 @@ class DepositCheckUseCase extends UseCase {
 
   void _notifySubscribers(entity) {
     ///Enables construction of view model
+    // if (entity is DepositCheckEntity)
+    //   _currentCheckViewModel = DepositCheckViewModel(
+    //       accountInfo: entity.accountInfo,
+    //       depositAmount: entity.depositAmount,
+    //       frontCheckImg: entity.frontCheckImg,
+    //       backCheckImg: entity.backCheckImg,
+    //       userEmail: entity.userEmail,
+    //       referenceNumber: entity.referenceNumber!);
     _viewModelCallBack(buildViewModel(entity, isResetAction: true));
   }
 
+  // late DepositCheckViewModel _currentCheckViewModel;
   DepositCheckViewModel buildViewModel(DepositCheckEntity entity,
       {String status = '',
       isUserInputValid = true,
@@ -73,6 +82,7 @@ class DepositCheckUseCase extends UseCase {
               ? _checkUserInputEntity(entity)
               : UserInputStatus.invalid,
           serviceResponseStatus: ServiceResponseStatus.failed);
+      //return _currentCheckViewModel;
     } else {
       return DepositCheckViewModel(
           accountInfo: entity.accountInfo,
@@ -93,6 +103,7 @@ class DepositCheckUseCase extends UseCase {
           serviceResponseStatus: isResetAction
               ? ServiceResponseStatus.unknown
               : ServiceResponseStatus.succeed);
+      //return _currentCheckViewModel;
     }
   }
 

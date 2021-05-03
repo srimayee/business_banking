@@ -73,7 +73,7 @@ class _succeedWidget extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    "Deposit to " + viewModel.accountInfo!.accountNickname,
+                    "Deposit to " + viewModel.accountInfo.accountNickname,
                     style: TextStyle(color: Colors.black54, fontSize: 20),
                     textAlign: TextAlign.left,
                   ),
@@ -283,7 +283,7 @@ class _failedWidget extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    "Deposit to " + viewModel.accountInfo!.accountNickname,
+                    "Deposit to " + viewModel.accountInfo.accountNickname,
                     style: TextStyle(color: Colors.black54, fontSize: 20),
                     textAlign: TextAlign.left,
                   ),

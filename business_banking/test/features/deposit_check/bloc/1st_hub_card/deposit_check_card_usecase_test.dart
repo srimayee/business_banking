@@ -41,11 +41,11 @@ void main() {
         depositCheckCardViewModel,
         tSucceedAccountInfo,
       );
-    }, timeout: Timeout(Duration(seconds: 3)));
+    });
 
     test('should callback return viewModel without recreate new scope',
         () async {
-      useCase.execute();
+      await useCase.execute();
 
       expect(depositCheckCardViewModel, isA<DepositCheckCardViewModel>());
       useCase.execute();

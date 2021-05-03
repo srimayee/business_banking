@@ -201,13 +201,13 @@ class DepositCheckScreen extends Screen {
                                     FocusScope.of(context)
                                         .requestFocus(_emailFNode);
                                   },
-                                  validator: (value) {
-                                    if (value == null ||
-                                        value.isEmpty ||
-                                        double.parse(value) == 0.0) {
-                                      return 'Please provide a value.';
-                                    }
-                                  },
+                                  // validator: (value) {
+                                  //   if (value == null ||
+                                  //       value.isEmpty ||
+                                  //       double.parse(value) == 0.0) {
+                                  //     return 'Please provide a value.';
+                                  //   }
+                                  // },
                                   onSaved: (val) => pressenterAction
                                       .onDepositCheckAmountSavedListener(
                                           val ?? ''),
@@ -249,15 +249,20 @@ class DepositCheckScreen extends Screen {
                                       labelText: 'Email Address'),
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.done,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please provide a value.';
-                                    }
-                                    return null;
-                                  },
+                                  // validator: (value) {
+                                  //   if (value == null || value.isEmpty) {
+                                  //     return 'Please provide a value.';
+                                  //   }
+                                  //   return null;
+                                  // },
                                   onFieldSubmitted: (val) {
                                     pressenterAction
                                         .onUserEmailSavedListener(val);
+
+                                    if (_form.currentState != null) {
+                                      _form.currentState!.save();
+                                    }
+
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
                                   },
@@ -321,8 +326,12 @@ class DepositCheckScreen extends Screen {
                                 borderRadius: BorderRadius.circular(15)),
                             side: BorderSide(width: 2, color: Colors.green)),
                         onPressed: () {
-                          pressenterAction.onTapConfirmBtn(
-                              context, _form, viewModel);
+                          if (_form.currentState != null) {
+                            _form.currentState!.save();
+                          }
+                          pressenterAction.onTapConfirmBtn(context, viewModel);
+                          // pressenterAction.onTapConfirmBtn(
+                          //     context, _form, viewModel);
                         },
                       ),
                     ),
