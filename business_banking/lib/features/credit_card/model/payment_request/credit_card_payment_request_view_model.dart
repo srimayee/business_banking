@@ -1,5 +1,4 @@
 import 'package:clean_framework/clean_framework.dart';
-import 'package:flutter/cupertino.dart';
 
 class CreditCardPaymentRequestViewModel extends ViewModel {
 

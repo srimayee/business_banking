@@ -15,6 +15,12 @@ dependencies:
   integration_test: ^1.0.2+2
   charts_flutter: ^0.10.0
 
+  ### https://pub.dev/packages/pdf/versions/2.1.0
+  pdf: ^2.1.0
+
+  ### https://pub.dev/packages/printing/versions/4.1.0
+  printing: ^4.1.0
+
 dev_dependencies:
   test: 
   flutter_test:

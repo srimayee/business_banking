@@ -1,6 +1,4 @@
 import 'package:business_banking/features/credit_card/model/payment_request/credit_card_payment_request_view_model.dart';
-import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -35,4 +33,27 @@ void main() {
       viewModel.paymentValue,
     ]);
   });
+
+
+  test('CreditCardPaymentRequestViewModel merge', () async {
+    final viewModel = CreditCardPaymentRequestViewModel(
+      number: '1111222233334444',
+      name: 'My Credit Card',
+      lastFour: '4444',
+      balance: 1234.56,
+      paymentDueDate: DateTime.parse("2021-05-03"),
+      nextClosingDate: DateTime.parse("2021-05-06"),
+      paymentMinimumValue: 100.00,
+      paymentValue: 20.00,
+    );
+
+    var viewModelMerged = CreditCardPaymentRequestViewModel.merge(viewModel);
+    expect(viewModelMerged.paymentValue, viewModel.paymentValue);
+
+    viewModelMerged = CreditCardPaymentRequestViewModel.merge(viewModel, paymentValue: 30.00);
+    expect(viewModelMerged.paymentValue, 30.00);
+
+
+  });
+
 }

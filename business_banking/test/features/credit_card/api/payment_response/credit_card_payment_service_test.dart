@@ -1,9 +1,5 @@
-import 'package:business_banking/features/cash_accounts/api/cash_accounts_service_response_model.dart';
-import 'package:business_banking/features/credit_card/api/credit_card_service.dart';
-import 'package:business_banking/features/credit_card/api/payment_response/credit_card_service_response_model.dart';
 import 'package:business_banking/features/credit_card/api/payment_response/credit_card_payment_response_service.dart';
 import 'package:business_banking/features/credit_card/api/payment_response/credit_card_payment_response_service_response_model.dart';
-import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -21,7 +17,7 @@ void main() {
       "lastFour": '1234',
       "paymentValue": 100.00,
       "paymentStatus": "Rejected",
-      "nextClosingDate": "Insufficient Funds.",
+      "reasonRejected": "Insufficient Funds.",
     };
 
     final service = CreditCardPaymentService();

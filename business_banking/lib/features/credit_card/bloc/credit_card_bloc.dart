@@ -4,11 +4,10 @@ import 'package:business_banking/features/credit_card/model/payment_request/cred
 import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
 import 'package:business_banking/features/credit_card/model/payment_response/credit_card_payment_response_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../routes.dart';
+import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'credit_card_usecase.dart';
 
 class CreditCardBloc extends Bloc {
@@ -63,6 +62,55 @@ class CreditCardBloc extends Bloc {
     return _creditCardPaymentRequestUseCase!.validatePaymentInformation(paymentValue);
   }
 
+  Future<pw.Document> generatePDFPaymentConfirmation(CreditCardPaymentResponseViewModel viewModel) async {
+    final pdf = pw.Document();
+    pdf.addPage(pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Column(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+
+              /// title
+              pw.Padding(
+              padding: pw.EdgeInsets.only(top: 40.0),
+              child: pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.center,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    children: [
+                      pw.Text("Payment Confirmation", style: pw.TextStyle(fontSize: 40, fontWeight: pw.FontWeight.bold)),
+                    ]
+              )),
+
+              /// Credit Card Name
+              pw.Padding(
+                padding: pw.EdgeInsets.only(top: 40.0),
+                child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    children: [
+                      pw.Text("Credit Card: ", style: pw.TextStyle(fontSize: 30, fontWeight: pw.FontWeight.bold)),
+                      pw.Text(viewModel.name, style: pw.TextStyle(fontSize: 30)),
+                    ]
+              )),
+
+              /// Payment Value
+              pw.Padding(
+                  padding: pw.EdgeInsets.only(top: 40.0),
+                  child: pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Text("Payment Value: ", style: pw.TextStyle(fontSize: 30, fontWeight: pw.FontWeight.bold)),
+                        pw.Text(NumberFormat.simpleCurrency().format(viewModel.paymentValue), style: pw.TextStyle(fontSize: 30)),
+                      ]
+                  )),
+          ],
+          ); // Center
+        })); // Page
+    return pdf;
+  }
 
 
 }
@@ -72,83 +120,14 @@ class CreditCardBloc extends Bloc {
 
 abstract class CreditCardViewEvents extends Equatable {}
 
-/*
-class CreditCardViewEventNavigateToDetailsScreen extends CreditCardViewEvents {
-
-  final CreditCardViewModel viewModel;
-  final BuildContext context;
-
-  CreditCardViewEventNavigateToDetailsScreen(this.viewModel, this.context);
-
-  @override
-  List<Object?> get props => [viewModel];
-
-}
-
- */
-/*
-class CreditCardViewEventNavigateBackToHubScreen extends CreditCardViewEvents {
-
-  final BuildContext context;
-
-  CreditCardViewEventNavigateBackToHubScreen(this.context);
-
-  @override
-  List<Object?> get props => [];
-
-}
- */
-
-/*
-class CreditCardViewEventNavigateToPaymentRequestScreen extends CreditCardViewEvents {
-
-  final CreditCardViewModel viewModel;
-  final BuildContext context;
-
-  CreditCardViewEventNavigateToPaymentRequestScreen(this.viewModel, this.context);
-
-  @override
-  List<Object?> get props => [viewModel];
-
-}
- */
-
-/*
-class CreditCardViewEventNavigateBackToDetailsScreen extends CreditCardViewEvents {
-
-  final BuildContext context;
-
-  CreditCardViewEventNavigateBackToDetailsScreen(this.context);
-
-  @override
-  List<Object?> get props => [];
-
-}
-
- */
 class CreditCardViewEventUpdatePaymentValue extends CreditCardViewEvents {
 
   final double paymentValue;
   final CreditCardPaymentRequestViewModel viewModel;
-  final BuildContext context;
 
-  CreditCardViewEventUpdatePaymentValue(this.viewModel, this.context, this.paymentValue);
+  CreditCardViewEventUpdatePaymentValue(this.viewModel, this.paymentValue);
 
   @override
   List<Object?> get props => [viewModel, paymentValue];
 
 }
-
-/*
-class CreditCardViewEventConfirmPayment extends CreditCardViewEvents {
-
-  final CreditCardPaymentRequestViewModel viewModel;
-  final BuildContext context;
-
-  CreditCardViewEventConfirmPayment(this.viewModel, this.context);
-
-  @override
-  List<Object?> get props => [viewModel];
-
-}
-*/
