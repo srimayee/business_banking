@@ -1,5 +1,3 @@
-import 'package:business_banking/features/credit_card/model/credit_card_entity.dart';
-import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
 import 'package:business_banking/features/credit_card/model/payment_response/credit_card_payment_response_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -59,15 +57,13 @@ void main() {
       reasonRejected: 'Tests!',
     );
 
-
     var entity2 = entity.merge(
         number: "5555666677778888",
         name: "Name2",
         lastFour: "8888",
         paymentValue: 200.00,
         paymentStatus: "Success",
-        reasonRejected: ''
-    ) as CreditCardPaymentResponseEntity;
+        reasonRejected: '') as CreditCardPaymentResponseEntity;
 
     expect(entity2.number, "5555666677778888");
     expect(entity2.name, "Name2");
@@ -76,5 +72,4 @@ void main() {
     expect(entity2.paymentStatus, "Success");
     expect(entity2.reasonRejected, '');
   });
-
 }

@@ -9,19 +9,29 @@ enum TransactionsServiceStatus { success, fail, unknown }
 
 class BudgetViewModel extends ViewModel {
   final AccountInfo? accountInfo;
+  final List<AccountInfo> accounts;
   final List<PostedTransactions> allTransactions;
+  final List<PostedTransactions> filteredTransactions;
   final List<charts.Series<ChartDataModel, int>> chartData;
   final TransactionsServiceStatus? serviceStatus;
 
   BudgetViewModel(
       {Key? key,
       required this.accountInfo,
+      required this.accounts,
       required this.allTransactions,
+      required this.filteredTransactions,
       required this.chartData,
       this.serviceStatus});
 
   @override
   // TODO: implement props
-  List<Object?> get props =>
-      [accountInfo, allTransactions, chartData, serviceStatus];
+  List<Object?> get props => [
+        accountInfo,
+        accounts,
+        allTransactions,
+        filteredTransactions,
+        chartData,
+        serviceStatus
+      ];
 }

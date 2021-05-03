@@ -18,7 +18,6 @@ void main() {
     expect(bloc.creditCardPaymentResponseViewModelPipe, isNotNull);
   });
 
-
   test('CreditCardBloc dispose', () async {
     final bloc = CreditCardBloc();
     bloc.dispose();
@@ -30,8 +29,9 @@ void main() {
 
   test('CreditCardBloc CreditCardUseCase create on pipe listen', () async {
     CreditCardUseCaseMock creditCardUseCaseMock = CreditCardUseCaseMock();
-    CreditCardBloc bloc = CreditCardBloc(creditCardUseCase: creditCardUseCaseMock);
-    bloc.creditCardViewModelPipe.receive.listen((event) { });
+    CreditCardBloc bloc =
+        CreditCardBloc(creditCardUseCase: creditCardUseCaseMock);
+    bloc.creditCardViewModelPipe.receive.listen((event) {});
     verify(creditCardUseCaseMock.create()).called(1);
   });
 
@@ -83,6 +83,4 @@ void main() {
     var event = CreditCardViewEventUpdatePaymentValue(viewModel, 0);
     expect(event.props, [viewModel, 0]);
   });
-
-
 }

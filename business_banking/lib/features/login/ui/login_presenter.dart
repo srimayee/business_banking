@@ -68,7 +68,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         title: Text('Error'),
         content: Text('Submit Failed'),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               CFRouterScope.of(context).pop();
             },
@@ -86,7 +86,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
         title: Text('Invalid'),
         content: Text('Data entered is incorrect.'),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               CFRouterScope.of(context).pop();
             },

@@ -1,4 +1,3 @@
-import 'package:business_banking/features/cash_accounts/api/cash_accounts_service_response_model.dart';
 import 'package:business_banking/features/credit_card/api/credit_card_service.dart';
 import 'package:business_banking/features/credit_card/api/payment_response/credit_card_service_response_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,13 +18,16 @@ void main() {
       "nextClosingDate": "2021-01-02",
       "paymentMinimumValue": 20.00,
       "transactions": [
-        {"id": "4", "name": "Transaction #4", "date": "2021-04-11", "value": 40.00}
+        {
+          "id": "4",
+          "name": "Transaction #4",
+          "date": "2021-04-11",
+          "value": 40.00
+        }
       ]
     };
     final service = CreditCardService();
     CreditCardServiceResponseModel response = service.parseResponse(json);
-    //expect(response, CreditCardServiceResponseModel.fromJson(json));
     expect(response, isA<CreditCardServiceResponseModel>());
   });
-
 }

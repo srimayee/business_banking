@@ -10,7 +10,6 @@ void main() {
   });
 
   test('CreditCardPaymentService parseResponse', () async {
-
     final json = {
       "number": '00001111',
       "name": 'AAAA',
@@ -22,9 +21,10 @@ void main() {
 
     final service = CreditCardPaymentService();
 
-    CreditCardPaymentResponseServiceResponseModel response = service.parseResponse(json);
+    CreditCardPaymentResponseServiceResponseModel response =
+        service.parseResponse(json);
 
-    expect(response, CreditCardPaymentResponseServiceResponseModel.fromJson(json));
+    expect(
+        response, CreditCardPaymentResponseServiceResponseModel.fromJson(json));
   });
-
 }
