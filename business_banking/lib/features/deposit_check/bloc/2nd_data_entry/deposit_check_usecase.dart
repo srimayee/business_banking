@@ -15,6 +15,7 @@ class DepositCheckUseCase extends UseCase {
   late final PermissionHandlerPlugin _permissionHandlerPluginImpl;
   late final ImagePickerPlugin _imagePickerPluginImpl;
 
+  ///Utilized a Repository Scope
   RepositoryScope? _scope;
 
   DepositCheckUseCase(
@@ -25,6 +26,7 @@ class DepositCheckUseCase extends UseCase {
         _permissionHandlerPluginImpl = permissionHandlerPlugin,
         _imagePickerPluginImpl = imagePickerPlugin;
 
+  ///Provide Constructor for specific use case type
   void execute() async {
     _scope = ExampleLocator().repository.containsScope<DepositCheckEntity>();
     if (_scope == null) {
@@ -46,6 +48,7 @@ class DepositCheckUseCase extends UseCase {
   }
 
   void _notifySubscribers(entity) {
+    ///Enables construction of view model
     _viewModelCallBack(buildViewModel(entity, isResetAction: true));
   }
 

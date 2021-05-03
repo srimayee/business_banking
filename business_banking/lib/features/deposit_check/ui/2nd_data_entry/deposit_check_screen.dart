@@ -59,11 +59,26 @@ class DepositCheckScreen extends Screen {
                 children: [
                   SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Deposit to " + viewModel.accountInfo!.accountNickname,
-                      style: TextStyle(color: Colors.black54, fontSize: 15),
-                      textAlign: TextAlign.left,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Image.asset('assets/images/bank-check.png',
+                            scale: 10, fit: BoxFit.cover),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Flexible(
+                          child: Text(
+                            "Deposit to " +
+                                viewModel.accountInfo!.accountNickname,
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 20),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -82,20 +97,23 @@ class DepositCheckScreen extends Screen {
                                 child: Container(
                                   height: 150,
                                   width: 160,
-                                  color: Colors.grey[300],
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffe5e5e5),
+                                      borderRadius: BorderRadius.circular(10)),
                                   child: viewModel.frontCheckImg.isNotEmpty
-                                      ? Image.file(
-                                          File(viewModel.frontCheckImg))
+                                      ? ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.file(
+                                            File(viewModel.frontCheckImg),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                       : Image.asset(
                                           'assets/images/img-icon.png',
                                           fit: BoxFit.scaleDown,
                                           scale: 10,
                                         ),
-                                  // Column(
-                                  //     mainAxisAlignment:
-                                  //         MainAxisAlignment.center,
-                                  //     children: [Icon(Icons.camera_alt)],
-                                  //   ),
                                 ),
                                 onTap: () {
                                   pressenterAction.onPickFrontImg();
@@ -112,9 +130,17 @@ class DepositCheckScreen extends Screen {
                                 child: Container(
                                   height: 150,
                                   width: 160,
-                                  color: Colors.grey[300],
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffe5e5e5),
+                                      borderRadius: BorderRadius.circular(10)),
                                   child: viewModel.backCheckImg.isNotEmpty
-                                      ? Image.file(File(viewModel.backCheckImg))
+                                      ? ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.file(
+                                            File(viewModel.backCheckImg),
+                                            fit: BoxFit.cover,
+                                          ))
                                       : Image.asset(
                                           'assets/images/img-icon.png',
                                           fit: BoxFit.scaleDown,
@@ -131,130 +157,177 @@ class DepositCheckScreen extends Screen {
                       ),
                     ),
                   ),
-                  Form(
-                      key: _form,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              key: Key('Deposit-Check-Amount-Txtfild'),
-                              controller: _depositAmountTxtedCtrl,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  prefixIcon: Icon(Icons.attach_money_outlined),
-                                  suffixStyle:
-                                      TextStyle(color: Colors.orangeAccent),
-                                  labelText: 'Deposit Amount'),
-                              keyboardType: TextInputType.numberWithOptions(
-                                  decimal: true),
-                              textInputAction: TextInputAction.next,
-                              // onChanged: (val) {
-                              //   pressenterAction
-                              //       .onDepositCheckAmountSavedListener(val);
-                              // },
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^(\d+)?\.?\d{0,2}')),
-                              ],
-                              onFieldSubmitted: (val) {
-                                pressenterAction
-                                    .onDepositCheckAmountSavedListener(val);
-                                FocusScope.of(context)
-                                    .requestFocus(_emailFNode);
-                              },
-                              validator: (value) {
-                                if (value == null ||
-                                    value.isEmpty ||
-                                    double.parse(value) == 0.0) {
-                                  return 'Please provide a value.';
-                                }
-                              },
-                              onSaved: (val) => pressenterAction
-                                  .onDepositCheckAmountSavedListener(val ?? ''),
-                            ),
-                          ),
-                          if (viewModel.depositAmountStatus != null &&
-                              viewModel.depositAmountStatus!.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                viewModel.depositAmountStatus!,
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              key: Key('Deposit-Check-Email-Txtfild'),
-                              controller: _userEmailTxtedCtrl,
-                              focusNode: _emailFNode,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  prefixIcon: Icon(Icons.email_outlined),
-                                  suffixStyle:
-                                      TextStyle(color: Colors.orangeAccent),
-                                  labelText: 'Email Address'),
-                              keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.done,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please provide a value.';
-                                }
-                                return null;
-                              },
-                              onFieldSubmitted: (val) {
-                                pressenterAction.onUserEmailSavedListener(val);
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                              },
-                              // onEditingComplete: () {
-                              //   print(_userEmailTxtedCtrl.text);
-                              // },
-                              // onChanged: (val) {
-                              //   pressenterAction.onUserEmailSavedListener(val);
-                              // },
-                              onSaved: (val) => pressenterAction
-                                  .onUserEmailSavedListener(val ?? ''),
-                            ),
-                          ),
-                          if (viewModel.userEmailStatus != null &&
-                              viewModel.userEmailStatus!.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                viewModel.userEmailStatus!,
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                        ],
-                      )),
-                  SizedBox(height: 40),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      '''Deposit by 11 PM ET and your money will typical be available for withdrawl by next business day.''',
-                      style: TextStyle(color: Colors.black54, fontSize: 15),
-                      textAlign: TextAlign.left,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Form(
+                        key: _form,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Theme(
+                                data: Theme.of(context).copyWith(
+                                  primaryColor: Colors.green,
+                                  textSelectionTheme: TextSelectionThemeData(
+                                      selectionHandleColor: Colors.green,
+                                      selectionColor: Colors.green),
+                                ),
+                                child: TextFormField(
+                                  key: Key('Deposit-Check-Amount-Txtfild'),
+                                  controller: _depositAmountTxtedCtrl,
+                                  cursorColor: Colors.green,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      errorStyle: TextStyle(
+                                          color: Colors.red, fontSize: 12),
+                                      prefixIcon:
+                                          Icon(Icons.attach_money_outlined),
+                                      suffixStyle:
+                                          TextStyle(color: Colors.orangeAccent),
+                                      labelText: 'Deposit Amount'),
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
+                                  textInputAction: TextInputAction.next,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^(\d+)?\.?\d{0,2}')),
+                                  ],
+                                  onFieldSubmitted: (val) {
+                                    pressenterAction
+                                        .onDepositCheckAmountSavedListener(val);
+                                    FocusScope.of(context)
+                                        .requestFocus(_emailFNode);
+                                  },
+                                  validator: (value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        double.parse(value) == 0.0) {
+                                      return 'Please provide a value.';
+                                    }
+                                  },
+                                  onSaved: (val) => pressenterAction
+                                      .onDepositCheckAmountSavedListener(
+                                          val ?? ''),
+                                ),
+                              ),
+                            ),
+                            if (viewModel.depositAmountStatus != null &&
+                                viewModel.depositAmountStatus!.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: Text(
+                                  viewModel.depositAmountStatus!,
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 12),
+                                ),
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Theme(
+                                data: Theme.of(context).copyWith(
+                                  primaryColor: Colors.green,
+                                  textSelectionTheme: TextSelectionThemeData(
+                                      selectionHandleColor: Colors.green,
+                                      selectionColor: Colors.green),
+                                ),
+                                child: TextFormField(
+                                  key: Key('Deposit-Check-Email-Txtfild'),
+                                  controller: _userEmailTxtedCtrl,
+                                  focusNode: _emailFNode,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      prefixIcon: Icon(Icons.email_outlined),
+                                      errorStyle: TextStyle(
+                                          color: Colors.red, fontSize: 12),
+                                      suffixStyle:
+                                          TextStyle(color: Colors.orangeAccent),
+                                      labelText: 'Email Address'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.done,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please provide a value.';
+                                    }
+                                    return null;
+                                  },
+                                  onFieldSubmitted: (val) {
+                                    pressenterAction
+                                        .onUserEmailSavedListener(val);
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+                                  },
+                                  onSaved: (val) => pressenterAction
+                                      .onUserEmailSavedListener(val ?? ''),
+                                ),
+                              ),
+                            ),
+                            if (viewModel.userEmailStatus != null &&
+                                viewModel.userEmailStatus!.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: Text(
+                                  viewModel.userEmailStatus!,
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 12),
+                                ),
+                              ),
+                          ],
+                        )),
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 5.0)
+                        ]),
+                    child: Center(
+                      child: Text(
+                        '''Deposit by 11 PM ET and your money will typical be available for withdrawl by next business day.''',
+                        style: TextStyle(color: Colors.black54, fontSize: 17),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     child: SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: OutlinedButton(
                         key: Key('Deposit-Check-Confirm-Button'),
-                        child: Text('Confirm'),
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            side: BorderSide(width: 2, color: Colors.green)),
                         onPressed: () {
                           pressenterAction.onTapConfirmBtn(
                               context, _form, viewModel);
                         },
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20),
                 ],
               )),
         ));
