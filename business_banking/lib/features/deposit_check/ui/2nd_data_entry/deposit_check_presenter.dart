@@ -77,22 +77,6 @@ class DepositCheckPressenterActions {
     }
   }
 
-  // void onTapConfirmBtn0(BuildContext context, GlobalKey<FormState> form,
-  //     DepositCheckViewModel viewModel) {
-  //   if (form.currentState != null) {
-  //     final isValid = form.currentState!.validate();
-  //     if (isValid == false) return;
-  //     form.currentState!.save();
-  //     if (viewModel.userInputStatus == UserInputStatus.valid) {
-  //       bloc.depositCheckEventPipe.send(SubmitDepositCheckEvent());
-
-  //       navigateToDepositCheckConfirm(context);
-  //     } else {
-  //       _showErrorDialog(context);
-  //     }
-  //   }
-  // }
-
   void showErrorDialog(BuildContext context,
       {String title = 'Invalid', String msg = 'Please fill all fields.'}) {
     showDialog(

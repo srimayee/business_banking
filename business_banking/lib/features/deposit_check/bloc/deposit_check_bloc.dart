@@ -77,15 +77,9 @@ class DepositCheckBloc extends Bloc {
     } else if (event is ResetDepositCheckViewModelEvent) {
       _depositCheckConfirmUseCase!.resetViewModel();
     }
-    // else if (event is ResetServiceStatusEvent) {
-    //   _depositCheckUseCase!.resetServiceStatus();
-    // }
   }
 
   void depositCheckCardEventPipeHandler(DepositCheckCardEvent event) {
-    // if (event is ResetServiceStatusEvent) {
-    //   _depositCheckUseCase!.resetServiceStatus();
-    // } else
     if (event is UpdateAccountInfoEvent) {
       _depositCheckUseCase!.updateAccountInfo(event.accountInfo);
     }
@@ -95,8 +89,5 @@ class DepositCheckBloc extends Bloc {
     if (event is ResetDepositCheckViewModelEvent) {
       _depositCheckConfirmUseCase!.resetViewModel();
     }
-    // else if (event is ResetServiceStatusEvent) {
-    //   _depositCheckUseCase!.resetServiceStatus();
-    // }
   }
 }

@@ -291,7 +291,6 @@ class _failedWidget extends StatelessWidget {
               ],
             ),
           ),
-
           Divider(),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -323,15 +322,6 @@ class _failedWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Divider(),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Text(
-          //     '''Please try again.''',
-          //     style: TextStyle(color: Colors.black54, fontSize: 15),
-          //     textAlign: TextAlign.left,
-          //   ),
-          // ),
           SizedBox(height: 50),
         ],
       )),

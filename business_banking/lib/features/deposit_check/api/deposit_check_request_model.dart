@@ -1,8 +1,6 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 
-class DepositCheckServiceRequestModel extends //Equatable
-    //implements
-    JsonRequestModel {
+class DepositCheckServiceRequestModel extends JsonRequestModel {
   final String accountNumber;
   final double depositAmount;
   final String frontCheckImg;
@@ -23,8 +21,4 @@ class DepositCheckServiceRequestModel extends //Equatable
       'backCheckImg': backCheckImg
     };
   }
-
-  // @override
-  // List<Object> get props =>
-  //     [accountNumber, depositAmount, frontCheckImg, backCheckImg];
 }
