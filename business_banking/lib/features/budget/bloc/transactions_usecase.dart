@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:business_banking/features/budget/bloc/transactions_service_adapter.dart';
 import 'package:business_banking/features/budget/model/budget_entity.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
@@ -7,6 +9,10 @@ import 'package:business_banking/locator.dart';
 import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:async';
+import 'dart:io' as dio;
+import 'package:path_provider/path_provider.dart';
 
 class TransactionsUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
@@ -84,6 +90,19 @@ class TransactionsUseCase extends UseCase {
           serviceStatus: TransactionsServiceStatus.success,
           chartData: updatedEntity.chartData));
     }
+  }
+
+  Future<dio.File> _saveAsPNG(Uint8List data) async {
+    final filename = "IMG_${DateTime.now().millisecondsSinceEpoch}.png";
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    dio.File file = new dio.File('$dir/$filename');
+    await file.writeAsBytes(data);
+    return file;
+  }
+
+  Future<String> pngChartImagePath(Uint8List data) async {
+    dio.File path = await _saveAsPNG(data);
+    return path.path;
   }
 
   static Color _segmentColorPalette(int index) {

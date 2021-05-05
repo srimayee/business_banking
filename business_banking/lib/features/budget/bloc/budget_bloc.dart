@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:business_banking/features/budget/bloc/accounts_card_usecase.dart';
 import 'package:business_banking/features/budget/bloc/transactions_usecase.dart';
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
@@ -8,6 +10,7 @@ class BudgetBloc extends Bloc {
   final budgetChartViewModelPipe = Pipe<BudgetViewModel>();
   final chosenCategoryPipe = Pipe<String>();
   final selectedRowIndexPipe = Pipe<int>();
+  final chartPipe = Pipe<Uint8List>();
 
   late AccountsCardUseCase _budgetCardUseCase;
   late TransactionsUseCase _budgetChartUseCase;
@@ -18,6 +21,7 @@ class BudgetBloc extends Bloc {
     budgetChartViewModelPipe.dispose();
     chosenCategoryPipe.dispose();
     selectedRowIndexPipe.dispose();
+    chartPipe.dispose();
   }
 
   BudgetBloc({
@@ -41,6 +45,8 @@ class BudgetBloc extends Bloc {
 
     // account selection event
     selectedRowIndexPipe.receive.listen(didSelectRowAtIndex);
+
+    chartPipe.receive.listen(shareChart);
   }
 
   void _didApplyFilter(String value) {
@@ -49,5 +55,9 @@ class BudgetBloc extends Bloc {
 
   void didSelectRowAtIndex(int index) {
     _budgetCardUseCase.selectedAccountWithRowIndex(index);
+  }
+
+  Future<String> shareChart(Uint8List data) async {
+    return _budgetChartUseCase.pngChartImagePath(data);
   }
 }

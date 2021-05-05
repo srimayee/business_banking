@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:business_banking/features/budget/model/budget_view_model.dart';
 import 'package:business_banking/features/budget/ui/budget_feature_actions.dart';
 import 'package:business_banking/features/budget/ui/widgets/account_info_widget.dart';
@@ -5,9 +7,13 @@ import 'package:business_banking/features/budget/ui/widgets/list_transactions_wi
 import 'package:business_banking/features/budget/ui/widgets/donut_auto_label_chart.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as ui;
+import 'package:share/share.dart';
 
 class ViewChartScreen extends Screen {
   final _scaffoldkey = new GlobalKey<ScaffoldState>();
+  final _chartkey = new GlobalKey();
   final BudgetViewModel viewModel;
   final BudgetFeatureActions actions;
 
@@ -57,6 +63,15 @@ class ViewChartScreen extends Screen {
     );
   }
 
+  Future<Uint8List> convertWidgetToImage(containerKey) async {
+    RenderRepaintBoundary renderRepaintBoundary =
+        containerKey.currentContext.findRenderObject();
+    ui.Image boxImage = await renderRepaintBoundary.toImage(pixelRatio: 1.0);
+    ByteData byteData =
+        (await boxImage.toByteData(format: ui.ImageByteFormat.png))!;
+    return byteData.buffer.asUint8List();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,31 +95,56 @@ class ViewChartScreen extends Screen {
               style: TextStyle(fontSize: 18),
             )),
           ),
-          Container(
-            child: ConstrainedBox(
-                constraints: BoxConstraints.loose(
-                  Size(
-                    double.infinity,
-                    MediaQuery.of(context).size.width / 1.8,
+          RepaintBoundary(
+            key: _chartkey,
+            child: Container(
+              child: ConstrainedBox(
+                  constraints: BoxConstraints.loose(
+                    Size(
+                      double.infinity,
+                      MediaQuery.of(context).size.width / 1.8,
+                    ),
                   ),
-                ),
-                child: DonutAutoLabelChart(
-                    seriesList: viewModel.chartData, animate: false)),
+                  child: DonutAutoLabelChart(
+                      seriesList: viewModel.chartData, animate: false)),
+            ),
           ),
           Divider(),
-          OutlinedButton(
-            onPressed: () {
-              _scaffoldkey.currentState?.showBottomSheet(
-                (context) {
-                  return bottomSheet();
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              OutlinedButton(
+                onPressed: () {
+                  _scaffoldkey.currentState?.showBottomSheet(
+                    (context) {
+                      return bottomSheet();
+                    },
+                  );
                 },
-              );
-            },
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0))),
-            ),
-            child: const Text("Select Category"),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0))),
+                ),
+                child: const Text("Select Category"),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  Future.delayed(
+                    Duration(seconds: 2),
+                    () => convertWidgetToImage(_chartkey).then(
+                      (value) => {
+                        actions.shareChart(context, value),
+                      },
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0))),
+                ),
+                child: const Text("Share Chart"),
+              ),
+            ],
           ),
           ListTransactionsWidget(viewModel: this.viewModel),
         ],
