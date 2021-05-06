@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:business_banking/features/deposit_check/bloc/deposit_check_bloc.dart';
 import 'package:business_banking/features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_presenter.dart';
 import 'package:business_banking/features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -17,7 +18,7 @@ void main() {
   setUp(() {
     mockPressenterAction = MockConfirmPressenterAction();
     testWidget = MaterialApp(
-      home: BlocProvider<DepositCheckBlockMock>(
+      home: BlocProvider<DepositCheckBloc>(
         create: (_) => DepositCheckBlockMock(),
         child: DepositCheckConfirmWidget(),
       ),
@@ -33,10 +34,6 @@ void main() {
 
       final widgetType = find.byType(DepositCheckConfirmPresenter);
       expect(widgetType, findsOneWidget);
-    });
-
-    test('description', () {
-      // verify(mockPressenterAction.popNavigationListener(any)).called(1);
     });
   });
 }

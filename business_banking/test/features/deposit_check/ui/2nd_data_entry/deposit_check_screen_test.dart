@@ -86,8 +86,6 @@ void main() {
       expect(find.text('Front of Check'), findsOneWidget);
       expect(find.text('Back of Check'), findsOneWidget);
 
-      // camera icon
-      expect(find.byIcon(Icons.camera_alt), findsWidgets);
       // Deposit Limit
       expect(
           find.text(
@@ -138,7 +136,8 @@ void main() {
 
       expect(widget, findsOneWidget);
       await tester.tap(widget);
-      verify(mockPressenterAction.onTapConfirmBtn(any, any, any)).called(1);
+//      verify(mockPressenterAction.onTapConfirmBtn(any, any, any)).called(1);
+      verify(mockPressenterAction.onTapConfirmBtn(any, any)).called(1);
     });
 
     testWidgets(

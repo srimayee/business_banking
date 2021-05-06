@@ -18,18 +18,6 @@ class DepositCheckPresenter extends Presenter<DepositCheckBloc,
   @override
   DepositCheckScreen buildScreen(BuildContext context, DepositCheckBloc bloc,
       DepositCheckViewModel viewModel) {
-    // SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
-    //   if (viewModel.serviceResponseStatus == ServiceResponseStatus.succeed) {
-    //     //pressenterAction.navigateToDepositCheckConfirm(context);
-    //     CFRouterScope.of(context)
-    //         .push(BusinessBankingRouter.depositCheckConfirmRoute);
-    //   } else if (viewModel.serviceResponseStatus !=
-    //           ServiceResponseStatus.succeed &&
-    //       viewModel.userInputStatus == UserInputStatus.valid) {
-    //     _showErrorDialog(context, bloc);
-    //   }
-    // });
-
     return DepositCheckScreen(
       viewModel: viewModel,
       pressenterAction: DepositCheckPressenterActions(
@@ -37,27 +25,6 @@ class DepositCheckPresenter extends Presenter<DepositCheckBloc,
       ),
     );
   }
-
-  // void _showErrorDialog(BuildContext context, DepositCheckBloc bloc) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (_) => AlertDialog(
-  //       title: Text('Error'),
-  //       content: Text('Submit Failed'),
-  //       actions: <Widget>[
-  //         TextButton(
-  //           onPressed: () {
-  //             bloc.resetServiceStatusPipe.launch();
-  //             Navigator.of(context).pop();
-  //             // CFRouterScope.of(context).pop();
-  //           },
-  //           child: Text('OK'),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
 }
 
 class DepositCheckPressenterActions {
@@ -84,42 +51,33 @@ class DepositCheckPressenterActions {
   /// listens saved action on Deposit Amount
   onDepositCheckAmountSavedListener(String amountString) {
     double? amount = double.tryParse(amountString);
-    if (amountString.isNotEmpty && (amount != null && amount > 0)) {
+    if (amountString.isNotEmpty && (amount != null && amount >= 0)) {
       bloc.depositCheckEventPipe.send(UpdateCheckAmountEvent(amount));
     }
   }
 
   /// listens action on pick front image of check
   void onPickFrontImg() async {
-    // bloc.frontImgPipe.send('front');
     bloc.depositCheckEventPipe.send(UpdateCheckImgEvent(CheckImageType.front));
   }
 
   /// listens action on pick back image of check
   void onPickBackImg() async {
-    // bloc.backImgPipe.send('back');
     bloc.depositCheckEventPipe.send(UpdateCheckImgEvent(CheckImageType.back));
   }
 
   /// listens action on Confirm Button
-  void onTapConfirmBtn(BuildContext context, GlobalKey<FormState> form,
-      DepositCheckViewModel viewModel) {
-    if (form.currentState != null) {
-      final isValid = form.currentState!.validate();
-      if (isValid == false) return;
-      form.currentState!.save();
-      if (viewModel.userInputStatus == UserInputStatus.valid) {
-        bloc.depositCheckEventPipe.send(SubmitDepositCheckEvent());
-        // bloc.submitPipe.launch();
+  void onTapConfirmBtn(BuildContext context, DepositCheckViewModel viewModel) {
+    if (viewModel.userInputStatus == UserInputStatus.valid) {
+      bloc.depositCheckEventPipe.send(SubmitDepositCheckEvent());
 
-        navigateToDepositCheckConfirm(context);
-      } else {
-        _showErrorDialog(context);
-      }
+      navigateToDepositCheckConfirm(context);
+    } else {
+      showErrorDialog(context);
     }
   }
 
-  void _showErrorDialog(BuildContext context,
+  void showErrorDialog(BuildContext context,
       {String title = 'Invalid', String msg = 'Please fill all fields.'}) {
     showDialog(
       context: context,
@@ -130,26 +88,6 @@ class DepositCheckPressenterActions {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          )
-        ],
-      ),
-    );
-  }
-
-  void showErrorDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Error'),
-        content: Text('Submit Failed'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              //bloc.resetServiceStatusPipe.launch();
-              Navigator.of(context).pop();
-              // CFRouterScope.of(context).pop();
             },
             child: Text('OK'),
           )

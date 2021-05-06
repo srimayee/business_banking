@@ -62,11 +62,23 @@ class _succeedWidget extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Deposit to " + viewModel.accountInfo.accountNickname,
-              style: TextStyle(color: Colors.black54, fontSize: 15),
-              textAlign: TextAlign.left,
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Image.asset('assets/images/bank-check.png',
+                    scale: 10, fit: BoxFit.cover),
+                SizedBox(
+                  width: 15,
+                ),
+                Flexible(
+                  child: Text(
+                    "Deposit to " + viewModel.accountInfo.accountNickname,
+                    style: TextStyle(color: Colors.black54, fontSize: 20),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
             ),
           ),
           Divider(),
@@ -77,11 +89,25 @@ class _succeedWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Front of Check'),
+                  Text(
+                    'Front of Check',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Container(
                     height: 150,
                     width: double.infinity,
-                    color: Colors.grey[300],
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 5.0)
+                        ]),
                     child: viewModel.frontCheckImg.isNotEmpty
                         ? Stack(
                             alignment: Alignment.center,
@@ -114,11 +140,25 @@ class _succeedWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Back of Check'),
+                  Text(
+                    'Back of Check',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Container(
                     height: 150,
                     width: double.infinity,
-                    color: Colors.grey[300],
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 5.0)
+                        ]),
                     child: viewModel.backCheckImg.isNotEmpty
                         ? Stack(
                             alignment: Alignment.center,
@@ -153,7 +193,13 @@ class _succeedWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Deposit Amount'),
+                  Text(
+                    'Deposit Amount',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Text(
                     '\$${viewModel.depositAmount}',
                     style: TextStyle(
@@ -166,19 +212,39 @@ class _succeedWidget extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text('Reference Number'),
+                  Text(
+                    'Reference Number',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                   Text(viewModel.referenceNumber),
                 ],
               ),
             ),
           ),
           Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              '''Money from deposits may not be available for immediate withdrawal. Our general policy is to allow you to withdraw money deposited in your account no later than the first business day after the day we receive your deposit.''',
-              style: TextStyle(color: Colors.black54, fontSize: 15),
-              textAlign: TextAlign.left,
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.1), blurRadius: 5.0)
+                ]),
+            child: Center(
+              child: Text(
+                '''Money from deposits may not be available for immediate withdrawal. Our general policy is to allow you to withdraw money deposited in your account no later than the first business day after the day we receive your deposit.''',
+                style: TextStyle(color: Colors.black54, fontSize: 17),
+                textAlign: TextAlign.left,
+              ),
             ),
           ),
           SizedBox(height: 50),
@@ -206,87 +272,26 @@ class _failedWidget extends StatelessWidget {
         children: [
           SizedBox(height: 30),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Deposit to " + viewModel.accountInfo.accountNickname,
-              style: TextStyle(color: Colors.black54, fontSize: 15),
-              textAlign: TextAlign.left,
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Image.asset('assets/images/bank-check.png',
+                    scale: 10, fit: BoxFit.cover),
+                SizedBox(
+                  width: 15,
+                ),
+                Flexible(
+                  child: Text(
+                    "Deposit to " + viewModel.accountInfo.accountNickname,
+                    style: TextStyle(color: Colors.black54, fontSize: 20),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
             ),
           ),
           Divider(),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Container(
-          //     height: 200,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       children: [
-          //         Text('Front of Check'),
-          //         Container(
-          //           height: 150,
-          //           width: double.infinity,
-          //           color: Colors.grey[300],
-          //           child: viewModel.frontCheckImg.isNotEmpty
-          //               ? Stack(
-          //                   alignment: Alignment.center,
-          //                   children: [
-          //                     Image.memory(
-          //                       base64.decode(viewModel.frontCheckImg),
-          //                       fit: BoxFit.fill,
-          //                     ),
-          //                     Icon(
-          //                       Icons.cancel,
-          //                       color: Colors.red,
-          //                       size: 50,
-          //                     )
-          //                   ],
-          //                 )
-          //               : Column(
-          //                   mainAxisAlignment: MainAxisAlignment.center,
-          //                   children: [Icon(Icons.camera_alt)],
-          //                 ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Container(
-          //     height: 200,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       children: [
-          //         Text('Back of Check'),
-          //         Container(
-          //           height: 150,
-          //           width: double.infinity,
-          //           color: Colors.grey[300],
-          //           child: viewModel.backCheckImg.isNotEmpty
-          //               ? Stack(
-          //                   alignment: Alignment.center,
-          //                   children: [
-          //                     Image.memory(
-          //                       base64.decode(viewModel.backCheckImg),
-          //                       fit: BoxFit.fill,
-          //                     ),
-          //                     Icon(
-          //                       Icons.check,
-          //                       color: Colors.green,
-          //                       size: 50,
-          //                     )
-          //                   ],
-          //                 )
-          //               : Column(
-          //                   mainAxisAlignment: MainAxisAlignment.center,
-          //                   children: [Icon(Icons.camera_alt)],
-          //                 ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // Divider(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -317,15 +322,6 @@ class _failedWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Divider(),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Text(
-          //     '''Please try again.''',
-          //     style: TextStyle(color: Colors.black54, fontSize: 15),
-          //     textAlign: TextAlign.left,
-          //   ),
-          // ),
           SizedBox(height: 50),
         ],
       )),
