@@ -16,7 +16,7 @@ void main() {
       "lastFour": '1234',
       "paymentValue": 100.00,
       "paymentStatus": "Rejected",
-      "nextClosingDate": "Insufficient Funds.",
+      "reasonRejected": "Insufficient Funds.",
     };
 
     final service = CreditCardPaymentService();

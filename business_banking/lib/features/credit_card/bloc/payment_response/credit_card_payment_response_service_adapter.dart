@@ -11,13 +11,13 @@ class CreditCardPaymentResponseServiceAdapter extends ServiceAdapter<CreditCardP
   @override
 
   CreditCardPaymentResponseServiceRequestModel createRequest(CreditCardPaymentResponseEntity entity) {
-    print("CreditCardPaymentResponseServiceAdapter.createRequest entity.number = " + entity.number);
+    //print("CreditCardPaymentResponseServiceAdapter.createRequest entity.number = " + entity.number);
     return CreditCardPaymentResponseServiceRequestModel(number: entity.number, paymentValue: entity.paymentValue);
   }
 
   @override
   CreditCardPaymentResponseEntity createEntity(CreditCardPaymentResponseEntity entityModel, CreditCardPaymentResponseServiceResponseModel responseModel) {
-    print("CreditCardPaymentResponseServiceAdapter.createEntity");
+    //print("CreditCardPaymentResponseServiceAdapter.createEntity");
     return entityModel.merge(
       number: responseModel.number,
       name: responseModel.name,
@@ -28,21 +28,4 @@ class CreditCardPaymentResponseServiceAdapter extends ServiceAdapter<CreditCardP
     ) as CreditCardPaymentResponseEntity;
   }
 
-  /*
-
-  /*
-  @override
-  LoginServiceRequestModel createRequest(LoginEntity entity) {
-    return LoginServiceRequestModel(
-        userName: entity.userName, password: entity.password);
-  }
-
-  @override
-  LoginEntity createEntity(initialEntity, responseModel) {
-    return initialEntity.merge(errors: <EntityFailure>[]) as LoginEntity;
-  }
-
-   */
-
-   */
 }

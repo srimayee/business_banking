@@ -11,14 +11,12 @@ class CreditCardPaymentRequestUseCase extends UseCase {
   final ViewModelCallback<ViewModel> _viewModelCallBack;
   CreditCardPaymentRequestUseCase(ViewModelCallback<ViewModel> viewModelCallBack) : _viewModelCallBack = viewModelCallBack;
 
-  void create() async {
-    print("CreditCardPaymentRequestUseCase.create");
+  Future<void> create() async {
+    // print("CreditCardPaymentRequestUseCase.create");
     _scopeCreditCardEntity = ExampleLocator().repository.create<CreditCardEntity>(CreditCardEntity(), _notifySubscribers);
     _scopeCreditCardPaymentResponseEntity = ExampleLocator().repository.create<CreditCardPaymentResponseEntity>(CreditCardPaymentResponseEntity(), _notifySubscribers);
     CreditCardEntity creditCardEntity = ExampleLocator().repository.get(_scopeCreditCardEntity!);
-
-    print("CreditCardPaymentRequestUseCase. creditCardEntity " + creditCardEntity.props.toString());
-
+    // print("CreditCardPaymentRequestUseCase. creditCardEntity " + creditCardEntity.props.toString());
     updateCreditCardInfo(creditCardEntity);
   }
 
@@ -52,23 +50,18 @@ class CreditCardPaymentRequestUseCase extends UseCase {
             lastFour: creditCardEntity.lastFour,
         ),
     );
-
     ExampleLocator().repository.update(_scopeCreditCardPaymentResponseEntity!, creditCardPaymentResponseEntity.merge(paymentValue: 0.00));
-
     _viewModelCallBack(buildViewModel());
   }
 
   updatePaymentValue(double paymentValue) {
     if (_scopeCreditCardPaymentResponseEntity == null) return;
-
     CreditCardPaymentResponseEntity creditCardPaymentResponseEntity = ExampleLocator().repository.get(_scopeCreditCardPaymentResponseEntity!);
     ExampleLocator().repository.update(_scopeCreditCardPaymentResponseEntity!, creditCardPaymentResponseEntity.merge(paymentValue: paymentValue));
     _viewModelCallBack(buildViewModel());
   }
 
   String validatePaymentInformation(double paymentValue) {
-    //if (_scopeCreditCardPaymentResponseEntity == null) return "Not initialized!";
-    //CreditCardPaymentResponseEntity creditCardPaymentResponseEntity = ExampleLocator().repository.get(_scopeCreditCardPaymentResponseEntity!);
     if (paymentValue <= 0.0) {
        return "Please inform the payment amount!";
     }

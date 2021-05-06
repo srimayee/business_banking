@@ -26,4 +26,29 @@ void main() {
       viewModel.reasonRejected
     ]);
   });
+
+  test('CreditCardPaymentResponseViewModel merge', () async {
+
+    final viewModel = CreditCardPaymentResponseViewModel(
+        number: '1111222233334444',
+        name: 'My Credit Card',
+        lastFour: '4444',
+        paymentValue: 0.00,
+        paymentStatus: 'Rejected',
+        reasonRejected: 'Rejected!'
+    );
+
+    var viewModelMerged = CreditCardPaymentResponseViewModel.merge(viewModel);
+    expect(viewModel, viewModelMerged);
+
+    viewModelMerged = CreditCardPaymentResponseViewModel.merge(viewModel,
+          paymentValue: 100.00,
+          paymentStatus: 'Rejected',
+          reasonRejected: 'No funds!'
+    );
+    expect(viewModelMerged.paymentValue, 100.00);
+    expect(viewModelMerged.paymentStatus, 'Rejected');
+    expect(viewModelMerged.reasonRejected, 'No funds!');
+  });
+  
 }
