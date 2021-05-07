@@ -8,6 +8,7 @@ import 'features/credit_card/ui/payment_request/credit_card_payment_request_widg
 import 'features/credit_card/ui/payment_response/credit_card_payment_response_widget.dart';
 import 'features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
 import 'features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
+import 'features/registration_success_screen/ui/registration_success_screen.dart';
 
 abstract class BusinessBankingRouter {
   static const String initialRoute = '/';
@@ -25,6 +26,7 @@ abstract class BusinessBankingRouter {
       '/creditCardPaymentResponse';
   static const String depositCheckRoute = '/depositCheck';
   static const String depositCheckConfirmRoute = '/depositCheckConfirm';
+  static const String successScreen = '/successScreen';
 
   static Widget generate(String name) {
     switch (name) {
@@ -52,6 +54,8 @@ abstract class BusinessBankingRouter {
       case depositCheckConfirmRoute:
         return DepositCheckConfirmWidget();
 
+      case successScreen:
+        return SuccessScreen();
       default:
         return const PageNotFound();
     }
