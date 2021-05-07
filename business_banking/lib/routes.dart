@@ -16,7 +16,7 @@ abstract class BusinessBankingRouter {
   static const String accountDetailRoute = '/accountDetail';
   static const String customerDetailRoute = '/customerDetail';
   static const String transactionPieChartRoute = '/transactionPieChart';
-  static const String transactionBarChartRoute = '/transactionBarChart';
+  static const String cardDetailsRoute = '/cardDetails';
 
   static Widget generate(String name) {
     switch (name) {
@@ -38,7 +38,7 @@ abstract class BusinessBankingRouter {
       case transactionPieChartRoute:
         return TransactionChartWidget();
 
-      case transactionBarChartRoute:
+      case cardDetailsRoute:
         return TransactionBarChartWidget();
 
       case customerDetailRoute:

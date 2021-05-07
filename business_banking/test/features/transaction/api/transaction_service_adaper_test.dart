@@ -9,7 +9,7 @@ void main() {
     final entity = TransactionServiceAdapter().createEntity(
         TransactionEntity(),
         TransactionServiceResponseModelList.fromJson({
-          "accountTransactions": [
+          "cardTransactions": [
             {
               "debit": true,
               "transactionTitle": "Boots",

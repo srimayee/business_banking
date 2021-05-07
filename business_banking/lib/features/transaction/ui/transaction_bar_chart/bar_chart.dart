@@ -22,7 +22,7 @@ class BarChart extends StatelessWidget {
         primaryMeasureAxis:
             charts.NumericAxisSpec(tickFormatterSpec: simpleCurrencyFormatter),
         defaultRenderer: charts.BarRendererConfig(
-            cornerStrategy: const charts.ConstCornerStrategy(30)));
+            cornerStrategy: const charts.ConstCornerStrategy(08)));
   }
 
   List<charts.Series<TransactionModel, String>> _generateTransactionData() {
@@ -32,7 +32,7 @@ class BarChart extends StatelessWidget {
       charts.Series<TransactionModel, String>(
         id: 'Transactions-Bar',
         domainFn: (TransactionModel transaction, _) =>
-            DateFormat('MM/dd/yyyy').format(transaction.date),
+            DateFormat('MM/dd').format(transaction.date),
         measureFn: (TransactionModel transaction, _) =>
             transaction.transactionAmount,
         data: data,

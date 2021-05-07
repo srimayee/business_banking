@@ -9,7 +9,7 @@ class TransactionService extends EitherService<JsonRequestModel,
       : super(
             method: RestMethod.get,
             restApi: ExampleLocator().api,
-            path: 'account-transactions');
+            path: 'card-usage');
 
   @override
   TransactionServiceResponseModelList parseResponse(

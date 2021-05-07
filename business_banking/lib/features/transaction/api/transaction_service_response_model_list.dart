@@ -10,7 +10,7 @@ class TransactionServiceResponseModelList extends Equatable
   TransactionServiceResponseModelList.fromJson(Map<String, dynamic> json)
       : transactionDetailEntityModelResponseList =
             List<TransactionServiceResponseModel>.from(
-                  json['accountTransactions']?.map((transactionsJSONObject) =>
+                  json['cardTransactions']?.map((transactionsJSONObject) =>
                       TransactionServiceResponseModel.fromJson(
                           transactionsJSONObject)),
                 ) ??

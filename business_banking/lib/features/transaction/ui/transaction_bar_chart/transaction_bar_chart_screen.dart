@@ -36,24 +36,33 @@ class TransactionBarChartScreen extends Screen {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText("Transaction Pie Chart"),
+            AutoSizeText("Card Transactions"),
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: const EdgeInsets.all(8.0),
-              child:
-                  Card(elevation: 5.0, child: BarChart(viewModel: viewModel)),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AutoSizeText('Weekly Card Usage', maxFontSize: 30.0, minFontSize: 20, style: TextStyle(color: Colors.green.shade600, fontWeight: FontWeight.w700),),
             ),
-          ),
-          Expanded(
+            Expanded(
+              flex: 2,
               child: Container(
-                  margin: const EdgeInsets.all(8.0), child: CategoryColors()))
-        ],
+                margin: const EdgeInsets.all(8.0),
+                child:
+                    Card(elevation: 8.0, child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BarChart(viewModel: viewModel),
+                    )),
+              ),
+            ),
+            // Expanded(
+            //     child: Container(
+            //         margin: const EdgeInsets.all(8.0), child: CategoryColors()))
+          ],
+        ),
       ),
     );
   }

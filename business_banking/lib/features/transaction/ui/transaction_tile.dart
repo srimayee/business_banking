@@ -13,15 +13,15 @@ class TransactionTile extends StatelessWidget {
     TransactionCategory category = EnumToString.fromString(
         TransactionCategory.values, viewModel.transactionCategory);
     return Card(
-        elevation: 2,
+        elevation: 5,
         child: ListTile(
           contentPadding: EdgeInsets.zero,
           title: Row(
             children: [
               Container(
                 color: category.color,
-                height: 25,
-                width: 2,
+                height: 20,
+                width: 3,
                 margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               ),
               Text(viewModel.transactionTitle),
