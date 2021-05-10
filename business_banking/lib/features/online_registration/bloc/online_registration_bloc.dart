@@ -6,7 +6,7 @@ import 'package:business_banking/features/online_registration/model/online_regis
 import 'package:clean_framework/clean_framework.dart';
 
 class OnlineRegistrationBloc extends Bloc {
-  late OnlineRegistrationUseCase? _onlineRegistrationUseCase;
+  OnlineRegistrationUseCase? _onlineRegistrationUseCase;
   OnlineRegistrationSuccessUseCase? _onlineRegistrationSuccessUseCase;
 
   final onlineRegistrationViewModelPipe = Pipe<OnlineRegistrationViewModel>();
@@ -23,18 +23,22 @@ class OnlineRegistrationBloc extends Bloc {
       OnlineRegistrationSuccessUseCase? onlineRegistrationSuccessUseCase}) {
     _onlineRegistrationUseCase = onlineRegistrationUseCase ??
         OnlineRegistrationUseCase(onlineRegistrationViewModelPipe.send);
-    onlineRegistrationViewModelPipe.whenListenedDo(() {
-      _onlineRegistrationUseCase!.execute();
-    });
+    onlineRegistrationViewModelPipe.whenListenedDo(
+      () {
+        _onlineRegistrationUseCase!.execute();
+      },
+    );
     onlineRegistrationEventPipe.receive
         .listen(onlineRegistrationEventPipeHandler);
 
     _onlineRegistrationSuccessUseCase = onlineRegistrationSuccessUseCase ??
         OnlineRegistrationSuccessUseCase(
             onlineRegistrationSuccessViewModelPipe.send);
-    onlineRegistrationSuccessViewModelPipe.whenListenedDo(() {
-      _onlineRegistrationSuccessUseCase!.execute();
-    });
+    onlineRegistrationSuccessViewModelPipe.whenListenedDo(
+      () {
+        _onlineRegistrationSuccessUseCase!.execute();
+      },
+    );
     // onlineRegistrationSuccessEventPipe.receive
     //     .listen(onlineRegistrationSuccessEventPipeHandler);
   }

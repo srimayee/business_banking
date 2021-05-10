@@ -6,7 +6,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class OnlineRegistrationUseCase extends UseCase {
-  late final ViewModelCallback<OnlineRegistrationViewModel> _viewModelCallBack;
+  ViewModelCallback<OnlineRegistrationViewModel> _viewModelCallBack;
   RepositoryScope? _scope;
 
   OnlineRegistrationUseCase(
@@ -27,30 +27,36 @@ class OnlineRegistrationUseCase extends UseCase {
     _notifySubscribers(entity);
   }
 
-  void _notifySubscribers(entity) {
-    _viewModelCallBack(
-        buildViewModelForServiceUpdate(entity, isResetAction: true));
+  void _notifySubscribers(entity,
+      {bool isResetAction = true, bool isUserInputValid = true}) {
+    _viewModelCallBack(buildViewModelForServiceUpdate(entity,
+        isResetAction: isResetAction, isUserInputValid: isUserInputValid));
   }
 
-  void updateCardHolderName(String cardHolderName) {
+  OnlineRegistrationEntity getEntity() {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+    return ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+  }
+
+  void updateRepository(updatedEntity) {
+    ExampleLocator().repository.update<OnlineRegistrationEntity>(
+        _scope!, updatedEntity as OnlineRegistrationEntity);
+  }
+
+  void updateCardHolderName(String cardHolderName) {
+    final updatedEntity = getEntity().merge(cardHolderName: cardHolderName);
+    updateRepository(updatedEntity);
     if (cardHolderName.contains(RegExp(r"^[a-zA-Z ]*$")) == true) {
-      final updatedEntity = entity.merge(cardHolderName: cardHolderName);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: '',
           inputStatusType: InputStatusType.cardHolderName,
           isUserInputValid: true));
     } else {
-      final updatedEntity = entity.merge(cardHolderName: cardHolderName);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: 'Please, provide a valid name.',
           inputStatusType: InputStatusType.cardHolderName,
           isUserInputValid: false));
@@ -58,26 +64,19 @@ class OnlineRegistrationUseCase extends UseCase {
   }
 
   void updateCreditCardNumber(String cardNumber) {
-    _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
-        new OnlineRegistrationEntity(), _notifySubscribers);
-
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+    final updatedEntity = getEntity().merge(cardNumber: cardNumber);
+    updateRepository(updatedEntity);
     if (cardNumber.contains(RegExp(
             r"^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$")) ==
         true) {
-      final updatedEntity = entity.merge(cardNumber: cardNumber);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: '',
           inputStatusType: InputStatusType.cardNumber,
           isUserInputValid: true));
     } else {
-      final updatedEntity = entity.merge(cardNumber: cardNumber);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: 'Enter valid credit card number.',
           inputStatusType: InputStatusType.cardNumber,
           isUserInputValid: false));
@@ -85,24 +84,17 @@ class OnlineRegistrationUseCase extends UseCase {
   }
 
   void updateSsnLastFourDigits(String lastFourDigits) {
-    _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
-        new OnlineRegistrationEntity(), _notifySubscribers);
-
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+    final updatedEntity = getEntity().merge(ssnLastFourDigits: lastFourDigits);
+    updateRepository(updatedEntity);
     if (lastFourDigits.contains(RegExp(r'^[0-9]{4}$')) == true) {
-      final updatedEntity = entity.merge(ssnLastFourDigits: lastFourDigits);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: '',
           inputStatusType: InputStatusType.ssnLastFourDigits,
           isUserInputValid: true));
     } else {
-      final updatedEntity = entity.merge(ssnLastFourDigits: lastFourDigits);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: 'SSN Number is not valid.',
           inputStatusType: InputStatusType.ssnLastFourDigits,
           isUserInputValid: false));
@@ -110,26 +102,19 @@ class OnlineRegistrationUseCase extends UseCase {
   }
 
   void updateEmail(String userEmail) {
-    _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
-        new OnlineRegistrationEntity(), _notifySubscribers);
-
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+    final updatedEntity = getEntity().merge(email: userEmail);
+    updateRepository(updatedEntity);
     if (userEmail.contains(RegExp(
             r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")) ==
         true) {
-      final updatedEntity = entity.merge(email: userEmail);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: '',
           inputStatusType: InputStatusType.email,
           isUserInputValid: true));
     } else {
-      final updatedEntity = entity.merge(email: userEmail);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: 'Please, provide a valid email.',
           inputStatusType: InputStatusType.email,
           isUserInputValid: false));
@@ -137,26 +122,19 @@ class OnlineRegistrationUseCase extends UseCase {
   }
 
   void updateUserPassword(String password) {
-    _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
-        new OnlineRegistrationEntity(), _notifySubscribers);
-
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
+    final updatedEntity = getEntity().merge(userPassword: password);
+    updateRepository(updatedEntity);
     if (password.contains(
             RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$")) ==
         true) {
-      final updatedEntity = entity.merge(userPassword: password);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status: '',
           inputStatusType: InputStatusType.userPassword,
           isUserInputValid: true));
     } else {
-      final updatedEntity = entity.merge(userPassword: password);
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(buildViewModelForServiceUpdate(updatedEntity,
+      _viewModelCallBack(buildViewModelForServiceUpdate(
+          updatedEntity as OnlineRegistrationEntity,
           status:
               'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
           inputStatusType: InputStatusType.userPassword,
@@ -165,26 +143,43 @@ class OnlineRegistrationUseCase extends UseCase {
   }
 
   void submitForm() {
-    _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
-        new OnlineRegistrationEntity(), _notifySubscribers);
-
-    final entity =
-        ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
     print(
-        'checkstatus : ${checkUserInputEntity(entity) == UserFormInputStatus.valid}');
-    print('entity: ${entity.cardHolderName}');
-    if (checkUserInputEntity(entity) == UserFormInputStatus.valid) {
-      final updatedEntity = entity.merge(accountNumberGenerated: '12345');
-      ExampleLocator().repository.update<OnlineRegistrationEntity>(
-          _scope!, updatedEntity as OnlineRegistrationEntity);
-      _viewModelCallBack(
-          buildViewModelForServiceUpdate(entity, isUserInputValid: true));
+        'check status : ${checkUserInputEntity(getEntity()) == UserFormInputStatus.valid}');
+    print('entity: ${getEntity().cardHolderName}');
+    if (checkUserInputEntity(getEntity()) == UserFormInputStatus.valid) {
+      final updatedEntity = getEntity().merge(accountNumberGenerated: '12345');
+      updateRepository(updatedEntity);
+      _notifySubscribers(getEntity(),
+          isUserInputValid: true, isResetAction: false);
       // ExampleLocator()
       //     .repository
       //     .runServiceAdapter(_scope!, OnlineRegistrationServiceAdapter());
     } else {
-      _viewModelCallBack(
-          buildViewModelForServiceUpdate(entity, isUserInputValid: true));
+      _notifySubscribers(getEntity(),
+          isUserInputValid: true, isResetAction: false);
+    }
+  }
+
+  UserFormInputStatus checkUserInputEntity(OnlineRegistrationEntity entity) {
+    print(
+        "Name UserFormInputStatus ${entity.cardHolderName} ${entity.cardHolderName!.isNotEmpty}");
+    print(
+        "Credit Card Number UserFormInputStatus ${entity.cardNumber} ${entity.cardNumber!.isNotEmpty}");
+    print(
+        "SSN UserFormInputStatus ${entity.ssnLastFourDigits} ${entity.ssnLastFourDigits!.length == 4}");
+    print(
+        "Email UserFormInputStatus ${entity.email} ${entity.email!.isNotEmpty}");
+    print(
+        "password UserFormInputStatus ${entity.userPassword} ${entity.userPassword!.length >= 8}");
+
+    if (entity.cardHolderName!.isNotEmpty &&
+        entity.cardNumber!.isNotEmpty &&
+        entity.email!.isNotEmpty &&
+        entity.ssnLastFourDigits!.isNotEmpty &&
+        entity.userPassword!.length >= 8) {
+      return UserFormInputStatus.valid;
+    } else {
+      return UserFormInputStatus.invalid;
     }
   }
 
@@ -246,29 +241,6 @@ class OnlineRegistrationUseCase extends UseCase {
           serviceResponseStatus: isResetAction
               ? ServiceResponseStatus.unknown
               : ServiceResponseStatus.succeed);
-    }
-  }
-
-  UserFormInputStatus checkUserInputEntity(OnlineRegistrationEntity entity) {
-    // print(
-    //     "Name UserFormInputStatus ${entity.cardHolderName} ${entity.cardHolderName!.isNotEmpty}");
-    // print(
-    //     "Credit Card Number UserFormInputStatus ${entity.cardNumber} ${entity.cardNumber!.isNotEmpty}");
-    // print(
-    //     "SSN UserFormInputStatus ${entity.ssnLastFourDigits} ${entity.ssnLastFourDigits!.length == 4}");
-    // print(
-    //     "Email UserFormInputStatus ${entity.email} ${entity.email!.isNotEmpty}");
-    print(
-        "password UserFormInputStatus ${entity.userPassword} ${entity.userPassword!.length >= 8}");
-
-    if (entity.cardHolderName!.isNotEmpty &&
-        entity.cardNumber!.isNotEmpty &&
-        entity.email!.isNotEmpty &&
-        entity.ssnLastFourDigits!.isNotEmpty &&
-        entity.userPassword!.length >= 8) {
-      return UserFormInputStatus.valid;
-    } else {
-      return UserFormInputStatus.invalid;
     }
   }
 }
