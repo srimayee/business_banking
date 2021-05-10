@@ -5,6 +5,8 @@ class Statement {
   final AccountInfoStruct accountInfo;
   final List<StatementActivity> statementActivity;
 
+  Statement({required this.accountInfo, required this.statementActivity});
+
   Statement.fromJson(Map<String, dynamic> json)
       : accountInfo = json['accountInfo'] != null
             ? AccountInfoStruct.fromJson(json['accountInfo'])

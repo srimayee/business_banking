@@ -5,7 +5,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 import '../../../../locator.dart';
-import 'account_info_struct_service_adapter.dart';
+import 'account_info_struct_list_service_adapter.dart';
 
 class StatementCardUseCase extends UseCase {
   late final ViewModelCallback<StatementCardViewModel> _viewModelCallBack;
@@ -15,7 +15,7 @@ class StatementCardUseCase extends UseCase {
       ViewModelCallback<StatementCardViewModel> viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
 
-  void create() async {
+  Future<void> create() async {
     _scope = ExampleLocator().repository.containsScope<StatementCardEntity>();
     if (_scope == null) {
       _scope = ExampleLocator().repository.create<StatementCardEntity>(
