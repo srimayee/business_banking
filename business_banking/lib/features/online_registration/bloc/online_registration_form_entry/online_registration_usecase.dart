@@ -13,7 +13,7 @@ class OnlineRegistrationUseCase extends UseCase {
     ViewModelCallback<OnlineRegistrationViewModel> viewModelCallBack,
   ) : _viewModelCallBack = viewModelCallBack;
 
-  void execute() async {
+  void execute() {
     _scope =
         ExampleLocator().repository.containsScope<OnlineRegistrationEntity>();
     if (_scope == null) {
@@ -32,7 +32,7 @@ class OnlineRegistrationUseCase extends UseCase {
         buildViewModelForServiceUpdate(entity, isResetAction: true));
   }
 
-  Future<void> updateCardHolderName(String cardHolderName) async {
+  void updateCardHolderName(String cardHolderName) {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -57,7 +57,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<void> updateCreditCardNumber(String cardNumber) async {
+  void updateCreditCardNumber(String cardNumber) {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -84,7 +84,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<void> updateSsnLastFourDigits(String lastFourDigits) async {
+  void updateSsnLastFourDigits(String lastFourDigits) {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -109,7 +109,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<void> updateEmail(String userEmail) async {
+  void updateEmail(String userEmail) {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -136,7 +136,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<void> updateUserPassword(String password) async {
+  void updateUserPassword(String password) {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -164,14 +164,14 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  void submitForm() async {
+  void submitForm() {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
     final entity =
         ExampleLocator().repository.get<OnlineRegistrationEntity>(_scope!);
     print(
-        'checkstatus : ${await checkUserInputEntity(entity) == UserFormInputStatus.valid}');
+        'checkstatus : ${checkUserInputEntity(entity) == UserFormInputStatus.valid}');
     print('entity: ${entity.cardHolderName}');
     if (checkUserInputEntity(entity) == UserFormInputStatus.valid) {
       final updatedEntity = entity.merge(accountNumberGenerated: '12345');
