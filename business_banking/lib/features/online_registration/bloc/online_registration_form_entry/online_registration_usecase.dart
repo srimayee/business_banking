@@ -13,7 +13,7 @@ class OnlineRegistrationUseCase extends UseCase {
     ViewModelCallback<OnlineRegistrationViewModel> viewModelCallBack,
   ) : _viewModelCallBack = viewModelCallBack;
 
-  void execute() {
+  void execute() async {
     _scope =
         ExampleLocator().repository.containsScope<OnlineRegistrationEntity>();
     if (_scope == null) {
