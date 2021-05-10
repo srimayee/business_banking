@@ -67,12 +67,10 @@ class OnlineRegistrationPresenterActions {
     );
   }
 
-  Future<void> onTapCreateAccountBtn(
-      BuildContext context, OnlineRegistrationViewModel viewModel) async {
-    print('status: ${viewModel.userFormInputStatus}');
+  void onTapCreateAccountBtn(
+      BuildContext context, OnlineRegistrationViewModel viewModel) {
     if (viewModel.userFormInputStatus == UserFormInputStatus.valid) {
-      await bloc.onlineRegistrationEventPipe
-          .send(SubmitOnlineRegistrationEvent());
+      bloc.onlineRegistrationEventPipe.send(SubmitOnlineRegistrationEvent());
       navigateToSuccessScreen(context);
     } else {
       showErrorDialog(context);

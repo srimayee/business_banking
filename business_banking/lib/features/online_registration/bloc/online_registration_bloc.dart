@@ -46,23 +46,20 @@ class OnlineRegistrationBloc extends Bloc {
   //   }
   // }
 
-  Future<void> onlineRegistrationEventPipeHandler(
-      OnlineRegistrationEvent event) async {
+  void onlineRegistrationEventPipeHandler(OnlineRegistrationEvent event) {
     if (event is UpdateCardHolderNameEvent) {
-      await _onlineRegistrationUseCase!
-          .updateCardHolderName(event.cardHolderName);
+      _onlineRegistrationUseCase!.updateCardHolderName(event.cardHolderName);
     } else if (event is UpdateCardNumberEvent) {
-      await _onlineRegistrationUseCase!
-          .updateCreditCardNumber(event.cardNumber);
+      _onlineRegistrationUseCase!.updateCreditCardNumber(event.cardNumber);
     } else if (event is UpdateUserEmailEvent) {
-      await _onlineRegistrationUseCase!.updateEmail(event.email);
+      _onlineRegistrationUseCase!.updateEmail(event.email);
     } else if (event is UpdateSSNLastFourDigitsEvent) {
-      await _onlineRegistrationUseCase!
+      _onlineRegistrationUseCase!
           .updateSsnLastFourDigits(event.ssnLastFourDigits);
     } else if (event is UpdateUserPasswordEvent) {
-      await _onlineRegistrationUseCase!.updateUserPassword(event.userPassword);
+      _onlineRegistrationUseCase!.updateUserPassword(event.userPassword);
     } else if (event is SubmitOnlineRegistrationEvent) {
-      await _onlineRegistrationUseCase!.submitForm();
+      _onlineRegistrationUseCase!.submitForm();
     }
   }
 

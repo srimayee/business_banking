@@ -164,7 +164,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<bool> submitForm({bool checkValidationStatus = false}) async {
+  void submitForm() async {
     _scope ??= ExampleLocator().repository.create<OnlineRegistrationEntity>(
         new OnlineRegistrationEntity(), _notifySubscribers);
 
@@ -173,7 +173,7 @@ class OnlineRegistrationUseCase extends UseCase {
     print(
         'checkstatus : ${await checkUserInputEntity(entity) == UserFormInputStatus.valid}');
     print('entity: ${entity.cardHolderName}');
-    if (await checkUserInputEntity(entity) == UserFormInputStatus.valid) {
+    if (checkUserInputEntity(entity) == UserFormInputStatus.valid) {
       final updatedEntity = entity.merge(accountNumberGenerated: '12345');
       ExampleLocator().repository.update<OnlineRegistrationEntity>(
           _scope!, updatedEntity as OnlineRegistrationEntity);
@@ -183,15 +183,9 @@ class OnlineRegistrationUseCase extends UseCase {
       //     .repository
       //     .runServiceAdapter(_scope!, OnlineRegistrationServiceAdapter());
     } else {
-      checkValidationStatus = false;
       _viewModelCallBack(
           buildViewModelForServiceUpdate(entity, isUserInputValid: true));
     }
-    return checkValidationStatus;
-  }
-
-  Future<void> validateStatus() async {
-    await submitForm();
   }
 
   OnlineRegistrationViewModel buildViewModelForServiceUpdate(
@@ -255,8 +249,7 @@ class OnlineRegistrationUseCase extends UseCase {
     }
   }
 
-  Future<UserFormInputStatus> checkUserInputEntity(
-      OnlineRegistrationEntity entity) async {
+  UserFormInputStatus checkUserInputEntity(OnlineRegistrationEntity entity) {
     // print(
     //     "Name UserFormInputStatus ${entity.cardHolderName} ${entity.cardHolderName!.isNotEmpty}");
     // print(
@@ -268,11 +261,10 @@ class OnlineRegistrationUseCase extends UseCase {
     print(
         "password UserFormInputStatus ${entity.userPassword} ${entity.userPassword!.length >= 8}");
 
-    if (
-        // entity.cardHolderName!.isNotEmpty &&
-        //     entity.cardNumber!.isNotEmpty &&
-        //     entity.email!.isNotEmpty &&
-        //     entity.ssnLastFourDigits!.isNotEmpty &&
+    if (entity.cardHolderName!.isNotEmpty &&
+        entity.cardNumber!.isNotEmpty &&
+        entity.email!.isNotEmpty &&
+        entity.ssnLastFourDigits!.isNotEmpty &&
         entity.userPassword!.length >= 8) {
       return UserFormInputStatus.valid;
     } else {
