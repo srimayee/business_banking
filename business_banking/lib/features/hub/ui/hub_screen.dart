@@ -1,6 +1,6 @@
 import 'package:business_banking/features/cash_accounts/ui/cash_accounts_widget.dart';
 import 'package:business_banking/features/quickpay/ui/quickpay_widget.dart';
-import 'package:business_banking/features/transaction/ui/transaction_widget.dart';
+import 'package:business_banking/features/card_usage/ui/card_transaction_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_card.dart';
 
 import 'package:clean_framework/clean_framework.dart';
@@ -23,19 +23,19 @@ class HubScreen extends Screen {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
-              child: Center(
-                  child: Text(
-                'Welcome John Doe',
-                style: TextStyle(fontSize: 18),
-              )),
-            ),
+            // Container(
+            //   padding:
+            //       const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+            //   child: Center(
+            //       child: Text(
+            //     'Welcome',
+            //     style: TextStyle(fontSize: 18),
+            //   )),
+            // ),
             CashAccountsWidget(),
             //PromosWidget(),
             SizedBox(height: 15),
-            TransactionWidget(),
+            CardTransactionWidget(),
             SizedBox(height: 15),
             // SizedBox(height: 15),
             TransferFundsCard(),
