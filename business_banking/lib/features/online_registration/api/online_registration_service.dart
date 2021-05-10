@@ -11,7 +11,7 @@ class OnlineRegistrationService extends EitherService<
       : super(
             method: RestMethod.post,
             restApi: ExampleLocator().api,
-            path: 'enter_path_here_once_ready');
+            path: 'create-new-account');
 
   @override
   OnlineRegistrationServiceResponseModel parseResponse(

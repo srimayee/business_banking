@@ -1,4 +1,4 @@
-import 'package:business_banking/features/online_registration/ui/online_registration_feature_widget.dart';
+import 'package:business_banking/features/online_registration/ui/online_registration_form_entry/online_registration_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,9 @@ class HubScreen extends Screen {
         ),
       ),
       backgroundColor: Colors.grey[300],
-      body: OnlineRegistrationFeatureWidget(),
+      body:
+          // DepositCheckWidget(),
+          OnlineRegistrationFeatureWidget(),
     );
   }
 }

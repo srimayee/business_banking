@@ -236,6 +236,8 @@
                 "latency": 0,
                 "port": 3001,
                 "routes": [
+
+
                     {
                         "uuid": "",
                         "documentation": "Gets info for CashAccounts screen",
@@ -670,6 +672,35 @@
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
                             }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "create-new-account",
+                        "responses": [
+                            {
+                            "uuid": "",
+                            "body": "{\n  \"status\" : \"Successful\",\n  \"didSucceed\" : true,\n  \"accountNumberGenerated\" : \"123456789\"\n}",
+                            "latency": 0,
+                            "statusCode": 200,
+                            "label": "",
+                            "headers": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "filePath": "",
+                            "sendFileAsBody": false,
+                            "rules": [],
+                            "rulesOperator": "OR",
+                            "disableTemplating": false
+                        }
+
                         ],
                         "enabled": true,
                         "randomResponse": false

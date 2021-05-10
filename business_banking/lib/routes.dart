@@ -2,13 +2,13 @@ import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart
 import 'package:business_banking/features/credit_card/ui/credit_card_details/credit_card_details_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
+import 'package:business_banking/features/online_registration/ui/online_registration_success_screen/online_registration_success_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'features/credit_card/ui/payment_request/credit_card_payment_request_widget.dart';
 import 'features/credit_card/ui/payment_response/credit_card_payment_response_widget.dart';
 import 'features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
 import 'features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
-import 'features/registration_success_screen/ui/registration_success_screen.dart';
 
 abstract class BusinessBankingRouter {
   static const String initialRoute = '/';
@@ -55,7 +55,7 @@ abstract class BusinessBankingRouter {
         return DepositCheckConfirmWidget();
 
       case successScreen:
-        return SuccessScreen();
+        return OnlineRegistrationSuccessWidget();
       default:
         return const PageNotFound();
     }

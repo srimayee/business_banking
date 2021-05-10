@@ -1,69 +1,76 @@
-import 'package:business_banking/features/login/api/login_service.dart';
-import 'package:business_banking/features/online_registration/bloc/online_registration_usecase.dart';
-import 'package:business_banking/features/online_registration/model/online_registration_view_model.dart';
+import 'package:business_banking/features/online_registration/bloc/online_registration_form_entry/online_registration_event.dart';
+import 'package:business_banking/features/online_registration/bloc/online_registration_form_entry/online_registration_usecase.dart';
+import 'package:business_banking/features/online_registration/bloc/online_registration_success/online_registration_success_usecase.dart';
+import 'package:business_banking/features/online_registration/model/online_registration_form_entry/online_registration_view_model.dart';
+import 'package:business_banking/features/online_registration/model/online_registration_success/online_registration_success_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class OnlineRegistrationBloc extends Bloc {
-  late OnlineRegistrationUseCase _onlineRegistrationUseCase;
+  late OnlineRegistrationUseCase? _onlineRegistrationUseCase;
+  OnlineRegistrationSuccessUseCase? _onlineRegistrationSuccessUseCase;
 
   final onlineRegistrationViewModelPipe = Pipe<OnlineRegistrationViewModel>();
-  final cardHolderNamePipe = Pipe<String>();
-  final cardNumberPipe = Pipe<String>();
-  final ssnLastFourDigitsPipe = Pipe<String>();
-  final emailPipe = Pipe<String>();
-  final userPasswordPipe = Pipe<String>();
-  final submitPipe = EventPipe();
+  final onlineRegistrationEventPipe =
+      Pipe<OnlineRegistrationEvent>(canSendDuplicateData: true); //false?
 
-  //Replace service
-  OnlineRegistrationBloc({LoginService? loginService}) {
-    _onlineRegistrationUseCase = OnlineRegistrationUseCase((viewModel) =>
-        onlineRegistrationViewModelPipe
-            .send(viewModel as OnlineRegistrationViewModel));
+  final onlineRegistrationSuccessViewModelPipe =
+      Pipe<OnlineRegistrationSuccessViewModel>();
+  // final onlineRegistrationSuccessEventPipe =
+  //     Pipe<OnlineRegistrationSuccessEvent>(canSendDuplicateData: true);
+
+  OnlineRegistrationBloc(
+      {OnlineRegistrationUseCase? onlineRegistrationUseCase,
+      OnlineRegistrationSuccessUseCase? onlineRegistrationSuccessUseCase}) {
+    _onlineRegistrationUseCase = onlineRegistrationUseCase ??
+        OnlineRegistrationUseCase(onlineRegistrationViewModelPipe.send);
     onlineRegistrationViewModelPipe.whenListenedDo(() {
-      _onlineRegistrationUseCase.create();
+      _onlineRegistrationUseCase!.execute();
     });
-    cardHolderNamePipe.receive.listen(cardHolderNameHandler);
-    cardNumberPipe.receive.listen(cardNumberInputHandler);
-    ssnLastFourDigitsPipe.receive.listen(ssnLastFourDigitsInputHandler);
-    emailPipe.receive.listen(userEmailInputHandler);
-    userPasswordPipe.receive.listen(userPasswordInputHandler);
-    submitPipe.listen(submitHandler);
-  }
+    onlineRegistrationEventPipe.receive
+        .listen(onlineRegistrationEventPipeHandler);
 
-  void cardHolderNameHandler(String cardHolderName) {
-    _onlineRegistrationUseCase.updateCardHolderName(cardHolderName);
+    _onlineRegistrationSuccessUseCase = onlineRegistrationSuccessUseCase ??
+        OnlineRegistrationSuccessUseCase(
+            onlineRegistrationSuccessViewModelPipe.send);
+    onlineRegistrationSuccessViewModelPipe.whenListenedDo(() {
+      _onlineRegistrationSuccessUseCase!.execute();
+    });
+    // onlineRegistrationSuccessEventPipe.receive
+    //     .listen(onlineRegistrationSuccessEventPipeHandler);
   }
+  //
+  // void onlineRegistrationSuccessEventPipeHandler(
+  //     OnlineRegistrationSuccessEvent event) {
+  //   if (event is ResetOnlineRegistrationViewModelEvent) {
+  //     _onlineRegistrationSuccessUseCase!.resetViewModel();
+  //   }
+  // }
 
-  void cardNumberInputHandler(String cardNumber) {
-    _onlineRegistrationUseCase.updateCardNumber(cardNumber);
-  }
-
-  void ssnLastFourDigitsInputHandler(String ssnLastFourDigits) {
-    _onlineRegistrationUseCase.updateSsnLastFourDigits(ssnLastFourDigits);
-  }
-
-  void userEmailInputHandler(String email) {
-    _onlineRegistrationUseCase.updateEmail(email);
-  }
-
-  void userPasswordInputHandler(String userPassword) {
-    print('Password from bloc: ${userPassword}');
-    _onlineRegistrationUseCase.updateUserPassword(userPassword);
-  }
-
-  void submitHandler() {
-    print('submitted from bloc:}');
-    _onlineRegistrationUseCase.submit();
+  Future<void> onlineRegistrationEventPipeHandler(
+      OnlineRegistrationEvent event) async {
+    if (event is UpdateCardHolderNameEvent) {
+      await _onlineRegistrationUseCase!
+          .updateCardHolderName(event.cardHolderName);
+    } else if (event is UpdateCardNumberEvent) {
+      await _onlineRegistrationUseCase!
+          .updateCreditCardNumber(event.cardNumber);
+    } else if (event is UpdateUserEmailEvent) {
+      await _onlineRegistrationUseCase!.updateEmail(event.email);
+    } else if (event is UpdateSSNLastFourDigitsEvent) {
+      await _onlineRegistrationUseCase!
+          .updateSsnLastFourDigits(event.ssnLastFourDigits);
+    } else if (event is UpdateUserPasswordEvent) {
+      await _onlineRegistrationUseCase!.updateUserPassword(event.userPassword);
+    } else if (event is SubmitOnlineRegistrationEvent) {
+      await _onlineRegistrationUseCase!.submitForm();
+    }
   }
 
   @override
   void dispose() {
     onlineRegistrationViewModelPipe.dispose();
-    cardHolderNamePipe.dispose();
-    cardNumberPipe.dispose();
-    ssnLastFourDigitsPipe.dispose();
-    emailPipe.dispose();
-    userPasswordPipe.dispose();
-    submitPipe.dispose();
+    onlineRegistrationEventPipe.dispose();
+    onlineRegistrationSuccessViewModelPipe.dispose();
+    // onlineRegistrationSuccessEventPipe.dispose();
   }
 }
