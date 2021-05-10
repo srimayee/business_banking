@@ -41,7 +41,7 @@ class OnlineRegistrationPresenterActions {
     }
   }
 
-  Future<void> onUpdatePasswordListener(String userPassword) async {
+  void onUpdatePasswordListener(String userPassword) {
     if (userPassword.isNotEmpty) {
       print('updating onUpdatePasswordListener pipe');
       bloc.onlineRegistrationEventPipe

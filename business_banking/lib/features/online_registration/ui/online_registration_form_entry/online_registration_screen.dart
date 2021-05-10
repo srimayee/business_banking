@@ -112,7 +112,7 @@ class OnlineRegistrationScreen extends Screen {
                     presenterAction!.onUpdatePasswordListener(value!);
                   },
                   onSaved: (String? password) async {
-                    await presenterAction!.onUpdatePasswordListener(password!);
+                    presenterAction!.onUpdatePasswordListener(password!);
                   },
                   status: viewModel!.userPasswordStatus,
                 ),
