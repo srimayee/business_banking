@@ -20,7 +20,6 @@ class StatementEntity extends Entity {
     List<Statement>? statements,
   }) {
     return StatementEntity(
-      statements: statements ?? this.statements,
-    );
+        statements: statements ?? this.statements, errors: errors ?? []);
   }
 }

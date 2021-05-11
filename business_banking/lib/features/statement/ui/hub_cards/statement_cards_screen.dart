@@ -10,17 +10,17 @@ import 'statement_cards_presenter.dart';
 
 class StatementCardScreen extends Screen {
   final StatementCardViewModel viewModel;
-  final StatementCardPresenterActions pressenterActions;
+  final StatementCardPresenterActions presenterActions;
 
   StatementCardScreen(
-      {required this.viewModel, required this.pressenterActions});
+      {required this.viewModel, required this.presenterActions});
 
   @override
   Widget build(BuildContext context) {
     return viewModel.serviceResponseStatus == ServiceResponseStatus.succeed
         ? _SuccessCard(
             viewModel: viewModel,
-            pressenterActions: pressenterActions,
+            pressenterActions: presenterActions,
             key: Key('statement-Card-Succeed'),
           )
         : _FailedCard(

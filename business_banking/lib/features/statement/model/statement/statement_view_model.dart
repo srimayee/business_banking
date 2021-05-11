@@ -4,7 +4,7 @@ import 'package:clean_framework/clean_framework.dart';
 
 class StatementViewModel extends ViewModel {
   final List<Statement> statements;
-  final serviceResponseStatus;
+  final ServiceResponseStatus serviceResponseStatus;
 
   StatementViewModel({
     required this.statements,
@@ -12,5 +12,5 @@ class StatementViewModel extends ViewModel {
   });
 
   @override
-  List<Object?> get props => [statements];
+  List<Object?> get props => [statements, serviceResponseStatus];
 }

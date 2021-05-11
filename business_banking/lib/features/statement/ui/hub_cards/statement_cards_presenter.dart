@@ -18,7 +18,7 @@ class StatementCardPresenter extends Presenter<StatementBloc,
       StatementCardViewModel viewModel) {
     return StatementCardScreen(
       viewModel: viewModel,
-      pressenterActions: StatementCardPresenterActions(bloc, viewModel),
+      presenterActions: StatementCardPresenterActions(bloc, viewModel),
     );
   }
 }

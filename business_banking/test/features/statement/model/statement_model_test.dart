@@ -1,27 +1,15 @@
 // @dart=2.9
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
 import 'package:business_banking/features/deposit_check/model/enums.dart';
-import 'package:business_banking/features/statement/bloc/statement/statement_usecase.dart';
 import 'package:business_banking/features/statement/model/statement.dart';
-import 'package:business_banking/features/statement/model/statement/statement_entity.dart';
 import 'package:business_banking/features/statement/model/statement/statement_view_model.dart';
 import 'package:business_banking/features/statement/model/statement_info.dart';
-import 'package:clean_framework/clean_framework.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  StatementUseCase useCase;
-  StatementViewModel statementViewModel;
-
-  setUp(() {
-    useCase = StatementUseCase((viewModel) {
-      statementViewModel = viewModel;
-      return true;
-    });
-  });
-
-  group('Statement Usecase', () {
-    final tStatements = [
+  test('MODEL TEST: On success StatementViewModel should initialize.',
+      () async {
+    final _statements = [
       Statement(
           accountInfo: AccountInfoStruct(
               accountNickname: 'HNB Credit Card (6917)',
@@ -47,35 +35,27 @@ void main() {
                 "TRANSFER", "04/13/2021 00:00:00", null, 100.00, 195.00)
           ])
     ];
-    final tSucceedStatementInfo = StatementViewModel(
-        statements: tStatements,
+    final viewModel = StatementViewModel(
+        statements: _statements,
         serviceResponseStatus: ServiceResponseStatus.succeed);
+    expect(viewModel.props, [
+      viewModel.statements,
+      viewModel.serviceResponseStatus,
+    ]);
 
-    final tStatementEntity =
-        StatementEntity(statements: tStatements, errors: [EntityFailure()]);
-    test('should callback return viewModel the same as source value', () async {
-      await useCase.create();
+    expect(viewModel.stringify, true);
 
-      expect(
-        statementViewModel,
-        tSucceedStatementInfo,
-      );
-    });
+    expect(
+        viewModel.statements.first.accountInfo,
+        AccountInfoStruct(
+            accountNickname: 'HNB Credit Card (6917)',
+            accountNumber: '1234567890126917',
+            availableBalance: 481.84,
+            depositLimit: 4500.0));
 
-    test('should callback return viewModel without recreate new scope',
-        () async {
-      await useCase.create();
-
-      expect(statementViewModel, isA<StatementViewModel>());
-      useCase.create();
-    });
-    test(
-        'should service response be failed when built view model with entity that has error',
-        () async {
-      statementViewModel = useCase.buildViewModel(tStatementEntity);
-
-      expect(statementViewModel.serviceResponseStatus,
-          ServiceResponseStatus.failed);
-    });
+    expect(
+        viewModel.statements.first.statementActivity.first.additions, 200.00);
+    expect(viewModel.statements.first.statementActivity.first.description,
+        'LYFT RIDE');
   });
 }

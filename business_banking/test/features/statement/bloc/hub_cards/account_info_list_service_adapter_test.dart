@@ -14,7 +14,7 @@ void main() {
           availableBalance: 481.84,
           depositLimit: 4500.0),
       AccountInfoStruct(
-          accountNickname: 'CWells Fargo (6537)',
+          accountNickname: 'Wells Fargo (6537)',
           accountNumber: '12345678932246917',
           availableBalance: 1441.84,
           depositLimit: 4500.00),

@@ -28,7 +28,7 @@ class StatementScreen extends Screen {
           onTap: () {
             presenterActions.navigateBackToHub(context);
           },
-          key: Key('Deposit-Check-Back-Button'),
+          key: Key('Statement-Back-Button'),
         ),
         title: AutoSizeText(
           'Your Statements',
@@ -68,6 +68,7 @@ class StatementScreen extends Screen {
                       ),
                     ),
                     ListView.builder(
+                        key: Key('statementListView'),
                         shrinkWrap: true,
                         itemCount: viewModel
                             .statements[index].statementActivity.length,
