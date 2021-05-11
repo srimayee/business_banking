@@ -51,7 +51,7 @@ class OnlineRegistrationScreen extends Screen {
                   textFieldKey: Key('cardHolderName-TxtField'),
                   textEditingController: _cardHolderNameCtrl,
                   hintText: 'Full Name',
-                  validator: (String? val) {
+                  validator: (val) {
                     presenterAction!.onUserNameSavedListener(val!);
                   },
                   onSaved: (String? name) {
@@ -66,6 +66,7 @@ class OnlineRegistrationScreen extends Screen {
                   maxLength: 16,
                   keyBoardType: TextInputType.number,
                   validator: (String? val) {
+                    // presenterAction2!(val);
                     presenterAction!.onUserCardNumberSavedListener(val!);
                   },
                   onSaved: (String? cardNumber) {
@@ -89,35 +90,35 @@ class OnlineRegistrationScreen extends Screen {
                   },
                   status: viewModel!.ssnLastFourDigitsStatus,
                 ),
-                MyTextFormField(
-                  textFieldKey: Key('userEmailAddress-TxtField'),
-                  textEditingController: _userEmailAddressCtrl,
-                  hintText: 'Email ID',
-                  keyBoardType: TextInputType.emailAddress,
-                  validator: (String? val) {
-                    presenterAction!.onUpdateEmailSavedListener(val!);
-                  },
-                  onSaved: (String? email) {
-                    presenterAction!.onUpdateEmailSavedListener(email!);
-                  },
-                  status: viewModel!.userEmailStatus,
-                ),
-                MyTextFormField(
-                  textFieldKey: Key('userPassword-TxtField'),
-                  textEditingController: _userPasswordCtrl,
-                  hintText: 'Password',
-                  isPassword: true,
-                  validator: (String? value) {
-                    print("Here with Password validator");
-                    presenterAction!.onUpdatePasswordListener(value!);
-                  },
-                  onSaved: (String? password) {
-                    presenterAction!.onUpdatePasswordListener(password!);
-                  },
-                  status: viewModel!.userPasswordStatus,
-                ),
+                // MyTextFormField(
+                //   textFieldKey: Key('userEmailAddress-TxtField'),
+                //   textEditingController: _userEmailAddressCtrl,
+                //   hintText: 'Email ID',
+                //   keyBoardType: TextInputType.emailAddress,
+                //   validator: (String? val) {
+                //     presenterAction!.onUpdateEmailSavedListener(val!);
+                //   },
+                //   onSaved: (String? email) {
+                //     presenterAction!.onUpdateEmailSavedListener(email!);
+                //   },
+                //   status: viewModel!.userEmailStatus,
+                // ),
+                // MyTextFormField(
+                //   textFieldKey: Key('userPassword-TxtField'),
+                //   textEditingController: _userPasswordCtrl,
+                //   hintText: 'Password',
+                //   isPassword: true,
+                //   validator: (String? value) {
+                //     print("Here with Password validator");
+                //     presenterAction!.onUpdatePasswordListener(value!);
+                //   },
+                //   onSaved: (String? password) {
+                //     presenterAction!.onUpdatePasswordListener(password!);
+                //   },
+                //   status: viewModel!.userPasswordStatus,
+                // ),
                 new ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (_key.currentState!.validate()) {
                       print('validate and saving');
                       _key.currentState!.save();

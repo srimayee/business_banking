@@ -6,12 +6,12 @@ import 'package:business_banking/features/online_registration/model/online_regis
 import 'package:clean_framework/clean_framework.dart';
 
 class OnlineRegistrationBloc extends Bloc {
-  OnlineRegistrationUseCase? _onlineRegistrationUseCase;
   OnlineRegistrationSuccessUseCase? _onlineRegistrationSuccessUseCase;
-
-  final onlineRegistrationViewModelPipe = Pipe<OnlineRegistrationViewModel>();
   final onlineRegistrationEventPipe =
-      Pipe<OnlineRegistrationEvent>(canSendDuplicateData: true); //false?
+      Pipe<OnlineRegistrationEvent>(canSendDuplicateData: false); //false?
+
+  OnlineRegistrationUseCase? _onlineRegistrationUseCase;
+  final onlineRegistrationViewModelPipe = Pipe<OnlineRegistrationViewModel>();
 
   final onlineRegistrationSuccessViewModelPipe =
       Pipe<OnlineRegistrationSuccessViewModel>();
@@ -21,15 +21,22 @@ class OnlineRegistrationBloc extends Bloc {
   OnlineRegistrationBloc(
       {OnlineRegistrationUseCase? onlineRegistrationUseCase,
       OnlineRegistrationSuccessUseCase? onlineRegistrationSuccessUseCase}) {
+    onlineRegistrationEventPipe.receive.listen((event) {
+      onlineRegistrationEventPipeHandler(event);
+    });
+
     _onlineRegistrationUseCase = onlineRegistrationUseCase ??
-        OnlineRegistrationUseCase(onlineRegistrationViewModelPipe.send);
-    onlineRegistrationViewModelPipe.whenListenedDo(
-      () {
-        _onlineRegistrationUseCase!.execute();
-      },
-    );
-    onlineRegistrationEventPipe.receive
-        .listen(onlineRegistrationEventPipeHandler);
+        OnlineRegistrationUseCase(
+            (viewModel) => onlineRegistrationViewModelPipe.send(viewModel));
+    onlineRegistrationViewModelPipe
+        .whenListenedDo(_onlineRegistrationUseCase!.execute);
+    // _onlineRegistrationUseCase = onlineRegistrationUseCase ??
+    //     OnlineRegistrationUseCase(onlineRegistrationViewModelPipe.send);
+    // onlineRegistrationViewModelPipe.whenListenedDo(
+    //   () {
+    //     _onlineRegistrationUseCase!.execute();
+    //   },
+    // );
 
     _onlineRegistrationSuccessUseCase = onlineRegistrationSuccessUseCase ??
         OnlineRegistrationSuccessUseCase(

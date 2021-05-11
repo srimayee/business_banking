@@ -1,4 +1,4 @@
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/online_registration/model/online_registration_form_entry/online_registration_enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class OnlineRegistrationViewModel extends ViewModel {
@@ -28,7 +28,7 @@ class OnlineRegistrationViewModel extends ViewModel {
       required this.ssnLastFourDigitsStatus,
       required this.userEmailStatus,
       required this.userPasswordStatus,
-      this.userFormInputStatus = UserInputStatus.unknown,
+      this.userFormInputStatus = UserFormInputStatus.unknown,
       this.serviceResponseStatus = ServiceResponseStatus.unknown});
 
   @override

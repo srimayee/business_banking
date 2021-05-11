@@ -69,10 +69,10 @@ class OnlineRegistrationPresenterActions {
 
   void onTapCreateAccountBtn(
       BuildContext context, OnlineRegistrationViewModel viewModel) {
-    if (viewModel.userFormInputStatus == UserFormInputStatus.valid) {
-      bloc.onlineRegistrationEventPipe.send(SubmitOnlineRegistrationEvent());
-      navigateToSuccessScreen(context);
-    } else {
+    print(
+        'status of userFormInputStatus on onTapCreateAccountBtn***:${viewModel.userFormInputStatus}');
+    bloc.onlineRegistrationEventPipe.send(SubmitOnlineRegistrationEvent());
+    if ((viewModel.userFormInputStatus != UserFormInputStatus.valid)) {
       showErrorDialog(context);
     }
   }
