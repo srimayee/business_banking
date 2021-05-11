@@ -23,7 +23,7 @@ void main() {
 
     expect(
       entity.toString(),
-      'TransactionEntity([], [TransactionModel(Boots, shopping, 9.99, 0000000, Merchant0, 2021-04-12 10:29:16.000, true)])',
+      'CardSummaryEntity([], [CardSummaryModel(Boots, shopping, 9.99, 0000000, Merchant0, 2021-04-12 03:29:16.000, true)])',
     );
   });
 
