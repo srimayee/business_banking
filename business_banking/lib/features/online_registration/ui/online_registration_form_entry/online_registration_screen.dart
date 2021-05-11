@@ -111,7 +111,7 @@ class OnlineRegistrationScreen extends Screen {
                     print("Here with Password validator");
                     presenterAction!.onUpdatePasswordListener(value!);
                   },
-                  onSaved: (String? password) async {
+                  onSaved: (String? password) {
                     presenterAction!.onUpdatePasswordListener(password!);
                   },
                   status: viewModel!.userPasswordStatus,

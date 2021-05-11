@@ -71,13 +71,3 @@ class SubmitOnlineRegistrationEvent implements OnlineRegistrationEvent {
   @override
   bool get stringify => true;
 }
-
-class ValidateStatus implements OnlineRegistrationEvent {
-  ValidateStatus();
-
-  @override
-  List<Object> get props => [];
-
-  @override
-  bool get stringify => true;
-}
