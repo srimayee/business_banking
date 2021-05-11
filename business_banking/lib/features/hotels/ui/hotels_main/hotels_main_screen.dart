@@ -1,146 +1,85 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:business_banking/features/hotels/model/hotels_view_model.dart';
+import 'package:business_banking/features/hotels/model/hotel_view_model.dart';
+import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class HotelsMainScreen extends Screen {
-  final HotelsViewModel viewModel;
-  final VoidCallback navigateBack;
+  //
+  HotelsListViewModel viewModel;
+  final Function onHotelClicked;
 
-  HotelsMainScreen({required this.viewModel, required this.navigateBack})
-      : assert(() {
-          return viewModel != null;
-        }());
+  HotelsMainScreen({required this.viewModel, required this.onHotelClicked});
+
+  _onEntryTapped(HotelViewModel viewModel) {
+    onHotelClicked(viewModel);
+  }
 
   @override
-  Widget build(BuildContext build) {
+  Widget build(BuildContext context) {
+    List<Widget> columnList = [];
+
+    List<HotelViewModel> hList = this.viewModel.hotels;
+    if (hList != null && hList.length > 0) {
+      ListView lView = ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: this.viewModel.hotels.length,
+          itemBuilder: (context, index) {
+            return _buildHotelEntry(hList[index]);
+          });
+
+      columnList.add(Expanded(child: lView));
+    }
+
+    // Main Container
+    Container bodyContainer = Container(
+      child: Column(children: columnList),
+      padding: const EdgeInsets.all(8.0),
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.black,
+    );
+
     return Scaffold(
+      body: bodyContainer,
       appBar: AppBar(
         backgroundColor: Colors.green,
-        /*leading: GestureDetector(
-          child: Icon(
-            Icons.chevron_left,
-            size: 40.0,
-          ),
-          onTap: () {
-            navigateBack();
-          },
-          key: Key('backButton'),
-        ),*/
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AutoSizeText(
-              viewModel.title,
-            ),
-            Text(
-              '*' + viewModel.title,
+              'Hotels',
               key: Key('ADappBarL4'),
-            )
+            ),
           ],
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Text('account balance'),
-              Text(
-                '\$' + viewModel.price.toStringAsFixed(2),
-                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w200),
-                key: Key('bigBalance'),
-              ),
-              const SizedBox(height: 40.0),
-              // Beginning Balance Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Beginning Balance:', style: TextStyle(fontSize: 15.0)),
-                  Text('\$' + viewModel.price.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 15.0))
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              // Pending Transactions Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Pending Transactions:',
-                      style: TextStyle(fontSize: 15.0))
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              // Deposit Holds Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Deposit Holds:', style: TextStyle(fontSize: 15.0)),
-                  Text('\$' + viewModel.price.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 15.0), key: Key('depHold'))
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              // Account Balance Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Account Balance:', style: TextStyle(fontSize: 15.0)),
-                  Text('\$' + viewModel.price.toStringAsFixed(2),
-                      style: TextStyle(fontSize: 15.0))
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              Divider(
-                thickness: 1.0,
-                color: Colors.black38,
-              ),
-              const SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Account Type: ', style: TextStyle(fontSize: 15.0)),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Routing Number: ', style: TextStyle(fontSize: 15.0)),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Account Number: ••••••',
-                      style: TextStyle(fontSize: 15.0)),
-                  Text(
-                    'Show',
-                    style: TextStyle(
-                        decoration: TextDecoration.underline, fontSize: 15.0),
-                  )
-                ],
-              )
-            ],
-          ),
         ),
       ),
     );
   }
-}
 
-Text _price(double priceValue) {
-  String newPrice = "\$" + priceValue.toStringAsFixed(2);
-  return Text(newPrice);
-}
+  Widget _buildHotelEntry(HotelViewModel viewModel) {
+    Color likedColor = viewModel.isLiked ? Colors.green : Colors.grey.shade300;
 
-/*Text pendingCheck(double pendingTransactions) {
-  if (pendingTransactions >= 0.00) {
-    return Text('\$' + pendingTransactions.toStringAsFixed(2),
-        style: TextStyle(fontSize: 15.0));
-  } else {
-    return Text('-\$' + pendingTransactions.toStringAsFixed(2).substring(1),
-        style: TextStyle(
-            fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.red));
-  }*/
+    ListTile lt = ListTile(
+        onTap: () => {_onEntryTapped(viewModel)},
+        leading: Icon(
+          Icons.check,
+          color: likedColor,
+          size: 30,
+        ),
+        trailing: Image.network(viewModel.imageUrl),
+        title: Text(viewModel.title + '\n' + _formatPrice(viewModel.price)),
+        subtitle: Text(viewModel.starRating.toString() + ' Stars'));
+
+    // Card
+    Card card = Card(child: lt);
+
+    return card;
+  }
+
+  String _formatPrice(double priceValue) {
+    String newPrice = "\$" + priceValue.toStringAsFixed(2);
+    return newPrice;
+  }
+}

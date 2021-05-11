@@ -1,6 +1,18 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 class HotelsServiceResponseModel extends JsonResponseModel {
+  final List<HotelInfo> allHotels;
+
+  HotelsServiceResponseModel.fromJson(Map<String, dynamic> json)
+      : allHotels = (json["hotels"] as List)
+            .map((i) => new HotelInfo.fromJson(i))
+            .toList();
+
+  @override
+  List<Object?> get props => [allHotels];
+}
+
+class HotelInfo {
   final String title;
   final String city;
   final String stateCode;
@@ -9,17 +21,15 @@ class HotelsServiceResponseModel extends JsonResponseModel {
   final double price;
   final String imageUrl;
 
-  HotelsServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : title = json['title'] ?? 'Luxor',
-        city = json['city'] ?? 'Las Vegas',
-        stateCode = json['state_code'] ?? 'NV',
-        isLiked = (json['is_liked'] == "true") ? true : false,
-        starRating = json['star_rating'] ?? 2.5,
-        price = json['price'] ?? 52.00,
-        imageUrl = json['image_url'] ??
-            "https://assets.cyllenius.com/resize_230x230/media/vegas/resorts/luxor/1024x1024_luxor_new.jpg";
+  HotelInfo(this.title, this.city, this.stateCode, this.isLiked,
+      this.starRating, this.price, this.imageUrl);
 
-  @override
-  List<Object> get props =>
-      [title, city, stateCode, isLiked, starRating, price, imageUrl];
+  HotelInfo.fromJson(Map<String, dynamic> json)
+      : title = json['title'] ?? '',
+        city = json['city'] ?? '',
+        stateCode = json['state_code'] ?? '',
+        isLiked = (json['is_liked'] == "true") ? true : false,
+        starRating = json['star_rating'] ?? 0,
+        price = json['price'] ?? 00.00,
+        imageUrl = json['image_url'] ?? "";
 }

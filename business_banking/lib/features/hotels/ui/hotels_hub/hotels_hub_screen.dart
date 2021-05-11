@@ -1,51 +1,54 @@
+import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
-import 'package:business_banking/features/hotels/model/hotels_view_model.dart';
+import 'package:business_banking/features/hotels/model/hotel_view_model.dart';
 
 class HotelsHubScreen extends Screen {
-  final HotelsViewModel viewModel;
-  //final VoidCallback navigateToHotels;
+  final HotelsListViewModel viewModel;
+  final VoidCallback navigateToHotels;
 
-  HotelsHubScreen({required this.viewModel});
+  HotelsHubScreen({required this.viewModel, required this.navigateToHotels});
 
   @override
   Widget build(BuildContext context) {
-    String name = this.viewModel.title;
+    HotelViewModel hvm = this.viewModel.hotels.first;
+
+    Text title =
+        Text(hvm.title, style: TextStyle(color: Colors.black, fontSize: 20));
+
+    ListTile tile = ListTile(
+        onTap: navigateToHotels,
+        contentPadding: EdgeInsets.zero,
+        trailing: Icon(Icons.hotel, color: Colors.black, size: 30),
+        title: title,
+        subtitle: Text("\$" + hvm.price.toStringAsFixed(2)));
 
     return Container(
-      height: 220,
+      height: 150,
       padding: EdgeInsets.all(5.0),
       child: Card(
         color: Colors.white,
         shadowColor: Colors.grey[500],
         elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 1),
+                padding: const EdgeInsets.only(top: 2),
                 child: Row(
                   children: [
                     const Text(
-                      'Hotels',
+                      'Latest Hotel',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ),
-              const Divider(
-                thickness: 2,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 100.0),
-                child: Text(
-                  name,
-                  style: TextStyle(color: Colors.black54, fontSize: 15),
-                ),
-              ),
+              const Divider(thickness: 2),
+              tile
             ],
           ),
         ),

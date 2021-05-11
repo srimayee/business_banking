@@ -7,7 +7,6 @@ class HotelsHubWidget extends StatelessWidget {
   //
   @override
   Widget build(BuildContext build) {
-    print('HotelsHubWidget 01');
     return BlocProvider<HotelsBloc>(
       create: (_) => HotelsBloc(),
       child: HotelsHubPresenter(),
