@@ -17,8 +17,6 @@ class HubScreen extends Screen {
       ),
       backgroundColor: Colors.grey[300],
       body: NewOnlineRegistrationRequestWidget(),
-      // DepositCheckWidget(),
-      // OnlineRegistrationFeatureWidget(),
     );
   }
 }
