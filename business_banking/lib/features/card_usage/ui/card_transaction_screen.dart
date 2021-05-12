@@ -32,11 +32,8 @@ class CardTransactionScreen extends Screen {
                   style: TextStyle(color: Colors.green.shade500, fontSize: 20.0, fontWeight: FontWeight.w500)),
               SizedBox(height: 10),
               Expanded(
-                  child: ListView.separated(
+                  child: ListView.builder(
                 itemCount: viewModel.transactionDetails.length,
-                separatorBuilder: (context, index) {
-                  return Container();
-                },
                 itemBuilder: (context, index) {
                   return CardTransactionTile(
                       viewModel: viewModel.transactionDetails[index]);
