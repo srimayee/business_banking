@@ -42,7 +42,7 @@ class NewOnlineRegistrationScreen extends Screen {
                     ),
                     customTextField(
                       controller: _cardNumberValueTextEditingController,
-                      labelText: 'Credit Card Name',
+                      labelText: 'Credit Card Number',
                       onSaved: (val) {
                         actions.onUpdateNumberParam(val!);
                       },
