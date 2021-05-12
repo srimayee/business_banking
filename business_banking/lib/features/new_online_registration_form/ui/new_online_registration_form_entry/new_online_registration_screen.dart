@@ -19,13 +19,15 @@ class NewOnlineRegistrationScreen extends Screen {
 
   final _nameValueTextEditingController = TextEditingController();
   final _cardNumberValueTextEditingController = TextEditingController();
-  final _userPasswordValueTextEditingController = TextEditingController();
   final _userEmailAddressController = TextEditingController();
+  final _userPasswordValueTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // _nameValueTextEditingController.text = viewModel.cardHolderName!;
-    // _cardNumberValueTextEditingController.text = viewModel.cardNumber!;
+    _nameValueTextEditingController.text = viewModel.cardHolderName!;
+    _cardNumberValueTextEditingController.text = viewModel.cardNumber!;
+    _userEmailAddressController.text = viewModel.email!;
+    _userPasswordValueTextEditingController.text = viewModel.userPassword!;
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Center(
