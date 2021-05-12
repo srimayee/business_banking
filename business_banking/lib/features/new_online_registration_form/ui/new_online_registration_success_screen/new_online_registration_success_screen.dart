@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 
 class NewOnlineRegistrationSuccessScreen extends Screen {
   final NewOnlineRegistrationRequestSuccessViewModel viewModel;
-  // final OnlineRegistrationSuccessPresenterActions presenterAction;
   NewOnlineRegistrationSuccessScreen({
     required this.viewModel,
-    // required this.presenterAction
   });
 
   @override
@@ -30,7 +28,6 @@ class NewOnlineRegistrationSuccessScreen extends Screen {
                 NewOnlineRegistrationServiceResponseStatus.succeed
             ? SuccessWidget(viewModel: viewModel)
             : FailedWidget(viewModel: viewModel));
-    // body: Center(child: Text('Successfully Registered')),
   }
 }
 

@@ -21,18 +21,6 @@ class NewOnlineRegistrationSuccessPresenter extends Presenter<
       NewOnlineRegistrationRequestSuccessViewModel viewModel) {
     return NewOnlineRegistrationSuccessScreen(
       viewModel: viewModel,
-      // presenterAction: OnlineRegistrationSuccessPresenterActions(bloc),
     );
   }
 }
-
-// class OnlineRegistrationSuccessPresenterActions {
-//   OnlineRegistrationBloc bloc;
-//   OnlineRegistrationSuccessPresenterActions(this.bloc);
-//
-//   popNavigationListener(BuildContext context) {
-//     bloc.onlineRegistrationSuccessEventPipe
-//         .send(ResetOnlineRegistrationViewModelEvent());
-//     CFRouterScope.of(context).popUntil(BusinessBankingRouter.hubRoute);
-//   }
-// }

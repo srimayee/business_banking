@@ -24,7 +24,6 @@ class NewOnlineRegistrationScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
-    //print("NewOnlineRegistrationScreen.build");
     // _nameValueTextEditingController.text = viewModel.cardHolderName!;
     // _cardNumberValueTextEditingController.text = viewModel.cardNumber!;
     return Scaffold(
