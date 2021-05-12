@@ -1,32 +1,32 @@
-import 'package:business_banking/features/online_registration/api/online_registration_service.dart';
-import 'package:business_banking/features/online_registration/api/online_registration_service_request_model.dart';
-import 'package:business_banking/features/online_registration/api/online_registration_service_response_model.dart';
-import 'package:business_banking/features/online_registration/model/online_registration_form_entry/online_registration_entity.dart';
+import 'package:business_banking/features/new_online_registration_form/api/new_online_registration_service.dart';
+import 'package:business_banking/features/new_online_registration_form/api/new_online_registration_service_request_model.dart';
+import 'package:business_banking/features/new_online_registration_form/api/new_online_registration_service_response_model.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_entity.dart';
 import 'package:clean_framework/clean_framework.dart';
 
-class OnlineRegistrationServiceAdapter extends ServiceAdapter<
-    OnlineRegistrationEntity,
-    OnlineRegistrationServiceRequestModel,
-    OnlineRegistrationServiceResponseModel,
-    OnlineRegistrationService> {
-  OnlineRegistrationServiceAdapter() : super(OnlineRegistrationService());
+class NewOnlineRegistrationRequestServiceAdapter extends ServiceAdapter<
+    NewOnlineRegistrationEntity,
+    NewOnlineRegistrationServiceRequestModel,
+    NewOnlineRegistrationServiceResponseModel,
+    NewOnlineRegistrationService> {
+  NewOnlineRegistrationRequestServiceAdapter()
+      : super(NewOnlineRegistrationService());
 
   @override
-  OnlineRegistrationEntity createEntity(initialEntity, responseModel) {
+  NewOnlineRegistrationEntity createEntity(initialEntity, responseModel) {
     return initialEntity.merge(
       errors: <EntityFailure>[],
       accountNumberGenerated: responseModel.accountNumberGenerated,
-    ) as OnlineRegistrationEntity;
+    ) as NewOnlineRegistrationEntity;
   }
 
   @override
-  OnlineRegistrationServiceRequestModel createRequest(
-      OnlineRegistrationEntity entity) {
-    return OnlineRegistrationServiceRequestModel(
+  NewOnlineRegistrationServiceRequestModel createRequest(
+      NewOnlineRegistrationEntity entity) {
+    return NewOnlineRegistrationServiceRequestModel(
       cardHolderName: entity.cardHolderName,
       cardNumber: entity.cardNumber,
       email: entity.email,
-      ssnLastFourDigits: entity.ssnLastFourDigits,
       userPassword: entity.userPassword,
     );
   }
