@@ -8,7 +8,7 @@ import 'package:business_banking/features/statement/model/statement_info.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('AccountInfoList Service Adapter Test', () {
+  group('StatementList Service Adapter Test', () {
     final tEntity = StatementEntity(statements: [
       Statement(
           accountInfo: AccountInfoStruct(

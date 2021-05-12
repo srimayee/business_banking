@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:business_banking/features/statement/bloc/statement/statement_event.dart';
 import 'package:business_banking/features/statement/model/hub_cards/statement_cards_view_model.dart';
 import 'package:business_banking/features/statement/model/statement/statement_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -12,6 +15,15 @@ class StatementBloc extends Bloc {
   StatementCardUseCase? _statementCardUseCase;
   final statementCardViewModelPipe = Pipe<StatementCardViewModel>();
 
+  final statmentEventPipe = Pipe<StatementEvent>(canSendDuplicateData: true);
+
+  @override
+  void dispose() {
+    statementViewModelPipe.dispose();
+    statementCardViewModelPipe.dispose();
+    statmentEventPipe.dispose();
+  }
+
   StatementBloc({
     StatementUseCase? statementUseCase,
     StatementCardUseCase? statementCardUseCase,
@@ -25,10 +37,13 @@ class StatementBloc extends Bloc {
         StatementCardUseCase(
             (viewModel) => statementCardViewModelPipe.send(viewModel));
     statementCardViewModelPipe.whenListenedDo(_statementCardUseCase!.create);
+
+    statmentEventPipe.receive.listen(statementEventPipeHandler);
   }
 
-  @override
-  void dispose() {
-    statementViewModelPipe.dispose();
+  void statementEventPipeHandler(StatementEvent event) {
+    if (event is SendStatementToEmail) {
+      _statementUseCase!.sendStatementAsPdf(event.statement, [event.recipient]);
+    }
   }
 }

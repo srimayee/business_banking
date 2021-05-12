@@ -11,32 +11,35 @@ class StatementUseCaseMock extends Mock implements StatementUseCase {}
 class StatementCardUseCaseMock extends Mock implements StatementCardUseCase {}
 
 void main() {
-  test('StatementBloc initialize', () async {
-    final bloc = StatementBloc();
-    expect(bloc.statementViewModelPipe, isNotNull);
-    expect(bloc.statementCardViewModelPipe, isNotNull);
+  StatementBloc bloc;
+  StatementCardUseCaseMock mockStatementCardUseCase;
+  StatementUseCaseMock mockStatementUseCase;
+  setUp(() {
+    mockStatementCardUseCase = StatementCardUseCaseMock();
+    mockStatementUseCase = StatementUseCaseMock();
+    bloc = StatementBloc(
+        statementCardUseCase: mockStatementCardUseCase,
+        statementUseCase: mockStatementUseCase);
   });
 
-  test('StatementBloc dispose', () async {
-    final bloc = StatementBloc();
+  tearDown(() {
     bloc.dispose();
-    expect(bloc.statementCardViewModelPipe.receive, emitsDone);
-    expect(bloc.statementViewModelPipe.receive, emitsDone);
   });
+  group('', () {
+    test(
+        'statementCardViewModelPipe streams out StatementViewModel to listeners.',
+        () {
+      bloc.statementCardViewModelPipe.receive.listen((model) {
+        verify(mockStatementCardUseCase.create()).called(1);
+      });
+    });
 
-  test('StatementBloc StatementUseCase create on pipe listen', () async {
-    StatementUseCaseMock statementUseCaseMock = StatementUseCaseMock();
-    StatementBloc bloc = StatementBloc(statementUseCase: statementUseCaseMock);
-    bloc.statementViewModelPipe.receive.listen((event) {});
-    verify(statementUseCaseMock.create()).called(1);
-  });
-
-  test('StatementBloc StatementCardUseCase create on pipe listen', () async {
-    StatementCardUseCaseMock statementCardUseCaseMock =
-        StatementCardUseCaseMock();
-    StatementBloc bloc =
-        StatementBloc(statementCardUseCase: statementCardUseCaseMock);
-    bloc.statementViewModelPipe.receive.listen((event) {});
-    verify(statementCardUseCaseMock.create()).called(1);
+    test(
+        'statementChartViewModelPipe streams out StatementViewModel to listeners.',
+        () {
+      bloc.statementViewModelPipe.receive.listen((model) {
+        verify(mockStatementCardUseCase.create()).called(1);
+      });
+    });
   });
 }

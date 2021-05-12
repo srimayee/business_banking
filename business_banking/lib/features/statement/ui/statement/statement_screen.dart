@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:business_banking/features/statement/model/statement/statement_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'statement_presenter.dart';
 
@@ -16,6 +17,20 @@ class StatementScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+      if (viewModel.emailServiceStatus == EmailServiceStatus.initial) {
+        return;
+      } else if (viewModel.emailServiceStatus == EmailServiceStatus.error) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("There was an error sending your email."),
+        ));
+      } else if (viewModel.emailServiceStatus == EmailServiceStatus.success) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Your email was successfully sent."),
+        ));
+      }
+    });
+
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
@@ -114,7 +129,12 @@ class StatementScreen extends Screen {
                               ),
                             ),
                           );
-                        })
+                        }),
+                    IconButton(
+                      icon: Icon(Icons.email),
+                      onPressed: () => presenterActions.sendStatementToEmail(
+                          context, viewModel.statements[index]),
+                    )
                   ],
                 ),
               ),

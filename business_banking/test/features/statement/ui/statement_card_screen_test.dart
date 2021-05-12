@@ -25,7 +25,7 @@ void main() {
     bloc.dispose();
   });
 
-  group('View Chart Screen tests', () {
+  group('View StatementCardScreen tests', () {
     testWidgets('pumping StatementCardScreen with test data', (tester) async {
       final tAccountListInfo = [
         AccountInfoStruct(

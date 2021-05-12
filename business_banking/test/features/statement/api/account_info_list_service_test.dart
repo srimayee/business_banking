@@ -36,7 +36,7 @@ void main() {
     });
 
     test(
-        'StatementService should return AccountInfoListServiceResponseModel when the response is success',
+        'AccountInfoListService should return AccountInfoListServiceResponseModel when the response is success',
         () async {
       final eitherResponce = await service.request();
 
