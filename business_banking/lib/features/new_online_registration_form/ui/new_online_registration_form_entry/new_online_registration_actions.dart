@@ -1,16 +1,13 @@
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_bloc.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_event.dart';
-import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewOnlineRegistrationRequestActions {
+  NewOnlineRegistrationRequestActions(this.bloc);
   final NewOnlineRegistrationBloc bloc;
-  final NewOnlineRegistrationViewModel viewModel;
-
-  NewOnlineRegistrationRequestActions(this.bloc, this.viewModel);
 
   void pressCreateButton(
     BuildContext context,
@@ -19,13 +16,11 @@ class NewOnlineRegistrationRequestActions {
     String email,
     String password,
   ) {
-    String userNameValidated = bloc.validateUserName(viewModel, userName);
-    String userCardNumberValidated =
-        bloc.validateCardHolderNumber(viewModel, cardNumber);
-    String userPasswordValidated =
-        bloc.validateUserPassword(viewModel, password);
+    String userNameValidated = bloc.validateUserName(userName);
+    String userCardNumberValidated = bloc.validateCardHolderNumber(cardNumber);
+    String userPasswordValidated = bloc.validateUserPassword(password);
 
-    String userEmail = bloc.validateEmailAddress(viewModel, email);
+    String userEmail = bloc.validateEmailAddress(email);
 
     if (userNameValidated.isNotEmpty ||
         userCardNumberValidated.isNotEmpty ||
@@ -54,22 +49,22 @@ class NewOnlineRegistrationRequestActions {
   }
 
   void onUpdateNameParam(String userName) {
-    var event = UpdateCardHolderNameRequestEvent(this.viewModel, userName);
+    var event = UpdateCardHolderNameRequestEvent(userName);
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
   void onUpdateNumberParam(String cardNumber) {
-    var event = UpdateCardHolderNumberRequestEvent(this.viewModel, cardNumber);
+    var event = UpdateCardHolderNumberRequestEvent(cardNumber);
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
   void onUpdateEmailAddress(String email) {
-    var event = UpdateEmailAddressRequestEvent(this.viewModel, email);
+    var event = UpdateEmailAddressRequestEvent(email);
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
   void onUpdatePassword(String password) {
-    var event = UpdateUserPasswordRequestEvent(this.viewModel, password);
+    var event = UpdateUserPasswordRequestEvent(password);
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 

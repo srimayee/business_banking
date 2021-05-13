@@ -27,26 +27,62 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     _viewModelCallBack(buildViewModel());
   }
 
-  NewOnlineRegistrationViewModel buildViewModel() {
-    NewOnlineRegistrationEntity newOnlineRegistrationEntity =
+  NewOnlineRegistrationViewModel buildViewModel({
+    status: '',
+    inputStatusType = NewOnlineRegistrationInputStatusType.unknown,
+    NewOnlineRegistrationEntity? newOnlineRegistrationEntity,
+  }) {
+    newOnlineRegistrationEntity = newOnlineRegistrationEntity ??
         ExampleLocator().repository.get(_scopeRegistrationFormEntity!);
     if (newOnlineRegistrationEntity.hasErrors()) {
       return NewOnlineRegistrationViewModel(
         cardHolderName: newOnlineRegistrationEntity.cardHolderName,
         cardNumber: newOnlineRegistrationEntity.cardNumber,
-        userPassword: newOnlineRegistrationEntity.userPassword,
         email: newOnlineRegistrationEntity.email,
+        userPassword: newOnlineRegistrationEntity.userPassword,
+        cardHolderNameStatus: inputStatusType ==
+                NewOnlineRegistrationInputStatusType.cardHolderName
+            ? status
+            : '',
+        cardNumberStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.cardNumber
+                ? status
+                : '',
+        userEmailStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.email
+                ? status
+                : '',
+        userPasswordStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.userPassword
+                ? status
+                : '',
         serviceResponseStatus:
-            NewOnlineRegistrationServiceResponseStatus.succeed,
+            NewOnlineRegistrationServiceResponseStatus.failed,
       );
     } else {
       return NewOnlineRegistrationViewModel(
         cardHolderName: newOnlineRegistrationEntity.cardHolderName,
         cardNumber: newOnlineRegistrationEntity.cardNumber,
-        userPassword: newOnlineRegistrationEntity.userPassword,
         email: newOnlineRegistrationEntity.email,
+        userPassword: newOnlineRegistrationEntity.userPassword,
+        cardHolderNameStatus: inputStatusType ==
+                NewOnlineRegistrationInputStatusType.cardHolderName
+            ? status
+            : '',
+        cardNumberStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.cardNumber
+                ? status
+                : '',
+        userEmailStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.email
+                ? status
+                : '',
+        userPasswordStatus:
+            inputStatusType == NewOnlineRegistrationInputStatusType.userPassword
+                ? status
+                : '',
         serviceResponseStatus:
-            NewOnlineRegistrationServiceResponseStatus.failed,
+            NewOnlineRegistrationServiceResponseStatus.succeed,
       );
     }
   }
@@ -59,8 +95,15 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
-
-    _viewModelCallBack(buildViewModel());
+    String? checkUserInputStatus = validateUserName(userName);
+    if (checkUserInputStatus.isNotEmpty) {
+      _viewModelCallBack(buildViewModel(
+        status: checkUserInputStatus,
+        inputStatusType: NewOnlineRegistrationInputStatusType.cardHolderName,
+      ));
+    } else {
+      _viewModelCallBack(buildViewModel());
+    }
   }
 
   updateCardNumber(String cardNumber) {
@@ -71,20 +114,15 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
-
-    _viewModelCallBack(buildViewModel());
-  }
-
-  updatePassword(String password) {
-    final NewOnlineRegistrationEntity entity = ExampleLocator()
-        .repository
-        .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
-    final updatedEntity = entity.merge(userPassword: password);
-    ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
-        _scopeRegistrationFormEntity!,
-        updatedEntity as NewOnlineRegistrationEntity);
-
-    _viewModelCallBack(buildViewModel());
+    String? checkUserInputStatus = validateCardNumber(cardNumber);
+    if (checkUserInputStatus.isNotEmpty) {
+      _viewModelCallBack(buildViewModel(
+        status: checkUserInputStatus,
+        inputStatusType: NewOnlineRegistrationInputStatusType.cardNumber,
+      ));
+    } else {
+      _viewModelCallBack(buildViewModel());
+    }
   }
 
   updateEmailAddress(String _email) {
@@ -95,8 +133,34 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
+    String checkUserInputStatus = validateEmailAddress(_email);
+    if (checkUserInputStatus.isNotEmpty) {
+      _viewModelCallBack(buildViewModel(
+        status: checkUserInputStatus,
+        inputStatusType: NewOnlineRegistrationInputStatusType.email,
+      ));
+    } else {
+      _viewModelCallBack(buildViewModel());
+    }
+  }
 
-    _viewModelCallBack(buildViewModel());
+  updatePassword(String password) {
+    final NewOnlineRegistrationEntity entity = ExampleLocator()
+        .repository
+        .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
+    final updatedEntity = entity.merge(userPassword: password);
+    ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
+        _scopeRegistrationFormEntity!,
+        updatedEntity as NewOnlineRegistrationEntity);
+    String checkUserInputStatus = validateUserPassword(password);
+    if (checkUserInputStatus.isNotEmpty) {
+      _viewModelCallBack(buildViewModel(
+        status: checkUserInputStatus,
+        inputStatusType: NewOnlineRegistrationInputStatusType.userPassword,
+      ));
+    } else {
+      _viewModelCallBack(buildViewModel());
+    }
   }
 
   String validateUserName(String userName) {
@@ -119,17 +183,6 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-  String validateUserPassword(String password) {
-    if (password.isNotEmpty &&
-        password.contains(RegExp(
-                r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$")) ==
-            true) {
-      return '';
-    } else {
-      return "Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.";
-    }
-  }
-
   String validateEmailAddress(String userEmail) {
     if (userEmail.isNotEmpty &&
         userEmail.contains(RegExp(
@@ -138,6 +191,17 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
       return '';
     } else {
       return "Please, provide a valid email.";
+    }
+  }
+
+  String validateUserPassword(String password) {
+    if (password.isNotEmpty &&
+        password.contains(RegExp(
+                r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$")) ==
+            true) {
+      return '';
+    } else {
+      return "Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.";
     }
   }
 }

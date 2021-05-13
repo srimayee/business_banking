@@ -684,7 +684,7 @@
                         "responses": [
                             {
                             "uuid": "",
-                            "body": "{\n  \"status\" : \"Successful\",\n  \"didSucceed\" : true,\n  \"accountNumberGenerated\" : \"123456789\"\n}",
+                            "body": "{\n \"didSucceed\" : true,\n  \"accountNumberGenerated\" : \"123456789\"\n}",
                             "latency": 0,
                             "statusCode": 200,
                             "label": "",

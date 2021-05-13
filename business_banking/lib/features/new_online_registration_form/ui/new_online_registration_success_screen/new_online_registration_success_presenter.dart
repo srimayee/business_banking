@@ -1,6 +1,7 @@
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_bloc.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_success/new_online_registration_success_view_model.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_success_screen/new_online_registration_success_screen.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/widgets/custom_circular_progress_bar_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -22,5 +23,10 @@ class NewOnlineRegistrationSuccessPresenter extends Presenter<
     return NewOnlineRegistrationSuccessScreen(
       viewModel: viewModel,
     );
+  }
+
+  @override
+  Widget buildLoadingScreen(BuildContext context) {
+    return CustomCircularProgressBar();
   }
 }

@@ -28,6 +28,7 @@ class NewOnlineRegistrationScreen extends Screen {
     _cardNumberValueTextEditingController.text = viewModel.cardNumber!;
     _userEmailAddressController.text = viewModel.email!;
     _userPasswordValueTextEditingController.text = viewModel.userPassword!;
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Center(
@@ -36,28 +37,36 @@ class NewOnlineRegistrationScreen extends Screen {
                 child: Column(
                   children: [
                     customTextField(
+                      textFieldKey: Key('cardHolderName-TxtField'),
                       controller: _nameValueTextEditingController,
+                      inputStatus: viewModel.cardHolderNameStatus,
                       labelText: 'Card Holder Name',
                       onSaved: (val) {
                         actions.onUpdateNameParam(val!);
                       },
                     ),
                     customTextField(
+                      textFieldKey: Key('cardHolderNumber-TxtField'),
                       controller: _cardNumberValueTextEditingController,
+                      inputStatus: viewModel.cardNumberStatus,
                       labelText: 'Credit Card Number',
                       onSaved: (val) {
                         actions.onUpdateNumberParam(val!);
                       },
                     ),
                     customTextField(
+                      textFieldKey: Key('userEmailAddress-TxtField'),
                       controller: _userEmailAddressController,
+                      inputStatus: viewModel.userEmailStatus,
                       labelText: 'Email for login',
                       onSaved: (val) {
                         actions.onUpdateEmailAddress(val!);
                       },
                     ),
                     customTextField(
+                      textFieldKey: Key('userPassword-TxtField'),
                       controller: _userPasswordValueTextEditingController,
+                      inputStatus: viewModel.userPasswordStatus,
                       labelText: 'Password',
                       onSaved: (val) {
                         actions.onUpdatePassword(val!);
@@ -86,32 +95,42 @@ class NewOnlineRegistrationScreen extends Screen {
                 ))));
   }
 
-  Widget customTextField(
-      {TextEditingController? controller,
-      String? labelText,
-      final FormFieldSetter<String>? onSaved,
-      bool obscureText = false,
-      TextInputType keyboardType = TextInputType.text}) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: TextFormField(
-        controller: controller, //viewModel.paymentValueTextEditingController,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          suffixStyle: TextStyle(color: Colors.orangeAccent),
-          labelText: labelText,
+  Widget customTextField({
+    TextEditingController? controller,
+    String? labelText,
+    final FormFieldSetter<String>? onSaved,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+    final String? inputStatus,
+    Key? textFieldKey,
+  }) {
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: TextFormField(
+          key: textFieldKey,
+          controller: controller, //viewModel.paymentValueTextEditingController,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            suffixStyle: TextStyle(color: Colors.orangeAccent),
+            labelText: labelText,
+          ),
+          textInputAction: TextInputAction.done,
+          keyboardType: keyboardType,
+          obscureText: obscureText,
+          onSaved: onSaved,
         ),
-        textInputAction: TextInputAction.done,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        onChanged: (val) {
-          controller!.text = val;
-          controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: controller.text.length));
-          // onNameChanged(context, val);
-        },
-        onSaved: onSaved,
       ),
-    );
+      if (inputStatus!.isNotEmpty)
+        Padding(
+            padding: EdgeInsets.only(left: 15, bottom: 10),
+            child: Row(children: [
+              Expanded(
+                  child: Text(
+                inputStatus,
+                style: TextStyle(color: Colors.red, fontSize: 12),
+              )),
+            ])),
+    ]);
   }
 }

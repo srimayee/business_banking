@@ -5,12 +5,8 @@ class NewOnlineRegistrationServiceResponseModel extends JsonResponseModel {
   final String accountNumberGenerated;
 
   NewOnlineRegistrationServiceResponseModel.fromJson(Map<String, dynamic> json)
-      : didSucceed = true, //change to false?
-        accountNumberGenerated = '123456';
-
-  // didSucceed = json['didSucceed'] ?? true, //change to false?
-  // status = json['status'] ?? '',
-  // accountNumberGenerated = json['accountNumberGenerated'] ?? '123456';
+      : didSucceed = json['didSucceed'] ?? false,
+        accountNumberGenerated = json['accountNumberGenerated'] ?? '';
 
   @override
   List<Object> get props => [didSucceed, accountNumberGenerated];

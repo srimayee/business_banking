@@ -3,14 +3,14 @@ import 'package:equatable/equatable.dart';
 
 class NewOnlineRegistrationServiceRequestModel extends Equatable
     implements JsonRequestModel {
-  final String? cardNumber;
   final String? cardHolderName;
+  final String? cardNumber;
   final String? email;
   final String? userPassword;
 
   NewOnlineRegistrationServiceRequestModel({
-    required this.cardNumber,
     required this.cardHolderName,
+    required this.cardNumber,
     required this.email,
     required this.userPassword,
   });
@@ -18,13 +18,13 @@ class NewOnlineRegistrationServiceRequestModel extends Equatable
   @override
   Map<String, dynamic> toJson() {
     return {
-      'cardNumber': cardNumber,
       'cardHolderName': cardHolderName,
+      'cardNumber': cardNumber,
       'email': email,
       'userPassword': userPassword,
     };
   }
 
   @override
-  List<Object?> get props => [cardNumber, cardHolderName, email, userPassword];
+  List<Object?> get props => [cardHolderName, cardNumber, email, userPassword];
 }

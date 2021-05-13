@@ -6,21 +6,21 @@ class NewOnlineRegistrationViewModel extends ViewModel {
   final String? cardNumber;
   final String? userPassword;
   final String? email;
+  final String? cardHolderNameStatus;
+  final String? cardNumberStatus;
+  final String? userEmailStatus;
+  final String? userPasswordStatus;
   final serviceResponseStatus;
 
   NewOnlineRegistrationViewModel(
       {required this.cardHolderName,
       required this.cardNumber,
-      // required this.ssnLastFourDigits,
       required this.email,
       required this.userPassword,
-      // required this.accountNumberGenerated,
-      // required this.cardNumberStatus,
-      // required this.cardHolderNameStatus,
-      // required this.ssnLastFourDigitsStatus,
-      // required this.userEmailStatus,
-      // required this.userPasswordStatus,
-      // this.userFormInputStatus = UserFormInputStatus.unknown,
+      required this.cardHolderNameStatus,
+      required this.cardNumberStatus,
+      required this.userEmailStatus,
+      required this.userPasswordStatus,
       this.serviceResponseStatus =
           NewOnlineRegistrationServiceResponseStatus.unknown});
 
@@ -28,9 +28,7 @@ class NewOnlineRegistrationViewModel extends ViewModel {
   List<Object?> get props => [
         cardHolderName,
         cardNumber,
-        // ssnLastFourDigits,
         email,
         userPassword,
-        // accountNumberGenerated
       ];
 }

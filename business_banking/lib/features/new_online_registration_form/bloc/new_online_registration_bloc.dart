@@ -67,27 +67,19 @@ class NewOnlineRegistrationBloc extends Bloc {
     }
   }
 
-  String validateUserName(
-      NewOnlineRegistrationViewModel newOnlineRegistrationViewModel,
-      String userName) {
+  String validateUserName(String userName) {
     return _newOnlineRegistrationRequestUseCase!.validateUserName(userName);
   }
 
-  String validateCardHolderNumber(
-      NewOnlineRegistrationViewModel newOnlineRegistrationViewModel,
-      String cardNumber) {
+  String validateCardHolderNumber(String cardNumber) {
     return _newOnlineRegistrationRequestUseCase!.validateCardNumber(cardNumber);
   }
 
-  String validateUserPassword(
-      NewOnlineRegistrationViewModel newOnlineRegistrationViewModel,
-      String password) {
+  String validateUserPassword(String password) {
     return _newOnlineRegistrationRequestUseCase!.validateUserPassword(password);
   }
 
-  String validateEmailAddress(
-      NewOnlineRegistrationViewModel newOnlineRegistrationViewModel,
-      String email) {
+  String validateEmailAddress(String email) {
     return _newOnlineRegistrationRequestUseCase!.validateEmailAddress(email);
   }
 }

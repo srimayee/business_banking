@@ -1,44 +1,47 @@
-import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class NewOnlineRegistrationEvent extends Equatable {}
 
 class UpdateCardHolderNameRequestEvent extends NewOnlineRegistrationEvent {
   final String username;
-  final NewOnlineRegistrationViewModel viewModel;
 
-  UpdateCardHolderNameRequestEvent(this.viewModel, this.username);
+  UpdateCardHolderNameRequestEvent(this.username);
 
   @override
-  List<Object?> get props => [viewModel, username];
+  List<Object?> get props => [username];
+  @override
+  bool get stringify => true;
 }
 
 class UpdateCardHolderNumberRequestEvent extends NewOnlineRegistrationEvent {
   final String cardNumber;
-  final NewOnlineRegistrationViewModel viewModel;
 
-  UpdateCardHolderNumberRequestEvent(this.viewModel, this.cardNumber);
+  UpdateCardHolderNumberRequestEvent(this.cardNumber);
 
   @override
-  List<Object?> get props => [viewModel, cardNumber];
+  List<Object?> get props => [cardNumber];
+  @override
+  bool get stringify => true;
 }
 
 class UpdateUserPasswordRequestEvent extends NewOnlineRegistrationEvent {
   final String password;
-  final NewOnlineRegistrationViewModel viewModel;
 
-  UpdateUserPasswordRequestEvent(this.viewModel, this.password);
+  UpdateUserPasswordRequestEvent(this.password);
 
   @override
-  List<Object?> get props => [viewModel, password];
+  List<Object?> get props => [password];
+  @override
+  bool get stringify => true;
 }
 
 class UpdateEmailAddressRequestEvent extends NewOnlineRegistrationEvent {
   final String email;
-  final NewOnlineRegistrationViewModel viewModel;
 
-  UpdateEmailAddressRequestEvent(this.viewModel, this.email);
+  UpdateEmailAddressRequestEvent(this.email);
 
   @override
-  List<Object?> get props => [viewModel, email];
+  List<Object?> get props => [email];
+  @override
+  bool get stringify => true;
 }

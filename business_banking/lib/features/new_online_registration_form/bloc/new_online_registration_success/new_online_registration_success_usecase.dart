@@ -1,3 +1,4 @@
+import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_service_adapter.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_entity.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_success/new_online_registration_success_view_model.dart';
@@ -18,30 +19,30 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
         .create<NewOnlineRegistrationEntity>(
             NewOnlineRegistrationEntity(), _notifySubscribers);
 
-    // await ExampleLocator().repository.runServiceAdapter(
-    //     __scopeRegistrationStatusResponse!,
-    //     NewOnlineRegistrationRequestServiceAdapter());
+    await ExampleLocator().repository.runServiceAdapter(
+        __scopeRegistrationStatusResponse!,
+        NewOnlineRegistrationRequestServiceAdapter());
 
     sendViewModelToSubscribers();
   }
 
 //Use this when service is ready rather below one
-  // void sendViewModelToSubscribers() {
-  // NewOnlineRegistrationEntity newOnlineRegistrationEntity =
-  // ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
-  //   _notifySubscribers(creditCardPaymentResponseEntity);
-  // }
-
   void sendViewModelToSubscribers() {
     NewOnlineRegistrationEntity newOnlineRegistrationEntity =
         ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
-    final updatedEntity =
-        newOnlineRegistrationEntity.merge(accountNumberGenerated: '12345');
-    ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
-        __scopeRegistrationStatusResponse!,
-        updatedEntity as NewOnlineRegistrationEntity);
-    _notifySubscribers(updatedEntity);
+    _notifySubscribers(newOnlineRegistrationEntity);
   }
+
+  // void sendViewModelToSubscribers() {
+  //   NewOnlineRegistrationEntity newOnlineRegistrationEntity =
+  //       ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
+  //   final updatedEntity =
+  //       newOnlineRegistrationEntity.merge(accountNumberGenerated: '12345');
+  //   ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
+  //       __scopeRegistrationStatusResponse!,
+  //       updatedEntity as NewOnlineRegistrationEntity);
+  //   _notifySubscribers(updatedEntity);
+  // }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));

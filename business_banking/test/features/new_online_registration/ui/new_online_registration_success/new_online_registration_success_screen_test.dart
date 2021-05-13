@@ -1,42 +1,46 @@
 // @dart = 2.9
-import 'package:business_banking/features/online_registration/model/online_registration_form_entry/online_registration_enums.dart';
-import 'package:business_banking/features/online_registration/model/online_registration_success/online_registration_success_view_model.dart';
-import 'package:business_banking/features/online_registration/ui/online_registration_success_screen/online_registration_success_screen.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_success/new_online_registration_success_view_model.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_success_screen/new_online_registration_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   MaterialApp testWidgetSucceed;
   MaterialApp testWidgetFailed;
-  OnlineRegistrationSuccessViewModel onlineRegistrationViewModelSucceed;
-  OnlineRegistrationSuccessViewModel onlineRegistrationViewModelFailed;
+  NewOnlineRegistrationRequestSuccessViewModel
+      onlineRegistrationViewModelSucceed;
+  NewOnlineRegistrationRequestSuccessViewModel
+      onlineRegistrationViewModelFailed;
 
   setUp(() async {
-    onlineRegistrationViewModelSucceed = OnlineRegistrationSuccessViewModel(
-        cardHolderName: 'Tyler',
-        cardNumber: '378282246310005',
-        email: 'test@test.com',
-        ssnLastFourDigits: '5462',
-        userPassword: 'TestPassword@123',
-        accountNumberGenerated: '123456789',
-        serviceResponseStatus: ServiceResponseStatus.succeed);
+    onlineRegistrationViewModelSucceed =
+        NewOnlineRegistrationRequestSuccessViewModel(
+            cardHolderName: 'Tyler',
+            cardNumber: '378282246310005',
+            email: 'test@test.com',
+            userPassword: 'TestPassword@123',
+            accountNumberGenerated: '123456789',
+            serviceResponseStatus:
+                NewOnlineRegistrationServiceResponseStatus.succeed);
 
-    onlineRegistrationViewModelFailed = OnlineRegistrationSuccessViewModel(
-        cardHolderName: 'Tyler',
-        cardNumber: '378282246310005',
-        email: 'test@test.com',
-        ssnLastFourDigits: '5462',
-        userPassword: 'TestPassword@123',
-        accountNumberGenerated: '',
-        serviceResponseStatus: ServiceResponseStatus.failed);
+    onlineRegistrationViewModelFailed =
+        NewOnlineRegistrationRequestSuccessViewModel(
+            cardHolderName: 'Tyler',
+            cardNumber: '378282246310005',
+            email: 'test@test.com',
+            userPassword: 'TestPassword@123',
+            accountNumberGenerated: '',
+            serviceResponseStatus:
+                NewOnlineRegistrationServiceResponseStatus.failed);
 
     testWidgetSucceed = MaterialApp(
-      home: OnlineRegistrationSuccessScreen(
+      home: NewOnlineRegistrationSuccessScreen(
           viewModel: onlineRegistrationViewModelSucceed),
     );
 
     testWidgetFailed = MaterialApp(
-      home: OnlineRegistrationSuccessScreen(
+      home: NewOnlineRegistrationSuccessScreen(
           viewModel: onlineRegistrationViewModelFailed),
     );
   });
@@ -49,7 +53,7 @@ void main() {
     testWidgets('should show the screen', (tester) async {
       await tester.pumpWidget(testWidgetSucceed);
       await tester.pump(Duration(milliseconds: 500));
-      final widgetType = find.byType(OnlineRegistrationSuccessScreen);
+      final widgetType = find.byType(NewOnlineRegistrationSuccessScreen);
       expect(widgetType, findsOneWidget);
     });
 

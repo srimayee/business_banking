@@ -1,66 +1,57 @@
 // @dart = 2.9
 import 'package:business_banking/features/deposit_check/model/enums.dart';
-import 'package:business_banking/features/online_registration/model/online_registration_form_entry/online_registration_view_model.dart';
-import 'package:business_banking/features/online_registration/ui/online_registration_form_entry/online_registration_actions.dart';
-import 'package:business_banking/features/online_registration/ui/online_registration_form_entry/online_registration_screen.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_actions.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockOnlineRegistrationPresenterActions extends Mock
-    implements OnlineRegistrationPresenterActions {}
+    implements NewOnlineRegistrationRequestActions {}
 
 void main() {
   MaterialApp testWidgetSucceed;
   MaterialApp testWidgetFailed;
   MaterialApp testWidgetFailedWithSomeErrors;
-  OnlineRegistrationViewModel onlineRegistrationViewModelSucceed;
-  OnlineRegistrationViewModel onlineRegistrationViewModelFailed;
-  OnlineRegistrationViewModel
+  NewOnlineRegistrationViewModel onlineRegistrationViewModelSucceed;
+  NewOnlineRegistrationViewModel onlineRegistrationViewModelFailed;
+  NewOnlineRegistrationViewModel
       onlineRegistrationViewModelFailedWithSomeValidationErrors;
   MockOnlineRegistrationPresenterActions mockOnlineRegistrationPresenterAction;
 
   setUp(() {
-    onlineRegistrationViewModelSucceed = OnlineRegistrationViewModel(
+    onlineRegistrationViewModelSucceed = NewOnlineRegistrationViewModel(
         cardHolderName: 'Tyler',
         cardNumber: '378282246310005',
         email: 'test@test.com',
-        ssnLastFourDigits: '5462',
         userPassword: 'TestPassword@123',
-        accountNumberGenerated: '123456789',
         cardHolderNameStatus: '',
         cardNumberStatus: '',
-        ssnLastFourDigitsStatus: '',
         userEmailStatus: '',
         userPasswordStatus: '',
         serviceResponseStatus: ServiceResponseStatus.succeed);
 
-    onlineRegistrationViewModelFailed = OnlineRegistrationViewModel(
+    onlineRegistrationViewModelFailed = NewOnlineRegistrationViewModel(
         cardHolderName: '',
         cardNumber: 'test',
         email: 'test',
-        ssnLastFourDigits: '123',
         userPassword: 'Test',
-        accountNumberGenerated: '',
         cardHolderNameStatus: 'Please, provide a valid name.',
         cardNumberStatus: 'Enter valid credit card number.',
-        ssnLastFourDigitsStatus: 'SSN must be 4 digits.',
         userEmailStatus: 'Please, provide a valid email.',
         userPasswordStatus:
             'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
         serviceResponseStatus: ServiceResponseStatus.failed);
 
     onlineRegistrationViewModelFailedWithSomeValidationErrors =
-        OnlineRegistrationViewModel(
+        NewOnlineRegistrationViewModel(
             cardHolderName: 'Tyler',
             cardNumber: 'test',
             email: 'test@test.com',
-            ssnLastFourDigits: 'wer4',
             userPassword: 'TestPassword',
-            accountNumberGenerated: '',
             cardHolderNameStatus: '',
             cardNumberStatus: 'Enter valid credit card number.',
-            ssnLastFourDigitsStatus: 'SSN Number is not valid.',
             userEmailStatus: '',
             userPasswordStatus:
                 'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
@@ -70,21 +61,21 @@ void main() {
         MockOnlineRegistrationPresenterActions();
 
     testWidgetSucceed = MaterialApp(
-      home: OnlineRegistrationScreen(
+      home: NewOnlineRegistrationScreen(
           viewModel: onlineRegistrationViewModelSucceed,
-          presenterAction: mockOnlineRegistrationPresenterAction),
+          actions: mockOnlineRegistrationPresenterAction),
     );
 
     testWidgetFailed = MaterialApp(
-      home: OnlineRegistrationScreen(
+      home: NewOnlineRegistrationScreen(
           viewModel: onlineRegistrationViewModelFailed,
-          presenterAction: mockOnlineRegistrationPresenterAction),
+          actions: mockOnlineRegistrationPresenterAction),
     );
 
     testWidgetFailedWithSomeErrors = MaterialApp(
-      home: OnlineRegistrationScreen(
+      home: NewOnlineRegistrationScreen(
           viewModel: onlineRegistrationViewModelFailedWithSomeValidationErrors,
-          presenterAction: mockOnlineRegistrationPresenterAction),
+          actions: mockOnlineRegistrationPresenterAction),
     );
   });
 
@@ -99,21 +90,16 @@ void main() {
   }
 
   void verifyParentActions() {
-    verify(mockOnlineRegistrationPresenterAction.onUserNameSavedListener(any))
-        .called(2);
-    verify(mockOnlineRegistrationPresenterAction
-            .onUserCardNumberSavedListener(any))
-        .called(2);
-    verify(mockOnlineRegistrationPresenterAction
-            .onUpdateSSNLastFourDigitsSavedListener(any))
-        .called(2);
-    verify(mockOnlineRegistrationPresenterAction
-            .onUpdateEmailSavedListener(any))
-        .called(2);
-    verify(mockOnlineRegistrationPresenterAction.onUpdatePasswordListener(any))
-        .called(2);
-    verify(mockOnlineRegistrationPresenterAction.onTapCreateAccountBtn(
-            any, any))
+    verify(mockOnlineRegistrationPresenterAction.onUpdateNameParam(any))
+        .called(1);
+    verify(mockOnlineRegistrationPresenterAction.onUpdateNumberParam(any))
+        .called(1);
+    verify(mockOnlineRegistrationPresenterAction.onUpdateEmailAddress(any))
+        .called(1);
+    verify(mockOnlineRegistrationPresenterAction.onUpdatePassword(any))
+        .called(1);
+    verify(mockOnlineRegistrationPresenterAction.pressCreateButton(
+            any, any, any, any, any))
         .called(1);
   }
 
@@ -127,13 +113,11 @@ void main() {
         (tester) async {
       await tester.pumpWidget(testWidgetSucceed);
       await tester.pump(Duration(milliseconds: 500));
-      final widgetType = find.byType(OnlineRegistrationScreen);
+      final widgetType = find.byType(NewOnlineRegistrationScreen);
       expect(widgetType, findsOneWidget);
-      expect(find.text('Full Name'), findsOneWidget);
+      expect(find.text('Card Holder Name'), findsOneWidget);
       expect(find.text('Credit Card Number'), findsOneWidget);
-      expect(find.text('SSN Last Four Digits'), findsOneWidget);
-      expect(find.text('Credit Card Number'), findsOneWidget);
-      expect(find.text('Email ID'), findsOneWidget);
+      expect(find.text('Email for login'), findsOneWidget);
       expect(find.text('Password'), findsOneWidget);
     });
 
@@ -156,11 +140,6 @@ void main() {
       expect(cardHolderNumberWidget, findsOneWidget);
       await tester.enterText(cardHolderNumberWidget, '378282246310005');
 
-      var ssnLastFourDigitsWidget =
-          find.byKey(const Key('ssnLastFourDigits-TxtField'));
-      expect(ssnLastFourDigitsWidget, findsOneWidget);
-      await tester.enterText(ssnLastFourDigitsWidget, '5462');
-
       var userEmailAddressWidget =
           find.byKey(const Key('userEmailAddress-TxtField'));
       expect(userEmailAddressWidget, findsOneWidget);
@@ -173,7 +152,6 @@ void main() {
       await pumpCreateAccountButton(tester, testWidgetSucceed);
       expect(find.text('Tyler'), findsOneWidget);
       expect(find.text('378282246310005'), findsOneWidget);
-      expect(find.text('5462'), findsOneWidget);
       expect(find.text('test@test.com'), findsOneWidget);
       expect(find.text('TestPassword@123'), findsOneWidget);
     });
@@ -184,7 +162,6 @@ void main() {
       verifyParentActions();
       expect(find.text('Please, provide a valid name.'), findsOneWidget);
       expect(find.text('Enter valid credit card number.'), findsOneWidget);
-      expect(find.text('SSN must be 4 digits.'), findsOneWidget);
       expect(find.text('Please, provide a valid email.'), findsOneWidget);
       expect(
           find.text(
@@ -198,7 +175,6 @@ void main() {
       verifyParentActions();
       expect(find.text('Tyler'), findsOneWidget);
       expect(find.text('Enter valid credit card number.'), findsOneWidget);
-      expect(find.text('SSN Number is not valid.'), findsOneWidget);
       expect(find.text('test@test.com'), findsOneWidget);
       expect(
           find.text(
