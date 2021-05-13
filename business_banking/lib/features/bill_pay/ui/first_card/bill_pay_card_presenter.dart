@@ -31,8 +31,6 @@ class BillPayCardPresenterActions {
   BillPayCardPresenterActions(this.bloc, this.viewModel);
 
   navigateToBillPay(BuildContext context) {
-    bloc.billPayCardEventPipe
-        .send(UpdateBillsDueEvent(viewModel.billsDue));
     CFRouterScope.of(context).push(BusinessBankingRouter.billPayRoute);
   }
 }

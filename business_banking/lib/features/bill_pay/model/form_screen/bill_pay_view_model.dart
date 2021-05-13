@@ -7,12 +7,21 @@ class BillPayViewModel extends ViewModel {
   final List<Bill> allBills;
   final selectedBillIndex;
   final serviceResponseStatus;
+  final didSucceed;
+  final referenceNumber;
 
   BillPayViewModel(
       {required this.allBills,
         this.serviceResponseStatus = ServiceResponseStatus.unknown,
-        this.selectedBillIndex = -1});
+        this.selectedBillIndex = -1,
+        this.didSucceed = false,
+        this.referenceNumber = ''});
 
   @override
-  List<Object> get props => [allBills];
+  List<Object> get props => [
+    allBills,
+    selectedBillIndex,
+    serviceResponseStatus,
+    didSucceed,
+    referenceNumber];
 }

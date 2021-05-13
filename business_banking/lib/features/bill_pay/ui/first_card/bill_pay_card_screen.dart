@@ -59,6 +59,7 @@ class _SucceedCard extends StatelessWidget {
                     Expanded(
                       child: const Text(
                         'Pay Bills',
+                        key: Key('Bill-Pay-Card-Title'),
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
@@ -78,6 +79,7 @@ class _SucceedCard extends StatelessWidget {
                 onPressed: () {
                   presenterActions.navigateToBillPay(context);
                 },
+                key: Key('Bill-Pay-Card-Button'),
                 child: Text("Pay Bills"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.lightGreen,
@@ -117,6 +119,7 @@ class _FailedCard extends StatelessWidget {
                     Expanded(
                       child: const Text(
                         'Pay Bills',
+                        key: Key('Bill-Pay-Card-Title'),
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,

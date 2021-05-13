@@ -16,8 +16,8 @@ class BillPayBloc extends Bloc {
   final billPayEventPipe =
   Pipe<BillPayEvent>(canSendDuplicateData: true);
 
-  final billPayCardViewModelPipe = Pipe<BillPayCardViewModel>(canSendDuplicateData: true);
-  final billPayViewModelPipe = Pipe<BillPayViewModel>(canSendDuplicateData: true);
+  final billPayCardViewModelPipe = Pipe<BillPayCardViewModel>();
+  final billPayViewModelPipe = Pipe<BillPayViewModel>();
 
   @override
   void dispose() {
@@ -40,7 +40,6 @@ class BillPayBloc extends Bloc {
         BillPayUseCase(billPayViewModelPipe.send);
     billPayViewModelPipe
         .whenListenedDo(() {
-          print("bill_pay_bloc.dart (43): just listened from view model pipe");
           _billPayUseCase!.execute();
         });
 
@@ -53,9 +52,7 @@ class BillPayBloc extends Bloc {
   }
 
   void billPayEventPipeHandler(BillPayEvent event) {
-    print("bill_pay_bloc.dart (56): in bloc handler");
     if (event is SelectBillEvent) {
-      print("bill_pay_bloc.dart (58): sending ${event.selectedBillIndex} to usecase");
       _billPayUseCase!.updateSelectedBillIndex(event.selectedBillIndex);
     } else if (event is PayButtonClickEvent) {
       _billPayUseCase!.payBill();

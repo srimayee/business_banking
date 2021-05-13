@@ -5,7 +5,8 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 import '../../../../locator.dart';
-import 'bill_pay_service_adapter.dart';
+import 'bill_pay_post_service_adapter.dart';
+import 'bill_pay_retrieval_service_adapter.dart';
 
 class BillPayUseCase extends UseCase {
   late final ViewModelCallback<BillPayViewModel> _viewModelCallBack;
@@ -16,7 +17,6 @@ class BillPayUseCase extends UseCase {
       : _viewModelCallBack = viewModelCallBack;
 
   void execute() async {
-    print("bill_pay_usecase (19): in usecase execute method");
     _scope =
         ExampleLocator().repository.containsScope<BillPayEntity>();
     if (_scope == null) {
@@ -25,9 +25,11 @@ class BillPayUseCase extends UseCase {
 
       await ExampleLocator()
           .repository
-          .runServiceAdapter(_scope!, BillPayServiceAdapter());
+          .runServiceAdapter(_scope!, BillPayRetrievalServiceAdapter());
     } else {
       _scope!.subscription = _notifySubscribers;
+      final entity = ExampleLocator().repository.get<BillPayEntity>(_scope!);
+      _notifySubscribers(entity);
     }
   }
 
@@ -35,34 +37,50 @@ class BillPayUseCase extends UseCase {
     _viewModelCallBack(buildViewModel(entity));
   }
 
-  BillPayViewModel buildViewModel(BillPayEntity entity, {int selectedBillIndex = -1}) {
+  BillPayViewModel buildViewModel(BillPayEntity entity) {
     if (entity.hasErrors()) {
       return BillPayViewModel(
         allBills: entity.allBills!,
-        selectedBillIndex: selectedBillIndex,
+        selectedBillIndex: entity.selectedBillIndex,
         serviceResponseStatus: ServiceResponseStatus.failed,
+        didSucceed: entity.didSucceed,
+        referenceNumber: entity.referenceNumber
       );
     } else {
       return BillPayViewModel(
         allBills: entity.allBills!,
-        selectedBillIndex: selectedBillIndex,
+        selectedBillIndex: entity.selectedBillIndex,
         serviceResponseStatus: ServiceResponseStatus.succeed,
+        didSucceed: entity.didSucceed,
+        referenceNumber: entity.referenceNumber
       );
     }
   }
 
   void updateSelectedBillIndex(int selectedBillIndex) {
-    print("bill_pay_usecase (55): in usecase $selectedBillIndex");
     if (_scope == null) {
       _scope = ExampleLocator().repository.create<BillPayEntity>(
           new BillPayEntity(), _notifySubscribers);
     }
 
     final entity = ExampleLocator().repository.get<BillPayEntity>(_scope!);
-    _viewModelCallBack(buildViewModel(entity, selectedBillIndex: selectedBillIndex));
+
+    final updatedEntity = entity.merge(selectedBillIndex: selectedBillIndex);
+    ExampleLocator()
+        .repository
+        .update<BillPayEntity>(_scope!, updatedEntity);
+    _viewModelCallBack(buildViewModel(updatedEntity));
   }
 
-  void payBill() {
-    //TODO: add functionality
+  Future<void> payBill() async {
+    if (_scope == null) {
+      _scope = ExampleLocator().repository.create<BillPayEntity>(
+          new BillPayEntity(), _notifySubscribers);
+    }
+    final entity = ExampleLocator().repository.get<BillPayEntity>(_scope!);
+    await ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope!, BillPayPostServiceAdapter());
+    //_viewModelCallBack(buildViewModel(entity));
   }
 }

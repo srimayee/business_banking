@@ -19,7 +19,7 @@ class BillPayPresenter extends Presenter<BillPayBloc,
       BillPayViewModel viewModel) {
     return BillPayScreen(
       viewModel: viewModel,
-      presenterAction: BillPayPresenterActions(
+      presenterActions: BillPayPresenterActions(
         bloc,
       ),
     );
@@ -37,8 +37,6 @@ class BillPayPresenterActions {
 
   /// listens select bill action
   onBillSelectedListener(int selectedBillIndex) {
-    print("");
-    print("bill_pay_presenter.dart (40): presenter listener $selectedBillIndex");
     bloc.billPayEventPipe.send(SelectBillEvent(selectedBillIndex));
   }
 
@@ -48,6 +46,7 @@ class BillPayPresenterActions {
       bloc.billPayEventPipe.send(PayButtonClickEvent());
 
     } else {
+      assert(false); //The confirm button can't be clicked if no bill is selected, so this should never happen
       showErrorDialog(context);
     }
   }

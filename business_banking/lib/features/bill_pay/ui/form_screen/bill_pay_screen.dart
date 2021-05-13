@@ -12,9 +12,9 @@ import 'bill_pay_presenter.dart';
 
 class BillPayScreen extends Screen {
   final BillPayViewModel viewModel;
-  final BillPayPresenterActions presenterAction;
+  final BillPayPresenterActions presenterActions;
 
-  BillPayScreen({required this.viewModel, required this.presenterAction});
+  BillPayScreen({required this.viewModel, required this.presenterActions});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class BillPayScreen extends Screen {
               size: 40.0,
             ),
             onTap: () {
-              presenterAction.popNavigationListener(context);
+              presenterActions.popNavigationListener(context);
             },
             key: Key('Bill-Pay-Back-Button'),
           ),
@@ -79,6 +79,9 @@ class BillPayScreen extends Screen {
                                         side: BorderSide(color: Colors.green, width: 4)
                                       )
                                     : null,
+                                color: (viewModel.selectedBillIndex == index)
+                                    ? Colors.white70
+                                    : Colors.white,
                                 child: ListTile(
                                   contentPadding: (viewModel.selectedBillIndex == index)
                                       ? EdgeInsets.all(16)
@@ -102,7 +105,7 @@ class BillPayScreen extends Screen {
                                       Divider(height: 4,),
                                       SizedBox(height: 6,),
                                       Text("${viewModel.allBills[index].memo}: "
-                                      "\$${viewModel.allBills[index].amount}"),
+                                      "\$${viewModel.allBills[index].amount.toStringAsFixed(2)}"),
                                       SizedBox(height: 6,),
                                       Text("$formatDate", style: TextStyle(
                                         color: overdue ? Colors.red : Colors.black54
@@ -112,9 +115,9 @@ class BillPayScreen extends Screen {
                                   onTap: () {
                                     if (viewModel.selectedBillIndex == index) {
                                       //User is deselecting the bill
-                                      presenterAction.onBillSelectedListener(-1);
+                                      presenterActions.onBillSelectedListener(-1);
                                     } else {
-                                      presenterAction.onBillSelectedListener(index);
+                                      presenterActions.onBillSelectedListener(index);
                                     }
                                   },
                                 ),
@@ -142,6 +145,8 @@ class BillPayScreen extends Screen {
                     ]),
                 child: Center(
                   child: Text(
+                    (viewModel.didSucceed) ?
+                        '''Payment success''' :
                     '''The amount due will be withdrawn from your primary billing account.''',
                     style: TextStyle(color: Colors.black54, fontSize: 17),
                     textAlign: TextAlign.left,
@@ -174,7 +179,7 @@ class BillPayScreen extends Screen {
                             ? Colors.grey
                             : Colors.green)),
                     onPressed: () {
-                      presenterAction.onTapConfirmBtn(context, viewModel);
+                      presenterActions.onTapConfirmBtn(context, viewModel);
                     },
                   ),
                 ),
