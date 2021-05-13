@@ -44,7 +44,8 @@ class NewOnlineRegistrationRequestActions {
     //   return;
     // }
     else {
-      CFRouterScope.of(context).push(BusinessBankingRouter.NewSuccessScreen);
+      CFRouterScope.of(context)
+          .replaceWith(BusinessBankingRouter.NewSuccessScreen);
     }
   }
 
