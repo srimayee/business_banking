@@ -12,14 +12,6 @@ void main() {
   });
   NewOnlineRegistrationRequestSuccessViewModel viewModel;
 
-  test('NewOnlineRegistrationRequestSuccessUseCase create', () async {
-    final useCase = NewOnlineRegistrationRequestSuccessUseCase((viewModel) {
-      return true;
-    });
-    await useCase.create();
-    expect(NewOnlineRegistrationRequestSuccessViewModel, isNotNull);
-  });
-
   test('NewOnlineRegistrationRequestSuccessUseCase success service call',
       () async {
     var entity = NewOnlineRegistrationEntity(
