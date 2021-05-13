@@ -50,13 +50,6 @@ class StatementUseCase extends UseCase {
     }
   }
 
-  getStatementForAccount(List<Statement> statement, {String? accountNumber}) {
-    if (accountNumber != null) {
-      return statement.firstWhere(
-          (statement) => statement.accountInfo.accountNumber == accountNumber);
-    }
-  }
-
   sendStatementAsPdf(Statement statement, List<String> recipients) async {
     final entity = ExampleLocator().repository.get<StatementEntity>(_scope);
     try {

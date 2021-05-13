@@ -77,5 +77,28 @@ void main() {
       expect(statementViewModel.serviceResponseStatus,
           ServiceResponseStatus.failed);
     });
+
+    test('send statement email test', () async {
+      await useCase.create();
+
+      expect(statementViewModel.emailServiceStatus, EmailServiceStatus.initial);
+
+      final statement = Statement(
+          accountInfo: AccountInfoStruct(
+              accountNickname: 'HNB Credit Card (6917)',
+              accountNumber: '1234567890126917',
+              availableBalance: 481.84,
+              depositLimit: 4500.0),
+          statementActivity: [
+            StatementActivity(
+                "LYFT RIDE", "04/13/2021 00:00:00", null, 200.00, 1200.00),
+            StatementActivity(
+                "PAYCHECK", "04/14/2021 00:00:00", null, 400.00, 1600.00)
+          ]);
+
+      await useCase.sendStatementAsPdf(statement, ['example@gmail.com']);
+
+      expect(statementViewModel.emailServiceStatus, EmailServiceStatus.success);
+    });
   });
 }

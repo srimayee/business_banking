@@ -37,10 +37,12 @@ void main() {
     ];
     final viewModel = StatementViewModel(
         statements: _statements,
-        serviceResponseStatus: ServiceResponseStatus.succeed);
+        serviceResponseStatus: ServiceResponseStatus.succeed,
+        emailServiceStatus: EmailServiceStatus.initial);
     expect(viewModel.props, [
       viewModel.statements,
       viewModel.serviceResponseStatus,
+      viewModel.emailServiceStatus
     ]);
 
     expect(viewModel.stringify, true);
@@ -53,9 +55,12 @@ void main() {
             availableBalance: 481.84,
             depositLimit: 4500.0));
 
-    expect(
-        viewModel.statements.first.statementActivity.first.additions, 200.00);
-    expect(viewModel.statements.first.statementActivity.first.description,
-        'LYFT RIDE');
+    expect(viewModel.statements.first.statementActivity.first.props, [
+      viewModel.statements.first.statementActivity.first.description,
+      viewModel.statements.first.statementActivity.first.date,
+      viewModel.statements.first.statementActivity.first.additions,
+      viewModel.statements.first.statementActivity.first.subtractions,
+      viewModel.statements.first.statementActivity.first.balance
+    ]);
   });
 }

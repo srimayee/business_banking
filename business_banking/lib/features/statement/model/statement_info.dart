@@ -1,4 +1,6 @@
-class StatementActivity {
+import 'package:equatable/equatable.dart';
+
+class StatementActivity extends Equatable {
   final String description;
   final String date;
   final double? additions;
@@ -14,4 +16,8 @@ class StatementActivity {
         additions = json['additions'],
         subtractions = json['subtractions'],
         balance = json['balance'] ?? 0.0;
+
+  @override
+  List<Object?> get props =>
+      [description, date, additions, subtractions, balance];
 }

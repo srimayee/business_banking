@@ -1,7 +1,8 @@
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
 import 'package:business_banking/features/statement/model/statement_info.dart';
+import 'package:equatable/equatable.dart';
 
-class Statement {
+class Statement extends Equatable {
   final AccountInfoStruct accountInfo;
   final List<StatementActivity> statementActivity;
 
@@ -16,4 +17,7 @@ class Statement {
                 .map((i) => new StatementActivity.fromJson(i))
                 .toList()
             : [];
+
+  @override
+  List<Object?> get props => [accountInfo, statementActivity];
 }

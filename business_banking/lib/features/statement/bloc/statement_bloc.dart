@@ -15,13 +15,13 @@ class StatementBloc extends Bloc {
   StatementCardUseCase? _statementCardUseCase;
   final statementCardViewModelPipe = Pipe<StatementCardViewModel>();
 
-  final statmentEventPipe = Pipe<StatementEvent>(canSendDuplicateData: true);
+  final statementEventPipe = Pipe<StatementEvent>(canSendDuplicateData: true);
 
   @override
   void dispose() {
     statementViewModelPipe.dispose();
     statementCardViewModelPipe.dispose();
-    statmentEventPipe.dispose();
+    statementEventPipe.dispose();
   }
 
   StatementBloc({
@@ -38,7 +38,7 @@ class StatementBloc extends Bloc {
             (viewModel) => statementCardViewModelPipe.send(viewModel));
     statementCardViewModelPipe.whenListenedDo(_statementCardUseCase!.create);
 
-    statmentEventPipe.receive.listen(statementEventPipeHandler);
+    statementEventPipe.receive.listen(statementEventPipeHandler);
   }
 
   void statementEventPipeHandler(StatementEvent event) {

@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
+import 'package:business_banking/features/statement/bloc/statement/statement_event.dart';
 import 'package:business_banking/features/statement/bloc/statement_bloc.dart';
 import 'package:business_banking/features/statement/model/hub_cards/statement_cards_view_model.dart';
 import 'package:business_banking/features/statement/model/statement.dart';
@@ -16,6 +17,9 @@ class StatementBlockMock extends Mock implements StatementBloc {
 
   @override
   Pipe<StatementViewModel> statementViewModelPipe = Pipe<StatementViewModel>();
+
+  @override
+  Pipe<StatementEvent> statementEventPipe = Pipe<StatementEvent>();
 
   StatementCardViewModel statementCardViewModelSample = StatementCardViewModel(
     accounts: [
@@ -71,5 +75,7 @@ class StatementBlockMock extends Mock implements StatementBloc {
         statementViewModelSample,
       );
     });
+
+    statementEventPipe.receive.listen(statementEventPipeHandler);
   }
 }

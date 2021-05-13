@@ -35,7 +35,7 @@ class StatementPresenterActions {
   }
 
   sendStatementToEmail(BuildContext context, Statement statement) {
-    TextEditingController controller = TextEditingController();
+    TextEditingController controller = TextEditingController(text: '');
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -44,7 +44,7 @@ class StatementPresenterActions {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              bloc.statmentEventPipe
+              bloc.statementEventPipe
                   .send(SendStatementToEmail(statement, controller.text));
               Navigator.of(context).pop();
             },
