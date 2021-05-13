@@ -1,27 +1,47 @@
-import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+
+import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
+import 'package:business_banking/features/hotels/ui/hotels_actions.dart';
 import 'package:business_banking/features/hotels/model/hotel_view_model.dart';
 
 class HotelsHubScreen extends Screen {
   final HotelsListViewModel viewModel;
-  final VoidCallback navigateToHotels;
+  final HotelsActions actions;
 
-  HotelsHubScreen({required this.viewModel, required this.navigateToHotels});
+  HotelsHubScreen({required this.viewModel, required this.actions});
+
+  _onTapHandler(BuildContext context) {
+    //
+    List<HotelViewModel> hList = this.viewModel.hotels;
+    if (hList.length > 0) actions.navigateToHotels(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    HotelViewModel hvm = this.viewModel.hotels.first;
+    List<HotelViewModel> hList = this.viewModel.hotels;
 
-    Text title =
-        Text(hvm.title, style: TextStyle(color: Colors.black, fontSize: 20));
+    String titleString = 'No data available.';
+    String subString = 'Please try again later.';
+
+    if (hList.length > 0) {
+      final HotelViewModel firstHotel = hList.first;
+      titleString = firstHotel.title;
+      subString = "\$" + firstHotel.price.toStringAsFixed(2);
+    }
+
+    Text title = Text(
+      titleString,
+      style: TextStyle(color: Colors.black, fontSize: 20),
+    );
 
     ListTile tile = ListTile(
-        onTap: navigateToHotels,
-        contentPadding: EdgeInsets.zero,
-        trailing: Icon(Icons.hotel, color: Colors.black, size: 30),
-        title: title,
-        subtitle: Text("\$" + hvm.price.toStringAsFixed(2)));
+      onTap: () => _onTapHandler(context),
+      contentPadding: EdgeInsets.zero,
+      trailing: Icon(Icons.hotel, color: Colors.black, size: 30),
+      title: title,
+      subtitle: Text(subString),
+    );
 
     return Container(
       height: 150,

@@ -1,11 +1,12 @@
-import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
+import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:clean_framework/clean_framework.dart';
+
+import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 import 'package:business_banking/features/hotels/api/hotels_service_adapter.dart';
 import 'package:business_banking/features/hotels/model/hotels_list_entity.dart';
 import 'package:business_banking/features/hotels/model/hotel_entity.dart';
 import 'package:business_banking/features/hotels/model/hotel_view_model.dart';
 import 'package:business_banking/locator.dart';
-import 'package:clean_framework/clean_framework_defaults.dart';
 
 class HotelsUseCase extends UseCase {
   late final ViewModelCallback<ViewModel> _viewModelListCallBack;
@@ -35,7 +36,7 @@ class HotelsUseCase extends UseCase {
     _viewModelListCallBack(buildViewModels(entity));
   }
 
-  void updateSingleHotel(HotelViewModel viewModel) {
+  HotelsListEntity switchLike(HotelViewModel viewModel) {
     //
     HotelsListEntity mainEntity = ExampleLocator().repository.get(_scope!);
     List<HotelEntity> hotels = mainEntity.allHotels;
@@ -54,6 +55,8 @@ class HotelsUseCase extends UseCase {
     final newMainEntity = HotelsListEntity(allHotels: newList);
     ExampleLocator().repository.update(_scope!, newMainEntity);
     _viewModelListCallBack(buildViewModels(newMainEntity));
+
+    return newMainEntity;
   }
 
   HotelsListViewModel buildViewModels(HotelsListEntity entities) {

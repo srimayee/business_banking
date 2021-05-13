@@ -18,19 +18,18 @@ class HotelEntity extends Entity {
       double? starRating,
       double? price,
       String? imageUrl})
-      : title = title ?? 'Luxor',
-        city = city ?? 'Las Vegas',
-        stateCode = stateCode ?? "NV",
+      : title = title ?? '',
+        city = city ?? '',
+        stateCode = stateCode ?? '',
         isLiked = isLiked ?? false,
-        starRating = starRating ?? 2.5,
-        price = price ?? 52.00,
-        imageUrl = imageUrl ??
-            "https://assets.cyllenius.com/resize_230x230/media/vegas/resorts/luxor/1024x1024_luxor_new.jpg",
+        starRating = starRating ?? 0.0,
+        price = price ?? 0.00,
+        imageUrl = imageUrl ?? '',
         super(errors: errors);
 
   @override
   List<Object> get props =>
-      [title, city, stateCode, isLiked, starRating, price, imageUrl];
+      [errors, title, city, stateCode, isLiked, starRating, price, imageUrl];
 
   @override
   HotelEntity merge(

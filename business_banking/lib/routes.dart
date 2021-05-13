@@ -75,7 +75,7 @@ abstract class BusinessBankingRouter {
         return DepositCheckConfirmWidget();
 
       case hotelsRoute:
-        return HotelsWidget();
+        return HotelsMainWidget();
 
       default:
         return const PageNotFound();
