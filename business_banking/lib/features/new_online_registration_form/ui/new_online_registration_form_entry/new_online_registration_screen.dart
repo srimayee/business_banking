@@ -78,7 +78,7 @@ class NewOnlineRegistrationScreen extends Screen {
                       children: [
                         OutlinedButton(
                             key: Key("createButton"),
-                            onPressed: () {
+                            onPressed: () async {
                               _form.currentState!.save();
                               actions.pressCreateButton(
                                   context,
