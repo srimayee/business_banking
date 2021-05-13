@@ -1,6 +1,5 @@
-import 'package:business_banking/features/hotels/api/hotels_service_response_model.dart';
-import 'package:business_banking/features/hotels/model/hotel_entity.dart';
 import 'package:clean_framework/clean_framework.dart';
+import 'package:business_banking/features/hotels/model/hotel_entity.dart';
 
 class HotelsListEntity extends Entity {
   final List<HotelEntity> allHotels;

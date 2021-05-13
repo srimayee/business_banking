@@ -1,10 +1,10 @@
-import 'dart:async';
-import 'package:business_banking/features/hotels/model/hotel_view_model.dart';
-import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/hotels/bloc/hotels_bloc.dart';
+
 import 'hotels_main_screen.dart';
+import 'package:business_banking/features/hotels/bloc/hotels_bloc.dart';
+import 'package:business_banking/features/hotels/ui/hotels_actions.dart';
+import 'package:business_banking/features/hotels/model/hotels_list_view_model.dart';
 
 class HotelsMainPresenter
     extends Presenter<HotelsBloc, HotelsListViewModel, HotelsMainScreen> {
@@ -16,14 +16,11 @@ class HotelsMainPresenter
   @override
   HotelsMainScreen buildScreen(BuildContext context, HotelsBloc bloc,
       HotelsListViewModel listViewModel) {
+    //
+    final hotelsActions = HotelsActions(bloc: bloc);
     return HotelsMainScreen(
-        viewModel: listViewModel,
-        onHotelClicked: (viewModel) {
-          _onHotelClicked(bloc, viewModel);
-        });
-  }
-
-  void _onHotelClicked(HotelsBloc bloc, HotelViewModel viewModel) {
-    bloc.hotelLiked(viewModel);
+      viewModel: listViewModel,
+      actions: hotelsActions,
+    );
   }
 }

@@ -13,14 +13,15 @@ class HotelsBloc extends Bloc {
     hotelsViewModelPipe.dispose();
   }
 
-  HotelsBloc() {
-    _hotelsUseCase = HotelsUseCase((viewModel) =>
-        hotelsViewModelPipe.send(viewModel as HotelsListViewModel));
+  HotelsBloc({HotelsUseCase? hotelsUseCase}) {
+    _hotelsUseCase = hotelsUseCase ??
+        HotelsUseCase((viewModel) =>
+            hotelsViewModelPipe.send(viewModel as HotelsListViewModel));
 
     hotelsViewModelPipe.whenListenedDo(_hotelsUseCase.create);
   }
 
   hotelLiked(HotelViewModel viewModel) {
-    _hotelsUseCase.updateSingleHotel(viewModel);
+    _hotelsUseCase.switchLike(viewModel);
   }
 }
