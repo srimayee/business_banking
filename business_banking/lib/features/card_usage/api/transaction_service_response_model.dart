@@ -22,12 +22,12 @@ class TransactionServiceResponseModel extends Equatable
 
   @override
   List<Object> get props => [
-        transactionTitle,
-        transactionCategory,
-        transactionAmount,
-        transactionId,
-        payTo,
-        timestamp,
-        debit
+        this.transactionTitle,
+        this.transactionCategory,
+        this.transactionAmount,
+        this.transactionId,
+        this.payTo,
+        this.timestamp,
+        this.debit
       ];
 }
