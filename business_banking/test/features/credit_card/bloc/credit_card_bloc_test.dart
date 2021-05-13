@@ -5,7 +5,7 @@ import 'package:business_banking/features/credit_card/model/credit_card_view_mod
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class CreditCardUseCaseMock extends Mock implements CreditCardUseCase{}
+class CreditCardUseCaseMock extends Mock implements CreditCardUseCase {}
 
 void main() {
   test('CreditCardBloc initialize', () async {
@@ -15,7 +15,6 @@ void main() {
     expect(bloc.creditCardPaymentRequestViewModelPipe, isNotNull);
     expect(bloc.creditCardPaymentResponseViewModelPipe, isNotNull);
   });
-
 
   test('CreditCardBloc dispose', () async {
     final bloc = CreditCardBloc();
@@ -28,9 +27,9 @@ void main() {
 
   test('CreditCardBloc CreditCardUseCase create on pipe listen', () async {
     CreditCardUseCaseMock creditCardUseCaseMock = CreditCardUseCaseMock();
-    CreditCardBloc bloc = CreditCardBloc(creditCardUseCase: creditCardUseCaseMock);
-    bloc.creditCardViewModelPipe.receive.listen((event) { });
+    CreditCardBloc bloc =
+        CreditCardBloc(creditCardUseCase: creditCardUseCaseMock);
+    bloc.creditCardViewModelPipe.receive.listen((event) {});
     verify(creditCardUseCaseMock.create()).called(1);
   });
-
 }
