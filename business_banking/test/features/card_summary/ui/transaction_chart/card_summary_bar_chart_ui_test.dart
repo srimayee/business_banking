@@ -18,4 +18,18 @@ void main() {
 
     expect(find.byType(TransactionBarChartPresenter), findsOneWidget);
   });
+
+  testWidgets('TransactionBarChartWidget, with true bloc', (tester) async {
+    final testWidget = MaterialApp(
+        home: BlocProvider<CardSummaryBloc>(
+          child: TransactionBarChartWidget(),
+          create: (_) => CardSummaryBloc(),
+        ));
+
+    await tester.pumpWidget(testWidget);
+    await tester.pump(Duration(milliseconds: 500));
+
+    expect(find.byType(TransactionBarChartPresenter), findsOneWidget);
+  });
+
 }
