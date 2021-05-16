@@ -8,6 +8,7 @@ void main() {
     final tViewModel = NewOnlineRegistrationRequestSuccessViewModel(
         cardHolderName: 'Tyler',
         cardNumber: '378282246310005',
+        validThru: '08/50',
         email: 'test@test.com',
         userPassword: 'TestPassword@123',
         accountNumberGenerated: '123456789',
@@ -17,6 +18,7 @@ void main() {
     test('should properties match', () {
       expect(tViewModel.cardHolderName, 'Tyler');
       expect(tViewModel.cardNumber, '378282246310005');
+      expect(tViewModel.validThru, '08/50');
       expect(tViewModel.email, 'test@test.com');
       expect(tViewModel.userPassword, 'TestPassword@123');
       expect(tViewModel.accountNumberGenerated, '123456789');
@@ -28,6 +30,7 @@ void main() {
       expect(tViewModel.props, [
         tViewModel.cardHolderName,
         tViewModel.cardNumber,
+        tViewModel.validThru,
         tViewModel.email,
         tViewModel.userPassword,
         tViewModel.accountNumberGenerated,

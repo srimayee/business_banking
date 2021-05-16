@@ -86,11 +86,29 @@ void main() {
     });
   });
 
+  test(
+      'should parentActions send event through the pipe on onUpdateCardExpiryDate',
+      () async {
+    actions.onUpdateCardExpiryDate('08/50');
+    mockBloc.newOnlineRegistrationViewModelPipe.receive.listen((event) {
+      expect(event, isA<NewOnlineRegistrationViewModel>());
+    });
+  });
+
+  test('should parentActions send event through the pipe on onCardScanned',
+      () async {
+    actions.onCardScanned();
+    mockBloc.newOnlineRegistrationViewModelPipe.receive.listen((event) {
+      expect(event, isA<NewOnlineRegistrationViewModel>());
+    });
+  });
+
   testWidgets('navigate success route when userInput is valid',
       (WidgetTester tester) async {
     when(mockBloc.validateUserName(any)).thenReturn('');
     when(mockBloc.validateCardHolderNumber(any)).thenReturn('');
     when(mockBloc.validateEmailAddress(any)).thenReturn('');
+    when(mockBloc.validateCardExpiryDate(any)).thenReturn('');
     when(mockBloc.validateUserPassword(any)).thenReturn('');
     Widget buildWidget({
       String initialRoute = '/',
@@ -114,8 +132,13 @@ void main() {
         case '/':
           return OnTapButton(
             id: 'SuccessScreen',
-            onTap: (context) => actions.pressCreateButton(context, 'Tyler',
-                '378282246310005', 'test@test.com', 'TestPassword@123'),
+            onTap: (context) => actions.pressCreateButton(
+                context,
+                'Tyler',
+                '378282246310005',
+                '08/50',
+                'test@test.com',
+                'TestPassword@123'),
           );
         default:
           return Container();
@@ -142,7 +165,7 @@ void main() {
         id: 'errorDialog',
         onTap: (context) {
           actions.pressCreateButton(
-              context, '', 'test', 'test', 'TestPassword@123');
+              context, '', 'test', '08/10', 'test', 'TestPassword@123');
         },
       ),
       navigatorObservers: [mockObserver],

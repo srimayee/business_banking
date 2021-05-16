@@ -2,6 +2,14 @@ import 'package:equatable/equatable.dart';
 
 abstract class NewOnlineRegistrationEvent extends Equatable {}
 
+class CardScannerEvent extends NewOnlineRegistrationEvent {
+  CardScannerEvent();
+  @override
+  List<Object?> get props => [];
+  @override
+  bool get stringify => true;
+}
+
 class UpdateCardHolderNameRequestEvent extends NewOnlineRegistrationEvent {
   final String username;
 
@@ -13,6 +21,7 @@ class UpdateCardHolderNameRequestEvent extends NewOnlineRegistrationEvent {
   bool get stringify => true;
 }
 
+
 class UpdateCardHolderNumberRequestEvent extends NewOnlineRegistrationEvent {
   final String cardNumber;
 
@@ -20,6 +29,17 @@ class UpdateCardHolderNumberRequestEvent extends NewOnlineRegistrationEvent {
 
   @override
   List<Object?> get props => [cardNumber];
+  @override
+  bool get stringify => true;
+}
+
+class UpdateCardExpiryRequestEvent extends NewOnlineRegistrationEvent {
+  final String expiryDate;
+
+  UpdateCardExpiryRequestEvent(this.expiryDate);
+
+  @override
+  List<Object?> get props => [expiryDate];
   @override
   bool get stringify => true;
 }

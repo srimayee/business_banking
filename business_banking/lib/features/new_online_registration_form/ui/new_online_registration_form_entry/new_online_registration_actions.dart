@@ -13,17 +13,20 @@ class NewOnlineRegistrationRequestActions {
     BuildContext context,
     String userName,
     String cardNumber,
+      String expiryDate,
     String email,
     String password,
   ) {
     String userNameValidated = bloc.validateUserName(userName);
     String userCardNumberValidated = bloc.validateCardHolderNumber(cardNumber);
+    String? userCardExpiryDate = bloc.validateCardExpiryDate(expiryDate);
     String userPasswordValidated = bloc.validateUserPassword(password);
 
     String userEmail = bloc.validateEmailAddress(email);
 
     if (userNameValidated.isNotEmpty ||
         userCardNumberValidated.isNotEmpty ||
+        userCardExpiryDate!.isNotEmpty ||
         userEmail.isNotEmpty ||
         userPasswordValidated.isNotEmpty) {
       _showDialog(context, "Invalid Information!",
@@ -59,6 +62,12 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
+  void onUpdateCardExpiryDate(String expiryDate) {
+    var event = UpdateCardExpiryRequestEvent(expiryDate);
+    bloc.newOnlineRegistrationEventsPipe.send(event);
+  }
+
+
   void onUpdateEmailAddress(String email) {
     var event = UpdateEmailAddressRequestEvent(email);
     bloc.newOnlineRegistrationEventsPipe.send(event);
@@ -66,6 +75,12 @@ class NewOnlineRegistrationRequestActions {
 
   void onUpdatePassword(String password) {
     var event = UpdateUserPasswordRequestEvent(password);
+    bloc.newOnlineRegistrationEventsPipe.send(event);
+  }
+
+
+  void onCardScanned(){
+    var event = CardScannerEvent();
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 

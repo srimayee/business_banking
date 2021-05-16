@@ -1,10 +1,35 @@
 // @dart=2.9
+import 'package:business_banking/dependency/card_scanner_plugin.dart';
+import 'package:business_banking/dependency/permission_handler_plugin.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_usecase.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_entity.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
+import 'package:card_scanner/card_scanner.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockPermissionHandlerPlugin extends Mock
+    implements PermissionHandlerPlugin {
+  @override
+  Future<bool> isGrantedAccessCamera() async {
+    return true;
+  }
+}
+
+class MockCardScannerPlugin extends Mock implements CardScannerPlugin {
+  @override
+  Future<dynamic> scanCard() async {
+    Map<String, String> map = {
+      'cardNumber': '345246807615128',
+      'cardIssuer': '',
+      'cardHolderName': '',
+      'expiryDate': '08/50',
+    };
+    return CardDetails.fromMap(map);
+  }
+}
 
 void main() {
   NewOnlineRegistrationRequestUseCase useCase;
@@ -15,7 +40,7 @@ void main() {
     useCase = NewOnlineRegistrationRequestUseCase((viewModel) {
       onlineRegistrationViewModel = viewModel;
       return true;
-    });
+    }, MockPermissionHandlerPlugin(), MockCardScannerPlugin());
   });
 
   group('Online Registration UseCase', () {
@@ -32,6 +57,8 @@ void main() {
       expect(onlineRegistrationViewModel.cardHolderName, 'Tyler');
       useCase.updateCardNumber('378282246310005');
       expect(onlineRegistrationViewModel.cardNumber, '378282246310005');
+      useCase.updateCardExpireDate('08/50');
+      expect(onlineRegistrationViewModel.validThru, '08/50');
       useCase.updateEmailAddress('test@test.com');
       expect(onlineRegistrationViewModel.email, 'test@test.com');
       useCase.updatePassword('TestPassword@123');
@@ -59,6 +86,23 @@ void main() {
     });
 
     test(
+        'should updateCardNumber method return a status and invalid updateCardExpireDateStatus, if user insert not valid Card Number',
+        () async {
+      useCase.create();
+      useCase.updateCardExpireDate('08/10');
+      expect(
+          onlineRegistrationViewModel.cardExpiryDateStatus, 'Card has expired');
+      useCase.updateCardExpireDate('13/21');
+      expect(onlineRegistrationViewModel.cardExpiryDateStatus,
+          'Expiry month is invalid');
+      useCase.updateCardExpireDate('08/50');
+      expect(onlineRegistrationViewModel.cardExpiryDateStatus, '');
+      useCase.updateCardExpireDate('01');
+      expect(onlineRegistrationViewModel.cardExpiryDateStatus,
+          'Expiry year is invalid');
+    });
+
+    test(
         'should updateEmail method return a status and invalid UserFormInputStatus, if user inserted non valid email',
         () async {
       useCase.create();
@@ -74,6 +118,16 @@ void main() {
       useCase.updatePassword('test');
       expect(onlineRegistrationViewModel.userPasswordStatus,
           'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.');
+    });
+
+    test(
+        'should getCardInformation method receive Card details and update view Model',
+        () async {
+      useCase.create();
+      await useCase.getCardInformation();
+
+      expect(onlineRegistrationViewModel.cardNumber, '345246807615128');
+      expect(onlineRegistrationViewModel.validThru, '08/50');
     });
 
     test('should submit form with valid data', () async {

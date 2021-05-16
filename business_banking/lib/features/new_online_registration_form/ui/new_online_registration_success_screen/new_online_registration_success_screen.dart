@@ -141,21 +141,28 @@ class FailedWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 180,
+              height: MediaQuery.of(context).size.height,
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Account creation failed for user'),
+                  Text(
+                    'Account creation failed for user',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   Text(
                     viewModel.cardHolderName!,
                     style: TextStyle(color: Colors.red, fontSize: 40),
                     textAlign: TextAlign.center,
                   ),
-                  Text(
-                    'Please try again later!',
-                    style: TextStyle(color: Colors.red, fontSize: 20),
-                  ),
+                  Expanded(
+                      child: Column(children: [
+                    Image.asset(
+                      'assets/images/server_error.png',
+                      height: 300,
+                      width: 400,
+                    )
+                  ])),
                 ],
               ),
             ),

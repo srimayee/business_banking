@@ -9,6 +9,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
   RepositoryScope? __scopeRegistrationStatusResponse;
   final ViewModelCallback<ViewModel> _viewModelCallBack;
+
   NewOnlineRegistrationRequestSuccessUseCase(
       ViewModelCallback<ViewModel> viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
@@ -61,6 +62,7 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
       cardNumber: newOnlineRegistrationEntity.cardNumber,
+      validThru: newOnlineRegistrationEntity.validThru,
       email: newOnlineRegistrationEntity.email,
       userPassword: newOnlineRegistrationEntity.userPassword,
       accountNumberGenerated:
@@ -74,6 +76,7 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
       cardNumber: newOnlineRegistrationEntity.cardNumber,
+      validThru: newOnlineRegistrationEntity.validThru,
       email: newOnlineRegistrationEntity.email,
       userPassword: newOnlineRegistrationEntity.userPassword,
       accountNumberGenerated: '',

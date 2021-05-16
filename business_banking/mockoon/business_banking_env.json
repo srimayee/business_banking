@@ -704,7 +704,36 @@
                         ],
                         "enabled": true,
                         "randomResponse": false
-                    }
+                    },
+                    {
+                    "uuid": "",
+                    "documentation": "",
+                    "method": "post",
+                    "endpoint": "create-new-account",
+                    "responses": [
+                        {
+                            "uuid": "",
+                            "body": "{\n \"didSucceed\" : false,\n \"accountNumberGenerated\" : \"\"\n}",
+                            "latency": 0,
+                            "statusCode": 400,
+                            "label": "",
+                            "headers": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "filePath": "",
+                            "sendFileAsBody": false,
+                            "rules": [],
+                            "rulesOperator": "OR",
+                            "disableTemplating": false
+                        }
+                    ],
+                    "enabled": true,
+                    "randomResponse": false
+                }
+
                 ],
                 "proxyMode": false,
                 "proxyHost": "",
