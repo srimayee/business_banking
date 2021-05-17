@@ -44,6 +44,7 @@ class BillPayPresenter extends Presenter<BillPayBloc,
         context: context,
         builder: (_) => AlertDialog(
           title: Text('Success'),
+          key: Key('Bill-Pay-Success-Dialog'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,12 +60,14 @@ class BillPayPresenter extends Presenter<BillPayBloc,
                   Navigator.of(context).pop();
                   presenterActions.confirmBillPayed();
                 },
+                key: Key('Bill-Pay-Success-Dialog-Pay-Another'),
                 child: Text('Pay another')),
             TextButton(
                 onPressed: () {
                   presenterActions.confirmBillPayed();
                   presenterActions.popNavigationListener(context);
                 },
+                key: Key('Bill-Pay-Success-Dialog-Hub'),
                 child: Text('Back to hub'))
           ],
         )
@@ -77,6 +80,7 @@ class BillPayPresenter extends Presenter<BillPayBloc,
         context: context,
         builder: (_) => AlertDialog(
           title: Text('Error'),
+          key: Key('Bill-Pay-Failed-Dialog'),
           content: Text('Unable to pay the bill, please try again later.'),
           actions: <Widget>[
             TextButton(

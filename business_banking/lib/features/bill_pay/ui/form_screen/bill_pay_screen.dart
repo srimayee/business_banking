@@ -74,6 +74,7 @@ class BillPayScreen extends Screen {
                                   ? EdgeInsets.all(0)
                                   : EdgeInsets.all(8.0),
                               child: Card(
+                                key: Key('Bill-Pay-Screen-Card-$index'),
                                 shape: (viewModel.selectedBillIndex == index)
                                     ? RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),

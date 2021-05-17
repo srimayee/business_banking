@@ -75,6 +75,7 @@ class _SucceedCard extends StatelessWidget {
                 (viewModel.billsDue < 1)
                     ? "You have no bills due"
                     : "You have ${viewModel.billsDue} bill(s) due",
+                key: Key('Bill-Pay-Card-Subtitle'),
                 style: TextStyle(color: Colors.black54, fontSize: 15),
               ),
               (viewModel.billsDue < 1)
