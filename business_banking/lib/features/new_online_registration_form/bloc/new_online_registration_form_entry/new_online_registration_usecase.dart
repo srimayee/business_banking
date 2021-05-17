@@ -19,7 +19,9 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
       ViewModelCallback<ViewModel> viewModelCallBack,
       PermissionHandlerPlugin permissionHandlerPlugin,
       CardScannerPlugin cardScannerPluginImpl)
-      : _viewModelCallBack = viewModelCallBack, _permissionHandlerPluginImpl = permissionHandlerPlugin,_cardScannerPluginImpl=cardScannerPluginImpl;
+      : _viewModelCallBack = viewModelCallBack,
+        _permissionHandlerPluginImpl = permissionHandlerPlugin,
+        _cardScannerPluginImpl = cardScannerPluginImpl;
 
   Future<void> create() async {
     _scopeRegistrationFormEntity = ExampleLocator()
@@ -59,9 +61,9 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
                 ? status
                 : '',
         cardExpiryDateStatus:
-        inputStatusType == NewOnlineRegistrationInputStatusType.expiryDate
-            ? status
-            : '',
+            inputStatusType == NewOnlineRegistrationInputStatusType.expiryDate
+                ? status
+                : '',
         userEmailStatus:
             inputStatusType == NewOnlineRegistrationInputStatusType.email
                 ? status
@@ -89,9 +91,9 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
                 ? status
                 : '',
         cardExpiryDateStatus:
-        inputStatusType == NewOnlineRegistrationInputStatusType.expiryDate
-            ? status
-            : '',
+            inputStatusType == NewOnlineRegistrationInputStatusType.expiryDate
+                ? status
+                : '',
         userEmailStatus:
             inputStatusType == NewOnlineRegistrationInputStatusType.email
                 ? status
@@ -106,7 +108,7 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-  Future<void> getCardInformation()async{
+  Future<void> getCardInformation() async {
     CardDetails? result;
     var isGranted = await _permissionHandlerPluginImpl.isGrantedAccessCamera();
     if (isGranted == true) {
@@ -115,15 +117,16 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
         .repository
         .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
-    if (result!=null) {
-      final updatedEntity = entity.merge(cardNumber: result.cardNumber ?? '',validThru: result.expiryDate ?? '');
-      ExampleLocator()
-          .repository
-          .update<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!, updatedEntity as NewOnlineRegistrationEntity);
+    if (result != null) {
+      final updatedEntity = entity.merge(
+          cardNumber: result.cardNumber ?? '',
+          validThru: result.expiryDate ?? '');
+      ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
+          _scopeRegistrationFormEntity!,
+          updatedEntity as NewOnlineRegistrationEntity);
     }
     _viewModelCallBack(buildViewModel());
   }
-
 
   updateUserName(String userName) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
@@ -143,8 +146,6 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
       _viewModelCallBack(buildViewModel());
     }
   }
-
-
 
   updateCardNumber(String cardNumber) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
@@ -184,7 +185,6 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-
   updateEmailAddress(String _email) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
         .repository
@@ -222,6 +222,7 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
       _viewModelCallBack(buildViewModel());
     }
   }
+
   String validateUserName(String userName) {
     if (userName.isNotEmpty &&
         userName.contains(RegExp(r"^[a-zA-Z]*$")) == true) {
@@ -231,10 +232,9 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-
   String validateCardNumber(String cardNumber) {
     RegExp regExp = new RegExp(r"[^0-9]");
-    cardNumber= cardNumber.replaceAll(regExp, '');
+    cardNumber = cardNumber.replaceAll(regExp, '');
     if (cardNumber.isNotEmpty &&
         cardNumber.contains(RegExp(
                 r"^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$")) ==
@@ -245,7 +245,7 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-   String? validateDate(String? value) {
+  String? validateDate(String? value) {
     if (value == null || value.isEmpty) {
       return "Please provide valid expiry date";
     }
@@ -283,14 +283,17 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
     return '';
   }
-   bool hasDateExpired(int month, int year) {
+
+  bool hasDateExpired(int month, int year) {
     return isNotExpired(year, month);
   }
-   bool isNotExpired(int year, int month) {
+
+  bool isNotExpired(int year, int month) {
     // It has not expired if both the year and date has not passed
     return !hasYearPassed(year) && !hasMonthPassed(year, month);
   }
-   bool hasMonthPassed(int year, int month) {
+
+  bool hasMonthPassed(int year, int month) {
     var now = DateTime.now();
     // The month has passed if:
     // 1. The year is in the past. In that case, we just assume that the month
@@ -299,7 +302,8 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     return hasYearPassed(year) ||
         convertYearTo4Digits(year) == now.year && (month < now.month + 1);
   }
-   bool hasYearPassed(int year) {
+
+  bool hasYearPassed(int year) {
     int fourDigitsYear = convertYearTo4Digits(year);
     var now = DateTime.now();
     // The year has passed if the year we are currently is more than card's
