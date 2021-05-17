@@ -14,7 +14,6 @@ void main() {
           payTo: "Merchant0",
           date: DateTime.fromMillisecondsSinceEpoch(1618237756 * 1000))
     ]);
-
     expect(viewModel.props, [viewModel.transactionDetails]);
   });
   test('CustomerViewModel initialize with error', () {

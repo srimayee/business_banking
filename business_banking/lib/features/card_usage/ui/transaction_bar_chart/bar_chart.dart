@@ -1,8 +1,6 @@
-import 'package:business_banking/features/card_usage/enums.dart';
 import 'package:business_banking/features/card_usage/model/card_summary_model.dart';
 import 'package:business_banking/features/card_usage/model/card_summary_view_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -36,10 +34,6 @@ class BarChart extends StatelessWidget {
         measureFn: (CardSummaryModel transaction, _) =>
             transaction.transactionAmount,
         data: data,
-        colorFn: (CardSummaryModel transaction, _) =>
-            charts.ColorUtil.fromDartColor(EnumToString.fromString(
-                    TransactionCategory.values, transaction.transactionCategory)
-                .color),
       )
     ];
   }
