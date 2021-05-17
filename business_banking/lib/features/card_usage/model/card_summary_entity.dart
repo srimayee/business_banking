@@ -14,10 +14,10 @@ class CardSummaryEntity extends Entity {
   List<Object> get props => [errors, transactionDetails];
 
   @override
-  merge({errors, String name, String lastFour, double balance}) {
+  merge({errors, String? name, String? lastFour, double? balance}) {
     return CardSummaryEntity(
       errors: errors ?? this.errors,
-      transactionDetails: transactionDetails ?? this.transactionDetails,
+      transactionDetails: transactionDetails,
     );
   }
 }

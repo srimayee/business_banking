@@ -25,6 +25,7 @@ abstract class BusinessBankingRouter {
       '/creditCardPaymentResponse';
   static const String depositCheckRoute = '/depositCheck';
   static const String depositCheckConfirmRoute = '/depositCheckConfirm';
+  static const String cardDetailsRoute = '/cardDetails';
 
   static Widget generate(String name) {
     switch (name) {

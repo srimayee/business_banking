@@ -7,10 +7,10 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class CardTransactionScreen extends Screen {
-  final CardSummaryViewModel viewModel;
+  final CardSummaryViewModel? viewModel;
   const CardTransactionScreen({
-    required this.viewModel,
-    required Key key,
+    this.viewModel,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -33,10 +33,10 @@ class CardTransactionScreen extends Screen {
               SizedBox(height: 10),
               Expanded(
                   child: ListView.builder(
-                itemCount: viewModel.transactionDetails.length,
+                itemCount: viewModel!.transactionDetails.length,
                 itemBuilder: (context, index) {
                   return CardTransactionTile(
-                      viewModel: viewModel.transactionDetails[index]);
+                      viewModel: viewModel!.transactionDetails[index]);
                 },
               )),
               Row(

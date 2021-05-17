@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CardSummaryViewModel extends ViewModel {
   final List<CardSummaryModel> transactionDetails;
 
-  CardSummaryViewModel({@required this.transactionDetails})
+  CardSummaryViewModel({required this.transactionDetails})
       : assert(transactionDetails != null);
 
   @override

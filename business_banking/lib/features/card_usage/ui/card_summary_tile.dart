@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 class CardTransactionTile extends StatelessWidget {
   final CardSummaryModel viewModel;
-  const CardTransactionTile({Key key, @required this.viewModel}) : super(key: key);
+  const CardTransactionTile({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

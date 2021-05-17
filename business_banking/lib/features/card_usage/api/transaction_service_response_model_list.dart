@@ -2,8 +2,7 @@ import 'package:business_banking/features/card_usage/api/transaction_service_res
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:equatable/equatable.dart';
 
-class TransactionServiceResponseModelList extends Equatable
-    implements JsonResponseModel {
+class TransactionServiceResponseModelList extends JsonResponseModel {
   final List<TransactionServiceResponseModel>
       transactionDetailEntityModelResponseList;
 
@@ -13,8 +12,7 @@ class TransactionServiceResponseModelList extends Equatable
                   json['cardTransactions']?.map((transactionsJSONObject) =>
                       TransactionServiceResponseModel.fromJson(
                           transactionsJSONObject)),
-                ) ??
-                [];
+                );
 
   @override
   List<Object> get props => [transactionDetailEntityModelResponseList];

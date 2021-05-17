@@ -5,7 +5,7 @@ import 'package:clean_framework/clean_framework.dart';
 import 'card_summary_usecase.dart';
 
 class CardSummaryBloc extends Bloc {
-  CardSummaryUseCase _useCase;
+  CardSummaryUseCase? _useCase;
 
   final transactionDetailsViewModelPipe = Pipe<CardSummaryViewModel>();
 
@@ -14,9 +14,9 @@ class CardSummaryBloc extends Bloc {
     transactionDetailsViewModelPipe.dispose();
   }
 
-  CardSummaryBloc({TransactionService transactionDetailsService}) {
+  CardSummaryBloc({ TransactionService? transactionDetailsService}) {
     _useCase = CardSummaryUseCase(
-        (viewModel) => transactionDetailsViewModelPipe.send(viewModel));
-    transactionDetailsViewModelPipe.whenListenedDo(() => _useCase.create());
+        (viewModel) => transactionDetailsViewModelPipe.send(viewModel as CardSummaryViewModel));
+    transactionDetailsViewModelPipe.whenListenedDo(() => _useCase!.create());
   }
 }

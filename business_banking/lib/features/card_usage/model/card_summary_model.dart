@@ -11,12 +11,12 @@ class CardSummaryModel extends ViewModel {
 
   CardSummaryModel(
       {required this.transactionTitle,
-      this.transactionCategory,
-      this.transactionAmount,
-      this.transactionId,
-      this.payTo,
-      this.date,
-      this.debit})
+      required this.transactionCategory,
+      required this.transactionAmount,
+      required this.transactionId,
+      required this.payTo,
+      required this.date,
+      required this.debit})
       : assert(
             transactionTitle != null &&
                 transactionCategory != null &&
