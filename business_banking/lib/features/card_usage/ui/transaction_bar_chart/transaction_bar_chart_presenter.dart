@@ -6,17 +6,17 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TransactionBarChartPresenter extends Presenter<CardSummaryBloc,
-    CardSummaryViewModel, TransactionBarChartScreen> {
+class CardSummaryChartPresenter extends Presenter<CardSummaryBloc,
+    CardSummaryViewModel, CardSummaryBarChartScreen> {
   @override
   Stream<CardSummaryViewModel> getViewModelStream(CardSummaryBloc bloc) {
     return bloc.transactionDetailsViewModelPipe.receive;
   }
 
   @override
-  TransactionBarChartScreen buildScreen(BuildContext context,
+  CardSummaryBarChartScreen buildScreen(BuildContext context,
       CardSummaryBloc bloc, CardSummaryViewModel viewModel) {
-    return TransactionBarChartScreen(
+    return CardSummaryBarChartScreen(
       viewModel: viewModel,
       navigateToHubScreen: () => _navigateToHubScreen(context),
     );

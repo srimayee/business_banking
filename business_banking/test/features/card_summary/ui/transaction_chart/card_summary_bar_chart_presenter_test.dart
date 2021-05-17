@@ -14,7 +14,7 @@ void main() {
     testWidget = MaterialApp(
       home: BlocProvider<CardSummaryBloc>(
         create: (_) => CardSummaryBloc(),
-        child: TransactionBarChartPresenter(),
+        child: CardSummaryChartPresenter(),
       ),
     );
   });
@@ -25,7 +25,7 @@ void main() {
     testWidgets('should show the presenter', (tester) async {
       await tester.pumpWidget(testWidget);
       await tester.pump(Duration(milliseconds: 500));
-      final widgetType = find.byType(TransactionBarChartPresenter);
+      final widgetType = find.byType(CardSummaryChartPresenter);
       expect(widgetType, findsOneWidget);
     });
   });

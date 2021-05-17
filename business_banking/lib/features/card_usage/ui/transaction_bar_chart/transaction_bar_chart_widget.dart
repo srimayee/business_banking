@@ -10,7 +10,7 @@ class TransactionBarChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<CardSummaryBloc>(
       create: (_) => CardSummaryBloc(),
-      child: TransactionBarChartPresenter(),
+      child: CardSummaryChartPresenter(),
     );
   }
 }

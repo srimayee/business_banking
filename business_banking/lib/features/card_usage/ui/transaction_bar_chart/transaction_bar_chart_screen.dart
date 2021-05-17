@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 
 import 'bar_chart.dart';
 
-class TransactionBarChartScreen extends Screen {
+class CardSummaryBarChartScreen extends Screen {
   final CardSummaryViewModel viewModel;
   final VoidCallback navigateToHubScreen;
 
-  TransactionBarChartScreen({
+  CardSummaryBarChartScreen({
     @required this.viewModel,
     @required this.navigateToHubScreen,
   }) : assert(() {
@@ -36,7 +36,7 @@ class TransactionBarChartScreen extends Screen {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText("Card Transactions"),
+            AutoSizeText("Card Usage"),
           ],
         ),
       ),
