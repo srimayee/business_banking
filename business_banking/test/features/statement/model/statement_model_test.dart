@@ -63,4 +63,11 @@ void main() {
       viewModel.statements.first.statementActivity.first.balance
     ]);
   });
+
+  test('NULL Statement TEST', () async {
+    final statement = Statement.fromJson({});
+
+    expect(statement.accountInfo, AccountInfoStruct());
+    expect(statement.statementActivity, []);
+  });
 }

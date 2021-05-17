@@ -53,7 +53,33 @@ void main() {
         ),
       );
 
+      final viewModelError = StatementViewModel(
+          statements: _statements,
+          serviceResponseStatus: ServiceResponseStatus.succeed,
+          emailServiceStatus: EmailServiceStatus.error);
+
+      final testWidgetError = MaterialApp(
+        home: StatementScreen(
+          viewModel: viewModelError,
+          presenterActions: mockActions,
+        ),
+      );
+
+      final viewModelSuccess = StatementViewModel(
+          statements: _statements,
+          serviceResponseStatus: ServiceResponseStatus.succeed,
+          emailServiceStatus: EmailServiceStatus.success);
+
+      final testWidgetSuccess = MaterialApp(
+        home: StatementScreen(
+          viewModel: viewModelSuccess,
+          presenterActions: mockActions,
+        ),
+      );
+
       await tester.pumpWidget(testWidget);
+      await tester.pumpWidget(testWidgetError);
+      await tester.pumpWidget(testWidgetSuccess);
       await tester.pumpAndSettle();
       var list = find.byKey(Key('statementListView'));
       expect(list, findsNWidgets(2));

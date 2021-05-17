@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:business_banking/features/statement/model/statement.dart';
 import 'package:business_banking/features/statement/model/statement/statement_entity.dart';
@@ -7,10 +5,7 @@ import 'package:business_banking/features/statement/model/statement/statement_vi
 import 'package:clean_framework/clean_framework.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'statement_service_adapter.dart';
 
@@ -53,22 +48,14 @@ class StatementUseCase extends UseCase {
   sendStatementAsPdf(Statement statement, List<String> recipients) async {
     final entity = ExampleLocator().repository.get<StatementEntity>(_scope);
     try {
-      final pdf = pw.Document();
+      final Uri _emailLaunchUri = Uri(
+          scheme: 'mailto',
+          path: recipients.first,
+          queryParameters: {
+            'subject': statement.accountInfo.accountNickname + " Statement"
+          });
 
-      Directory appDocDirectory = await getApplicationDocumentsDirectory();
-
-      final file = File(appDocDirectory.path +
-          "/statement_${statement.accountInfo.accountNumber}.pdf");
-      await file.writeAsBytes(await pdf.save());
-
-      final Email email = Email(
-        subject: 'Statement for ${statement.accountInfo.accountNickname}',
-        recipients: recipients,
-        attachmentPaths: [file.path],
-        isHTML: false,
-      );
-
-      await FlutterEmailSender.send(email);
+      await launch(_emailLaunchUri.toString());
 
       _viewModelCallBack(buildViewModel(entity,
           emailServiceStatus: EmailServiceStatus.success));

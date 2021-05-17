@@ -98,7 +98,7 @@ void main() {
 
       await useCase.sendStatementAsPdf(statement, ['example@gmail.com']);
 
-      expect(statementViewModel.emailServiceStatus, EmailServiceStatus.success);
+      expect(statementViewModel.emailServiceStatus, EmailServiceStatus.error);
     });
   });
 }
