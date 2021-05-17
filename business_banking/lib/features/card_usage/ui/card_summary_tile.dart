@@ -11,7 +11,7 @@ class CardTransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TransactionCategory category = EnumToString.fromString(
-        TransactionCategory.values, viewModel.transactionCategory);
+        TransactionCategory.values, viewModel.transactionCategory)!;
     return Card(
         elevation: 5,
         child: ListTile(

@@ -9,8 +9,8 @@ class CardSummaryBarChartScreen extends Screen {
   final VoidCallback navigateToHubScreen;
 
   CardSummaryBarChartScreen({
-    @required this.viewModel,
-    @required this.navigateToHubScreen,
+    required this.viewModel,
+    required this.navigateToHubScreen,
   }) : assert(() {
           return viewModel != null;
         }());

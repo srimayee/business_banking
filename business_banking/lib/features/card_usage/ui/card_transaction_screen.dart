@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 class CardTransactionScreen extends Screen {
   final CardSummaryViewModel viewModel;
   const CardTransactionScreen({
-    @required this.viewModel,
-    Key key,
+    required this.viewModel,
+    required Key key,
   }) : super(key: key);
 
   @override

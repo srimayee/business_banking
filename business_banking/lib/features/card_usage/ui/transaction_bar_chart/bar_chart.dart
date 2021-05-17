@@ -11,7 +11,7 @@ class BarChart extends StatelessWidget {
       charts.BasicNumericTickFormatterSpec.fromNumberFormat(
           NumberFormat.compactSimpleCurrency());
 
-  BarChart({this.animate = true, this.viewModel});
+  BarChart({this.animate = true, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
