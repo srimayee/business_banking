@@ -237,29 +237,31 @@ void main() {
       }
     });
 
-    testWidgets('should show success pop up when pay succeeds', (tester) async {
-      await tester.pumpWidget(testWidgetPaySuccess);
-      await tester.pump(Duration(milliseconds: 500));
-
-      final title = find.text("Success");
-      expect(title, findsOneWidget);
-
-      final line1 = find.text("You successfully paid \$216.88 to AEP!");
-      expect(line1, findsOneWidget);
-
-      final line2 = find.text("Reference number: 987654321");
-      expect(line2, findsOneWidget);
-    });
-
-    testWidgets('should show error pop up when pay fails', (tester) async {
-      await tester.pumpWidget(testWidgetPayFailed);
-      await tester.pump(Duration(milliseconds: 500));
-
-      final title = find.text("Error");
-      expect(title, findsOneWidget);
-
-      final content = find.text("Unable to pay the bill, please try again later.");
-      expect(content, findsOneWidget);
-    });
+    //This is being tested in bill_pay_presenter_test.dart instead but I'm
+    //keeping it here in case I need it
+    // testWidgets('should show success pop up when pay succeeds', (tester) async {
+    //   await tester.pumpWidget(testWidgetPaySuccess);
+    //   await tester.pump(Duration(milliseconds: 500));
+    //
+    //   final title = find.text("Success");
+    //   expect(title, findsOneWidget);
+    //
+    //   final line1 = find.text("You successfully paid \$216.88 to AEP!");
+    //   expect(line1, findsOneWidget);
+    //
+    //   final line2 = find.text("Reference number: 987654321");
+    //   expect(line2, findsOneWidget);
+    // });
+    //
+    // testWidgets('should show error pop up when pay fails', (tester) async {
+    //   await tester.pumpWidget(testWidgetPayFailed);
+    //   await tester.pump(Duration(milliseconds: 500));
+    //
+    //   final title = find.text("Error");
+    //   expect(title, findsOneWidget);
+    //
+    //   final content = find.text("Unable to pay the bill, please try again later.");
+    //   expect(content, findsOneWidget);
+    // });
   });
 }

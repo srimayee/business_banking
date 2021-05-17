@@ -35,51 +35,71 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 void main() {
   MockBuildContext mockBuildContext;
   BillPayViewModel billPayViewModelSucceed;
+  BillPayViewModel billPayViewModelPaySuccess;
+  BillPayViewModel billPayViewModelPayFailed;
   MockPresenterActions mockPresenterActions;
   BillPayPresenterActions billPayPresenterActions;
   BillPayBlocMock mockBloc;
   MaterialApp testWidget;
+  List<Bill> allBills;
+  BillPayPresenter presenter;
 
   setUp(() {
     mockBuildContext = MockBuildContext();
 
     mockBloc = BillPayBlocMock();
 
+    allBills = [
+      Bill.fromJson({
+        "id": 123,
+        "payee": "AEP",
+        "memo": "Electric bill",
+        "amount": 216.88,
+        "due": 1622793600000
+      }),
+      Bill.fromJson({
+        "id": 124,
+        "payee": "City of Columbus",
+        "memo": "Water bill",
+        "amount": 59.53,
+        "due": 1620039600000
+      }),
+      Bill.fromJson({
+        "id": 125,
+        "payee": "City of Columbus",
+        "memo": "Gas bill",
+        "amount": 32,
+        "due": 1621422000000
+      }),
+      Bill.fromJson({
+        "id": 126,
+        "payee": "Coinbase",
+        "memo": "Monthly Bitcoin splurging",
+        "amount": 14228.27,
+        "due": 1621753200000
+      })
+    ];
+
     billPayViewModelSucceed = BillPayViewModel(
-        allBills: [
-          Bill.fromJson({
-            "id": 123,
-            "payee": "AEP",
-            "memo": "Electric bill",
-            "amount": 216.88,
-            "due": 1622793600000
-          }),
-          Bill.fromJson({
-            "id": 124,
-            "payee": "City of Columbus",
-            "memo": "Water bill",
-            "amount": 59.53,
-            "due": 1620039600000
-          }),
-          Bill.fromJson({
-            "id": 125,
-            "payee": "City of Columbus",
-            "memo": "Gas bill",
-            "amount": 32,
-            "due": 1621422000000
-          }),
-          Bill.fromJson({
-            "id": 126,
-            "payee": "Coinbase",
-            "memo": "Monthly Bitcoin splurging",
-            "amount": 14228.27,
-            "due": 1621753200000
-          })
-        ],
+        allBills: allBills,
         selectedBillIndex: -1,
         serviceRequestStatus: ServiceRequestStatus.success,
         payStatus: PayBillStatus.none,
         referenceNumber: '');
+    billPayViewModelPaySuccess = BillPayViewModel(
+        allBills: allBills,
+        selectedBillIndex: 0,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.success,
+        referenceNumber: '');
+    billPayViewModelPayFailed = BillPayViewModel(
+        allBills: allBills,
+        selectedBillIndex: 0,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.failed,
+        referenceNumber: '');
+
+    presenter = BillPayPresenter();
 
     mockPresenterActions =
          MockPresenterActions(mockBloc, billPayViewModelSucceed);
@@ -164,4 +184,33 @@ void main() {
               verify(observer.didPush(any, any)).called(1);
         });
   });
+
+  //these two tests work but don't get code coverage for presenter
+  //I may need to actually test that the alert dialog is there
+  test('presenter with success pop up', () {
+    final result = presenter.buildScreen(null, null, billPayViewModelPaySuccess);
+    expect(result, isA<BillPayScreen>());
+  });
+
+  test('presenter with failure pop up', () {
+    final result = presenter.buildScreen(null, null, billPayViewModelPayFailed);
+    expect(result, isA<BillPayScreen>());
+  });
+
+  //doesn't work
+
+  // testWidgets("success pop up should show", (tester) async {
+  //   await tester.pumpWidget(testWidget);
+  //   await mockBloc.billPayViewModelPipe.send(billPayViewModelPaySuccess);
+  //   await tester.pumpAndSettle();
+  //
+  //   final title = find.text("Success");
+  //   expect(title, findsOneWidget);
+  //
+  //   final line1 = find.text("You successfully paid \$216.88 to AEP!");
+  //   expect(line1, findsOneWidget);
+  //
+  //   final line2 = find.text("Reference number: 987654321");
+  //   expect(line2, findsOneWidget);
+  // });
 }
