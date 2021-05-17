@@ -1,27 +1,27 @@
 import 'package:clean_framework/clean_framework.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 
 import '../bill.dart';
 
 class BillPayViewModel extends ViewModel {
   final List<Bill> allBills;
   final selectedBillIndex;
-  final serviceResponseStatus;
-  final didSucceed;
+  final serviceRequestStatus;
+  final payStatus;
   final referenceNumber;
 
   BillPayViewModel(
       {required this.allBills,
-        this.serviceResponseStatus = ServiceResponseStatus.unknown,
+        this.serviceRequestStatus = ServiceRequestStatus.none,
         this.selectedBillIndex = -1,
-        this.didSucceed = false,
+        this.payStatus = PayBillStatus.none,
         this.referenceNumber = ''});
 
   @override
   List<Object> get props => [
     allBills,
     selectedBillIndex,
-    serviceResponseStatus,
-    didSucceed,
+    serviceRequestStatus,
+    payStatus,
     referenceNumber];
 }

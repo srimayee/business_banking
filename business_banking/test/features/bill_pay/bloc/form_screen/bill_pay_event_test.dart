@@ -10,6 +10,12 @@ void main() {
           expect(event.props, [0]);
           expect(event.stringify, true);
         });
+    test('props should be empty and stringify be true on ConfirmBillPaid',
+            () {
+          final event = ConfirmBillPayedEvent();
+          expect(event.props, []);
+          expect(event.stringify, true);
+        });
     test('props should be empty and stringify be true on PayButtonClickEvent',
             () {
           final event = PayButtonClickEvent();

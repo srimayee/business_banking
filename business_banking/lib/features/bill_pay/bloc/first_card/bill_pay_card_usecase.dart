@@ -1,6 +1,6 @@
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_entity.dart';
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_view_model.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
@@ -38,12 +38,12 @@ class BillPayCardUseCase extends UseCase {
     if (entity.hasErrors()) {
       return BillPayCardViewModel(
         billsDue: entity.billsDue,
-        serviceResponseStatus: ServiceResponseStatus.failed,
+        serviceRequestStatus: ServiceRequestStatus.failed,
       );
     } else {
       return BillPayCardViewModel(
         billsDue: entity.billsDue,
-        serviceResponseStatus: ServiceResponseStatus.succeed,
+        serviceRequestStatus: ServiceRequestStatus.success,
       );
     }
   }

@@ -1,10 +1,13 @@
 // @dart=2.9
+import 'package:business_banking/features/bill_pay/bloc/bill_pay_bloc.dart';
 import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_event.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_view_model.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_screen.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_presenter.dart';
 import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_widget.dart';
+import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,6 +29,8 @@ class MockPresenterActions extends Mock
 }
 
 class MockBuildContext extends Mock implements BuildContext {}
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   MockBuildContext mockBuildContext;
@@ -72,8 +77,8 @@ void main() {
           })
         ],
         selectedBillIndex: -1,
-        serviceResponseStatus: ServiceResponseStatus.succeed,
-        didSucceed: false,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.none,
         referenceNumber: '');
 
     mockPresenterActions =
@@ -101,7 +106,7 @@ void main() {
     test(
         'presenterActions should send event through the pipe on onBillSelectedListener',
             () async {
-          mockPresenterActions.onBillSelectedListener(-1);
+          billPayPresenterActions.onBillSelectedListener(-1);
 
           await mockBloc.billPayViewModelPipe.receive.listen((event) {
             expect(event, isA<BillPayViewModel>());
@@ -109,13 +114,54 @@ void main() {
         });
 
     test(
-        'presenterActions should send event through the pipe on onBillSelectedListener',
+        'presenterActions should send event through the pipe on onTapConfirmButton',
             () async {
           billPayPresenterActions.onTapConfirmBtn(mockBuildContext, billPayViewModelSucceed);
 
           await mockBloc.billPayViewModelPipe.receive.listen((event) {
             expect(event, isA<BillPayViewModel>());
           });
+        });
+
+    test(
+        'presenterActions should send event through the pipe on onTapConfirmButton',
+            () async {
+          billPayPresenterActions.confirmBillPayed();
+
+          await mockBloc.billPayViewModelPipe.receive.listen((event) {
+            expect(event, isA<BillPayViewModel>());
+          });
+        });
+
+    testWidgets(
+        'presenterActions should pop context on popNavigationListener',
+            (tester) async {
+              Widget testWidgetRouter;
+              MockNavigatorObserver observer = MockNavigatorObserver();
+              BuildContext routeContext;
+              testWidgetRouter = CFRouterScope(
+                  routeGenerator: BusinessBankingRouter.generate,
+                  initialRoute: BusinessBankingRouter.initialRoute,
+                  builder: (context) => BlocProvider(
+                    create: (context) {
+                      routeContext = context;
+                      return BillPayBloc();
+                    },
+                    child: MaterialApp(
+                      home: BillPayScreen(
+                        viewModel: BillPayViewModel(allBills: []),
+                        presenterActions: billPayPresenterActions,
+                      ),
+                      navigatorObservers: [observer],
+                      debugShowCheckedModeBanner: false,
+                    ),
+                  )
+              );
+
+              await tester.pumpWidget(testWidgetRouter);
+              await tester.pump(Duration(milliseconds: 500));
+              billPayPresenterActions.popNavigationListener(routeContext);
+              verify(observer.didPush(any, any)).called(1);
         });
   });
 }

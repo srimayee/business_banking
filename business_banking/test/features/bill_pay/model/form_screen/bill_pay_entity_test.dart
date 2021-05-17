@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'package:business_banking/features/bill_pay/model/bill.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -40,7 +41,7 @@ void main() {
     final tEntity = BillPayEntity(
       allBills: allBills,
       selectedBillIndex: -1,
-      didSucceed: false,
+      payStatus: PayBillStatus.none,
       referenceNumber: '',
       errors: []
     );
@@ -48,14 +49,14 @@ void main() {
     test('properties should match', () {
       expect(tEntity.allBills, allBills);
       expect(tEntity.selectedBillIndex, -1);
-      expect(tEntity.didSucceed, false);
+      expect(tEntity.payStatus, PayBillStatus.none);
       expect(tEntity.referenceNumber, '');
     });
 
     test('props should match', () async {
       expect(tEntity.props, [tEntity.errors,
         tEntity.allBills, tEntity.selectedBillIndex,
-        tEntity.didSucceed, tEntity.referenceNumber]);
+        tEntity.payStatus, tEntity.referenceNumber]);
     });
 
     test('merge func should return new Entity with updated data', () async {
@@ -68,10 +69,10 @@ void main() {
         "due": 1622793600001
       });
       var newEntity = tEntity.merge(allBills: newBills, selectedBillIndex: 0,
-          didSucceed: true, referenceNumber: '1010101010');
+          payStatus: PayBillStatus.success, referenceNumber: '1010101010');
       expect(newEntity.allBills, newBills);
       expect(newEntity.selectedBillIndex, 0);
-      expect(newEntity.didSucceed, true);
+      expect(newEntity.payStatus, PayBillStatus.success);
       expect(newEntity.referenceNumber, '1010101010');
     });
   });

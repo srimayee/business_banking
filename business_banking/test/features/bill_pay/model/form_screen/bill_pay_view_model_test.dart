@@ -1,7 +1,7 @@
 // @dart=2.9
 import 'package:business_banking/features/bill_pay/model/bill.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_view_model.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -41,22 +41,22 @@ void main() {
     final tViewModel = BillPayViewModel(
         allBills: allBills,
         selectedBillIndex: -1,
-        didSucceed: false,
+        payStatus: PayBillStatus.none,
         referenceNumber: '',
-        serviceResponseStatus: ServiceResponseStatus.unknown);
+        serviceRequestStatus: ServiceRequestStatus.none);
 
     test('properties should match', () {
       expect(tViewModel.allBills, allBills);
       expect(tViewModel.selectedBillIndex, -1);
-      expect(tViewModel.didSucceed, false);
+      expect(tViewModel.payStatus, PayBillStatus.none);
       expect(tViewModel.referenceNumber, '');
-      expect(tViewModel.serviceResponseStatus, ServiceResponseStatus.unknown);
+      expect(tViewModel.serviceRequestStatus, ServiceRequestStatus.none);
     });
 
     test('props should match', () async {
       expect(tViewModel.props,
           [tViewModel.allBills, tViewModel.selectedBillIndex,
-            tViewModel.serviceResponseStatus, tViewModel.didSucceed,
+            tViewModel.serviceRequestStatus, tViewModel.payStatus,
             tViewModel.referenceNumber]);
     });
   });

@@ -61,6 +61,7 @@ class BillPayScreen extends Screen {
                       Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,
+                          key: Key('Bill-Pay-Bill-List'),
                           itemCount: viewModel.allBills.length,
                           itemBuilder: (BuildContext context, int index) {
                             DateTime dueDate = viewModel.allBills[index].due;
@@ -102,7 +103,7 @@ class BillPayScreen extends Screen {
                                   subtitle: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Divider(height: 4,),
+                                      Divider(thickness: 2,),
                                       SizedBox(height: 6,),
                                       Text("${viewModel.allBills[index].memo}: "
                                       "\$${viewModel.allBills[index].amount.toStringAsFixed(2)}"),
@@ -145,8 +146,6 @@ class BillPayScreen extends Screen {
                     ]),
                 child: Center(
                   child: Text(
-                    (viewModel.didSucceed) ?
-                        '''Payment success''' :
                     '''The amount due will be withdrawn from your primary billing account.''',
                     style: TextStyle(color: Colors.black54, fontSize: 17),
                     textAlign: TextAlign.left,
@@ -193,6 +192,7 @@ class BillPayScreen extends Screen {
   //https://stackoverflow.com/questions/23308682/how-do-you-format-the-day-of-the-month-to-say-11th-21st-or-23rd-in-dart
   String getDayOfMonthSuffix(int dayNum) {
     if(!(dayNum >= 1 && dayNum <= 31)) {
+      //doesn't need test coverage since this is a dev error
       throw Exception('Invalid day of month');
     }
 

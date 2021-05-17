@@ -2,6 +2,7 @@
 import 'package:business_banking/features/bill_pay/api/form_screen/bill_pay_post_response_model.dart';
 import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_post_service_adapter.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_entity.dart';
 import 'package:test/test.dart';
 
@@ -39,7 +40,7 @@ void main() {
           })
         ],
         selectedBillIndex: -1,
-        didSucceed: true,
+        payStatus: PayBillStatus.success,
         referenceNumber: '987654321');
 
     final tJsonResponse = {
@@ -83,7 +84,7 @@ void main() {
                     })
                   ],
                   selectedBillIndex: -1,
-                  didSucceed: false,
+                  payStatus: PayBillStatus.failed,
                   referenceNumber: ''),
               BillPayPostResponseModel.fromJson(tJsonResponse));
           expect(entity, tEntity);

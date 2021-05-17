@@ -1,17 +1,13 @@
-import 'package:business_banking/features/bill_pay/bloc/first_card/bill_pay_card_event.dart';
 import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_event.dart';
 import 'package:business_banking/features/bill_pay/bloc/bill_pay_bloc.dart';
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_view_model.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_view_model.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:mockito/mockito.dart';
 
 class BillPayBlocMock extends Mock implements BillPayBloc {
-  @override
-  final billPayCardEventPipe =
-  Pipe<BillPayCardEvent>(canSendDuplicateData: true);
   @override
   final billPayEventPipe =
   Pipe<BillPayEvent>(canSendDuplicateData: true);
@@ -60,8 +56,8 @@ class BillPayBlocMock extends Mock implements BillPayBloc {
       })
     ],
     selectedBillIndex: -1,
-    serviceResponseStatus: ServiceResponseStatus.succeed,
-    didSucceed: false,
+    serviceRequestStatus: ServiceRequestStatus.success,
+    payStatus: PayBillStatus.none,
     referenceNumber: ''
   );
 

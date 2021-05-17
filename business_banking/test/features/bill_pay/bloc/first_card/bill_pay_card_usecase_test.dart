@@ -2,7 +2,7 @@
 import 'package:business_banking/features/bill_pay/bloc/first_card/bill_pay_card_usecase.dart';
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_entity.dart';
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_view_model.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:test/test.dart';
 
@@ -25,7 +25,7 @@ void main() {
 
     final tSucceedViewModel = BillPayCardViewModel(
         billsDue: 4,
-        serviceResponseStatus: ServiceResponseStatus.succeed);
+        serviceRequestStatus: ServiceRequestStatus.success);
 
     final tBillPayCardEntity = BillPayCardEntity(
         billsDue: 4, errors: [EntityFailure()]);
@@ -52,8 +52,8 @@ void main() {
           billPayCardViewModel =
               useCase.buildViewModel(tBillPayCardEntity);
 
-          expect(billPayCardViewModel.serviceResponseStatus,
-              ServiceResponseStatus.failed);
+          expect(billPayCardViewModel.serviceRequestStatus,
+              ServiceRequestStatus.failed);
         });
   });
 }

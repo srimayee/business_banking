@@ -1,15 +1,15 @@
 import 'package:clean_framework/clean_framework.dart';
 
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 
 class BillPayCardViewModel extends ViewModel {
   final int billsDue;
-  final serviceResponseStatus;
+  final serviceRequestStatus;
 
   BillPayCardViewModel(
       {required this.billsDue,
-        this.serviceResponseStatus = ServiceResponseStatus.unknown});
+        this.serviceRequestStatus = ServiceRequestStatus.none});
 
   @override
-  List<Object> get props => [billsDue, serviceResponseStatus];
+  List<Object> get props => [billsDue, serviceRequestStatus];
 }

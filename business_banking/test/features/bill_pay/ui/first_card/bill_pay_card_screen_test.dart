@@ -1,7 +1,6 @@
 // @dart = 2.9
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_view_model.dart';
-import 'package:business_banking/features/bill_pay/model/bill.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:business_banking/features/bill_pay/ui/first_card/bill_pay_card_presenter.dart';
 import 'package:business_banking/features/bill_pay/ui/first_card/bill_pay_card_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +13,24 @@ class MockPresenterAction extends Mock
 void main() {
   MaterialApp testWidgetSucceed;
   MaterialApp testWidgetFailed;
+  MaterialApp testWidgetNoBills;
   BillPayCardViewModel billPayViewModelSucceed;
   BillPayCardViewModel billPayViewModelFailed;
+  BillPayCardViewModel billPayViewModelNoBills;
   MockPresenterAction mockPresenterAction;
 
   setUp(() {
     billPayViewModelSucceed = BillPayCardViewModel(
         billsDue: 4,
-        serviceResponseStatus: ServiceResponseStatus.succeed);
+        serviceRequestStatus: ServiceRequestStatus.success);
 
     billPayViewModelFailed = BillPayCardViewModel(
         billsDue: 0,
-        serviceResponseStatus: ServiceResponseStatus.failed);
+        serviceRequestStatus: ServiceRequestStatus.failed);
+
+    billPayViewModelNoBills = BillPayCardViewModel(
+        billsDue: 0,
+        serviceRequestStatus: ServiceRequestStatus.success);
 
     mockPresenterAction = MockPresenterAction();
 
@@ -40,11 +45,18 @@ void main() {
           viewModel: billPayViewModelFailed,
           presenterActions: mockPresenterAction),
     );
+
+    testWidgetNoBills = MaterialApp(
+      home: BillPayCardScreen(
+          viewModel: billPayViewModelNoBills,
+          presenterActions: mockPresenterAction),
+    );
   });
 
   tearDown(() {
     billPayViewModelSucceed = null;
     billPayViewModelFailed = null;
+    billPayViewModelNoBills = null;
     mockPresenterAction = null;
   });
   group('Bill Pay Card', () {
@@ -99,17 +111,21 @@ void main() {
           expect(find.text('Service is not available! Please try again later.'),
               findsOneWidget);
         });
+    testWidgets('should show no bills card if  bills due is zero',
+            (tester) async {
+          await tester.pumpWidget(testWidgetNoBills);
+          await tester.pump(Duration(milliseconds: 500));
 
-    //TODO: make this function verify you can't go to the next screen if no bills due
-    // testWidgets('should not navigate to Deposit Check page on Failed Response',
-    //         (tester) async {
-    //       await tester.pumpWidget(testWidgetFailed);
-    //       await tester.pump(Duration(milliseconds: 500));
-    //
-    //       var widget = find.byKey(Key('Deposit-Check-Card-Failed'));
-    //       expect(widget, findsOneWidget);
-    //       await tester.tap(widget);
-    //       verifyNever(mockPressenterAction.navigateToDepositCheck(any));
-    //     });
+          // Title
+          expect(find.byKey(Key('Bill-Pay-Card-Title')), findsOneWidget);
+          // Divider
+          expect(find.byType(Divider), findsOneWidget);
+          // Message header
+          expect(find.text('You have no bills due'),
+              findsOneWidget);
+          // Message body
+          expect(find.text('Nice! You\'re all caught up.'),
+              findsOneWidget);
+        });
   });
 }

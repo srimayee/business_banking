@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:business_banking/features/bill_pay/model/first_card/bill_pay_card_view_model.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class BillPayCardScreen extends Screen {
 
   @override
   Widget build(BuildContext context) {
-    return viewModel.serviceResponseStatus == ServiceResponseStatus.succeed
+    return viewModel.serviceRequestStatus == ServiceRequestStatus.success
         ? _SucceedCard(
       viewModel: viewModel,
       presenterActions: presenterActions,
@@ -72,19 +72,27 @@ class _SucceedCard extends StatelessWidget {
                 thickness: 2,
               ),
               Text(
-                "You have ${viewModel.billsDue} bill(s) due",
+                (viewModel.billsDue < 1)
+                    ? "You have no bills due"
+                    : "You have ${viewModel.billsDue} bill(s) due",
                 style: TextStyle(color: Colors.black54, fontSize: 15),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  presenterActions.navigateToBillPay(context);
-                },
-                key: Key('Bill-Pay-Card-Button'),
-                child: Text("Pay Bills"),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.lightGreen,
-                ),
-              )
+              (viewModel.billsDue < 1)
+                ? Text(
+                  "Nice! You're all caught up.",
+                  style: TextStyle(color: Colors.black87, fontSize: 18,
+                      fontStyle: FontStyle.italic),
+                )
+                : ElevatedButton(
+                  onPressed: () {
+                    presenterActions.navigateToBillPay(context);
+                  },
+                  key: Key('Bill-Pay-Card-Button'),
+                  child: Text("Pay Bills"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.lightGreen,
+                  ),
+                )
             ],
           ),
         ),

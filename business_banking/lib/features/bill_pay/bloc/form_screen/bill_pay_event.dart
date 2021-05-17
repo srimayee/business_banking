@@ -14,6 +14,16 @@ class SelectBillEvent implements BillPayEvent {
   bool get stringify => true;
 }
 
+class ConfirmBillPayedEvent implements BillPayEvent {
+  ConfirmBillPayedEvent();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
+}
+
 class PayButtonClickEvent implements BillPayEvent {
   PayButtonClickEvent();
 

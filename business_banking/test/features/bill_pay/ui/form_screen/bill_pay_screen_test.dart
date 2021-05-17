@@ -1,7 +1,7 @@
 // @dart = 2.9
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_view_model.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
+import 'package:business_banking/features/bill_pay/model/enums.dart';
 import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_presenter.dart';
 import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,52 +14,72 @@ class MockPresenterAction extends Mock
 void main() {
   MaterialApp testWidgetSucceed;
   MaterialApp testWidgetFailed;
+  MaterialApp testWidgetPaySuccess;
+  MaterialApp testWidgetPayFailed;
   BillPayViewModel billPayViewModelSucceed;
   BillPayViewModel billPayViewModelFailed;
+  BillPayViewModel billPayViewModelPaySuccess;
+  BillPayViewModel billPayViewModelPayFailed;
   MockPresenterAction mockPresenterAction;
+  List<Bill> allBills;
 
   setUp(() {
+    allBills = [
+      Bill.fromJson({
+        "id": 123,
+        "payee": "AEP",
+        "memo": "Electric bill",
+        "amount": 216.88,
+        "due": 1622793600000
+      }),
+      Bill.fromJson({
+        "id": 124,
+        "payee": "City of Columbus",
+        "memo": "Water bill",
+        "amount": 59.53,
+        "due": 1620039600000
+      }),
+      Bill.fromJson({
+        "id": 125,
+        "payee": "City of Columbus",
+        "memo": "Gas bill",
+        "amount": 32,
+        "due": 1621422000000
+      }),
+      Bill.fromJson({
+        "id": 126,
+        "payee": "Coinbase",
+        "memo": "Monthly Bitcoin splurging",
+        "amount": 14228.27,
+        "due": 1621753200000
+      })
+    ];
     billPayViewModelSucceed = BillPayViewModel(
-        allBills: [
-          Bill.fromJson({
-            "id": 123,
-            "payee": "AEP",
-            "memo": "Electric bill",
-            "amount": 216.88,
-            "due": 1622793600000
-          }),
-          Bill.fromJson({
-            "id": 124,
-            "payee": "City of Columbus",
-            "memo": "Water bill",
-            "amount": 59.53,
-            "due": 1620039600000
-          }),
-          Bill.fromJson({
-            "id": 125,
-            "payee": "City of Columbus",
-            "memo": "Gas bill",
-            "amount": 32,
-            "due": 1621422000000
-          }),
-          Bill.fromJson({
-            "id": 126,
-            "payee": "Coinbase",
-            "memo": "Monthly Bitcoin splurging",
-            "amount": 14228.27,
-            "due": 1621753200000
-          })
-        ],
-        selectedBillIndex: -1,
-        serviceResponseStatus: ServiceResponseStatus.succeed,
-        didSucceed: false,
+        allBills: allBills,
+        selectedBillIndex: 0,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.none,
         referenceNumber: '');
 
     billPayViewModelFailed = BillPayViewModel(
         allBills: [],
         selectedBillIndex: -1,
-        serviceResponseStatus: ServiceResponseStatus.failed,
-        didSucceed: false,
+        serviceRequestStatus: ServiceRequestStatus.failed,
+        payStatus: PayBillStatus.none,
+        referenceNumber: '');
+
+    billPayViewModelPaySuccess = BillPayViewModel(
+        allBills: allBills,
+        selectedBillIndex: 0,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.success,
+        referenceNumber: '');
+
+    billPayViewModelPayFailed = BillPayViewModel(
+        allBills: allBills,
+        selectedBillIndex: 0,
+        serviceRequestStatus: ServiceRequestStatus.success,
+        payStatus: PayBillStatus.failed,
         referenceNumber: '');
 
     mockPresenterAction = MockPresenterAction();
@@ -75,11 +95,25 @@ void main() {
           viewModel: billPayViewModelFailed,
           presenterActions: mockPresenterAction),
     );
+
+    testWidgetPaySuccess = MaterialApp(
+      home: BillPayScreen(
+          viewModel: billPayViewModelPaySuccess,
+          presenterActions: mockPresenterAction),
+    );
+
+    testWidgetPayFailed = MaterialApp(
+      home: BillPayScreen(
+          viewModel: billPayViewModelPayFailed,
+          presenterActions: mockPresenterAction),
+    );
   });
 
   tearDown(() {
     billPayViewModelSucceed = null;
     billPayViewModelFailed = null;
+    billPayViewModelPaySuccess = null;
+    billPayViewModelPayFailed = null;
     mockPresenterAction = null;
   });
   group('Bill Pay Screen', () {
@@ -121,9 +155,13 @@ void main() {
           await tester.pumpWidget(testWidgetSucceed);
           await tester.pump(Duration(milliseconds: 500));
 
-          var widget = find.text('AEP');
+          var widget = find.text('AEP'); //the selected bill
           expect(widget, findsOneWidget);
           await tester.tap(widget);
+          verify(mockPresenterAction.onBillSelectedListener(any)).called(1);
+          var widget2 = find.text('Water bill: \$59.53');
+          expect(widget2, findsOneWidget);
+          await tester.tap(widget2);
           verify(mockPresenterAction.onBillSelectedListener(any)).called(1);
         });
     testWidgets('should call confirm action presenter action', (tester) async {
@@ -180,6 +218,11 @@ void main() {
         expect(billDue3, findsOneWidget);
       }
 
+      await tester.drag(
+          find.byKey(Key('Bill-Pay-Bill-List')), const Offset(0.0, -300));
+
+      await tester.pump();
+
       var billTitle4 = find.text('Coinbase');
       expect(billTitle4, findsOneWidget);
       var billAmount4 = find.text('Monthly Bitcoin splurging: \$14228.27');
@@ -192,6 +235,31 @@ void main() {
         var billDue4 = find.text('Due: May 23rd at 3:00 AM');
         expect(billDue4, findsOneWidget);
       }
+    });
+
+    testWidgets('should show success pop up when pay succeeds', (tester) async {
+      await tester.pumpWidget(testWidgetPaySuccess);
+      await tester.pump(Duration(milliseconds: 500));
+
+      final title = find.text("Success");
+      expect(title, findsOneWidget);
+
+      final line1 = find.text("You successfully paid \$216.88 to AEP!");
+      expect(line1, findsOneWidget);
+
+      final line2 = find.text("Reference number: 987654321");
+      expect(line2, findsOneWidget);
+    });
+
+    testWidgets('should show error pop up when pay fails', (tester) async {
+      await tester.pumpWidget(testWidgetPayFailed);
+      await tester.pump(Duration(milliseconds: 500));
+
+      final title = find.text("Error");
+      expect(title, findsOneWidget);
+
+      final content = find.text("Unable to pay the bill, please try again later.");
+      expect(content, findsOneWidget);
     });
   });
 }
