@@ -91,14 +91,22 @@ class _FailedCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5.0),
       child: Card(
-        color: Colors.green,
         shadowColor: Colors.grey[500],
         elevation: 3.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: const Text(
+                  'View Account Statements',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               const Divider(
                 thickness: 2,
               ),
