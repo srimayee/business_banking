@@ -1,17 +1,16 @@
 import 'package:business_banking/features/login/bloc/login_service_adapter.dart';
 import 'package:business_banking/features/login/model/login_entity.dart';
 import 'package:business_banking/features/login/model/login_view_model.dart';
+import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:business_banking/locator.dart';
 
 class LoginUseCase extends UseCase {
   Function(ViewModel) _viewModelCallBack;
   RepositoryScope? _scope;
 
   LoginUseCase(Function(ViewModel) viewModelCallBack)
-      : assert(viewModelCallBack != null),
-        _viewModelCallBack = viewModelCallBack;
+      : _viewModelCallBack = viewModelCallBack;
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<LoginEntity>();
@@ -41,7 +40,9 @@ class LoginUseCase extends UseCase {
   void updateUsername(String username) async {
     final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
     final updatedEntity = entity.merge(userName: username);
-    ExampleLocator().repository.update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
+    ExampleLocator()
+        .repository
+        .update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 
@@ -49,7 +50,9 @@ class LoginUseCase extends UseCase {
     final entity = ExampleLocator().repository.get<LoginEntity>(_scope!);
 
     final updatedEntity = entity.merge(password: password);
-    ExampleLocator().repository.update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
+    ExampleLocator()
+        .repository
+        .update<LoginEntity>(_scope!, updatedEntity as LoginEntity);
     _viewModelCallBack(buildViewModelForLocalUpdate(updatedEntity));
   }
 

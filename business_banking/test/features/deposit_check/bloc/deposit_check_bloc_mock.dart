@@ -1,3 +1,6 @@
+import 'package:business_banking/features/deposit_check/bloc/1st_hub_card/deposit_check_card_event.dart';
+import 'package:business_banking/features/deposit_check/bloc/2nd_data_entry/deposit_check_event.dart';
+import 'package:business_banking/features/deposit_check/bloc/3rd_request_confirmation/deposit_check_confirm_event.dart';
 import 'package:business_banking/features/deposit_check/bloc/deposit_check_bloc.dart';
 import 'package:business_banking/features/deposit_check/model/1st_hub_card/deposit_check_card_view_model.dart';
 import 'package:business_banking/features/deposit_check/model/2nd_data_entry/deposit_check_view_model.dart';
@@ -9,22 +12,32 @@ import 'package:mockito/mockito.dart';
 
 class DepositCheckBlockMock extends Mock implements DepositCheckBloc {
   @override
+  final depositCheckCardEventPipe =
+      Pipe<DepositCheckCardEvent>(canSendDuplicateData: true);
+  @override
+  final depositCheckEventPipe =
+      Pipe<DepositCheckEvent>(canSendDuplicateData: true);
+  @override
+  final depositCheckConfirmEventPipe =
+      Pipe<DepositCheckConfirmEvent>(canSendDuplicateData: true);
+
+  @override
   Pipe<DepositCheckCardViewModel> depositCheckCardViewModelPipe =
       Pipe<DepositCheckCardViewModel>();
-
+  @override
   Pipe<DepositCheckViewModel> depositCheckViewModelPipe =
       Pipe<DepositCheckViewModel>();
-
+  @override
   Pipe<DepositCheckConfirmViewModel> depositCheckConfirmViewModelPipe =
       Pipe<DepositCheckConfirmViewModel>();
 
   DepositCheckCardViewModel depositCheckCardViewModelSample =
       DepositCheckCardViewModel(
     accountInfo: AccountInfoStruct(
-        accountNickname: '',
-        accountNumber: '',
-        availableBalance: 0.0,
-        depositLimit: 0.0),
+        accountNickname: 'Checking Account (...6917)',
+        accountNumber: '1234567890126917',
+        availableBalance: 481.84,
+        depositLimit: 4500.0),
   );
 
   DepositCheckViewModel depositCheckViewModelSample = DepositCheckViewModel(

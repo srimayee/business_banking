@@ -15,6 +15,7 @@ class DepositCheckUseCase extends UseCase {
   late final PermissionHandlerPlugin _permissionHandlerPluginImpl;
   late final ImagePickerPlugin _imagePickerPluginImpl;
 
+  ///Utilized a Repository Scope
   RepositoryScope? _scope;
 
   DepositCheckUseCase(
@@ -25,6 +26,7 @@ class DepositCheckUseCase extends UseCase {
         _permissionHandlerPluginImpl = permissionHandlerPlugin,
         _imagePickerPluginImpl = imagePickerPlugin;
 
+  ///Provide Constructor for specific use case type
   void execute() async {
     _scope = ExampleLocator().repository.containsScope<DepositCheckEntity>();
     if (_scope == null) {
@@ -35,20 +37,15 @@ class DepositCheckUseCase extends UseCase {
     }
 
     final entity = ExampleLocator().repository.get<DepositCheckEntity>(_scope!);
-    // if (entity.accountInfo == null) {
-    //   // await ExampleLocator()
-    //   //     .repository
-    //   //     .runServiceAdapter(_scope!, AccountInfoServiceAdapter());
-    //   _notifySubscribers(entity);
-    // } else {
+
     _notifySubscribers(entity);
-    // }
   }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity, isResetAction: true));
   }
 
+  // late DepositCheckViewModel _currentCheckViewModel;
   DepositCheckViewModel buildViewModel(DepositCheckEntity entity,
       {String status = '',
       isUserInputValid = true,
@@ -151,23 +148,18 @@ class DepositCheckUseCase extends UseCase {
           .repository
           .update<DepositCheckEntity>(_scope!, updatedEntity);
       _viewModelCallBack(buildViewModel(updatedEntity,
-              status: '',
-              inputStatusType: InputStatusType.userEmail,
-              isUserInputValid: true)
-          // buildViewModelUpdateEmailStatus(updatedEntity)
-          );
+          status: '',
+          inputStatusType: InputStatusType.userEmail,
+          isUserInputValid: true));
     } else {
       final updatedEntity = entity.merge(userEmail: email);
       ExampleLocator()
           .repository
           .update<DepositCheckEntity>(_scope!, updatedEntity);
       _viewModelCallBack(buildViewModel(updatedEntity,
-              status: 'Please, provide a valid email.',
-              inputStatusType: InputStatusType.userEmail,
-              isUserInputValid: false)
-          // buildViewModelUpdateEmailStatus(updatedEntity,
-          //   status: 'Please, provide a valid email.', isUserInputValid: false)
-          );
+          status: 'Please, provide a valid email.',
+          inputStatusType: InputStatusType.userEmail,
+          isUserInputValid: false));
     }
   }
 
@@ -225,9 +217,7 @@ class DepositCheckUseCase extends UseCase {
           .repository
           .runServiceAdapter(_scope!, DepositCheckServiceAdapter());
     } else {
-      _viewModelCallBack(buildViewModel(entity, isUserInputValid: true)
-          //buildViewModelForLocalUpdate(entity)
-          );
+      _viewModelCallBack(buildViewModel(entity, isUserInputValid: true));
     }
   }
 

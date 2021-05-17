@@ -4,7 +4,6 @@ import 'package:business_banking/features/deposit_check/model/account_info_struc
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_presenter.dart';
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_driver/flutter_driver.dart' as drive;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -87,8 +86,6 @@ void main() {
       expect(find.text('Front of Check'), findsOneWidget);
       expect(find.text('Back of Check'), findsOneWidget);
 
-      // camera icon
-      expect(find.byIcon(Icons.camera_alt), findsWidgets);
       // Deposit Limit
       expect(
           find.text(
@@ -139,7 +136,8 @@ void main() {
 
       expect(widget, findsOneWidget);
       await tester.tap(widget);
-      verify(mockPressenterAction.onTapConfirmBtn(any, any, any)).called(1);
+//      verify(mockPressenterAction.onTapConfirmBtn(any, any, any)).called(1);
+      verify(mockPressenterAction.onTapConfirmBtn(any, any)).called(1);
     });
 
     testWidgets(

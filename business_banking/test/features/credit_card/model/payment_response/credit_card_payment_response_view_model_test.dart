@@ -1,19 +1,15 @@
-import 'package:business_banking/features/credit_card/model/payment_request/credit_card_payment_request_view_model.dart';
 import 'package:business_banking/features/credit_card/model/payment_response/credit_card_payment_response_view_model.dart';
-import 'package:business_banking/features/credit_card/model/credit_card_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('CreditCardPaymentResponseViewModel initialize', () async {
-
     final viewModel = CreditCardPaymentResponseViewModel(
-      number: '1111222233334444',
-      name: 'My Credit Card',
-      lastFour: '4444',
-      paymentValue: 0.00,
-      paymentStatus: 'Rejected',
-      reasonRejected: 'Rejected!'
-    );
+        number: '1111222233334444',
+        name: 'My Credit Card',
+        lastFour: '4444',
+        paymentValue: 0.00,
+        paymentStatus: 'Rejected',
+        reasonRejected: 'Rejected!');
 
     expect(viewModel.number, '1111222233334444');
     expect(viewModel.name, 'My Credit Card');
@@ -30,4 +26,29 @@ void main() {
       viewModel.reasonRejected
     ]);
   });
+
+  test('CreditCardPaymentResponseViewModel merge', () async {
+
+    final viewModel = CreditCardPaymentResponseViewModel(
+        number: '1111222233334444',
+        name: 'My Credit Card',
+        lastFour: '4444',
+        paymentValue: 0.00,
+        paymentStatus: 'Rejected',
+        reasonRejected: 'Rejected!'
+    );
+
+    var viewModelMerged = CreditCardPaymentResponseViewModel.merge(viewModel);
+    expect(viewModel, viewModelMerged);
+
+    viewModelMerged = CreditCardPaymentResponseViewModel.merge(viewModel,
+          paymentValue: 100.00,
+          paymentStatus: 'Rejected',
+          reasonRejected: 'No funds!'
+    );
+    expect(viewModelMerged.paymentValue, 100.00);
+    expect(viewModelMerged.paymentStatus, 'Rejected');
+    expect(viewModelMerged.reasonRejected, 'No funds!');
+  });
+  
 }

@@ -34,7 +34,7 @@ class CreditCardPaymentRequestActions {
 
   void onUpdatePaymentValue(BuildContext context, double paymentValue) {
     //print("CreditCardPaymentRequestActions.onUpdatePaymentValue paymentValue = $paymentValue");
-    var event = CreditCardViewEventUpdatePaymentValue(this.viewModel, context, paymentValue);
+    var event = CreditCardViewEventUpdatePaymentValue(this.viewModel, paymentValue);
     bloc.creditCardViewEventsPipe.send(event);
   }
 

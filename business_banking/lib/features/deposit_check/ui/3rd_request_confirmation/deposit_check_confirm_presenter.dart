@@ -30,8 +30,6 @@ class DepositCheckConfirmPressenterActions {
   DepositCheckConfirmPressenterActions(this.bloc);
 
   popNavigationListener(BuildContext context) {
-    // bloc.resetServiceStatusPipe.launch();
-    //bloc.resetViewModelPipe.launch();
     bloc.depositCheckConfirmEventPipe.send(ResetDepositCheckViewModelEvent());
     CFRouterScope.of(context).popUntil(BusinessBankingRouter.hubRoute);
   }

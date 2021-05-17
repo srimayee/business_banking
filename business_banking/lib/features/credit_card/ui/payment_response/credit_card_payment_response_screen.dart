@@ -87,6 +87,19 @@ class CreditCardPaymentResponseSuccess extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Divider(thickness: 1.0, color: Colors.black38),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                OutlinedButton(
+                    key: Key("shareButton"),
+                    onPressed: () {
+                      actions.sharePDFPaymentConfirmation(context);
+                    },
+                    child: Text('Share', style: TextStyle(fontSize: 20.0))),
+
+              ],
+            ),
           ],
         ),
       ),

@@ -77,7 +77,7 @@ class CreditCardScreen extends Screen {
             ),
           ),
           onTap: () {
-            this.actions.navigateToCreditCardDetails(context, viewModel);
+            this.actions.navigateToCreditCardDetails(context);
           },
         ),
       ),

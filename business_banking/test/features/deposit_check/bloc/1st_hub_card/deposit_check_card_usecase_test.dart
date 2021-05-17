@@ -1,5 +1,4 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/bloc/1st_hub_card/deposit_check_card_event.dart';
 import 'package:business_banking/features/deposit_check/bloc/1st_hub_card/deposit_check_card_usecase.dart';
 import 'package:business_banking/features/deposit_check/model/1st_hub_card/deposit_check_card_entity.dart';
 import 'package:business_banking/features/deposit_check/model/1st_hub_card/deposit_check_card_view_model.dart';
@@ -7,8 +6,6 @@ import 'package:business_banking/features/deposit_check/model/account_info_struc
 import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:test/test.dart';
-
-import '../consent_list_usecase_test.dart';
 
 void main() {
   DepositCheckCardUseCase useCase;
@@ -44,11 +41,11 @@ void main() {
         depositCheckCardViewModel,
         tSucceedAccountInfo,
       );
-    }, timeout: Timeout(Duration(seconds: 3)));
+    });
 
     test('should callback return viewModel without recreate new scope',
         () async {
-      useCase.execute();
+      await useCase.execute();
 
       expect(depositCheckCardViewModel, isA<DepositCheckCardViewModel>());
       useCase.execute();
