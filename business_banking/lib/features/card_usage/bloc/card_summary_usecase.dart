@@ -14,7 +14,7 @@ class CardSummaryUseCase extends UseCase {
         _viewModelCallBack = viewModelCallBack;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<CardSummaryEntity>()!;
+    _scope = ExampleLocator().repository.containsScope<CardSummaryEntity>();
     if (_scope == null) {
       final newTransaction = CardSummaryEntity();
       _scope = ExampleLocator()

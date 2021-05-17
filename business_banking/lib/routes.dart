@@ -1,4 +1,6 @@
 import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart';
+import 'package:business_banking/features/card_usage/ui/card_transaction_widget.dart';
+import 'package:business_banking/features/card_usage/ui/transaction_bar_chart/transaction_bar_chart_widget.dart';
 import 'package:business_banking/features/credit_card/ui/credit_card_details/credit_card_details_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
@@ -52,6 +54,9 @@ abstract class BusinessBankingRouter {
 
       case depositCheckConfirmRoute:
         return DepositCheckConfirmWidget();
+
+      case cardDetailsRoute:
+        return TransactionBarChartWidget();
 
       default:
         return const PageNotFound();

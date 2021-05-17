@@ -1,5 +1,5 @@
 import 'package:clean_framework/clean_framework_defaults.dart';
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 
 class TransactionServiceResponseModel extends JsonResponseModel {
   final String transactionTitle;

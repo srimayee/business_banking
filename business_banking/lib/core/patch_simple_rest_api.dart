@@ -15,7 +15,7 @@ class PatchSimpleRestApi extends RestApi {
   HttpClient? _httpClient;
   late IOClient _ioClient;
 
-  PatchSimpleRestApi({this.baseUrl = 'http://127.0.0.1:8080/service/'}) {
+  PatchSimpleRestApi({this.baseUrl = 'http://0.0.0.0:3001'}) {
     _httpClient = new HttpClient()
       //@TODO should we remove this? Not sure if its safe for release
       ..badCertificateCallback =
