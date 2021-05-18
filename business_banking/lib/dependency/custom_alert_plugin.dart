@@ -53,8 +53,6 @@ class CustomAlert extends ExternalDependency {
   });
 
   void show() {
-    var test = Theme.of(context).dialogBackgroundColor;
-    print(test);
     Alert(
       context: context,
       id: keyString,
