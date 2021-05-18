@@ -1,6 +1,8 @@
 // @dart=2.9
 import 'package:business_banking/features/bill_pay/bloc/bill_pay_bloc.dart';
+import 'package:business_banking/features/bill_pay/bloc/first_card/bill_pay_card_usecase.dart';
 import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_event.dart';
+import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_usecase.dart';
 import 'package:business_banking/features/bill_pay/model/form_screen/bill_pay_view_model.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
 import 'package:business_banking/features/bill_pay/ui/form_screen/bill_pay_screen.dart';
@@ -32,6 +34,10 @@ class MockBuildContext extends Mock implements BuildContext {}
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
+class MockBillPayUseCase extends Mock implements BillPayUseCase {}
+
+class MockBillPayCardUseCase extends Mock implements BillPayCardUseCase {}
+
 void main() {
   MockBuildContext mockBuildContext;
   BillPayViewModel billPayViewModelSucceed;
@@ -43,6 +49,7 @@ void main() {
   MaterialApp testWidget;
   List<Bill> allBills;
   BillPayPresenter presenter;
+  MockNavigatorObserver observer;
 
   setUp(() {
     mockBuildContext = MockBuildContext();
@@ -98,6 +105,8 @@ void main() {
         serviceRequestStatus: ServiceRequestStatus.success,
         payStatus: PayBillStatus.failed,
         referenceNumber: '');
+
+    observer = MockNavigatorObserver();
 
     presenter = BillPayPresenter();
 
@@ -185,32 +194,99 @@ void main() {
         });
   });
 
-  //these two tests work but don't get code coverage for presenter
-  //I may need to actually test that the alert dialog is there
-  test('presenter with success pop up', () {
-    final result = presenter.buildScreen(null, null, billPayViewModelPaySuccess);
-    expect(result, isA<BillPayScreen>());
+  testWidgets('presenter with success pop up - pay another', (tester) async {
+    final bloc = BillPayBloc(
+        billPayCardUseCase: MockBillPayCardUseCase(),
+        billPayUseCase: MockBillPayUseCase()
+    );
+    final app = MaterialApp(
+      home: BlocProvider<BillPayBloc>(
+        create: (_) => bloc,
+        child: presenter,
+      ),
+      navigatorObservers: [observer],
+    );
+    await tester.pumpWidget(app);
+    bloc.billPayViewModelPipe.send(billPayViewModelPaySuccess);
+    await tester.pumpAndSettle();
+
+    expect(find.text("Success"), findsOneWidget);
+    expect(find.text("You successfully paid \$216.88 to AEP!"),
+        findsOneWidget);
+    final anotherButton = find.widgetWithText(TextButton, "Pay another");
+    expect(anotherButton, findsOneWidget);
+
+    bloc.billPayEventPipe.receive.listen(expectAsync1((event) {
+      expectSync(event, isA<ConfirmBillPayedEvent>());
+    }));
+    await tester.tap(anotherButton);
+    await tester.pumpAndSettle();
+    verify(observer.didPop(any, any)).called(1);
   });
 
-  test('presenter with failure pop up', () {
-    final result = presenter.buildScreen(null, null, billPayViewModelPayFailed);
-    expect(result, isA<BillPayScreen>());
+  testWidgets('presenter with success pop up - back to hub', (tester) async {
+    final bloc = BillPayBloc(
+        billPayCardUseCase: MockBillPayCardUseCase(),
+        billPayUseCase: MockBillPayUseCase()
+    );
+    final testWidgetRouter = CFRouterScope(
+        routeGenerator: BusinessBankingRouter.generate,
+        initialRoute: BusinessBankingRouter.initialRoute,
+        builder: (context) => MaterialApp(
+          home: BlocProvider<BillPayBloc>(
+            create: (_) => bloc,
+            child: presenter,
+          ),
+          navigatorObservers: [observer],
+        )
+    );
+
+    await tester.pumpWidget(testWidgetRouter);
+    bloc.billPayViewModelPipe.send(billPayViewModelPaySuccess);
+    await tester.pumpAndSettle();
+
+    expect(find.text("Success"), findsOneWidget);
+    expect(find.text("You successfully paid \$216.88 to AEP!"),
+        findsOneWidget);
+    final hubButton = find.widgetWithText(TextButton, "Back to hub");
+    expect(hubButton, findsOneWidget);
+
+    bloc.billPayEventPipe.receive.listen(expectAsync1((event) {
+      expectSync(event, isA<ConfirmBillPayedEvent>());
+    }));
+    await tester.tap(hubButton);
+    await tester.pumpAndSettle();
+    verify(observer.didPush(any, any)).called(2);
   });
 
-  //doesn't work
 
-  // testWidgets("success pop up should show", (tester) async {
-  //   await tester.pumpWidget(testWidget);
-  //   await mockBloc.billPayViewModelPipe.send(billPayViewModelPaySuccess);
-  //   await tester.pumpAndSettle();
-  //
-  //   final title = find.text("Success");
-  //   expect(title, findsOneWidget);
-  //
-  //   final line1 = find.text("You successfully paid \$216.88 to AEP!");
-  //   expect(line1, findsOneWidget);
-  //
-  //   final line2 = find.text("Reference number: 987654321");
-  //   expect(line2, findsOneWidget);
-  // });
+  testWidgets('presenter with failure pop up', (tester) async {
+    final bloc = BillPayBloc(
+      billPayCardUseCase: MockBillPayCardUseCase(),
+      billPayUseCase: MockBillPayUseCase()
+    );
+    final app = MaterialApp(
+      home: BlocProvider<BillPayBloc>(
+        create: (_) => bloc,
+        child: presenter,
+      ),
+      navigatorObservers: [observer],
+    );
+    await tester.pumpWidget(app);
+    bloc.billPayViewModelPipe.send(billPayViewModelPayFailed);
+    await tester.pumpAndSettle();
+
+    expect(find.text("Error"), findsOneWidget);
+    expect(find.text("Unable to pay the bill, please try again later."),
+        findsOneWidget);
+    final backButton = find.widgetWithText(TextButton, "Back");
+    expect(backButton, findsOneWidget);
+
+    bloc.billPayEventPipe.receive.listen(expectAsync1((event) {
+      expectSync(event, isA<ConfirmBillPayedEvent>());
+    }));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+    verify(observer.didPop(any, any)).called(1);
+  });
 }
