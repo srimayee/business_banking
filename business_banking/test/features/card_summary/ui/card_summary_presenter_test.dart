@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
-  MaterialApp testWidget;
+  MaterialApp? testWidget;
   setUp(() {
     testWidget = MaterialApp(
       home: BlocProvider<CardSummaryBloc>(
@@ -16,17 +16,17 @@ void main() {
         child: CardSummaryPresenter(),
       ),
     );
+  });
 
-    // tearDown(() {
-    //   testWidget = MaterialApp();
-    // });
+    tearDown(() {
+      testWidget = null;
+    });
     group('Successfully presents Card Summary', () {
       testWidgets('should show the presenter', (tester) async {
-        await tester.pumpWidget(testWidget);
+        await tester.pumpWidget(testWidget!);
         await tester.pump(Duration(milliseconds: 500));
         final widgetType = find.byType(CardSummaryPresenter);
         expect(widgetType, findsOneWidget);
       });
     });
-  });
 }

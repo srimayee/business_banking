@@ -377,7 +377,7 @@
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-                        "endpoint": "account-transactions",
+                        "endpoint": "card-usage",
                         "responses": [
                             {
                                 "uuid": "",
