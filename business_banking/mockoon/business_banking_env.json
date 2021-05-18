@@ -1,231 +1,6 @@
 {
-    "source": "mockoon:1.13.0",
+    "source": "mockoon:1.12.0",
     "data": [
-        {
-            "type": "environment",
-            "item": {
-                "uuid": "",
-                "lastMigration": 13,
-                "name": "Demo API",
-                "endpointPrefix": "",
-                "latency": 0,
-                "port": 30,
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Use multiple responses with rules",
-                        "method": "post",
-                        "endpoint": "content/:param1",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Default response. Served if route param 'param1' is not present.\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Default response",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Content XYZ. Served if route param 'param1' equals 'xyz'. (See in 'Rules' tab)\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Content XYZ",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "param1",
-                                        "value": "xyz",
-                                        "isRegex": false
-                                    }
-                                ],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Rules example\": \"Content not found. Served if route param 'param1' is not equal to 'xyz'. (See in 'Rules' tab)\"\n}\n",
-                                "latency": 0,
-                                "statusCode": 404,
-                                "label": "Content not found",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "params",
-                                        "modifier": "param1",
-                                        "value": "^(?!.*xyz).*$",
-                                        "isRegex": true
-                                    }
-                                ],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
-                        "method": "get",
-                        "endpoint": "users",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"Templating example\": \"For more information about templating, click the blue 'i' above this editor\",\n  \"users\": [\n    {{# repeat (queryParam 'total' '10') }}\n      {\n        \"userId\": \"{{ faker 'random.number' min=10000 max=100000 }}\",\n        \"firstname\": \"{{ faker 'name.firstName' }}\",\n        \"lastname\": \"{{ faker 'name.lastName' }}\",\n        \"friends\": [\n          {{# repeat (faker 'random.number' 5) }}\n            {\n              \"id\": \"{{ faker 'random.uuid' }}\"\n            }\n          {{/ repeat }}\n        ]\n      },\n    {{/ repeat }}\n  ],\n  \"total\": \"{{queryParam 'total' '10'}}\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Creates 10 random users, or the amount specified in the 'total' query param",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Serve a file dynamically depending on the path param 'pageName'.",
-                        "method": "get",
-                        "endpoint": "file/:pageName",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "Templating is also supported in file path",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/html"
-                                    }
-                                ],
-                                "filePath": "./page{{urlParam 'pageName'}}.html",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Path supports various patterns",
-                        "method": "put",
-                        "endpoint": "path/with/pattern(s)?/*",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "The current path will match the following routes: \nhttp://localhost:3000/path/with/pattern/\nhttp://localhost:3000/path/with/patterns/\nhttp://localhost:3000/path/with/patterns/anything-else\n\nLearn more about Mockoon's routing: https://mockoon.com/docs/latest/routing",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/plain"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "Can Mockoon forward or record entering requests?",
-                        "method": "get",
-                        "endpoint": "forward-and-record",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "Mockoon can also act as a proxy and forward all entering requests that are not caught by declared routes. \nYou can activate this option in the environment settings ('cog' icon in the upper right corner). \nTo learn more: https://mockoon.com/docs/latest/proxy-mode\n\nAs always, all entering requests, and responses from the proxied server will be recorded ('clock' icon in the upper right corner).\nTo learn more: https://mockoon.com/docs/latest/requests-logging",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "text/plain"
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
-        },
         {
             "type": "environment",
             "item": {
@@ -236,34 +11,6 @@
                 "latency": 0,
                 "port": 3001,
                 "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Gets info for CashAccounts screen",
-                        "method": "get",
-                        "endpoint": "cash_accounts",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"type\": \"Employee Checking\",\n  \"lastFour\": \"6542\",\n  \"balance\": 3545.54\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "disableTemplating": false,
-                                "rulesOperator": "OR"
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
                     {
                         "uuid": "",
                         "documentation": "Gets info for AccountDetail screen",
@@ -296,11 +43,11 @@
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-                        "endpoint": "promos/:cid",
+                        "endpoint": "promos/123",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "",
+                                "body": "{\n   \"imageUrl\":\"https://via.placeholder.com/300\",\n   \"externalUrl\":\"https://www.huntington.com/\"\n}",
                                 "latency": 0,
                                 "statusCode": 400,
                                 "label": "",
@@ -363,29 +110,6 @@
                                         "value": ""
                                     }
                                 ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "card-usage",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n   \"accountTransactions\":[\n      {\n         \"transactionTitle\":\"Europe Tripe\",\n         \"transactionCategory\":\"airTravel\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000001\",\n         \"debit\": true,\n         \"payTo\":\"Merchant1\",\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"Cat in the Hat\",\n         \"transactionCategory\":\"movies\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000002\",\n         \"payTo\":\"Merchant2\",\n         \"debit\": true,\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"Olive Garden\",\n         \"transactionCategory\":\"restaurant\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000003\",\n         \"debit\": true,\n         \"payTo\":\"Merchant3\",\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"Starbucks\",\n         \"transactionCategory\":\"coffeeShop\",\n         \"transactionAmount\":\"50.99\",\n         \"transactionId\":\"0000004\",\n         \"debit\": true,\n         \"payTo\":\"Merchant4\",\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"Paycheck\",\n         \"transactionCategory\":\"income\",\n         \"transactionAmount\":\"200.23\",\n         \"transactionId\":\"0000005\",\n         \"debit\": false,\n         \"payTo\":\"Merchant5\",\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"Gas Station\",\n         \"transactionCategory\":\"gas\",\n         \"transactionAmount\":\"200.23\",\n         \"transactionId\":\"0000006\",\n         \"debit\": true,\n         \"payTo\":\"Merchant6\",\n         \"timestamp\":1618275504\n      },\n      {\n         \"transactionTitle\":\"The Gap\",\n         \"transactionCategory\":\"shopping\",\n         \"transactionAmount\":\"400.23\",\n         \"transactionId\":\"0000007\",\n         \"payTo\":\"Merchant7\",\n         \"debit\": true,\n         \"timestamp\":1618363234\n      },\n      {\n         \"transactionTitle\":\"Princeton Tuition\",\n         \"transactionCategory\":\"tuition\",\n         \"transactionAmount\":\"300.00\",\n         \"transactionId\":\"0000008\",\n         \"payTo\":\"Merchant8\",\n         \"debit\": true,\n         \"timestamp\":1618363234\n      },\n      {\n         \"transactionTitle\":\"Bus\",\n         \"transactionCategory\":\"transportation\",\n         \"transactionAmount\":\"435.67\",\n         \"transactionId\":\"0000009\",\n         \"payTo\":\"Merchant9\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Tennis Class\",\n         \"transactionCategory\":\"miscellaneous\",\n         \"transactionAmount\":\"90.67\",\n         \"transactionId\":\"00000010\",\n         \"payTo\":\"Merchant10\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Barber Shop\",\n         \"transactionCategory\":\"haircut\",\n         \"transactionAmount\":\"50.67\",\n         \"transactionId\":\"00000011\",\n         \"payTo\":\"Merchant11\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Internet Bill\",\n         \"transactionCategory\":\"utilities\",\n         \"transactionAmount\":\"100.00\",\n         \"transactionId\":\"00000012\",\n         \"payTo\":\"Merchant12\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Dry Cleaning\",\n         \"transactionCategory\":\"service\",\n         \"transactionAmount\":\"120.00\",\n         \"transactionId\":\"00000013\",\n         \"payTo\":\"Merchant13\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Rent\",\n         \"transactionCategory\":\"rent\",\n         \"transactionAmount\":\"1200.00\",\n         \"transactionId\":\"00000014\",\n         \"debit\": true,\n         \"payTo\":\"Merchant14\",\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Transfer Money\",\n         \"transactionCategory\":\"transfer\",\n         \"transactionAmount\":\"200.00\",\n         \"transactionId\":\"00000015\",\n         \"payTo\":\"Merchant15\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Veterans Donation\",\n         \"transactionCategory\":\"charity\",\n         \"transactionAmount\":\"300.00\",\n         \"transactionId\":\"00000016\",\n         \"debit\": true,\n         \"payTo\":\"Merchant16\",\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Physical Exam\",\n         \"transactionCategory\":\"health\",\n         \"transactionAmount\":\"200.00\",\n         \"transactionId\":\"00000017\",\n         \"payTo\":\"Merchant17\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"ATM Withdrawal\",\n         \"transactionCategory\":\"withdrawals\",\n         \"transactionAmount\":\"140.00\",\n         \"transactionId\":\"00000018\",\n         \"payTo\":\"Merchant18\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Streaming Subscription\",\n         \"transactionCategory\":\"subscriptions\",\n         \"transactionAmount\":\"30.00\",\n         \"transactionId\":\"00000019\",\n         \"payTo\":\"Merchant19\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      },\n      {\n         \"transactionTitle\":\"Organic Groceries\",\n         \"transactionCategory\":\"groceries\",\n         \"transactionAmount\":\"30.00\",\n         \"transactionId\":\"00000020\",\n         \"payTo\":\"Merchant20\",\n         \"debit\": true,\n         \"timestamp\":1618449634\n      }\n   ]\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
                                 "filePath": "",
                                 "sendFileAsBody": false,
                                 "rules": [],
@@ -500,7 +224,7 @@
                     },
                     {
                         "uuid": "",
-                        "documentation": "",
+                        "documentation": "Gets info for CashAccounts screen",
                         "method": "get",
                         "endpoint": "cash-accounts",
                         "responses": [
@@ -530,62 +254,11 @@
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-                        "endpoint": "investment-account",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"accountBalance\" : 166996.5,\n  \"totalGainValue\" : -6557.0,\n  \"totalGainPercent\" : -36.07\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "",
-                                        "value": ""
-                                    }
-                                ],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "investment-details-account",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n     \"accountBalance\" : 166996.50,\n  \"totalGainValue\" : -6557.00,\n  \"totalGainPercent\" : -26.07,\n  \"investments\" : [\n    {\n      \"symbol\" : \"CRSP\",\n      \"dayGainValue\" : 76.00,\n      \"dayGainPercent\" : 0.33,\n      \"price\" : 114.00,\n      \"marketValue\" : 22800.00,\n      \"count\" : 200\n    },\n        {\n      \"symbol\" : \"TXG\",\n      \"dayGainValue\" : -4347.00,\n      \"dayGainPercent\" : -9.31,\n      \"price\" : 114.00,\n      \"marketValue\" : 42303.00,\n      \"count\" : 300\n    },\n        {\n      \"symbol\" : \"JMIA\",\n      \"dayGainValue\" : -1050.00,\n      \"dayGainPercent\" : -9.38,\n      \"price\" : 34.00,\n      \"marketValue\" : 10200.00,\n      \"count\" : 300\n    },\n        {\n      \"symbol\" : \"BABA\",\n      \"dayGainValue\" : -360.00,\n      \"dayGainPercent\" : -3.08,\n      \"price\" : 226.69,\n      \"marketValue\" : 11334.5,\n      \"count\" : 50\n    },\n        {\n      \"symbol\" : \"FCEL\",\n      \"dayGainValue\" : -172.00,\n      \"dayGainPercent\" : -3.3,\n      \"price\" : 12.8,\n      \"marketValue\" : 5120.00,\n      \"count\" : 400\n    },\n        {\n      \"symbol\" : \"AAPL\",\n      \"dayGainValue\" : -253.00,\n      \"dayGainPercent\" : -5.2,\n      \"price\" : 116.84,\n      \"marketValue\" : 5842.00,\n      \"count\" : 50\n    },\n        {\n      \"symbol\" : \"TSLA\",\n      \"dayGainValue\" : -699.00,\n      \"dayGainPercent\" : -5.84,\n      \"price\" : 567.00,\n      \"marketValue\" : 11340.00,\n      \"count\" : 20\n    },\n        {\n      \"symbol\" : \"PLUG\",\n      \"dayGainValue\" : -476.00 ,\n      \"dayGainPercent\" : -3.03,\n      \"price\" : 38.9,\n      \"marketValue\" : 15560.00,\n      \"count\" : 400\n    },\n        {\n      \"symbol\" : \"NNDM\",\n      \"dayGainValue\" : 680.00,\n      \"dayGainPercent\" : 4.47,\n      \"price\" : 8.13,\n      \"marketValue\" : 16260.00,\n      \"count\" : 2000\n    },\n        {\n      \"symbol\" : \"COTY\",\n      \"dayGainValue\" : 120.00,\n      \"dayGainPercent\" : 0.51,\n      \"price\" : 7.85,\n      \"marketValue\" : 23550.00,\n      \"count\" : 3000\n    },\n        {\n      \"symbol\" : \"SPCE\",\n      \"dayGainValue\" : -76.00,\n      \"dayGainPercent\" : 2.78,\n      \"price\" : 26.87,\n      \"marketValue\" : 2687.00,\n      \"count\" : 100\n    }\n    \n    ]\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
                         "endpoint": "quickpay",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"name\" : \"Sam Doe\",\n  \"email\" : \"Sam.Doe@gmail.com\",\n  \"imageUrl\" : \"\"\n}",
+                                "body": "{\n  \"name\": \"user name\", \n  \"email\": \"username@gmail.com\",\n  \"imageUrl\": \"\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -604,89 +277,15 @@
                         "uuid": "",
                         "documentation": "",
                         "method": "get",
-                        "endpoint": "request_money",
+                        "endpoint": "card-usage",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"name\" : \"Sam Doe\",\n  \"email\" : \"Sam.Doe@gmail.com\",\n  \"imageUrl\" : \"\",\n  \"amount\": 0.0,\n  \"memo\":\"\"\n}",
+                                "body": "{\n   \"cardTransactions\":[\n      {\n         \"transactionTitle\":\"Europe Tripe\",\n         \"transactionCategory\":\"airTravel\",\n         \"transactionAmount\":\"219.99\",\n         \"transactionId\":\"0000001\",\n         \"payTo\":\"Merchant1\",\n         \"timestamp\":1619944222\n      },\n      {\n         \"transactionTitle\":\"Canada Trip\",\n         \"transactionCategory\":\"airTravel\",\n         \"transactionAmount\":\"319.99\",\n         \"transactionId\":\"0000001\",\n         \"payTo\":\"Merchant1\",\n         \"timestamp\":1619944222\n      },\n      {\n         \"transactionTitle\":\"Cat in the Hat\",\n         \"transactionCategory\":\"movies\",\n         \"transactionAmount\":\"129.99\",\n         \"transactionId\":\"0000002\",\n         \"payTo\":\"Merchant2\",\n         \"timestamp\":1619944220\n      },\n      {\n         \"transactionTitle\":\"Olive Garden\",\n         \"transactionCategory\":\"restaurant\",\n         \"transactionAmount\":\"9.99\",\n         \"transactionId\":\"0000003\",\n         \"payTo\":\"Merchant3\",\n         \"timestamp\":1619944220\n      },\n      {\n         \"transactionTitle\":\"Starbucks\",\n         \"transactionCategory\":\"coffeeShop\",\n         \"transactionAmount\":\"50.99\",\n         \"transactionId\":\"0000004\",\n         \"payTo\":\"Merchant4\",\n         \"timestamp\":1620030620\n      },\n      {\n         \"transactionTitle\":\"Gas Station\",\n         \"transactionCategory\":\"gas\",\n         \"transactionAmount\":\"200.23\",\n         \"transactionId\":\"0000006\",\n         \"payTo\":\"Merchant6\",\n         \"timestamp\":1620117020\n      },\n      {\n         \"transactionTitle\":\"The Gap\",\n         \"transactionCategory\":\"shopping\",\n         \"transactionAmount\":\"400.23\",\n         \"transactionId\":\"0000007\",\n         \"payTo\":\"Merchant7\",\n         \"timestamp\":1620203420\n      },\n      {\n         \"transactionTitle\":\"Princeton Tuition\",\n         \"transactionCategory\":\"tuition\",\n         \"transactionAmount\":\"300.00\",\n         \"transactionId\":\"0000008\",\n         \"payTo\":\"Merchant8\",\n         \"timestamp\":1620203420\n      },\n      {\n         \"transactionTitle\":\"Bus\",\n         \"transactionCategory\":\"Transportation\",\n         \"transactionAmount\":\"335.67\",\n         \"transactionId\":\"00000009\",\n         \"payTo\":\"Merchant9\",\n         \"timestamp\":1620203420\n      },\n      {\n         \"transactionTitle\":\"Tennis Class\",\n         \"transactionCategory\":\"Miscellaneous\",\n         \"transactionAmount\":\"50.67\",\n         \"transactionId\":\"00000010\",\n         \"payTo\":\"Merchant10\",\n         \"timestamp\":1620289820\n      },\n      {\n         \"transactionTitle\":\"Barber Shop\",\n         \"transactionCategory\":\"Haircut\",\n         \"transactionAmount\":\"50.67\",\n         \"transactionId\":\"00000011\",\n         \"payTo\":\"Merchant11\",\n         \"timestamp\":1620289820\n      },\n      {\n         \"transactionTitle\":\"Internet Bill\",\n         \"transactionCategory\":\"Utilities\",\n         \"transactionAmount\":\"50.00\",\n         \"transactionId\":\"00000012\",\n         \"payTo\":\"Merchant12\",\n         \"timestamp\":1620289820\n      },\n      {\n         \"transactionTitle\":\"Dry Cleaning\",\n         \"transactionCategory\":\"Service\",\n         \"transactionAmount\":\"120.00\",\n         \"transactionId\":\"00000013\",\n         \"payTo\":\"Merchant13\",\n         \"timestamp\":1620376220\n      },\n      {\n         \"transactionTitle\":\"Veterans Donation\",\n         \"transactionCategory\":\"Charity\",\n         \"transactionAmount\":\"100.00\",\n         \"transactionId\":\"00000016\",\n         \"payTo\":\"Merchant16\",\n         \"timestamp\":1620462620\n      },\n      {\n         \"transactionTitle\":\"Physical Exam\",\n         \"transactionCategory\":\"Health\",\n         \"transactionAmount\":\"200.00\",\n         \"transactionId\":\"00000017\",\n         \"payTo\":\"Merchant17\",\n         \"timestamp\":1620462620\n      },\n      {\n         \"transactionTitle\":\"ATM Withdrawal\",\n         \"transactionCategory\":\"Withdrawals\",\n         \"transactionAmount\":\"140.00\",\n         \"transactionId\":\"00000018\",\n         \"payTo\":\"Merchant18\",\n         \"timestamp\":1620462620\n      },\n      {\n         \"transactionTitle\":\"Streaming Subscription\",\n         \"transactionCategory\":\"Subscriptions\",\n         \"transactionAmount\":\"30.00\",\n         \"transactionId\":\"00000019\",\n         \"payTo\":\"Merchant19\",\n         \"timestamp\":1620462620\n      },\n      {\n         \"transactionTitle\":\"Organic Groceries\",\n         \"transactionCategory\":\"Groceries\",\n         \"transactionAmount\":\"30.00\",\n         \"transactionId\":\"00000020\",\n         \"payTo\":\"Merchant20\",\n         \"timestamp\":1620462620\n      }\n   ]\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
                                 "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "transactions",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"accountInfo\": {\n    \"accountCategory\": \"LOANACCOUNT\",\n    \"accountNumber\": \"1234567890126917\",\n    \"availableBalance\": 481.84,\n    \"accountNickname\": \"HNB Credit Card (6917)\"\n  },\n  \"postedTransactions\": [\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"LYFT RIDE\",\n      \"debitAmount\": 18.0,\n      \"category\": \"Ground Transportation\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"UBER TRIP\",\n      \"debitAmount\": 28.0,\n      \"category\": \"Ground Transportation\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"WALMART.COM\",\n      \"debitAmount\": 45.0,\n      \"category\": \"Wholesale Clubs\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"UBER EATS\",\n      \"debitAmount\": 12.0,\n      \"category\": \"Eating Out\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"SUNRISE MINI MART\",\n      \"debitAmount\": 11.0,\n      \"category\": \"Wholesale Clubs\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"ALDI 65084\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Groceries\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"INOX 3D 65084\",\n      \"debitAmount\": 55.0,\n      \"category\": \"Entertainment\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"ALDI 65084\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Groceries\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"BUFFALO FRESH 65084\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Groceries\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"RITE AID\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Health and Fitness\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"CVS HEALTH\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Health and Fitness\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"ALDI 65084\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Groceries\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"CHANGE POINT LAUNDRY\",\n      \"debitAmount\": 5.0,\n      \"category\": \"Others\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"INTERNET PAYMENT\",\n      \"debitAmount\": 25.0,\n      \"category\": \"Others\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    },\n    {\n      \"transactionDate\": \"04/13/2021 00:00:00\",\n      \"description\": \"US POSTAL SERVICE\",\n      \"debitAmount\": 12.0,\n      \"category\": \"Others\",\n      \"cardNumber\": \"xxxx-xxxx-xxxx-6917\"\n    }\n  ]\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "get",
-                        "endpoint": "account-info",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n    \"accountNumber\": \"1234567890126917\",\n    \"availableBalance\": 481.84,\n    \"depositLimit\": 4500.00,\n    \"accountNickname\": \"Checking Account (...6917)\"\n  \n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false
-                    },
-                    {
-                        "uuid": "",
-                        "documentation": "",
-                        "method": "post",
-                        "endpoint": "deposit-check",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"status\" : \"Successful\",\n  \"didSucceed\" : true,\n  \"referenceNumber\" : \"123456789\"\n}",
-                                "latency": 0,
-                                "statusCode": 200,
-                                "label": "",
-                                "headers": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application/json"
-                                    }
-                                ],
                                 "filePath": "",
                                 "sendFileAsBody": false,
                                 "rules": [],

@@ -30,7 +30,7 @@ class BarChart extends StatelessWidget {
       charts.Series<CardSummaryModel, String>(
         id: 'Transactions-Bar',
         domainFn: (CardSummaryModel transaction, _) =>
-            DateFormat('MM/dd').format(transaction.date),
+            DateFormat('MM/dd').format(transaction.date!),
         measureFn: (CardSummaryModel transaction, _) =>
             transaction.transactionAmount,
         data: data,
