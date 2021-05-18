@@ -71,7 +71,7 @@ void main() {
       await didWidgetAppear(billPaySuccessDialog);
 
       //Bill Pay, pay another bill
-      await tapWidget(payBillButton);
+      // await tapWidget(payBillButton);
       await tapWidget(billPaySuccessDialogPayAnother);
       await tester.pumpAndSettle();
       await tapWidget(getBillPayCard(2));

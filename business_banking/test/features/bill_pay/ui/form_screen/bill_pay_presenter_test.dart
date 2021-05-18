@@ -213,7 +213,7 @@ void main() {
     expect(find.text("Success"), findsOneWidget);
     expect(find.text("You successfully paid \$216.88 to AEP!"),
         findsOneWidget);
-    final anotherButton = find.widgetWithText(TextButton, "Pay another");
+    final anotherButton = find.text("Pay another");
     expect(anotherButton, findsOneWidget);
 
     bloc.billPayEventPipe.receive.listen(expectAsync1((event) {
@@ -248,7 +248,7 @@ void main() {
     expect(find.text("Success"), findsOneWidget);
     expect(find.text("You successfully paid \$216.88 to AEP!"),
         findsOneWidget);
-    final hubButton = find.widgetWithText(TextButton, "Back to hub");
+    final hubButton = find.text("Back to hub");
     expect(hubButton, findsOneWidget);
 
     bloc.billPayEventPipe.receive.listen(expectAsync1((event) {
@@ -279,7 +279,7 @@ void main() {
     expect(find.text("Error"), findsOneWidget);
     expect(find.text("Unable to pay the bill, please try again later."),
         findsOneWidget);
-    final backButton = find.widgetWithText(TextButton, "Back");
+    final backButton = find.text("Back");
     expect(backButton, findsOneWidget);
 
     bloc.billPayEventPipe.receive.listen(expectAsync1((event) {

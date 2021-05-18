@@ -1,3 +1,4 @@
+import 'package:business_banking/dependency/custom_alert_plugin.dart';
 import 'package:business_banking/features/bill_pay/bloc/form_screen/bill_pay_event.dart';
 import 'package:business_banking/features/bill_pay/bloc/bill_pay_bloc.dart';
 import 'package:business_banking/features/bill_pay/model/bill.dart';
@@ -40,57 +41,64 @@ class BillPayPresenter extends Presenter<BillPayBloc,
       BillPayViewModel viewModel,
       BillPayPresenterActions presenterActions) {
     Bill bill = viewModel.allBills[viewModel.selectedBillIndex];
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('Success'),
-          key: Key('Bill-Pay-Success-Dialog'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('You successfully paid '
-                  '\$${bill.amount.toStringAsFixed(2)} to ${bill.payee}!'),
-              Text('Reference number: ${viewModel.referenceNumber}')
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  presenterActions.confirmBillPayed();
-                },
-                key: Key('Bill-Pay-Success-Dialog-Pay-Another'),
-                child: Text('Pay another')),
-            TextButton(
-                onPressed: () {
-                  presenterActions.confirmBillPayed();
-                  presenterActions.popNavigationListener(context);
-                },
-                key: Key('Bill-Pay-Success-Dialog-Hub'),
-                child: Text('Back to hub'))
-          ],
-        )
-    );
+    CustomAlert(
+      context: context,
+      title: 'Success',
+      keyString: 'Bill-Pay-Success-Dialog',
+      style: CustomAlertStyle(
+        isOverlayTapDismiss: false,
+        isCloseButton: false
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('You successfully paid '
+              '\$${bill.amount.toStringAsFixed(2)} to ${bill.payee}!'),
+          Text('Reference number: ${viewModel.referenceNumber}')
+        ],
+      ),
+      buttons: [
+        CustomDialogButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              presenterActions.confirmBillPayed();
+            },
+            key: Key('Bill-Pay-Success-Dialog-Pay-Another'),
+            child: Text('Pay another')),
+        CustomDialogButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              presenterActions.confirmBillPayed();
+              presenterActions.popNavigationListener(context);
+            },
+            key: Key('Bill-Pay-Success-Dialog-Hub'),
+            child: Text('Back to hub'))
+      ],
+
+    ).show();
   }
 
   void _showBillPayFailedDialog(BuildContext context,
       BillPayPresenterActions presenterActions) {
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('Error'),
-          key: Key('Bill-Pay-Failed-Dialog'),
-          content: Text('Unable to pay the bill, please try again later.'),
-          actions: <Widget>[
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  presenterActions.confirmBillPayed();
-                },
-                child: Text('Back'))
-          ],
-        ));
+    CustomAlert(
+      context: context,
+      title: 'Error',
+      keyString: 'Bill-Pay-Failed-Dialog',
+      style: CustomAlertStyle(
+        isOverlayTapDismiss: false,
+        isCloseButton: false
+      ),
+      content: Text('Unable to pay the bill, please try again later.'),
+      buttons: [
+        CustomDialogButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              presenterActions.confirmBillPayed();
+            },
+            child: Text('Back'))
+      ],
+    ).show();
   }
 }
 
