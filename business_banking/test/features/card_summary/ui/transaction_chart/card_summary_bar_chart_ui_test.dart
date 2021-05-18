@@ -24,13 +24,14 @@ void main() {
   });
 
     testWidgets('Transactions, with true bloc', (tester) async {
-      navigateToHubScreen() {}
+       VoidCallback navigateToHubScreen;
+      // navigateToHubScreen() {}
       final testWidget = MaterialApp(
         home: BlocProvider<CardSummaryBloc>(
           create: (_) => CardSummaryBloc(),
           child: CardSummaryBarChartScreen(
-            viewModel: CardSummaryViewModel(transactionDetails: []),
-            navigateToHubScreen: navigateToHubScreen(),
+            viewModel: CardSummaryViewModel(cardTransactions: []), navigateToHubScreen: () {  },
+            // navigateToHubScreen: navigateToHubScreen(),
           ),
         ),
       );

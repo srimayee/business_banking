@@ -33,10 +33,10 @@ class CardTransactionScreen extends Screen {
               SizedBox(height: 10),
               Expanded(
                   child: ListView.builder(
-                itemCount: viewModel!.transactionDetails.length,
+                itemCount: viewModel!.cardTransactions.length,
                 itemBuilder: (context, index) {
                   return CardTransactionTile(
-                      viewModel: viewModel!.transactionDetails[index]);
+                      viewModel: viewModel!.cardTransactions[index]);
                 },
               )),
               Row(

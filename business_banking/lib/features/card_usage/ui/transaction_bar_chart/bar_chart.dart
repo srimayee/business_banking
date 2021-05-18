@@ -24,7 +24,7 @@ class BarChart extends StatelessWidget {
   }
 
   List<charts.Series<CardSummaryModel, String>> _generateTransactionData() {
-    final List<CardSummaryModel> data = viewModel.transactionDetails;
+    final List<CardSummaryModel> data = viewModel.cardTransactions;
 
     return [
       charts.Series<CardSummaryModel, String>(

@@ -3,11 +3,11 @@ import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
 class CardSummaryViewModel extends ViewModel {
-  final List<CardSummaryModel> transactionDetails;
+  final List<CardSummaryModel> cardTransactions;
 
-  CardSummaryViewModel({required this.transactionDetails})
-      : assert(transactionDetails != null);
+  CardSummaryViewModel({required this.cardTransactions})
+      : assert(cardTransactions != null);
 
   @override
-  List<Object> get props => [transactionDetails];
+  List<Object> get props => [cardTransactions];
 }

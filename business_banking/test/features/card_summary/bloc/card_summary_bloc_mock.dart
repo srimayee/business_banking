@@ -11,7 +11,7 @@ class TransactionBlocMock extends Fake implements CardSummaryBloc {
   TransactionBlocMock() {
     transactionDetailsViewModelPipe.whenListenedDo(() {
       transactionDetailsViewModelPipe
-          .send(CardSummaryViewModel(transactionDetails: [
+          .send(CardSummaryViewModel(cardTransactions: [
         CardSummaryModel(
             debit: true,
             transactionAmount: 9.99,

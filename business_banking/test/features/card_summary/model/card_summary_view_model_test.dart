@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('TransactionViewModel initialize', () {
-    final viewModel = CardSummaryViewModel(transactionDetails: [
+    final viewModel = CardSummaryViewModel(cardTransactions: [
       CardSummaryModel(
           debit: true,
           transactionAmount: 9.99,
@@ -14,11 +14,11 @@ void main() {
           payTo: "Merchant0",
           date: DateTime.fromMillisecondsSinceEpoch(1618237756 * 1000))
     ]);
-    expect(viewModel.props, [viewModel.transactionDetails]);
+    expect(viewModel.props, [viewModel.cardTransactions]);
   });
   test('CustomerViewModel initialize with error', () {
     try {
-      CardSummaryViewModel(transactionDetails: []);
+      CardSummaryViewModel(cardTransactions: []);
       expect(false, true);
     } catch (error) {
       expect(error != null, true);

@@ -34,6 +34,6 @@ class CardSummaryUseCase extends UseCase {
   }
 
   CardSummaryViewModel buildViewModel(CardSummaryEntity entity) {
-    return CardSummaryViewModel(transactionDetails: entity.transactionDetails);
+    return CardSummaryViewModel(cardTransactions: entity.transactionDetails);
   }
 }

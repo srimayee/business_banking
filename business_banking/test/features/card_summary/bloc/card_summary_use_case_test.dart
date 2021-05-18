@@ -5,13 +5,13 @@ import 'package:test/test.dart';
 
 void main() {
 
-  test('TransactionUseCase initialize with error', () {
-    try {
-      CardSummaryUseCase(viewModelCallBack);
-    } catch (e) {
-      expect(e != null, true);
-    }
-  });
+  // test('TransactionUseCase initialize with error', () {
+  //   try {
+  //     CardSummaryUseCase((viewModel_);
+  //   } catch (e) {
+  //     expect(e != null, true);
+  //   }
+  // });
   test('TransactionUseCase initialize and create', () {
     final useCase = CardSummaryUseCase((viewModel) {
       expect(viewModel, isA<CardSummaryViewModel>());

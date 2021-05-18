@@ -30,7 +30,7 @@ void main() {
       (tester) async {
     CardSummaryViewModel transactionViewModel;
 
-    transactionViewModel = CardSummaryViewModel(transactionDetails: [
+    transactionViewModel = CardSummaryViewModel(cardTransactions: [
       CardSummaryModel(
           debit: true,
           transactionAmount: 200.23,

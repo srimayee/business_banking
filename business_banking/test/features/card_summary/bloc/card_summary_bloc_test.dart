@@ -11,7 +11,7 @@ void main() {
 
     bloc.transactionDetailsViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<CardSummaryViewModel>());
-      expect(model.transactionDetails, [
+      expect(model.cardTransactions, [
         CardSummaryModel(
             debit: true,
             transactionAmount: 9.99,
@@ -29,7 +29,7 @@ void main() {
 
     bloc.transactionDetailsViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<CardSummaryViewModel>());
-      expect(model.transactionDetails, [
+      expect(model.cardTransactions, [
         CardSummaryModel(
             debit: false,
             transactionAmount: 219.99,
