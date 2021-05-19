@@ -61,9 +61,7 @@ void main() {
             cardNumberStatus: '',
             cardExpiryDateStatus: '',
             userEmailStatus: '',
-            userPasswordStatus: '',
-            serviceResponseStatus:
-                NewOnlineRegistrationServiceResponseStatus.succeed);
+            userPasswordStatus: '');
 
     NewOnlineRegistrationRequestSuccessViewModel
         newOnlineRegistrationRequestSuccessViewModel =

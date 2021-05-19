@@ -1,4 +1,3 @@
-import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:clean_framework/clean_framework.dart';
 
 class NewOnlineRegistrationViewModel extends ViewModel {
@@ -12,21 +11,19 @@ class NewOnlineRegistrationViewModel extends ViewModel {
   final String? cardExpiryDateStatus;
   final String? userEmailStatus;
   final String? userPasswordStatus;
-  final serviceResponseStatus;
 
-  NewOnlineRegistrationViewModel(
-      {required this.cardHolderName,
-      required this.cardNumber,
-      required this.validThru,
-      required this.email,
-      required this.userPassword,
-      required this.cardHolderNameStatus,
-      required this.cardNumberStatus,
-      required this.cardExpiryDateStatus,
-      required this.userEmailStatus,
-      required this.userPasswordStatus,
-      this.serviceResponseStatus =
-          NewOnlineRegistrationServiceResponseStatus.unknown});
+  NewOnlineRegistrationViewModel({
+    required this.cardHolderName,
+    required this.cardNumber,
+    required this.validThru,
+    required this.email,
+    required this.userPassword,
+    required this.cardHolderNameStatus,
+    required this.cardNumberStatus,
+    required this.cardExpiryDateStatus,
+    required this.userEmailStatus,
+    required this.userPasswordStatus,
+  });
 
   @override
   List<Object?> get props => [

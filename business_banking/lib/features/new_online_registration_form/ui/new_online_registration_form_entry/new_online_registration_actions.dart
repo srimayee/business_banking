@@ -13,7 +13,7 @@ class NewOnlineRegistrationRequestActions {
     BuildContext context,
     String userName,
     String cardNumber,
-      String expiryDate,
+    String expiryDate,
     String email,
     String password,
   ) {
@@ -32,21 +32,7 @@ class NewOnlineRegistrationRequestActions {
       _showDialog(context, "Invalid Information!",
           "Please fill in all fields properly");
       return;
-    }
-    // else if (userNameValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userNameValidated);
-    //   return;
-    // } else if (userCardNumberValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userCardNumberValidated);
-    //   return;
-    // } else if (userEmail.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userEmail);
-    //   return;
-    // } else if (userPasswordValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userPasswordValidated);
-    //   return;
-    // }
-    else {
+    } else {
       CFRouterScope.of(context)
           .replaceWith(BusinessBankingRouter.NewSuccessScreen);
     }
@@ -67,7 +53,6 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
-
   void onUpdateEmailAddress(String email) {
     var event = UpdateEmailAddressRequestEvent(email);
     bloc.newOnlineRegistrationEventsPipe.send(event);
@@ -78,8 +63,7 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
-
-  void onCardScanned(){
+  void onCardScanned() {
     var event = CardScannerEvent();
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }

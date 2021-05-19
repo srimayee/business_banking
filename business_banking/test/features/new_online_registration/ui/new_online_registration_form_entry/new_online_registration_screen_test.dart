@@ -1,5 +1,4 @@
 // @dart = 2.9
-import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_actions.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_screen.dart';
@@ -31,8 +30,7 @@ void main() {
         cardNumberStatus: '',
         cardExpiryDateStatus: '',
         userEmailStatus: '',
-        userPasswordStatus: '',
-        serviceResponseStatus: ServiceResponseStatus.succeed);
+        userPasswordStatus: '');
 
     onlineRegistrationViewModelFailed = NewOnlineRegistrationViewModel(
         cardHolderName: '',
@@ -45,8 +43,7 @@ void main() {
         cardExpiryDateStatus: 'Expiry year is invalid.',
         userEmailStatus: 'Please, provide a valid email.',
         userPasswordStatus:
-            'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
-        serviceResponseStatus: ServiceResponseStatus.failed);
+            'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.');
 
     onlineRegistrationViewModelFailedWithSomeValidationErrors =
         NewOnlineRegistrationViewModel(
@@ -60,8 +57,7 @@ void main() {
             cardExpiryDateStatus: 'Expiry month is invalid.',
             userEmailStatus: '',
             userPasswordStatus:
-                'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
-            serviceResponseStatus: ServiceResponseStatus.failed);
+                'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.');
 
     mockOnlineRegistrationPresenterAction =
         MockOnlineRegistrationPresenterActions();
