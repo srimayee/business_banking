@@ -71,7 +71,8 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
       NewOnlineRegistrationEntity newOnlineRegistrationEntity) {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
-      accountNumberGenerated: '',
+      accountNumberGenerated:
+          newOnlineRegistrationEntity.accountNumberGenerated,
       serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.failed,
     );
   }
