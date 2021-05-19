@@ -19,7 +19,7 @@ class StocksListPresenter
   }
 
   @override
-  Stream<StocksListViewModel> getViewModelStream(bloc) {
+  Stream<StocksListViewModel> getViewModelStream(StocksBloc bloc) {
     return bloc.stocksListViewModelPipe.receive;
   }
 
@@ -32,5 +32,7 @@ class StocksListPresenter
 
   void _onAddDeleteTapped(StocksBloc bloc) {
     bloc.deleteStockPipe.send(0);
+    
+    // getViewModelStream(bloc);
   }
 }

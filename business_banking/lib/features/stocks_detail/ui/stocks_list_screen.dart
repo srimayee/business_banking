@@ -2,7 +2,6 @@ import 'package:business_banking/features/stocks_detail/model/stocks_list_view_m
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
-
 class StocksListScreen extends Screen {
   final StocksListViewModel viewModel;
   final Function onAddDeleteTapped;
@@ -19,9 +18,10 @@ class StocksListScreen extends Screen {
         title: Text('Stocks'),
         actions: [
           TextButton(
-            key: Key('add_delete_stock_key'),
+              key: Key('add_delete_stock_key'),
               onPressed: () {
                 onAddDeleteTapped();
+                
               },
               child: Text('Add/Delete'))
         ],
