@@ -69,10 +69,6 @@ void main() {
         newOnlineRegistrationRequestSuccessViewModel =
         NewOnlineRegistrationRequestSuccessViewModel(
             cardHolderName: 'Tyler',
-            cardNumber: '378282246310005',
-            validThru: '08/50',
-            email: 'test@test.com',
-            userPassword: 'TestPassword@123',
             accountNumberGenerated: '123456',
             serviceResponseStatus:
                 NewOnlineRegistrationServiceResponseStatus.succeed);

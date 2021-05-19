@@ -61,10 +61,6 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
       NewOnlineRegistrationEntity newOnlineRegistrationEntity) {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
-      cardNumber: newOnlineRegistrationEntity.cardNumber,
-      validThru: newOnlineRegistrationEntity.validThru,
-      email: newOnlineRegistrationEntity.email,
-      userPassword: newOnlineRegistrationEntity.userPassword,
       accountNumberGenerated:
           newOnlineRegistrationEntity.accountNumberGenerated ?? '',
       serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.succeed,
@@ -75,10 +71,6 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
       NewOnlineRegistrationEntity newOnlineRegistrationEntity) {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
-      cardNumber: newOnlineRegistrationEntity.cardNumber,
-      validThru: newOnlineRegistrationEntity.validThru,
-      email: newOnlineRegistrationEntity.email,
-      userPassword: newOnlineRegistrationEntity.userPassword,
       accountNumberGenerated: '',
       serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.failed,
     );
