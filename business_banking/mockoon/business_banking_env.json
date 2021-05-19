@@ -684,7 +684,7 @@
                         "responses": [
                             {
                             "uuid": "",
-                            "body": "{\n \"didSucceed\" : true,\n  \"accountNumberGenerated\" : \"123456789\"\n}",
+                            "body": "{\n \"accountNumberGenerated\" : \"123456789\"\n}",
                             "latency": 0,
                             "statusCode": 200,
                             "label": "",
@@ -713,7 +713,7 @@
                     "responses": [
                         {
                             "uuid": "",
-                            "body": "{\n \"didSucceed\" : false,\n \"accountNumberGenerated\" : \"\"\n}",
+                            "body": "{\n \"accountNumberGenerated\" : \"\"\n}",
                             "latency": 0,
                             "statusCode": 400,
                             "label": "",

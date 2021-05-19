@@ -24,10 +24,7 @@ void main() {
       userPassword: 'TestPassword@123',
     );
 
-    final tJsonResponse = {
-      "didSucceed": true,
-      "accountNumberGenerated": "123456789"
-    };
+    final tJsonResponse = {"accountNumberGenerated": "123456789"};
 
     test('should received a json response and return account number generated',
         () async {

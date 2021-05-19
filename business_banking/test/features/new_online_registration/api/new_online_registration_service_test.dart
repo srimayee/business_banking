@@ -10,20 +10,17 @@ void main() {
   group('NewOnlineRegistrationService Test', () {
     test("RestAPI POST call", () async {
       final client = MockClient((Request request) async {
-        return Response(
-            '{"didSucceed": true, "accountNumberGenerated": "123456789"}', 200);
+        return Response('{"accountNumberGenerated": "123456789"}', 200);
       });
       final resp =
           await client.post(Uri.https('test.com', 'create-new-account'));
-      expect(resp.body,
-          '{"didSucceed": true, "accountNumberGenerated": "123456789"}');
+      expect(resp.body, '{"accountNumberGenerated": "123456789"}');
     });
 
     test('throws an exception if the http call completes with an error',
         () async {
       final client = MockClient((Request request) async {
-        return Response(
-            '{"didSucceed": false, "accountNumberGenerated": ""}', 404);
+        return Response('{"accountNumberGenerated": ""}', 404);
       });
       final resp =
           await client.post(Uri.https('test.com', 'create-new-account'));
@@ -35,6 +32,7 @@ void main() {
       final json = {
         'cardHolderName': 'Test',
         'cardNumber': '12345',
+        'validThru': '08/50',
         'email': 'test@test.com',
         'userPassword': ''
       };
