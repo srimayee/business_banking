@@ -14,5 +14,6 @@ class NewOnlineRegistrationRequestSuccessViewModel extends ViewModel {
   List<Object> get props => [
         cardHolderName!,
         accountNumberGenerated!,
+        serviceResponseStatus,
       ];
 }

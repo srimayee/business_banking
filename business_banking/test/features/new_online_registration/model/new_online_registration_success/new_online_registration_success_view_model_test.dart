@@ -22,6 +22,7 @@ void main() {
       expect(tViewModel.props, [
         tViewModel.cardHolderName,
         tViewModel.accountNumberGenerated,
+        tViewModel.serviceResponseStatus,
       ]);
     });
   });
