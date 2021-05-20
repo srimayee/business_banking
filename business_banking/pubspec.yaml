@@ -21,7 +21,7 @@ dependencies:
   pdf: ^2.1.0
 
   ### https://pub.dev/packages/printing/versions/4.1.0
-  printing: ^4.1.0
+#  printing: ^4.1.0
 
 dev_dependencies:
   test: 
