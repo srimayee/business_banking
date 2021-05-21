@@ -1,3 +1,4 @@
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -25,6 +26,8 @@ void main() {
       expect(tViewModel.userEmailStatus, 'userEmailStatus');
       expect(tViewModel.cardNumberStatus, 'cardNumberStatus');
       expect(tViewModel.cardExpiryDateStatus, 'cardExpiryDateStatus');
+      expect(tViewModel.serviceResponseStatus,
+          NewOnlineRegistrationServiceResponseStatus.unknown);
     });
 
     test('should props match', () async {

@@ -29,7 +29,7 @@ class NewOnlineRegistrationRequestActions {
         userCardExpiryDate!.isNotEmpty ||
         userEmail.isNotEmpty ||
         userPasswordValidated.isNotEmpty) {
-      _showDialog(context, "Invalid Information!",
+      showDialogWithContent(context, "Invalid Information!",
           "Please fill in all fields properly");
       return;
     } else {
@@ -68,7 +68,8 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
-  void _showDialog(BuildContext context, String title, String message) {
+  void showDialogWithContent(
+      BuildContext context, String title, String message) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(

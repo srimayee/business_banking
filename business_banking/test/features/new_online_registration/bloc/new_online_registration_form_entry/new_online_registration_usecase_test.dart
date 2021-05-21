@@ -3,6 +3,7 @@ import 'package:business_banking/dependency/card_scanner_plugin.dart';
 import 'package:business_banking/dependency/permission_handler_plugin.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_usecase.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_entity.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:card_scanner/card_scanner.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -140,11 +141,8 @@ void main() {
       useCase.create();
       onlineRegistrationViewModel =
           useCase.buildViewModel(newOnlineRegistrationEntity: tEntity);
-      expect(onlineRegistrationViewModel.cardNumber, '378282246310005');
-      expect(onlineRegistrationViewModel.validThru, '08/50');
-      expect(onlineRegistrationViewModel.cardHolderName, 'Tyler');
-      expect(onlineRegistrationViewModel.userPassword, 'TestPassword@123');
-      expect(onlineRegistrationViewModel.email, 'test@test.com');
+      expect(onlineRegistrationViewModel.serviceResponseStatus,
+          NewOnlineRegistrationServiceResponseStatus.succeed);
     });
 
     test(
@@ -160,11 +158,8 @@ void main() {
       onlineRegistrationViewModel =
           useCase.buildViewModel(newOnlineRegistrationEntity: tEntity);
 
-      expect(onlineRegistrationViewModel.cardNumber, '378282246310005');
-      expect(onlineRegistrationViewModel.validThru, '');
-      expect(onlineRegistrationViewModel.cardHolderName, '');
-      expect(onlineRegistrationViewModel.userPassword, 'TestPassword@123');
-      expect(onlineRegistrationViewModel.email, 'test@test.com');
+      expect(onlineRegistrationViewModel.serviceResponseStatus,
+          NewOnlineRegistrationServiceResponseStatus.failed);
     });
   });
 }

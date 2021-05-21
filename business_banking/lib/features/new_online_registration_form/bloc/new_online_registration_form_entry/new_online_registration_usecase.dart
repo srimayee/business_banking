@@ -72,6 +72,8 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
             inputStatusType == NewOnlineRegistrationInputStatusType.userPassword
                 ? status
                 : '',
+        serviceResponseStatus:
+            NewOnlineRegistrationServiceResponseStatus.failed,
       );
     } else {
       return NewOnlineRegistrationViewModel(
@@ -100,6 +102,8 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
             inputStatusType == NewOnlineRegistrationInputStatusType.userPassword
                 ? status
                 : '',
+        serviceResponseStatus:
+            NewOnlineRegistrationServiceResponseStatus.succeed,
       );
     }
   }

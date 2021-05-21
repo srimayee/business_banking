@@ -1,4 +1,5 @@
 // @dart = 2.9
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_actions.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_screen.dart';
@@ -30,7 +31,9 @@ void main() {
         cardNumberStatus: '',
         cardExpiryDateStatus: '',
         userEmailStatus: '',
-        userPasswordStatus: '');
+        userPasswordStatus: '',
+        serviceResponseStatus:
+            NewOnlineRegistrationServiceResponseStatus.succeed);
 
     onlineRegistrationViewModelFailed = NewOnlineRegistrationViewModel(
         cardHolderName: '',
@@ -43,21 +46,25 @@ void main() {
         cardExpiryDateStatus: 'Expiry year is invalid.',
         userEmailStatus: 'Please, provide a valid email.',
         userPasswordStatus:
-            'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.');
+            'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
+        serviceResponseStatus:
+            NewOnlineRegistrationServiceResponseStatus.failed);
 
     onlineRegistrationViewModelFailedWithSomeValidationErrors =
         NewOnlineRegistrationViewModel(
-            cardHolderName: 'Tyler',
-            cardNumber: 'test',
-            validThru: '01/21',
-            email: 'test@test.com',
-            userPassword: 'TestPassword',
-            cardHolderNameStatus: '',
-            cardNumberStatus: 'Enter valid credit card number.',
-            cardExpiryDateStatus: 'Expiry month is invalid.',
-            userEmailStatus: '',
-            userPasswordStatus:
-                'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.');
+      cardHolderName: 'Tyler',
+      cardNumber: 'test',
+      validThru: '01/21',
+      email: 'test@test.com',
+      userPassword: 'TestPassword',
+      cardHolderNameStatus: '',
+      cardNumberStatus: 'Enter valid credit card number.',
+      cardExpiryDateStatus: 'Expiry month is invalid.',
+      userEmailStatus: '',
+      userPasswordStatus:
+          'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
+      serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.succeed,
+    );
 
     mockOnlineRegistrationPresenterAction =
         MockOnlineRegistrationPresenterActions();
