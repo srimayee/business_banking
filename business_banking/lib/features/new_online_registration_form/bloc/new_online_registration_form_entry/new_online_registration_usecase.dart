@@ -147,15 +147,15 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-  updateCardNumber(String cardNumber) {
+  updateCardNumber(String _cardNumber) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
         .repository
         .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
-    final updatedEntity = entity.merge(cardNumber: cardNumber);
+    final updatedEntity = entity.merge(cardNumber: _cardNumber);
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
-    String? checkUserInputStatus = validateCardNumber(cardNumber);
+    String? checkUserInputStatus = validateCardNumber(_cardNumber);
     if (checkUserInputStatus.isNotEmpty) {
       _viewModelCallBack(buildViewModel(
         status: checkUserInputStatus,
@@ -166,15 +166,15 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-  updateCardExpireDate(String expiryDate) {
+  updateCardExpireDate(String _expiryDate) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
         .repository
         .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
-    final updatedEntity = entity.merge(validThru: expiryDate);
+    final updatedEntity = entity.merge(validThru: _expiryDate);
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
-    String? checkUserInputStatus = validateDate(expiryDate);
+    String? checkUserInputStatus = validateDate(_expiryDate);
     if (checkUserInputStatus!.isNotEmpty) {
       _viewModelCallBack(buildViewModel(
         status: checkUserInputStatus,
@@ -204,15 +204,15 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
   }
 
-  updatePassword(String password) {
+  updatePassword(String _password) {
     final NewOnlineRegistrationEntity entity = ExampleLocator()
         .repository
         .get<NewOnlineRegistrationEntity>(_scopeRegistrationFormEntity!);
-    final updatedEntity = entity.merge(userPassword: password);
+    final updatedEntity = entity.merge(userPassword: _password);
     ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
         _scopeRegistrationFormEntity!,
         updatedEntity as NewOnlineRegistrationEntity);
-    String checkUserInputStatus = validateUserPassword(password);
+    String checkUserInputStatus = validateUserPassword(_password);
     if (checkUserInputStatus.isNotEmpty) {
       _viewModelCallBack(buildViewModel(
         status: checkUserInputStatus,
@@ -252,12 +252,10 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
 
     int year;
     int month;
-    // The value contains a forward slash if the month and year has been
-    // entered.
+
     if (value.contains(new RegExp(r'(/)'))) {
       var split = value.split(new RegExp(r'(/)'));
-      // The value before the slash is the month while the value to right of
-      // it is the year.
+
       month = int.parse(split[0]);
       year = int.parse(split[1]);
     } else {
@@ -267,14 +265,11 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
     }
 
     if ((month < 1) || (month > 12)) {
-      // A valid month is between 1 (January) and 12 (December)
       return 'Expiry month is invalid';
     }
 
     var fourDigitsYear = convertYearTo4Digits(year);
     if ((fourDigitsYear < 1) || (fourDigitsYear > 2099)) {
-      // We are assuming a valid should be between 1 and 2099.
-      // Note that, it's valid doesn't mean that it has not expired.
       return 'Expiry year is invalid';
     }
 
@@ -289,16 +284,11 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
   }
 
   bool isNotExpired(int year, int month) {
-    // It has not expired if both the year and date has not passed
     return !hasYearPassed(year) && !hasMonthPassed(year, month);
   }
 
   bool hasMonthPassed(int year, int month) {
     var now = DateTime.now();
-    // The month has passed if:
-    // 1. The year is in the past. In that case, we just assume that the month
-    // has passed
-    // 2. Card's month (plus another month) is more than current month.
     return hasYearPassed(year) ||
         convertYearTo4Digits(year) == now.year && (month < now.month + 1);
   }
@@ -306,8 +296,6 @@ class NewOnlineRegistrationRequestUseCase extends UseCase {
   bool hasYearPassed(int year) {
     int fourDigitsYear = convertYearTo4Digits(year);
     var now = DateTime.now();
-    // The year has passed if the year we are currently is more than card's
-    // year
     return fourDigitsYear < now.year;
   }
 
