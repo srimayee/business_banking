@@ -27,23 +27,11 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
     sendViewModelToSubscribers();
   }
 
-//Use this when service is ready rather below one
   void sendViewModelToSubscribers() {
     NewOnlineRegistrationEntity newOnlineRegistrationEntity =
         ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
     _notifySubscribers(newOnlineRegistrationEntity);
   }
-
-  // void sendViewModelToSubscribers() {
-  //   NewOnlineRegistrationEntity newOnlineRegistrationEntity =
-  //       ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
-  //   final updatedEntity =
-  //       newOnlineRegistrationEntity.merge(accountNumberGenerated: '12345');
-  //   ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
-  //       __scopeRegistrationStatusResponse!,
-  //       updatedEntity as NewOnlineRegistrationEntity);
-  //   _notifySubscribers(updatedEntity);
-  // }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));

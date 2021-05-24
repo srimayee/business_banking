@@ -163,14 +163,3 @@ void main() {
     });
   });
 }
-
-//  test('should resetViewModel method reset view model', () async {
-//       useCase.resetViewModel();
-
-//       expect(NewOnlineRegistrationViewModel.depositAmount, 0.0);
-//       expect(NewOnlineRegistrationViewModel.depositAmountStatus, '');
-//       expect(NewOnlineRegistrationViewModel.userEmail, '');
-//       expect(NewOnlineRegistrationViewModel.userEmailStatus, '');
-//       expect(NewOnlineRegistrationViewModel.referenceNumber, '');
-//       expect(NewOnlineRegistrationViewModel.UserFormInputStatus, UserFormInputStatus.unknown);
-//     });

@@ -7,7 +7,7 @@ class NewOnlineRegistrationRequestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => NewOnlineRegistrationBloc(), //Replace Bloc
+      create: (_) => NewOnlineRegistrationBloc(),
       child: NewOnlineRegistrationRequestPresenter(),
     );
   }
