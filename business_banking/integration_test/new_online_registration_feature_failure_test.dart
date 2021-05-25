@@ -13,7 +13,6 @@ void main() {
     await startTest(tester);
     await didWidgetAppear('signInText');
     await tapText('Register Account online');
-    //Investment Accounts Screen, displaying Card Data
     await didWidgetAppear('cardHolderName-TxtField');
     await didWidgetAppear('cardHolderNumber-TxtField');
     await didWidgetAppear('userEmailAddress-TxtField');
