@@ -1,11 +1,9 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/bloc/2nd_data_entry/deposit_check_event.dart';
 import 'package:business_banking/features/deposit_check/bloc/deposit_check_bloc.dart';
 import 'package:business_banking/features/deposit_check/model/2nd_data_entry/deposit_check_view_model.dart';
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
 import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_presenter.dart';
-import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:business_banking/main.dart';
@@ -72,19 +71,6 @@ Future<void> didWidgetNeverAppear(String widgetKey) async {
   expect(finder, findsNothing);
   _log("$_helperName: didWidgetNeverAppear: $widgetKey");
 }
-
-Future<void> didTextNeverAppear(String widgetText) async {
-  final Finder finder = find.text(widgetText);
-
-  final DateTime endTime = DateTime.now().add(Duration(seconds: 5));
-  do {
-    await _tester.pumpAndSettle();
-  } while (!DateTime.now().isAfter(endTime));
-
-  expect(finder, findsNothing);
-  _log("$_helperName: didtextNeverAppear: $widgetText");
-}
-
 
 Future<void> enterText(String widgetKey, String text) async {
   final Finder finder = find.byKey(Key(widgetKey));
