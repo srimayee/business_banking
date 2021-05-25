@@ -29,6 +29,7 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
       },
       // Make login button route to CashAccounts screen, implement login later
       onTapSubmit: () => _navigateToHubScreen(context),
+      onTapAccountOnline: () => navigateToAccountRegistrationScreen(context),
     );
   }
 
@@ -59,6 +60,11 @@ class LoginPresenter extends Presenter<LoginBloc, LoginViewModel, LoginScreen> {
 
   void _navigateToHubScreen(BuildContext context) {
     CFRouterScope.of(context).replaceWith(BusinessBankingRouter.hubRoute);
+  }
+
+  void navigateToAccountRegistrationScreen(BuildContext context) {
+    CFRouterScope.of(context)
+        .push(BusinessBankingRouter.newOnlineRegistrationScreen);
   }
 
   void _showErrorDialog(BuildContext context) {
