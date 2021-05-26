@@ -3,7 +3,7 @@ import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart
 import 'package:business_banking/features/customer/ui/customer_detail_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
-import 'package:business_banking/features/stocks_detail/ui/stocks_list_widget.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_widget.dart';
 import 'package:flutter/material.dart';

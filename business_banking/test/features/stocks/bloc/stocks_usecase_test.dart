@@ -1,5 +1,5 @@
-import 'package:business_banking/features/stocks_detail/bloc/stocks_usecase.dart';
-import 'package:business_banking/features/stocks_detail/model/stocks_portfolio_view_model.dart';
+import 'package:business_banking/features/stocks_portfolio/bloc/stocks_usecase.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:test/test.dart';
 

@@ -1,5 +1,5 @@
-import 'package:business_banking/features/stocks_detail/api/delete_stock_requestModel.dart';
-import 'package:business_banking/features/stocks_detail/api/delete_stock_responseModel.dart';
+import 'package:business_banking/features/stocks_portfolio/api/delete_stock_requestModel.dart';
+import 'package:business_banking/features/stocks_portfolio/api/delete_stock_responseModel.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';

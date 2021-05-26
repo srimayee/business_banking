@@ -1,6 +1,6 @@
-import 'package:business_banking/features/stocks_detail/bloc/stocks_bloc.dart';
-import 'package:business_banking/features/stocks_detail/ui/stocks_portfolio_presenter.dart';
-import 'package:business_banking/features/stocks_detail/ui/stocks_portfolio_widget.dart';
+import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_portfolio_presenter.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_portfolio_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,11 +14,9 @@ void main() {
       ),
     );
 
-     await tester.pumpWidget(stocksWidget);
-     await tester.pump(Duration(milliseconds: 500));
+    await tester.pumpWidget(stocksWidget);
+    await tester.pump(Duration(milliseconds: 500));
 
-     expect(find.byType(StocksPortfolioPresenter), findsOneWidget);
+    expect(find.byType(StocksPortfolioPresenter), findsOneWidget);
   });
-
- 
 }

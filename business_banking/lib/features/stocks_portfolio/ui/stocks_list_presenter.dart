@@ -1,6 +1,6 @@
-import 'package:business_banking/features/stocks_detail/bloc/stocks_bloc.dart';
-import 'package:business_banking/features/stocks_detail/model/stocks_list_view_model.dart';
-import 'package:business_banking/features/stocks_detail/ui/stocks_list_screen.dart';
+import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_screen.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

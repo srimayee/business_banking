@@ -1,4 +1,4 @@
-import 'package:business_banking/features/stocks_detail/model/stocks_list_view_model.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,6 @@ class StocksListScreen extends Screen {
               key: Key('add_delete_stock_key'),
               onPressed: () {
                 onAddDeleteTapped();
-                
               },
               child: Text('Add/Delete'))
         ],

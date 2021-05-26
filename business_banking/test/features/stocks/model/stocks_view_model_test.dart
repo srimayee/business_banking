@@ -1,4 +1,4 @@
-import 'package:business_banking/features/stocks_detail/model/stocks_portfolio_view_model.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -18,7 +18,8 @@ void main() {
   });
 
   test('StocksViewModel has correct properties', () {
-    StocksPortfolioViewModel viewModel = StocksPortfolioViewModel(stocksList: stocksList);
+    StocksPortfolioViewModel viewModel =
+        StocksPortfolioViewModel(stocksList: stocksList);
     expect(viewModel.props, [
       [
         {
@@ -49,7 +50,8 @@ void main() {
         "value": 1000.00
       }
     ];
-    StocksPortfolioViewModel viewModel = StocksPortfolioViewModel(stocksList: stocks);
+    StocksPortfolioViewModel viewModel =
+        StocksPortfolioViewModel(stocksList: stocks);
     expect(viewModel.totalValue, 2000.0);
   });
 }

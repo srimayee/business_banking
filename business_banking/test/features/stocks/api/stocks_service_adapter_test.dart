@@ -1,6 +1,6 @@
-import 'package:business_banking/features/stocks_detail/api/stocks_service_response_model.dart';
-import 'package:business_banking/features/stocks_detail/bloc/stocks_service_adapter.dart';
-import 'package:business_banking/features/stocks_detail/model/stocks_entity.dart';
+import 'package:business_banking/features/stocks_portfolio/api/stocks_service_response_model.dart';
+import 'package:business_banking/features/stocks_portfolio/bloc/stocks_service_adapter.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
