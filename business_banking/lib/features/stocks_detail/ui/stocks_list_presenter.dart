@@ -32,7 +32,5 @@ class StocksListPresenter
 
   void _onAddDeleteTapped(StocksBloc bloc) {
     bloc.deleteStockPipe.send(0);
-    
-    // getViewModelStream(bloc);
   }
 }

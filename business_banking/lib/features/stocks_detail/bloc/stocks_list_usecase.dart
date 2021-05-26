@@ -36,6 +36,6 @@ class StocksListUseCase extends UseCase {
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, DeleteStockServiceAdapter());
-    // entity.deleteStockAtIndex(index);
+    
   }
 }
