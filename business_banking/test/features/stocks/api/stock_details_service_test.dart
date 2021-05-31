@@ -1,3 +1,4 @@
+import 'package:business_banking/features/stocks_portfolio/api/stock_details_request_model.dart';
 import 'package:business_banking/features/stocks_portfolio/api/stock_details_responseModel.dart';
 import 'package:business_banking/features/stocks_portfolio/api/stock_details_service.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -7,8 +8,9 @@ import 'package:test/test.dart';
 void main() {
   test('StockDetailsService success', () async {
     final service = StockDetailsService();
+    final request = StockDetailsRequestModel('Disney');
     final Either<ServiceFailure, StockDetailsResponseModel> eitherResponse =
-        await service.request();
+        await service.request(requestModel: request);
 
     expect(eitherResponse.isRight, isTrue);
     expect(
