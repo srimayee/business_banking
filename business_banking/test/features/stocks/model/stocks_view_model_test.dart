@@ -1,16 +1,11 @@
+import 'package:business_banking/features/stocks_portfolio/model/stock_entity.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
 import 'package:test/test.dart';
 
 void main() {
-  List<Map<String, dynamic>> stocksList = [
-    {
-      "company": "Amazon.com",
-      "symbol": "AMZN",
-      "at_close": 89.38,
-      "shares": 100,
-      "value": 8938.0
-    }
-  ];
+  StockEntity stockEntity = StockEntity(
+      company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0);
+  List<StockEntity> stocksList = [stockEntity];
   test('StocksViewModel initializes ', () async {
     final viewModel = StocksPortfolioViewModel(stocksList: stocksList);
 
@@ -21,34 +16,24 @@ void main() {
     StocksPortfolioViewModel viewModel =
         StocksPortfolioViewModel(stocksList: stocksList);
     expect(viewModel.props, [
-      [
-        {
-          "company": "Amazon.com",
-          "symbol": "AMZN",
-          "at_close": 89.38,
-          "shares": 100,
-          "value": 8938.0
-        }
-      ]
+      [stockEntity]
     ]);
   });
 
   test('StocksViewModel totalValue is correct', () async {
-    List<Map<String, dynamic>> stocks = [
-      {
-        "company": "Amazon.com",
-        "symbol": "AMZN",
-        "at_close": 89.38,
-        "shares": 100,
-        "value": 1000.0
-      },
-      {
-        "company": "Apple",
-        "symbol": "AAPL",
-        "at_close": 134.22,
-        "shares": 100,
-        "value": 1000.00
-      }
+    List<StockEntity> stocks = [
+      StockEntity(
+          company: 'test',
+          symbol: 'test',
+          atClose: 1.0,
+          shares: 1.0,
+          value: 1000.0),
+      StockEntity(
+          company: 'test',
+          symbol: 'test',
+          atClose: 1.0,
+          shares: 1.0,
+          value: 1000.0)
     ];
     StocksPortfolioViewModel viewModel =
         StocksPortfolioViewModel(stocksList: stocks);

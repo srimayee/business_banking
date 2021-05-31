@@ -1,29 +1,18 @@
+import 'package:business_banking/features/stocks_portfolio/model/stock_entity.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stock_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  List<Map<String, dynamic>> stocksList = [
-    {
-      "company": "Amazon.com",
-      "symbol": "AMZN",
-      "at_close": 89.38,
-      "shares": 100,
-      "value": 8938.0
-    }
+  List<StockViewModel> viewModelList = [
+    StockViewModel('test', 'test', 1.0, 1.0, 1.0)
   ];
 
   test('StocksListViewModel has correct properties', () {
-    StocksListViewModel viewModel = StocksListViewModel(stocksList: stocksList);
+    StocksListViewModel viewModel =
+        StocksListViewModel(viewModelList: viewModelList);
     expect(viewModel.props, [
-      [
-        {
-          "company": "Amazon.com",
-          "symbol": "AMZN",
-          "at_close": 89.38,
-          "shares": 100,
-          "value": 8938.0
-        }
-      ]
+      [StockViewModel('test', 'test', 1.0, 1.0, 1.0)]
     ]);
   });
 }

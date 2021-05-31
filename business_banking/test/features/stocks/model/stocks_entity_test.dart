@@ -1,23 +1,20 @@
+import 'package:business_banking/features/stocks_portfolio/model/stock_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_entity.dart';
 
 void main() {
-  StocksListEntity entity = StocksListEntity(stocks: [
-    {"name": "test"}
-  ]);
+  StockEntity stockEntity = StockEntity(
+      company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0);
+  StocksListEntity entity = StocksListEntity(stocks: [stockEntity]);
 
-  test('StockEntity properties', () {
-    expect(entity.stocks, [
-      {"name": "test"}
-    ]);
+  test('StockListEntity properties', () {
+    expect(entity.stocks, [stockEntity]);
 
-    expect(entity.toString(), 'StocksEntity([], [{name: test}])');
+    expect(entity.toString(), 'StocksListEntity([], [StockEntity([])])');
   });
 
   test('StocksEntity merge with errors = null', () {
     entity.merge(errors: null);
-    expect(entity.stocks, [
-      {"name": "test"}
-    ]);
+    expect(entity.stocks, [stockEntity]);
   });
 }
