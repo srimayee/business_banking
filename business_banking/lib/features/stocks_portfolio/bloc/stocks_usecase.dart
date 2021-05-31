@@ -1,4 +1,4 @@
-import 'package:business_banking/features/stocks_portfolio/model/stocks_entity.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_list_entity.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
 import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -13,7 +13,7 @@ class StocksUseCase extends UseCase {
   void create() async {
     final scope = ExampleLocator()
         .repository
-        .create<StocksEntity>(StocksEntity(), _notifySubscribers);
+        .create<StocksListEntity>(StocksListEntity(), _notifySubscribers);
 
     await ExampleLocator()
         .repository
@@ -24,7 +24,7 @@ class StocksUseCase extends UseCase {
     _viewModelCallback(buildViewModel(entity));
   }
 
-  StocksPortfolioViewModel buildViewModel(StocksEntity stocksEntity) {
+  StocksPortfolioViewModel buildViewModel(StocksListEntity stocksEntity) {
     return StocksPortfolioViewModel(stocksList: stocksEntity.stocks);
   }
 }

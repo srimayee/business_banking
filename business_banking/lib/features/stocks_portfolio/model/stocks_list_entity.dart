@@ -1,9 +1,9 @@
 import 'package:clean_framework/clean_framework.dart';
 
-class StocksEntity extends Entity {
+class StocksListEntity extends Entity {
   final List<Map<String, dynamic>> stocks;
 
-  StocksEntity(
+  StocksListEntity(
       {List<EntityFailure> errors = const [],
       List<Map<String, dynamic>>? stocks})
       : this.stocks = stocks ?? [];
@@ -12,8 +12,8 @@ class StocksEntity extends Entity {
   List<Object> get props => [errors, stocks];
 
   @override
-  StocksEntity merge({errors, List<Map<String, dynamic>>? stocks}) {
-    return StocksEntity(
+  StocksListEntity merge({errors, List<Map<String, dynamic>>? stocks}) {
+    return StocksListEntity(
       errors: errors ?? this.errors,
       stocks: stocks ?? this.stocks,
     );

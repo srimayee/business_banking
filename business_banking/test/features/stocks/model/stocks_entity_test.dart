@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:business_banking/features/stocks_portfolio/model/stocks_entity.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stocks_list_entity.dart';
 
 void main() {
-  StocksEntity entity = StocksEntity(stocks: [
+  StocksListEntity entity = StocksListEntity(stocks: [
     {"name": "test"}
   ]);
 
