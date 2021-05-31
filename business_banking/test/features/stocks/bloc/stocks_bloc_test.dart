@@ -1,4 +1,6 @@
 import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stock_entity.dart';
+import 'package:business_banking/features/stocks_portfolio/model/stock_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
 // import 'package:mockito/mockito.dart';
@@ -6,49 +8,19 @@ import 'package:test/test.dart';
 
 void main() {
   final bloc = StocksBloc();
-  List<Map<String, dynamic>> stocksList = [
-    {
-      "company": "Amazon.com",
-      "symbol": "AMZN",
-      "at_close": 89.38,
-      "shares": 100,
-      "value": 8938.0
-    },
-    {
-      "company": "Disney",
-      "symbol": "DIS",
-      "at_close": 40.65,
-      "shares": 100,
-      "value": 4065.00
-    },
-    {
-      "company": "PepsiCo",
-      "symbol": "PEP",
-      "at_close": 38.02,
-      "shares": 100,
-      "value": 3802.00
-    },
-    {
-      "company": "Apple",
-      "symbol": "AAPL",
-      "at_close": 134.22,
-      "shares": 100,
-      "value": 13422.00
-    },
-    {
-      "company": "Home Depot",
-      "symbol": "HD",
-      "at_close": 323.60,
-      "shares": 100,
-      "value": 32360.00
-    },
-    {
-      "company": "Nike",
-      "symbol": "NIKE",
-      "at_close": 130.19,
-      "shares": 100,
-      "value": 13019.00
-    }
+  List<StockEntity> stocksList = [
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0),
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0),
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0),
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0),
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0),
+    StockEntity(
+        company: 'test', symbol: 'test', atClose: 1.0, shares: 1.0, value: 1.0)
   ];
   test('StocksBloc get correct StocksPortfolioViewModel', () {
     bloc.stocksPortfolioViewModelPipe.receive.listen(expectAsync1((model) {
@@ -58,9 +30,17 @@ void main() {
   });
 
   test('StocksBloc gets correct StocksListViewModel', () {
+    List<StockViewModel> viewModelList = [
+      StockViewModel('Amazon.com', 'AMZN', 89.38, 100.0, 8938.0),
+      StockViewModel('Disney', 'DIS', 40.65, 100.0, 4065.0),
+      StockViewModel('PepsiCo', 'PEP', 38.02, 100.0, 3802.0),
+      StockViewModel('Apple', 'AAPL', 134.22, 100.0, 13422.0),
+      StockViewModel('Home Depot', 'HD', 323.6, 100.0, 32360.0),
+      StockViewModel('Nike', 'NIKE', 130.19, 100.0, 13019.0),
+    ];
     bloc.stocksListViewModelPipe.receive.listen(expectAsync1((model) {
       expect(model, isA<StocksListViewModel>());
-      expect(model.stocksList, stocksList);
+      expect(model.viewModelList, viewModelList);
     }));
   });
 }
