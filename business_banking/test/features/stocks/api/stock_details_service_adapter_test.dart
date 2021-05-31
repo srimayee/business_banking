@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:business_banking/features/stocks_portfolio/api/stock_details_responseModel.dart';
 import 'package:business_banking/features/stocks_portfolio/bloc/stock_details_service_adapter.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stock_details_entity.dart';
@@ -25,5 +27,6 @@ void main() {
         }));
 
     expect(entity, isA<StockDetailsEntity>());
+    expect(entity.company, 'The Walt Disney Company');
   });
 }

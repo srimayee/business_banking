@@ -12,11 +12,6 @@ void main() {
     }
   ];
 
-  test('StocksListViewModel initializes', () {
-    final viewModel = StocksListViewModel(stocksList: stocksList);
-    expect(viewModel.stocksList, stocksList);
-  });
-
   test('StocksListViewModel has correct properties', () {
     StocksListViewModel viewModel = StocksListViewModel(stocksList: stocksList);
     expect(viewModel.props, [
