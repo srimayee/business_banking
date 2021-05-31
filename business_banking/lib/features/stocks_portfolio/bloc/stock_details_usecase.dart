@@ -12,7 +12,7 @@ class StockDetailsUseCase extends UseCase {
 
   late RepositoryScope _scope;
 
-  void create() async {
+  void createStockDetailsViewModel() async {
     _scope = ExampleLocator()
         .repository
         .create(StockDetailsEntity(), _notifySubscribers);
@@ -36,5 +36,11 @@ class StockDetailsUseCase extends UseCase {
         lowValue: entity.lowValue,
         volume: entity.volume,
         history: entity.history);
+  }
+
+  Future<void> showStockDetails(int index) async {
+    await ExampleLocator()
+        .repository
+        .runServiceAdapter(_scope, StockDetailsServiceAdapter());
   }
 }

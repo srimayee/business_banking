@@ -9,6 +9,6 @@ void main() {
       expect(viewModel, isA<StockDetailsViewModel>());
       throw Error();
     });
-    usecase.create();
+    usecase.createStockDetailsViewModel();
   });
 }
