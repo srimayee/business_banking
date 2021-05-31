@@ -1,6 +1,7 @@
 import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_screen.dart';
+import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,6 +15,10 @@ class StocksListPresenter
       viewModel: viewModel,
       onAddDeleteTapped: () {
         _onAddDeleteTapped(bloc);
+      },
+      onStockSelected: (index) {
+        // send stock name from viewmodel in list
+        _onStockSelected(context, bloc, 'NAME');
       },
     );
   }
@@ -32,5 +37,11 @@ class StocksListPresenter
 
   void _onAddDeleteTapped(StocksBloc bloc) {
     bloc.deleteStockPipe.send(0);
+  }
+
+  void _onStockSelected(BuildContext context, StocksBloc bloc, String name) {
+    bloc.stockSelectedPipe.send(name);
+    CFRouterScope.of(context)
+        .push(BusinessBankingRouter.stockDetailsScreenRoute);
   }
 }

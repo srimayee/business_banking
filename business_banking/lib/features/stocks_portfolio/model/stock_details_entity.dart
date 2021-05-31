@@ -8,7 +8,7 @@ class StockDetailsEntity extends Entity {
   final double highValue;
   final double lowValue;
   final String volume;
-  final List<Map<String, double>> history;
+  final List<Map<String, dynamic>> history;
 
   StockDetailsEntity({
     List<EntityFailure> errors = const [],
@@ -19,7 +19,7 @@ class StockDetailsEntity extends Entity {
     double? highValue,
     double? lowValue,
     String? volume,
-    List<Map<String, double>>? history,
+    List<Map<String, dynamic>>? history,
   })  : company = company ?? "",
         symbol = symbol ?? "",
         value = value ?? 0.0,
@@ -30,7 +30,7 @@ class StockDetailsEntity extends Entity {
         history = history ?? [];
 
   @override
-  merge(
+  StockDetailsEntity merge(
       {errors,
       String? company,
       String? symbol,
@@ -39,7 +39,7 @@ class StockDetailsEntity extends Entity {
       double? highValue,
       double? lowValue,
       String? volume,
-      List<Map<String, double>>? history}) {
+      List<Map<String, dynamic>>? history}) {
     return StockDetailsEntity(
         company: company ?? this.company,
         symbol: symbol ?? this.symbol,

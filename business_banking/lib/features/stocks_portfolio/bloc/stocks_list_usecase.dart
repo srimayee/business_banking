@@ -15,7 +15,7 @@ class StocksListUseCase extends UseCase {
 
   void create() async {
     _scope = ExampleLocator().repository.containsScope<StocksEntity>()!;
-    final entity = ExampleLocator().repository.get<StocksEntity>(_scope);
+
     _scope.subscription = _notifySubscribers;
 
     await ExampleLocator()
@@ -28,11 +28,11 @@ class StocksListUseCase extends UseCase {
   }
 
   StocksListViewModel buildViewModel(StocksEntity stocksEntity) {
+    // for (var stock)
     return StocksListViewModel(stocksList: stocksEntity.stocks);
   }
 
   Future<void> deleteStock(int index) async {
-    final entity = ExampleLocator().repository.get<StocksEntity>(_scope);
     await ExampleLocator()
         .repository
         .runServiceAdapter(_scope, DeleteStockServiceAdapter());
