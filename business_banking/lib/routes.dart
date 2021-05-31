@@ -3,6 +3,7 @@ import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart
 import 'package:business_banking/features/customer/ui/customer_detail_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stock_details_widget.dart';
 import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/confirmation/transfer_confirmation_widget.dart';
 import 'package:business_banking/features/transfer_funds/ui/transfer_widget.dart';
@@ -19,7 +20,8 @@ abstract class BusinessBankingRouter {
   static const String customerDetailRoute = '/customerDetail';
   static const String viewBudgetChartRoute = '/viewBudgetChartRoute';
   static const String investmentDetailRoute = '/investmentDetail';
-  static const String stocksListScreenRoute = '/stocksDetail';
+  static const String stocksListScreenRoute = '/stocksList';
+  static const String stockDetailsScreenRoute = '/stockDetails';
 
   static Widget generate(String name) {
     switch (name) {
@@ -49,6 +51,9 @@ abstract class BusinessBankingRouter {
 
       case stocksListScreenRoute:
         return StocksListWidget();
+
+      case stockDetailsScreenRoute:
+        return StockDetailsWidget();
 
       default:
         return const PageNotFound();
