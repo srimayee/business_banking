@@ -1,3 +1,4 @@
+import 'package:business_banking/features/stocks_portfolio/model/stock_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/gestures.dart';
@@ -31,10 +32,10 @@ class StocksListScreen extends Screen {
         ],
       ),
       body: ListView.builder(
-          itemCount: viewModel.stocksList.length,
+          itemCount: viewModel.viewModelList.length,
           itemBuilder: (BuildContext context, int index) {
             return StockTile(
-              stock: viewModel.stocksList[index],
+              viewModel: viewModel.viewModelList[index],
               onTapCallback: () {
                 onStockSelected(index);
               },
@@ -45,15 +46,17 @@ class StocksListScreen extends Screen {
 }
 
 class StockTile extends StatelessWidget {
-  final Map<String, dynamic> stock;
+  final StockViewModel viewModel;
   final Function onTapCallback;
 
-  const StockTile({Key? key, required this.stock, required this.onTapCallback})
+  const StockTile(
+      {Key? key, required this.viewModel, required this.onTapCallback})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String shares = stock['shares'].toString();
-    String value = stock['value'].toString();
+    String shares = viewModel.shares.toString();
+    String value = viewModel.value.toString();
+    String atClose = viewModel.atClose.toString();
     return GestureDetector(
       onTap: () {
         onTapCallback();
@@ -62,7 +65,8 @@ class StockTile extends StatelessWidget {
         height: 70,
         child: Column(
           children: [
-            Text(stock['company']),
+            Text('company:' + viewModel.company!),
+            Text('at close: $atClose'),
             Text("shares: $shares"),
             Text("value: $value")
           ],
