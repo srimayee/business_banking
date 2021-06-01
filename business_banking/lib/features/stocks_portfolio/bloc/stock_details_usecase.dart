@@ -10,16 +10,20 @@ class StockDetailsUseCase extends UseCase {
   StockDetailsUseCase(Function(ViewModel) viewModelCallback)
       : _viewModelCallback = viewModelCallback;
 
-  late RepositoryScope _scope;
+  RepositoryScope? _scope;
+  String? companyName;
 
-  void createStockDetailsViewModel() async {
-    _scope = ExampleLocator()
-        .repository
-        .create(StockDetailsEntity(), _notifySubscribers);
+  void create() async {
+    _scope = ExampleLocator().repository.containsScope<StockDetailsEntity>();
+    if (_scope == null) {
+      _scope = ExampleLocator()
+          .repository
+          .create(StockDetailsEntity(company: companyName), _notifySubscribers);
+    }
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, StockDetailsServiceAdapter());
+        .runServiceAdapter(_scope!, StockDetailsServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -38,9 +42,16 @@ class StockDetailsUseCase extends UseCase {
         history: entity.history);
   }
 
-  Future<void> showStockDetails(int index) async {
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope, StockDetailsServiceAdapter());
+  Future<void> showStockDetails(String name) async {
+    if (_scope == null) {
+      companyName = name;
+    } else {
+      ExampleLocator()
+          .repository
+          .update(_scope!, StockDetailsEntity(company: name));
+      await ExampleLocator()
+          .repository
+          .runServiceAdapter(_scope!, StockDetailsServiceAdapter());
+    }
   }
 }

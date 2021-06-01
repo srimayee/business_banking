@@ -37,7 +37,7 @@ class StocksListScreen extends Screen {
             return StockTile(
               viewModel: viewModel.viewModelList[index],
               onTapCallback: () {
-                onStockSelected(index);
+                onStockSelected(viewModel.viewModelList[index].company);
               },
             );
           }),
@@ -61,15 +61,18 @@ class StockTile extends StatelessWidget {
       onTap: () {
         onTapCallback();
       },
-      child: Container(
-        height: 70,
-        child: Column(
-          children: [
-            Text('company:' + viewModel.company!),
-            Text('at close: $atClose'),
-            Text("shares: $shares"),
-            Text("value: $value")
-          ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 70,
+          child: Column(
+            children: [
+              Text(viewModel.company!),
+              Text('at close: $atClose'),
+              Text("shares: $shares"),
+              Text("value: $value")
+            ],
+          ),
         ),
       ),
     );

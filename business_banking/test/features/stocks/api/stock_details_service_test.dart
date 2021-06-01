@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 void main() {
   test('StockDetailsService success', () async {
     final service = StockDetailsService();
-    final request = StockDetailsRequestModel('Disney');
+    final request = StockDetailsRequestModel(stockName: 'Disney');
     final Either<ServiceFailure, StockDetailsResponseModel> eitherResponse =
         await service.request(requestModel: request);
 

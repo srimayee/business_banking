@@ -4,6 +4,7 @@ import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_screen
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class StocksListPresenter
@@ -16,9 +17,9 @@ class StocksListPresenter
       onAddDeleteTapped: () {
         _onAddDeleteTapped(bloc);
       },
-      onStockSelected: (index) {
+      onStockSelected: (name) {
         // send stock name from viewmodel in list
-        _onStockSelected(context, bloc, 'NAME');
+        _onStockSelected(context, bloc, name);
       },
     );
   }

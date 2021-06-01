@@ -5,7 +5,7 @@ class DeleteStockRequestModel extends JsonRequestModel {
 
   @override
   Map<String, dynamic> toJson() {
-    // Mock service just returns the list without the Nike stock. It just does it.
+    // Mock service just returns the list without the Nike stock.
     return {'company': 'Nike'};
   }
 }

@@ -3,7 +3,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class StockDetailsRequestModel extends JsonRequestModel {
   final String stockName;
 
-  StockDetailsRequestModel(this.stockName);
+  StockDetailsRequestModel({required this.stockName});
 
   @override
   Map<String, dynamic> toJson() {

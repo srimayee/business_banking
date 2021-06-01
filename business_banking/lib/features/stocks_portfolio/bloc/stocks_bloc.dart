@@ -24,7 +24,7 @@ class StocksBloc extends Bloc {
     deleteStockPipe.dispose();
   }
 
-  StocksBloc({StocksService? stocksService}) {
+  StocksBloc() {
     _useCase = StocksUseCase((viewModel) => stocksPortfolioViewModelPipe
         .send(viewModel as StocksPortfolioViewModel));
     stocksPortfolioViewModelPipe.whenListenedDo(() => _useCase.create());
@@ -35,8 +35,8 @@ class StocksBloc extends Bloc {
 
     _stockDetailsUseCase = StockDetailsUseCase((viewModel) =>
         stockDetailsViewModelPipe.send(viewModel as StockDetailsViewModel));
-    stockDetailsViewModelPipe.whenListenedDo(
-        () => _stockDetailsUseCase.createStockDetailsViewModel());
+    stockDetailsViewModelPipe
+        .whenListenedDo(() => _stockDetailsUseCase.create());
 
     deleteStockPipe.receive.listen(_deleteStock);
     stockSelectedPipe.receive.listen(_stockSelected);
@@ -46,5 +46,7 @@ class StocksBloc extends Bloc {
     _stocksListUseCase.deleteStock(index);
   }
 
-  void _stockSelected(String stockName) {}
+  void _stockSelected(String stockName) {
+    _stockDetailsUseCase.showStockDetails(stockName);
+  }
 }
