@@ -12,16 +12,16 @@ class StocksListUseCase extends UseCase {
   Function(ViewModel) _viewModelCallback;
   StocksListUseCase(Function(ViewModel) viewModelCallback)
       : _viewModelCallback = viewModelCallback;
-  late RepositoryScope _scope;
+  RepositoryScope? _scope;
 
   void create() async {
-    _scope = ExampleLocator().repository.containsScope<StocksListEntity>()!;
-
-    _scope.subscription = _notifySubscribers;
+    _scope = ExampleLocator()
+        .repository
+        .create(StocksListEntity(), _notifySubscribers);
 
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, StocksServiceAdapter());
+        .runServiceAdapter(_scope!, StocksServiceAdapter());
   }
 
   void _notifySubscribers(entity) {
@@ -40,6 +40,6 @@ class StocksListUseCase extends UseCase {
   Future<void> deleteStock(int index) async {
     await ExampleLocator()
         .repository
-        .runServiceAdapter(_scope, DeleteStockServiceAdapter());
+        .runServiceAdapter(_scope!, DeleteStockServiceAdapter());
   }
 }

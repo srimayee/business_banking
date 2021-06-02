@@ -6,8 +6,8 @@ import 'package:clean_framework/clean_framework.dart';
 import 'stocks_service_adapter.dart';
 
 class StocksUseCase extends UseCase {
-  late final ViewModelCallback<ViewModel> _viewModelCallback;
-  StocksUseCase(ViewModelCallback<ViewModel> viewModelCallback)
+  Function(ViewModel) _viewModelCallback;
+  StocksUseCase(Function(ViewModel) viewModelCallback)
       : _viewModelCallback = viewModelCallback;
 
   void create() async {

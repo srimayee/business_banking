@@ -1,5 +1,6 @@
 import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stock_details_widget.dart';
 import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_screen.dart';
 import 'package:business_banking/routes.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -42,7 +43,7 @@ class StocksListPresenter
 
   void _onStockSelected(BuildContext context, StocksBloc bloc, String name) {
     bloc.stockSelectedPipe.send(name);
-    CFRouterScope.of(context)
-        .push(BusinessBankingRouter.stockDetailsScreenRoute);
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => StockDetailsWidget()));
   }
 }

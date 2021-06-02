@@ -8,14 +8,15 @@ import 'package:business_banking/features/stocks_portfolio/model/stocks_portfoli
 import 'package:clean_framework/clean_framework.dart';
 
 class StocksBloc extends Bloc {
-  late StocksUseCase _useCase;
-  late StocksListUseCase _stocksListUseCase;
-  late StockDetailsUseCase _stockDetailsUseCase;
+  late final StocksUseCase _useCase;
+  late final StocksListUseCase _stocksListUseCase;
+  late final StockDetailsUseCase _stockDetailsUseCase;
   final stocksPortfolioViewModelPipe = Pipe<StocksPortfolioViewModel>();
   final stocksListViewModelPipe = Pipe<StocksListViewModel>();
   final deleteStockPipe = Pipe<int>();
   final stockSelectedPipe = Pipe<String>();
-  final stockDetailsViewModelPipe = Pipe<StockDetailsViewModel>();
+  final stockDetailsViewModelPipe =
+      Pipe<StockDetailsViewModel>(canSendDuplicateData: true);
 
   @override
   void dispose() {
@@ -40,6 +41,8 @@ class StocksBloc extends Bloc {
 
     deleteStockPipe.receive.listen(_deleteStock);
     stockSelectedPipe.receive.listen(_stockSelected);
+
+    print('Bloc: ' + this.hashCode.toString());
   }
 
   void _deleteStock(int index) {
