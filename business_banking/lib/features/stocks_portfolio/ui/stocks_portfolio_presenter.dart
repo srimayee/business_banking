@@ -27,8 +27,6 @@ class StocksPortfolioPresenter extends Presenter<StocksBloc,
   }
 
   void _navigateToStocksScreen(BuildContext context) {
-    // CFRouterScope.of(context).push(BusinessBankingRouter.stocksListScreenRoute);
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => StocksListWidget()));
+    CFRouterScope.of(context).push(BusinessBankingRouter.stocksListScreenRoute);
   }
 }
