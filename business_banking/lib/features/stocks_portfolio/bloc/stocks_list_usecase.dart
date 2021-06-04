@@ -9,22 +9,28 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 import 'delete_stock_service_adapter.dart';
 
 class StocksListUseCase extends UseCase {
-  Function(ViewModel) _viewModelCallback;
-  StocksListUseCase(Function(ViewModel) viewModelCallback)
-      : _viewModelCallback = viewModelCallback;
+  Repository repository;
   RepositoryScope? _scope;
 
-  void create() async {
-    _scope = ExampleLocator()
-        .repository
-        .create(StocksListEntity(), _notifySubscribers);
+  Function(ViewModel) _viewModelCallback;
+  StocksListUseCase(
+    Function(ViewModel) viewModelCallback,
+    this.repository,
+  ) : _viewModelCallback = viewModelCallback;
 
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope!, StocksServiceAdapter());
+  void getStocksList() async {
+    _scope = repository.containsScope<StocksListEntity>();
+    if (_scope == null) {
+      _scope = repository.create<StocksListEntity>(
+          StocksListEntity(), notifySubscribers);
+    } else {
+      _scope!.subscription = notifySubscribers;
+    }
+
+    await repository.runServiceAdapter(_scope!, StocksServiceAdapter());
   }
 
-  void _notifySubscribers(entity) {
+  void notifySubscribers(entity) {
     _viewModelCallback(buildViewModel(entity));
   }
 
@@ -38,8 +44,6 @@ class StocksListUseCase extends UseCase {
   }
 
   Future<void> deleteStock(int index) async {
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope!, DeleteStockServiceAdapter());
+    await repository.runServiceAdapter(_scope!, DeleteStockServiceAdapter());
   }
 }
