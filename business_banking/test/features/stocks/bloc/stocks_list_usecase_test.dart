@@ -9,7 +9,6 @@ import 'package:business_banking/locator.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../mocks/repository_mocks.dart';
@@ -19,9 +18,6 @@ class MockStocksServiceAdapter extends Mock implements StocksServiceAdapter {}
 class MockDeleteStockServiceAdapter extends Mock
     implements DeleteStockServiceAdapter {}
 
-@GenerateMocks(
-  [Repository, RepositoryScope, EventPipe],
-)
 main() {
   MockRepository mockRepository;
   StocksListUseCase usecase;
