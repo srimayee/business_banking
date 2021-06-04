@@ -9,9 +9,10 @@ class DeleteStockServiceAdapter extends ServiceAdapter<StocksListEntity,
     DeleteStockRequestModel, DeleteStockResponseModel, DeleteStockService> {
   DeleteStockServiceAdapter() : super(DeleteStockService());
 
+  // TODO make this a legitimate request
   @override
   DeleteStockRequestModel createRequest(StocksListEntity entity) {
-    return DeleteStockRequestModel();
+    return DeleteStockRequestModel('test');
   }
 
   @override

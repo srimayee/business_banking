@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:business_banking/features/stocks_portfolio/api/delete_stock_requestModel.dart';
 import 'package:business_banking/features/stocks_portfolio/api/delete_stock_responseModel.dart';
 import 'package:business_banking/features/stocks_portfolio/api/delete_stock_service.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('DeleteStockService success', () async {
     final service = DeleteStockService();
-    final request = DeleteStockRequestModel();
+    final request = DeleteStockRequestModel('test');
     final Either<ServiceFailure, DeleteStockResponseModel> eitherResponse =
         await service.request(requestModel: request);
 
