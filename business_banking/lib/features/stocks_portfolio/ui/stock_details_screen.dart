@@ -13,7 +13,7 @@ class StockDetailsScreen extends Screen {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text(viewModel.company),
+        title: Text('Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

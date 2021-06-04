@@ -1,3 +1,11 @@
+// @dart = 2.9
+import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_presenter.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_list_widget.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_portfolio_presenter.dart';
+import 'package:business_banking/features/stocks_portfolio/ui/stocks_portfolio_widget.dart';
+import 'package:clean_framework/clean_framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -29,7 +37,7 @@ void main() {
     final customerDetailAppBar = find.byKey(Key('HCDappBarName'));
     final customerDetailName = find.byKey(Key('HCDname'));
     final customerDetailAddress = find.byKey(Key('HCDaddress'));
-    final customerBackButton = find.bySemanticsLabel("Back");
+    // final customerBackButton = find.bySemanticsLabel("Back");
 /*
     // transfer funds widgets
     // transfer funds screen widgets
@@ -78,6 +86,36 @@ void main() {
 */
     /// These will only pass with the specific JSON included in the Mockoon folder
     testWidgets('Integration test', (WidgetTester tester) async {
+      tester.ensureSemantics();
+
+      // final signInText = 'signInText';
+      // final loginButton = 'login_button_key';
+
+      // // hub
+      // final hubAppBar = find.byKey(Key('CAappBarName'));
+
+      // // Cash Accounts - Card
+      // final cashAccountsCardOne = 'accountCard1';
+
+      // // Cash Accounts - Detail
+      // final backButton = find.byKey(Key('backButton'));
+      // final accountDetailAppBar = find.byKey(Key('ADappBarL4'));
+      // final bigBalance = find.byKey(Key('bigBalance'));
+      // final depHold = find.byKey(Key('depHold'));
+
+      // // Customer - Tile
+      // final customerTileText = find.byKey(Key('HCTileText'));
+      // final customerTileButton = 'HCTileButton';
+
+      // // Customer - Detail
+      // final customerDetailAppBar = find.byKey(Key('HCDappBarName'));
+      // final customerDetailName = find.byKey(Key('HCDname'));
+      // final customerDetailAddress = find.byKey(Key('HCDaddress'));
+      final customerBackButton = find.bySemanticsLabel("Back");
+
+      final stocksHubCard = find.byKey(Key('StocksHubCard'));
+      final stocksText = find.byKey(Key('StocksPortText'));
+
       await startTest(tester);
 
       //LoginScreen, screen is displayed
@@ -109,19 +147,61 @@ void main() {
       await tapWithFinder(backButton);
 
       //CustomerScreen, Hello Joe is displayed on tile
-      expect(tester.widget<Text>(customerTileText).data, 'Hello Mr. Joe A');
+      // expect(tester.widget<Text>(customerTileText).data, 'Hello Mr. Joe A');
 
-      //CustomerDetailScreen, navigate to and app bar is displayed
-      await tapWidget(customerTileButton);
-      expect(tester.widget<Text>(customerDetailAppBar).data, 'Hello Customer');
+      // //CustomerDetailScreen, navigate to and app bar is displayed
+      // await tapWidget(customerTileButton);
+      // expect(tester.widget<Text>(customerDetailAppBar).data, 'Hello Customer');
 
-      //CustomerDetailScreen, name address is displayed on screen
-      expect(tester.widget<Text>(customerDetailName).data, 'Hello Mr. Joe A');
-      expect(tester.widget<Text>(customerDetailAddress).data,
-          '1234 ABCD Rd, City, State 00000');
+      // //CustomerDetailScreen, name address is displayed on screen
+      // expect(tester.widget<Text>(customerDetailName).data, 'Hello Mr. Joe A');
+      // expect(tester.widget<Text>(customerDetailAddress).data,
+      //     '1234 ABCD Rd, City, State 00000');
 
-      //CustomerScreen, check to find correct app bar
-      await tapWithFinder(customerBackButton);
+      // //CustomerScreen, check to find correct app bar
+      // await tapWithFinder(customerBackButton);
+    });
+
+    testWidgets('StocksPortfolioScreen', (WidgetTester tester) async {
+      await startTest(tester);
+      final signInText = 'signInText';
+      final loginButton = 'login_button_key';
+
+      await didWidgetAppear(signInText);
+      await didTextAppear('Sign In');
+
+      //navigated to and app bar is displayed
+      await tapWidget(loginButton);
+      // expect(tester.widget<Text>(hubAppBar).data, 'Business Banking');
+
+      await didTextAppear('Stocks Portfolio');
+      await tapWidget('StocksHubCard');
+      await didTextAppear('Stocks');
+
+      await tapWidget('StockTile');
+      await didTextAppear('Details');
+    });
+
+    testWidgets('StocksPortfolio, with true bloc', (tester) async {
+      final testWidget = MaterialApp(
+          home: BlocProvider<StocksBloc>(
+              create: (_) => StocksBloc(), child: StocksPortfolioWidget()));
+
+      await tester.pumpWidget(testWidget);
+      await tester.pump(Duration(milliseconds: 500));
+
+      expect(find.byType(StocksPortfolioPresenter), findsOneWidget);
+    });
+
+    testWidgets('StocksList, with true bloc', (tester) async {
+      final testWidget = MaterialApp(
+          home: BlocProvider<StocksBloc>(
+              create: (_) => StocksBloc(), child: StocksListWidget()));
+
+      await tester.pumpWidget(testWidget);
+      await tester.pump(Duration(milliseconds: 500));
+
+      expect(find.byType(StocksListPresenter), findsOneWidget);
     });
 /*
     // transfer funds feature

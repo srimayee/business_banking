@@ -14,6 +14,7 @@ class StockPortfolioScreen extends Screen {
   Widget build(BuildContext context) {
     double value = viewModel.totalValue;
     return GestureDetector(
+      key: Key('StocksHubCard'),
       onTap: navigateToStocksScreen,
       child: Container(
         height: 125,
@@ -29,6 +30,7 @@ class StockPortfolioScreen extends Screen {
                   Text(
                     'Stocks Portfolio',
                     style: TextStyle(fontSize: 25),
+                    key: Key('StocksPortText'),
                   ),
                 ],
               )),

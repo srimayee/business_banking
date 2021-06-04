@@ -58,6 +58,7 @@ class StockTile extends StatelessWidget {
     String value = viewModel.value.toString();
     String atClose = viewModel.atClose.toString();
     return GestureDetector(
+      key: Key('StockTile'),
       onTap: () {
         onTapCallback();
       },
