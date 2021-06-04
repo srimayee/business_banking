@@ -55,7 +55,7 @@ class StocksBloc extends Bloc {
     _stockDetailsUseCase = StockDetailsUseCase((viewModel) =>
         stockDetailsViewModelPipe.send(viewModel as StockDetailsViewModel));
     stockDetailsViewModelPipe
-        .whenListenedDo(() => _stockDetailsUseCase.create());
+        .whenListenedDo(() => _stockDetailsUseCase.getStockDetails());
   }
 
   void _deleteStock(int index) {

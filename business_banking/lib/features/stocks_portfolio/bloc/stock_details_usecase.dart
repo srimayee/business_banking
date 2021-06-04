@@ -7,26 +7,32 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 
 class StockDetailsUseCase extends UseCase {
   Function(ViewModel) _viewModelCallback;
-  StockDetailsUseCase(Function(ViewModel) viewModelCallback)
-      : _viewModelCallback = viewModelCallback;
-
+  Repository _repository;
   RepositoryScope? _scope;
+  StockDetailsServiceAdapter _stockDetailsServiceAdapter;
   String? companyName;
 
-  void create() async {
-    _scope = ExampleLocator().repository.containsScope<StockDetailsEntity>();
+  StockDetailsUseCase(Function(ViewModel) viewModelCallback,
+      {Repository? repository,
+      StockDetailsServiceAdapter? stockDetailsServiceAdapter})
+      : _viewModelCallback = viewModelCallback,
+        _repository = repository ?? ExampleLocator().repository,
+        _stockDetailsServiceAdapter =
+            stockDetailsServiceAdapter ?? StockDetailsServiceAdapter();
+
+  void getStockDetails() async {
+    _scope = _repository.containsScope<StockDetailsEntity>();
     if (_scope == null) {
-      _scope = ExampleLocator()
-          .repository
-          .create(StockDetailsEntity(company: companyName), _notifySubscribers);
+      _scope = _repository.create(
+          StockDetailsEntity(company: companyName), notifySubscribers);
+    } else {
+      _scope!.subscription = notifySubscribers;
     }
 
-    await ExampleLocator()
-        .repository
-        .runServiceAdapter(_scope!, StockDetailsServiceAdapter());
+    await _repository.runServiceAdapter(_scope!, _stockDetailsServiceAdapter);
   }
 
-  void _notifySubscribers(entity) {
+  void notifySubscribers(entity) {
     _viewModelCallback(buildViewModel(entity));
   }
 
@@ -43,15 +49,17 @@ class StockDetailsUseCase extends UseCase {
   }
 
   Future<void> showStockDetails(String name) async {
-    if (_scope == null) {
-      companyName = name;
-    } else {
-      ExampleLocator()
-          .repository
-          .update(_scope!, StockDetailsEntity(company: name));
-      await ExampleLocator()
-          .repository
-          .runServiceAdapter(_scope!, StockDetailsServiceAdapter());
-    }
+    companyName = name;
+
+    // TODO
+    // Due to issue of multiple blocs being created the conditional below is not needed
+    // until that is resolved
+
+    // if (_scope == null) {
+    //   companyName = name;
+    // } else {
+    //   _repository.update(_scope!, StockDetailsEntity(company: name));
+    //   await _repository.runServiceAdapter(_scope!, _stockDetailsServiceAdapter);
+    // }
   }
 }
