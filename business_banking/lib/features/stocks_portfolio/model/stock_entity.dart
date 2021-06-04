@@ -32,4 +32,8 @@ class StockEntity extends Entity {
         shares: shares ?? this.shares,
         value: value ?? this.value);
   }
+
+  @override
+  List<Object> get props =>
+      [errors, company!, symbol!, atClose!, shares!, value!];
 }
