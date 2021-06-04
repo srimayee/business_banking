@@ -1,10 +1,28 @@
+import 'package:business_banking/features/stocks_portfolio/ui/stock_details_screen.dart';
+import 'package:charts_flutter/flutter.dart';
 import 'package:clean_framework/clean_framework.dart';
-
-enum ChartType { line, bar, pie }
+import 'package:flutter/material.dart';
 
 class ChartsFlutter extends ExternalDependency {
-  final List<dynamic> chartData;
-  final ChartType chartType;
+  TimeSeriesChart showTimeSeriesChart(List<StockHistory> list) {
+    List<Series<StockHistory, DateTime>> seriesList = [
+      makeSeriesFromList(list)
+    ];
+    return TimeSeriesChart(
+      seriesList,
+      dateTimeFactory: LocalDateTimeFactory(),
+    );
+  }
 
-  ChartsFlutter(this.chartData, this.chartType);
+  Series<StockHistory, DateTime> makeSeriesFromList(List<StockHistory> list) {
+    return Series<StockHistory, DateTime>(
+        id: 'Week',
+        colorFn: (_, __) => MaterialPalette.blue.shadeDefault,
+        domainFn: (StockHistory day, _) => day.date,
+        measureFn: (StockHistory day, _) => day.value,
+        data: list);
+  }
+
+  /// Create one series with sample hard coded data.
+
 }

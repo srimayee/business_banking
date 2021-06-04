@@ -1,12 +1,20 @@
+import 'package:business_banking/dependency/charts_flutter.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stock_details_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class StockDetailsScreen extends Screen {
   final StockDetailsViewModel viewModel;
 
   StockDetailsScreen({required this.viewModel});
+
+  final List<StockHistory> days = [
+    StockHistory(DateTime(2021, 6, 1), 10.0),
+    StockHistory(DateTime(2021, 6, 2), 50.0),
+    StockHistory(DateTime(2021, 6, 3), 106.0),
+    StockHistory(DateTime(2021, 6, 4), 23.0),
+    StockHistory(DateTime(2021, 6, 5), 122.0),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +49,7 @@ class StockDetailsScreen extends Screen {
               child: Container(
                 color: Colors.grey[100],
                 height: 200,
-                child: Row(
-                  key: Key('stock-details-chart'),
-                  children: [Text('chart')],
-                ),
+                child: ChartsFlutter().showTimeSeriesChart(days),
               ),
             ),
             Padding(
@@ -69,4 +74,11 @@ class StockDetailsScreen extends Screen {
       ),
     );
   }
+}
+
+class StockHistory {
+  final DateTime date;
+  final double value;
+
+  StockHistory(this.date, this.value);
 }
