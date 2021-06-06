@@ -9,7 +9,7 @@ class StocksPortfolioViewModel extends ViewModel {
   double get totalValue {
     double value = 0.0;
     for (StockEntity stock in stocksList) {
-      value += stock.value ?? 0;
+      value += stock.value! * stock.shares!;
     }
 
     return value;
