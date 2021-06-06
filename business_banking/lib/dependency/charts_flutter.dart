@@ -22,7 +22,4 @@ class ChartsFlutter extends ExternalDependency {
         measureFn: (StockHistory day, _) => day.value,
         data: list);
   }
-
-  /// Create one series with sample hard coded data.
-
 }
