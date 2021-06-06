@@ -194,6 +194,9 @@ void main() {
     });
 
     testWidgets('StocksList, with true bloc', (tester) async {
+      await startTest(tester);
+      // final addDel
+
       final testWidget = MaterialApp(
           home: BlocProvider<StocksBloc>(
               create: (_) => StocksBloc(), child: StocksListWidget()));
@@ -202,6 +205,28 @@ void main() {
       await tester.pump(Duration(milliseconds: 500));
 
       expect(find.byType(StocksListPresenter), findsOneWidget);
+    });
+
+    testWidgets('StocksListScreen', (WidgetTester tester) async {
+      await startTest(tester);
+      final signInText = 'signInText';
+      final loginButton = 'login_button_key';
+
+      await didWidgetAppear(signInText);
+      await didTextAppear('Sign In');
+
+      //navigated to and app bar is displayed
+      await tapWidget(loginButton);
+      // expect(tester.widget<Text>(hubAppBar).data, 'Business Banking');
+
+      await tapWidget('StocksHubCard');
+      await didTextAppear('Stocks');
+
+      await tapWidget('add_delete_stock_key');
+      await didTextAppear('Stocks');
+
+      await tapWidget('StockTile');
+      await didTextAppear('Details');
     });
 /*
     // transfer funds feature
