@@ -26,10 +26,14 @@ class StocksBloc extends Bloc {
     deleteStockPipe.dispose();
   }
 
-  StocksBloc() {
-    _setUpStocksUseCase();
-    _setUpStocksListUseCase();
-    _setUpStockDetailsUseCase();
+  StocksBloc(
+      {StocksUseCase? stocksUseCase,
+      StocksListUseCase? stocksListUseCase,
+      StockDetailsUseCase? stockDetailsUseCase}) {
+    _stockUseCase = stocksUseCase ?? _setUpStocksUseCase();
+
+    _stocksListUseCase = stocksListUseCase ?? _setUpStocksListUseCase();
+    _stockDetailsUseCase = stockDetailsUseCase ?? _setUpStockDetailsUseCase();
 
     deleteStockPipe.receive.listen(_deleteStock);
     stockSelectedPipe.receive.listen(_stockSelected);
@@ -37,25 +41,29 @@ class StocksBloc extends Bloc {
     print('Bloc: ' + this.hashCode.toString());
   }
 
-  void _setUpStocksUseCase() {
-    _stockUseCase = StocksUseCase((viewModel) => stocksPortfolioViewModelPipe
-        .send(viewModel as StocksPortfolioViewModel));
-    stocksPortfolioViewModelPipe.whenListenedDo(() => _stockUseCase.create());
+  StocksUseCase _setUpStocksUseCase() {
+    StocksUseCase stockUC = StocksUseCase((viewModel) =>
+        stocksPortfolioViewModelPipe
+            .send(viewModel as StocksPortfolioViewModel));
+    stocksPortfolioViewModelPipe.whenListenedDo(() => stockUC.create());
+    return stockUC;
   }
 
-  void _setUpStocksListUseCase() {
-    Function(ViewModel) stocksListVMcallback = (viewModel) =>
-        stocksListViewModelPipe.send(viewModel as StocksListViewModel);
-    _stocksListUseCase = StocksListUseCase(stocksListVMcallback);
-    stocksListViewModelPipe
-        .whenListenedDo(() => _stocksListUseCase.getStocksList());
+  StocksListUseCase _setUpStocksListUseCase() {
+    StocksListUseCase stocksListUC = StocksListUseCase((viewModel) =>
+        stocksListViewModelPipe.send(viewModel as StocksListViewModel));
+    stocksListViewModelPipe.whenListenedDo(() => stocksListUC.getStocksList());
+
+    return stocksListUC;
   }
 
-  void _setUpStockDetailsUseCase() {
-    _stockDetailsUseCase = StockDetailsUseCase((viewModel) =>
+  StockDetailsUseCase _setUpStockDetailsUseCase() {
+    StockDetailsUseCase stockDetailsUC = StockDetailsUseCase((viewModel) =>
         stockDetailsViewModelPipe.send(viewModel as StockDetailsViewModel));
     stockDetailsViewModelPipe
-        .whenListenedDo(() => _stockDetailsUseCase.getStockDetails());
+        .whenListenedDo(() => stockDetailsUC.getStockDetails());
+
+    return stockDetailsUC;
   }
 
   void _deleteStock(int index) {
