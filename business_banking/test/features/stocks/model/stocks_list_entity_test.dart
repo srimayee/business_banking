@@ -1,3 +1,4 @@
+//@dart = 2.9
 import 'package:business_banking/features/stocks_portfolio/model/stock_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_entity.dart';
@@ -10,7 +11,8 @@ void main() {
   test('StockListEntity properties', () {
     expect(entity.stocks, [stockEntity]);
 
-    expect(entity.toString(), 'StocksListEntity([], [StockEntity([])])');
+    expect(entity.toString(),
+        'StocksListEntity([], [StockEntity([], test, test, 1.0, 1.0, 1.0)])');
   });
 
   test('StocksEntity merge with errors = null', () {
