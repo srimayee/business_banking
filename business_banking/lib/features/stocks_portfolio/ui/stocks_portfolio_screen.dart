@@ -17,32 +17,35 @@ class StockPortfolioScreen extends Screen {
       key: Key('StocksHubCard'),
       onTap: navigateToStocksScreen,
       child: Container(
-        height: 125,
+        height: 115,
         child: Card(
           color: Colors.white,
           shadowColor: Colors.grey[500],
           elevation: 3.0,
-          child: Column(
-            children: [
-              Expanded(
-                  child: Row(
-                children: [
-                  Text(
-                    'Stocks Portfolio',
-                    style: TextStyle(fontSize: 25),
-                    key: Key('StocksPortText'),
-                  ),
-                ],
-              )),
-              Expanded(
-                child: Row(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                    child: Row(
                   children: [
-                    Text('Total value: \$' + value.toString(),
-                        style: TextStyle(fontSize: 18)),
+                    Text(
+                      'Stocks Portfolio',
+                      style: TextStyle(fontSize: 18),
+                      key: Key('StocksPortText'),
+                    ),
                   ],
-                ),
-              )
-            ],
+                )),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text('Total value: \$' + value.toString(),
+                          style: TextStyle(fontSize: 24)),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

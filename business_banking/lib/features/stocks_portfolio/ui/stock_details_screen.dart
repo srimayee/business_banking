@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:business_banking/dependency/charts_flutter.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stock_details_view_model.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -8,13 +10,24 @@ class StockDetailsScreen extends Screen {
 
   StockDetailsScreen({required this.viewModel});
 
-  final List<StockHistory> days = [
-    StockHistory(DateTime(2021, 6, 1), 10.0),
-    StockHistory(DateTime(2021, 6, 2), 50.0),
-    StockHistory(DateTime(2021, 6, 3), 106.0),
-    StockHistory(DateTime(2021, 6, 4), 23.0),
-    StockHistory(DateTime(2021, 6, 5), 122.0),
-  ];
+  List<StockHistory> get days {
+    List<double> values = [];
+    var rando = Random();
+    int min = 10;
+    int max = 150;
+    for (int i = 0; i < 5; i++) {
+      double next = min + rando.nextInt(max - min).toDouble();
+      values.add(next);
+    }
+
+    return [
+      StockHistory(DateTime(2021, 6, 1), values[0]),
+      StockHistory(DateTime(2021, 6, 2), values[1]),
+      StockHistory(DateTime(2021, 6, 3), values[2]),
+      StockHistory(DateTime(2021, 6, 4), values[3]),
+      StockHistory(DateTime(2021, 6, 5), values[4]),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
