@@ -1,4 +1,6 @@
 // @dart = 2.9
+import 'dart:async';
+
 import 'package:business_banking/features/stocks_portfolio/bloc/stock_details_usecase.dart';
 import 'package:business_banking/features/stocks_portfolio/bloc/stocks_bloc.dart';
 import 'package:business_banking/features/stocks_portfolio/bloc/stocks_list_usecase.dart';
@@ -6,9 +8,10 @@ import 'package:business_banking/features/stocks_portfolio/model/stock_entity.da
 import 'package:business_banking/features/stocks_portfolio/model/stock_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_list_view_model.dart';
 import 'package:business_banking/features/stocks_portfolio/model/stocks_portfolio_view_model.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 // import 'package:mockito/mockito.dart';
-import 'package:test/test.dart';
+// import 'package:test/test.dart';
 
 class MockStocksListUseCase extends Mock implements StocksListUseCase {}
 
@@ -76,10 +79,23 @@ void main() {
     }));
   });
 
-  test('StocksBloc _deleteStock calls StocksListUseCase.deleteStock', () async {
+  test('StocksBloc _deleteStock calls StocksListUseCase.deleteStock', () {
     MockStocksListUseCase mockUC = MockStocksListUseCase();
     StocksBloc stockbloc = StocksBloc(stocksListUseCase: mockUC);
+
     stockbloc.deleteStockPipe.send(1);
-    verify(mockUC.deleteStock(1)).called(1);
+    var timer = Timer(Duration(milliseconds: 200), () {
+      verify(mockUC.deleteStock(1));
+    });
+  });
+
+  test('StocksBloc _stockSelected calls StockDetailsUseCase.showStockDetails',
+      () {
+    MockStockDetailsUseCase mockUC = MockStockDetailsUseCase();
+    StocksBloc stockbloc = StocksBloc(stockDetailsUseCase: mockUC);
+    stockbloc.stockSelectedPipe.send('test');
+    var timer = Timer(Duration(milliseconds: 200), () {
+      verify(mockUC.showStockDetails('test')).called(1);
+    });
   });
 }
