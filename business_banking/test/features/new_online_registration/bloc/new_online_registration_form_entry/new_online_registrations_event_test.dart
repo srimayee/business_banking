@@ -32,5 +32,19 @@ void main() {
       expect(event.props, ['Test123test']);
       expect(event.stringify, true);
     });
+
+    test(
+        'should props match and stringify be true on UpdateCardExpiryRequestEvent',
+        () {
+      final event = UpdateCardExpiryRequestEvent('08/50');
+      expect(event.props, ['08/50']);
+      expect(event.stringify, true);
+    });
+
+    test('should props match and stringify be true on CardScannerEvent', () {
+      final event = CardScannerEvent();
+      expect(event.props, []);
+      expect(event.stringify, true);
+    });
   });
 }

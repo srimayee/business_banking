@@ -9,6 +9,7 @@ import 'package:clean_framework/clean_framework_defaults.dart';
 class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
   RepositoryScope? __scopeRegistrationStatusResponse;
   final ViewModelCallback<ViewModel> _viewModelCallBack;
+
   NewOnlineRegistrationRequestSuccessUseCase(
       ViewModelCallback<ViewModel> viewModelCallBack)
       : _viewModelCallBack = viewModelCallBack;
@@ -26,23 +27,11 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
     sendViewModelToSubscribers();
   }
 
-//Use this when service is ready rather below one
   void sendViewModelToSubscribers() {
     NewOnlineRegistrationEntity newOnlineRegistrationEntity =
         ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
     _notifySubscribers(newOnlineRegistrationEntity);
   }
-
-  // void sendViewModelToSubscribers() {
-  //   NewOnlineRegistrationEntity newOnlineRegistrationEntity =
-  //       ExampleLocator().repository.get(__scopeRegistrationStatusResponse!);
-  //   final updatedEntity =
-  //       newOnlineRegistrationEntity.merge(accountNumberGenerated: '12345');
-  //   ExampleLocator().repository.update<NewOnlineRegistrationEntity>(
-  //       __scopeRegistrationStatusResponse!,
-  //       updatedEntity as NewOnlineRegistrationEntity);
-  //   _notifySubscribers(updatedEntity);
-  // }
 
   void _notifySubscribers(entity) {
     _viewModelCallBack(buildViewModel(entity));
@@ -60,9 +49,6 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
       NewOnlineRegistrationEntity newOnlineRegistrationEntity) {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
-      cardNumber: newOnlineRegistrationEntity.cardNumber,
-      email: newOnlineRegistrationEntity.email,
-      userPassword: newOnlineRegistrationEntity.userPassword,
       accountNumberGenerated:
           newOnlineRegistrationEntity.accountNumberGenerated ?? '',
       serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.succeed,
@@ -73,10 +59,8 @@ class NewOnlineRegistrationRequestSuccessUseCase extends UseCase {
       NewOnlineRegistrationEntity newOnlineRegistrationEntity) {
     return NewOnlineRegistrationRequestSuccessViewModel(
       cardHolderName: newOnlineRegistrationEntity.cardHolderName,
-      cardNumber: newOnlineRegistrationEntity.cardNumber,
-      email: newOnlineRegistrationEntity.email,
-      userPassword: newOnlineRegistrationEntity.userPassword,
-      accountNumberGenerated: '',
+      accountNumberGenerated:
+          newOnlineRegistrationEntity.accountNumberGenerated,
       serviceResponseStatus: NewOnlineRegistrationServiceResponseStatus.failed,
     );
   }

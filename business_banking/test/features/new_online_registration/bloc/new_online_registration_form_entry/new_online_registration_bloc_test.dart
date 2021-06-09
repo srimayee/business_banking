@@ -49,14 +49,17 @@ void main() {
     String cardNumber = '378282246310005';
     String email = 'test@test.com';
     String userPassword = 'TestPassword@123';
+    String expiryDate = '08/50';
     NewOnlineRegistrationViewModel onlineRegistrationViewModelSucceed =
         NewOnlineRegistrationViewModel(
             cardHolderName: 'Tyler',
             cardNumber: '378282246310005',
+            validThru: '08/50',
             email: 'test@test.com',
             userPassword: 'TestPassword@123',
             cardHolderNameStatus: '',
             cardNumberStatus: '',
+            cardExpiryDateStatus: '',
             userEmailStatus: '',
             userPasswordStatus: '',
             serviceResponseStatus:
@@ -66,9 +69,6 @@ void main() {
         newOnlineRegistrationRequestSuccessViewModel =
         NewOnlineRegistrationRequestSuccessViewModel(
             cardHolderName: 'Tyler',
-            cardNumber: '378282246310005',
-            email: 'test@test.com',
-            userPassword: 'TestPassword@123',
             accountNumberGenerated: '123456',
             serviceResponseStatus:
                 NewOnlineRegistrationServiceResponseStatus.succeed);
@@ -96,6 +96,16 @@ void main() {
     test('should newOnlineRegistrationEventsPipeHandler calls correct method',
         () {
       bloc.newOnlineRegistrationEventsPipe.receive.listen((event) {
+        if (event is UpdateCardExpiryRequestEvent) {
+          verify(mockNewOnlineRegistrationRequestUseCase
+                  .updateCardExpireDate(expiryDate))
+              .called((1));
+        }
+        if (event is CardScannerEvent) {
+          verify(mockNewOnlineRegistrationRequestUseCase.getCardInformation())
+              .called((1));
+        }
+
         if (event is UpdateCardHolderNameRequestEvent) {
           verify(mockNewOnlineRegistrationRequestUseCase
                   .updateUserName(cardHolderName))
@@ -158,6 +168,11 @@ void main() {
               mockNewOnlineRegistrationRequestUseCase,
           newOnlineRegistrationRequestSuccessUseCase:
               mockNewOnlineRegistrationRequestSuccessUseCase);
+
+      event = CardScannerEvent();
+      bloc.newOnlineRegistrationEventsPipeHandler(event);
+      verify(mockNewOnlineRegistrationRequestUseCase.getCardInformation())
+          .called(1);
       event = UpdateCardHolderNameRequestEvent('Tyler');
       bloc.newOnlineRegistrationEventsPipeHandler(event);
       verify(mockNewOnlineRegistrationRequestUseCase.updateUserName(any))
@@ -165,6 +180,10 @@ void main() {
       event = UpdateCardHolderNumberRequestEvent('12345678901234567');
       bloc.newOnlineRegistrationEventsPipeHandler(event);
       verify(mockNewOnlineRegistrationRequestUseCase.updateCardNumber(any))
+          .called(1);
+      event = UpdateCardExpiryRequestEvent('08/50');
+      bloc.newOnlineRegistrationEventsPipeHandler(event);
+      verify(mockNewOnlineRegistrationRequestUseCase.updateCardExpireDate(any))
           .called(1);
       event = UpdateEmailAddressRequestEvent('test@test.com');
       bloc.newOnlineRegistrationEventsPipeHandler(event);
@@ -187,6 +206,9 @@ void main() {
           .called(1);
       bloc.validateCardHolderNumber('12345678901234567');
       verify(mockNewOnlineRegistrationRequestUseCase.validateCardNumber(any))
+          .called(1);
+      bloc.validateCardExpiryDate('08/50');
+      verify(mockNewOnlineRegistrationRequestUseCase.validateDate(any))
           .called(1);
       bloc.validateEmailAddress('test@test.com');
       verify(mockNewOnlineRegistrationRequestUseCase.validateEmailAddress(any))

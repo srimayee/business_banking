@@ -1,3 +1,5 @@
+import 'package:business_banking/dependency/card_scanner_plugin.dart';
+import 'package:business_banking/dependency/permission_handler_plugin.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_event.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_form_entry/new_online_registration_usecase.dart';
 import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_success/new_online_registration_success_usecase.dart';
@@ -30,7 +32,7 @@ class NewOnlineRegistrationBloc extends Bloc {
         newOnlineRegistrationRequestUseCase ??
             NewOnlineRegistrationRequestUseCase((viewModel) =>
                 newOnlineRegistrationViewModelPipe
-                    .send(viewModel as NewOnlineRegistrationViewModel));
+                    .send(viewModel as NewOnlineRegistrationViewModel),PermissionHandlerPlugin(), CardScannerPlugin());
     newOnlineRegistrationViewModelPipe
         .whenListenedDo(_newOnlineRegistrationRequestUseCase!.create);
 
@@ -52,13 +54,21 @@ class NewOnlineRegistrationBloc extends Bloc {
   }
 
   newOnlineRegistrationEventsPipeHandler(NewOnlineRegistrationEvent event) {
+    if(event is CardScannerEvent){
+      _newOnlineRegistrationRequestUseCase!.getCardInformation();
+    }
     if (event is UpdateCardHolderNameRequestEvent) {
       _newOnlineRegistrationRequestUseCase!.updateUserName(event.username);
       return;
-    } else if (event is UpdateCardHolderNumberRequestEvent) {
+    }
+    else if (event is UpdateCardHolderNumberRequestEvent) {
       _newOnlineRegistrationRequestUseCase!.updateCardNumber(event.cardNumber);
       return;
-    } else if (event is UpdateUserPasswordRequestEvent) {
+    }  else if (event is UpdateCardExpiryRequestEvent) {
+      _newOnlineRegistrationRequestUseCase!.updateCardExpireDate(event.expiryDate);
+      return;
+    }
+    else if (event is UpdateUserPasswordRequestEvent) {
       _newOnlineRegistrationRequestUseCase!.updatePassword(event.password);
       return;
     } else if (event is UpdateEmailAddressRequestEvent) {
@@ -73,6 +83,10 @@ class NewOnlineRegistrationBloc extends Bloc {
 
   String validateCardHolderNumber(String cardNumber) {
     return _newOnlineRegistrationRequestUseCase!.validateCardNumber(cardNumber);
+  }
+
+  String? validateCardExpiryDate(String expiryDate) {
+    return _newOnlineRegistrationRequestUseCase!.validateDate(expiryDate);
   }
 
   String validateUserPassword(String password) {

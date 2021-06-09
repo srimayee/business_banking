@@ -5,12 +5,14 @@ void main() {
   final viewModel = NewOnlineRegistrationServiceRequestModel(
     cardHolderName: 'Test',
     cardNumber: '12345',
+    validThru: '08/50',
     email: 'test@test.com',
     userPassword: 'Test123test',
   );
   test('NewOnlineRegistrationServiceRequestModel initialize', () async {
     expect(viewModel.cardHolderName, 'Test');
     expect(viewModel.cardNumber, '12345');
+    expect(viewModel.validThru, '08/50');
     expect(viewModel.email, 'test@test.com');
     expect(viewModel.userPassword, 'Test123test');
   });
@@ -19,6 +21,7 @@ void main() {
     expect(viewModel.toJson(), {
       'cardHolderName': 'Test',
       'cardNumber': '12345',
+      'validThru': '08/50',
       'email': 'test@test.com',
       'userPassword': 'Test123test',
     });
@@ -28,6 +31,7 @@ void main() {
     final viewModel = NewOnlineRegistrationServiceRequestModel(
       cardHolderName: '',
       cardNumber: '',
+      validThru: '',
       email: '',
       userPassword: '',
     );
@@ -35,6 +39,7 @@ void main() {
     expect(viewModel.toJson(), {
       'cardHolderName': '',
       'cardNumber': '',
+      'validThru': '',
       'email': '',
       'userPassword': '',
     });
@@ -43,6 +48,7 @@ void main() {
     expect(viewModel.props, [
       viewModel.cardHolderName,
       viewModel.cardNumber,
+      viewModel.validThru,
       viewModel.email,
       viewModel.userPassword,
     ]);

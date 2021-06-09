@@ -3,7 +3,7 @@ import 'package:clean_framework/clean_framework.dart';
 class NewOnlineRegistrationEntity extends Entity {
   final String? cardNumber;
   final String? cardHolderName;
-  // final String? ssnLastFourDigits;
+  final String? validThru;
   final String? email;
   final String? userPassword;
   final String? accountNumberGenerated;
@@ -12,11 +12,13 @@ class NewOnlineRegistrationEntity extends Entity {
     List<EntityFailure> errors = const [],
     String? cardHolderName,
     String? cardNumber,
+    String? validThru,
     String? email,
     String? userPassword,
     String? accountNumberGenerated,
   })  : cardHolderName = cardHolderName ?? '',
         cardNumber = cardNumber ?? '',
+        validThru = validThru ?? '',
         email = email ?? '',
         userPassword = userPassword ?? '',
         accountNumberGenerated = accountNumberGenerated ?? '',
@@ -27,6 +29,7 @@ class NewOnlineRegistrationEntity extends Entity {
         errors,
         cardHolderName!,
         cardNumber!,
+        validThru!,
         email!,
         userPassword!,
         accountNumberGenerated!,
@@ -37,6 +40,7 @@ class NewOnlineRegistrationEntity extends Entity {
     errors,
     String? cardHolderName,
     String? cardNumber,
+    String? validThru,
     String? email,
     String? userPassword,
     String? accountNumberGenerated,
@@ -45,6 +49,7 @@ class NewOnlineRegistrationEntity extends Entity {
       errors: errors ?? this.errors,
       cardHolderName: cardHolderName ?? this.cardHolderName,
       cardNumber: cardNumber ?? this.cardNumber,
+      validThru: validThru ?? this.validThru,
       email: email ?? this.email,
       userPassword: userPassword ?? this.userPassword,
       accountNumberGenerated:

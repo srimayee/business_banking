@@ -26,6 +26,7 @@ class NewOnlineRegistrationRequestServiceAdapter extends ServiceAdapter<
     return NewOnlineRegistrationServiceRequestModel(
       cardHolderName: entity.cardHolderName,
       cardNumber: entity.cardNumber,
+      validThru: entity.validThru,
       email: entity.email,
       userPassword: entity.userPassword,
     );

@@ -11,6 +11,7 @@ void main() {
         errors: [],
         cardHolderName: 'Tyler',
         cardNumber: '378282246310005',
+        validThru: '08/50',
         email: 'test@test.com',
         userPassword: 'TestPassword@123',
         accountNumberGenerated: '123456789');
@@ -18,14 +19,12 @@ void main() {
     final tRequestModel = NewOnlineRegistrationServiceRequestModel(
       cardHolderName: 'Tyler',
       cardNumber: '378282246310005',
+      validThru: '08/50',
       email: 'test@test.com',
       userPassword: 'TestPassword@123',
     );
 
-    final tJsonResponse = {
-      "didSucceed": true,
-      "accountNumberGenerated": "123456789"
-    };
+    final tJsonResponse = {"accountNumberGenerated": "123456789"};
 
     test('should received a json response and return account number generated',
         () async {
@@ -41,6 +40,7 @@ void main() {
           NewOnlineRegistrationRequestServiceAdapter().createRequest(tEntity);
       expect(requestModel.cardHolderName, tRequestModel.cardHolderName);
       expect(requestModel.cardNumber, tRequestModel.cardNumber);
+      expect(requestModel.validThru, tRequestModel.validThru);
       expect(requestModel.email, tRequestModel.email);
       expect(requestModel.userPassword, tRequestModel.userPassword);
     });

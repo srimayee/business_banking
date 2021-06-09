@@ -5,12 +5,14 @@ class NewOnlineRegistrationServiceRequestModel extends Equatable
     implements JsonRequestModel {
   final String? cardHolderName;
   final String? cardNumber;
+  final String? validThru;
   final String? email;
   final String? userPassword;
 
   NewOnlineRegistrationServiceRequestModel({
     required this.cardHolderName,
     required this.cardNumber,
+    required this.validThru,
     required this.email,
     required this.userPassword,
   });
@@ -20,11 +22,13 @@ class NewOnlineRegistrationServiceRequestModel extends Equatable
     return {
       'cardHolderName': cardHolderName,
       'cardNumber': cardNumber,
+      'validThru': validThru,
       'email': email,
       'userPassword': userPassword,
     };
   }
 
   @override
-  List<Object?> get props => [cardHolderName, cardNumber, email, userPassword];
+  List<Object?> get props =>
+      [cardHolderName, cardNumber, validThru, email, userPassword];
 }

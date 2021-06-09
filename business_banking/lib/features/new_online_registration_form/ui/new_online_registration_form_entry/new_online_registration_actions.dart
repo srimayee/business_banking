@@ -13,37 +13,26 @@ class NewOnlineRegistrationRequestActions {
     BuildContext context,
     String userName,
     String cardNumber,
+    String expiryDate,
     String email,
     String password,
   ) {
     String userNameValidated = bloc.validateUserName(userName);
     String userCardNumberValidated = bloc.validateCardHolderNumber(cardNumber);
+    String? userCardExpiryDate = bloc.validateCardExpiryDate(expiryDate);
     String userPasswordValidated = bloc.validateUserPassword(password);
 
     String userEmail = bloc.validateEmailAddress(email);
 
     if (userNameValidated.isNotEmpty ||
         userCardNumberValidated.isNotEmpty ||
+        userCardExpiryDate!.isNotEmpty ||
         userEmail.isNotEmpty ||
         userPasswordValidated.isNotEmpty) {
-      _showDialog(context, "Invalid Information!",
+      showDialogWithContent(context, "Invalid Information!",
           "Please fill in all fields properly");
       return;
-    }
-    // else if (userNameValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userNameValidated);
-    //   return;
-    // } else if (userCardNumberValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userCardNumberValidated);
-    //   return;
-    // } else if (userEmail.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userEmail);
-    //   return;
-    // } else if (userPasswordValidated.isNotEmpty) {
-    //   _showDialog(context, "Invalid Information!", userPasswordValidated);
-    //   return;
-    // }
-    else {
+    } else {
       CFRouterScope.of(context)
           .replaceWith(BusinessBankingRouter.NewSuccessScreen);
     }
@@ -59,6 +48,11 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
+  void onUpdateCardExpiryDate(String expiryDate) {
+    var event = UpdateCardExpiryRequestEvent(expiryDate);
+    bloc.newOnlineRegistrationEventsPipe.send(event);
+  }
+
   void onUpdateEmailAddress(String email) {
     var event = UpdateEmailAddressRequestEvent(email);
     bloc.newOnlineRegistrationEventsPipe.send(event);
@@ -69,7 +63,13 @@ class NewOnlineRegistrationRequestActions {
     bloc.newOnlineRegistrationEventsPipe.send(event);
   }
 
-  void _showDialog(BuildContext context, String title, String message) {
+  void onCardScanned() {
+    var event = CardScannerEvent();
+    bloc.newOnlineRegistrationEventsPipe.send(event);
+  }
+
+  void showDialogWithContent(
+      BuildContext context, String title, String message) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(

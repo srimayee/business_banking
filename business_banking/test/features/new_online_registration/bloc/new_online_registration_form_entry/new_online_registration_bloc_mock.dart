@@ -22,10 +22,12 @@ class NewOnlineRegistrationBlocMock extends Mock
       NewOnlineRegistrationViewModel(
     cardHolderName: 'Tyler',
     cardNumber: '378282246310005',
+    validThru: '08/10',
     email: 'test@test.com',
     userPassword: 'TestPassword@123',
     cardHolderNameStatus: '',
     cardNumberStatus: '',
+    cardExpiryDateStatus: '',
     userEmailStatus: '',
     userPasswordStatus: '',
   );
@@ -34,9 +36,6 @@ class NewOnlineRegistrationBlocMock extends Mock
       onlineRegistrationSuccessViewModelSample =
       NewOnlineRegistrationRequestSuccessViewModel(
           cardHolderName: 'Tyler',
-          cardNumber: '378282246310005',
-          email: 'test@test.com',
-          userPassword: 'TestPassword@123',
           accountNumberGenerated: '123456789',
           serviceResponseStatus:
               NewOnlineRegistrationServiceResponseStatus.unknown);

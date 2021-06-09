@@ -1,7 +1,10 @@
 // @dart=2.9
 
+import 'package:business_banking/features/new_online_registration_form/bloc/new_online_registration_bloc.dart';
+import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_enums.dart';
 import 'package:business_banking/features/new_online_registration_form/model/new_online_registration_form_entry/new_online_registration_view_model.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_actions.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_presenter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,15 +41,53 @@ class OnTapButton extends StatelessWidget {
 void main() {
   NewOnlineRegistrationBlocMock mockBloc;
   NewOnlineRegistrationRequestActions actions;
+
+  NewOnlineRegistrationRequestPresenter presenter;
   final mockObserver = MockNavigatorObserver();
 
   setUp(() {
     mockBloc = NewOnlineRegistrationBlocMock();
     actions = NewOnlineRegistrationRequestActions(mockBloc);
+    presenter = NewOnlineRegistrationRequestPresenter();
   });
 
   tearDown(() {
     mockBloc = null;
+  });
+
+  NewOnlineRegistrationViewModel onlineRegistrationViewModelFailed =
+      NewOnlineRegistrationViewModel(
+          cardHolderName: '',
+          cardNumber: 'test',
+          validThru: '08/10',
+          email: 'test',
+          userPassword: 'Test',
+          cardHolderNameStatus: 'Please, provide a valid name.',
+          cardNumberStatus: 'Enter valid credit card number.',
+          cardExpiryDateStatus: 'Expiry year is invalid.',
+          userEmailStatus: 'Please, provide a valid email.',
+          userPasswordStatus:
+              'Password should be minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
+          serviceResponseStatus:
+              NewOnlineRegistrationServiceResponseStatus.failed);
+
+  testWidgets('should show the error dialog when server status fail',
+      (tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: OnTapButton(
+        id: 'errorDialog',
+        onTap: (context) {
+          presenter.buildScreen(context, NewOnlineRegistrationBloc(),
+              onlineRegistrationViewModelFailed);
+        },
+      ),
+      navigatorObservers: [mockObserver],
+    ));
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pumpAndSettle();
+    await tester.pump(Duration(milliseconds: 500));
+    expect(find.text('Errors!'), findsOneWidget);
+    expect(find.text('Submission failed'), findsOneWidget);
   });
 
   test(
@@ -86,11 +127,29 @@ void main() {
     });
   });
 
+  test(
+      'should parentActions send event through the pipe on onUpdateCardExpiryDate',
+      () async {
+    actions.onUpdateCardExpiryDate('08/50');
+    mockBloc.newOnlineRegistrationViewModelPipe.receive.listen((event) {
+      expect(event, isA<NewOnlineRegistrationViewModel>());
+    });
+  });
+
+  test('should parentActions send event through the pipe on onCardScanned',
+      () async {
+    actions.onCardScanned();
+    mockBloc.newOnlineRegistrationViewModelPipe.receive.listen((event) {
+      expect(event, isA<NewOnlineRegistrationViewModel>());
+    });
+  });
+
   testWidgets('navigate success route when userInput is valid',
       (WidgetTester tester) async {
     when(mockBloc.validateUserName(any)).thenReturn('');
     when(mockBloc.validateCardHolderNumber(any)).thenReturn('');
     when(mockBloc.validateEmailAddress(any)).thenReturn('');
+    when(mockBloc.validateCardExpiryDate(any)).thenReturn('');
     when(mockBloc.validateUserPassword(any)).thenReturn('');
     Widget buildWidget({
       String initialRoute = '/',
@@ -114,8 +173,13 @@ void main() {
         case '/':
           return OnTapButton(
             id: 'SuccessScreen',
-            onTap: (context) => actions.pressCreateButton(context, 'Tyler',
-                '378282246310005', 'test@test.com', 'TestPassword@123'),
+            onTap: (context) => actions.pressCreateButton(
+                context,
+                'Tyler',
+                '378282246310005',
+                '08/50',
+                'test@test.com',
+                'TestPassword@123'),
           );
         default:
           return Container();
@@ -142,7 +206,7 @@ void main() {
         id: 'errorDialog',
         onTap: (context) {
           actions.pressCreateButton(
-              context, '', 'test', 'test', 'TestPassword@123');
+              context, '', 'test', '08/10', 'test', 'TestPassword@123');
         },
       ),
       navigatorObservers: [mockObserver],

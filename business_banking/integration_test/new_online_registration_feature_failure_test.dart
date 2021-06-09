@@ -1,24 +1,18 @@
 // @dart=2.9
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'integration_test_helpers.dart';
 
-
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 //stop Mockoon instance
   testWidgets(
-      "User filling new online registration form end with failure response", (WidgetTester tester) async {
+      "User filling new online registration form end with failure response",
+      (WidgetTester tester) async {
     await startTest(tester);
     await didWidgetAppear('signInText');
-    await tapWidget('login_button_key');
-    // hub
-    final hubAppBar = find.byKey(Key('CAappBarName'));
-    expect(tester.widget<Text>(hubAppBar).data, 'Business Banking');
-
-    //Investment Accounts Screen, displaying Card Data
+    await tapText('Register Account online');
     await didWidgetAppear('cardHolderName-TxtField');
     await didWidgetAppear('cardHolderNumber-TxtField');
     await didWidgetAppear('userEmailAddress-TxtField');
@@ -30,17 +24,18 @@ void main() {
     await didTextAppear('OK');
     await tapText('OK');
     await tapWidget('cardHolderName-TxtField');
-    await enterText('cardHolderName-TxtField','TestUser');
+    await enterText('cardHolderName-TxtField', 'TestUser');
     await tapWidget('cardHolderNumber-TxtField');
-    await enterText('cardHolderNumber-TxtField','345246807615128');
+    await enterText('cardHolderNumber-TxtField', '345246807615128');
     await tapWidget('userPassword-TxtField');
-    await enterText('userPassword-TxtField','Test123test');
+    await enterText('userPassword-TxtField', 'Test123test');
     await tapWidget('userEmailAddress-TxtField');
-    await enterText('userEmailAddress-TxtField','Test@test.com');
+    await enterText('userEmailAddress-TxtField', 'Test@test.com');
+    await tapWidget('validThru-TxtField');
+    await enterText('validThru-TxtField', '08/50');
     await tapWidget('createButton');
     await didTextAppear('REGISTRATION CONFIRMATION');
     await didTextAppear('Account creation failed for user');
     await didTextAppear('TestUser');
-    await didTextAppear('Please try again later!');
   });
 }

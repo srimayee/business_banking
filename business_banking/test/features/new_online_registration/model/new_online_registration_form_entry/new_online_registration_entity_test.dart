@@ -8,6 +8,7 @@ void main() {
         errors: [],
         cardHolderName: 'Tyler',
         cardNumber: '378282246310005',
+        validThru: '08/50',
         email: 'test@test.com',
         userPassword: 'TestPassword@123',
         accountNumberGenerated: '123456789');
@@ -15,6 +16,7 @@ void main() {
     test('should properties match', () {
       expect(tEntity.cardHolderName, 'Tyler');
       expect(tEntity.cardNumber, '378282246310005');
+      expect(tEntity.validThru, '08/50');
       expect(tEntity.email, 'test@test.com');
       expect(tEntity.userPassword, 'TestPassword@123');
       expect(tEntity.accountNumberGenerated, '123456789');
@@ -25,6 +27,7 @@ void main() {
         tEntity.errors,
         tEntity.cardHolderName,
         tEntity.cardNumber,
+        tEntity.validThru,
         tEntity.email,
         tEntity.userPassword,
         tEntity.accountNumberGenerated,
@@ -37,6 +40,8 @@ void main() {
       expect(newEntity.cardHolderName, 'Tyler');
       newEntity = tEntity.merge(cardNumber: '379260567141018');
       expect(newEntity.cardNumber, '379260567141018');
+      newEntity = tEntity.merge(validThru: '08/50');
+      expect(newEntity.validThru, '08/50');
       newEntity = tEntity.merge(email: 'test@test.com');
       expect(newEntity.email, 'test@test.com');
       newEntity = tEntity.merge(userPassword: 'test@Test123');
