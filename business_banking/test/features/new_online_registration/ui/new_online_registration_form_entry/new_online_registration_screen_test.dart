@@ -10,6 +10,8 @@ import 'package:mockito/mockito.dart';
 class MockOnlineRegistrationPresenterActions extends Mock
     implements NewOnlineRegistrationRequestActions {}
 
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
 void main() {
   MaterialApp testWidgetSucceed;
   MaterialApp testWidgetFailed;
@@ -176,7 +178,6 @@ void main() {
     testWidgets('should show errors on view model with status error',
         (tester) async {
       await pumpCreateAccountButton(tester, testWidgetFailed);
-      verifyParentActions();
       expect(find.text('Please, provide a valid name.'), findsOneWidget);
       expect(find.text('Enter valid credit card number.'), findsOneWidget);
       expect(find.text('Expiry year is invalid.'), findsOneWidget);
@@ -206,13 +207,28 @@ void main() {
         (tester) async {
       await tester.pumpWidget(testWidgetSucceed);
       await tester.pumpAndSettle();
-      var widget = find.text('scan card');
+      var widget = find.text('Scan your card or enter manually');
       expect(widget, findsOneWidget);
       await tester.tap(widget);
       await tester.pumpAndSettle();
       verify(mockOnlineRegistrationPresenterAction.onCardScanned()).called(1);
       expect(find.text('378282246310005'), findsOneWidget);
       expect(find.text('08/50'), findsOneWidget);
+    });
+
+    testWidgets('tap on back button should pop current context',
+        (tester) async {
+      final mockObserver = MockNavigatorObserver();
+      await tester.pumpWidget(
+        MaterialApp(
+          home: NewOnlineRegistrationScreen(
+              viewModel: onlineRegistrationViewModelFailed, actions: null),
+          navigatorObservers: [mockObserver],
+        ),
+      );
+      await tester.tap(find.byKey(const Key('back-button')));
+      await tester.pumpAndSettle();
+      verify(mockObserver.didPop(any, any));
     });
   });
 }

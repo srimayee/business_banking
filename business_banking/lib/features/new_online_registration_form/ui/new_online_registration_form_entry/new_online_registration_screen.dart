@@ -34,104 +34,132 @@ class NewOnlineRegistrationScreen extends Screen {
     _userPasswordValueTextEditingController.text = viewModel.userPassword!;
 
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: Form(
-            key: _form,
+        appBar: AppBar(
+          leading: IconButton(
+            key: const Key('back-button'),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.green.withOpacity(0.7),
+          title: Text(
+            'Create New Account Online',
+          ),
+        ),
+        backgroundColor: Colors.grey[300],
+        body: SafeArea(
             child: SingleChildScrollView(
-                child: Column(
-              children: [
-                ElevatedButton(
-                  key: Key("scanButton"),
-                  onPressed: () async {
-                    actions.onCardScanned();
-                    _cardNumberValueTextEditingController.text =
-                        viewModel.cardNumber!;
-                    _validThruController.text = viewModel.validThru!;
-                  },
-                  child: Text('scan card'),
-                ),
-                customTextField(
-                  textFieldKey: Key('cardHolderName-TxtField'),
-                  controller: _nameValueTextEditingController,
-                  inputStatus: viewModel.cardHolderNameStatus,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
-                  ],
-                  labelText: 'Card Holder Name',
-                  onSaved: (val) {
-                    actions.onUpdateNameParam(val!);
-                  },
-                ),
-                customTextField(
-                  textFieldKey: Key('cardHolderNumber-TxtField'),
-                  controller: _cardNumberValueTextEditingController,
-                  inputStatus: viewModel.cardNumberStatus,
-                  labelText: 'Credit Card Number',
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(19),
-                    CardNumberInputFormatter()
-                  ],
-                  hintText: 'xxxx xxxx xxxx xxxx xxx',
-                  onSaved: (val) {
-                    actions.onUpdateNumberParam(val!);
-                  },
-                ),
-                customTextField(
-                  textFieldKey: Key('validThru-TxtField'),
-                  controller: _validThruController,
-                  inputStatus: viewModel.cardExpiryDateStatus,
-                  labelText: 'Valid Thru',
-                  hintText: "MM/YY",
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(5),
-                    FilteringTextInputFormatter.digitsOnly,
-                    CardMonthInputFormatter()
-                  ],
-                  onSaved: (val) {
-                    actions.onUpdateCardExpiryDate(val!);
-                  },
-                ),
-                customTextField(
-                  textFieldKey: Key('userEmailAddress-TxtField'),
-                  controller: _userEmailAddressController,
-                  inputStatus: viewModel.userEmailStatus,
-                  labelText: 'Email for login',
-                  onSaved: (val) {
-                    actions.onUpdateEmailAddress(val!);
-                  },
-                ),
-                customTextField(
-                  textFieldKey: Key('userPassword-TxtField'),
-                  controller: _userPasswordValueTextEditingController,
-                  inputStatus: viewModel.userPasswordStatus,
-                  labelText: 'Password',
-                  onSaved: (val) {
-                    actions.onUpdatePassword(val!);
-                  },
-                  obscureText: true,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
-                        key: Key("createButton"),
-                        onPressed: () async {
-                          _form.currentState!.save();
-                          actions.pressCreateButton(
-                              context,
-                              _nameValueTextEditingController.text,
-                              _cardNumberValueTextEditingController.text,
-                              _validThruController.text,
-                              _userEmailAddressController.text,
-                              _userPasswordValueTextEditingController.text);
+                child: Column(children: [
+          Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 5.0),
+              child: Form(
+                  key: _form,
+                  child: SingleChildScrollView(
+                      child: Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: ElevatedButton(
+                            key: Key("scanButton"),
+                            style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(fontSize: 16),
+                                primary: Colors.green.withOpacity(0.7)),
+                            onPressed: () async {
+                              actions.onCardScanned();
+                              _cardNumberValueTextEditingController.text =
+                                  viewModel.cardNumber!;
+                              _validThruController.text = viewModel.validThru!;
+                            },
+                            child: Text('Scan your card or enter manually'),
+                          )),
+                      customTextField(
+                        textFieldKey: Key('cardHolderName-TxtField'),
+                        controller: _nameValueTextEditingController,
+                        inputStatus: viewModel.cardHolderNameStatus,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                        ],
+                        labelText: 'Card Holder Name',
+                        onSaved: (val) {
+                          actions.onUpdateNameParam(val!);
                         },
-                        child: Text('Create Account',
-                            style: TextStyle(fontSize: 20.0))),
-                  ],
-                ),
-              ],
-            ))));
+                      ),
+                      customTextField(
+                        textFieldKey: Key('cardHolderNumber-TxtField'),
+                        controller: _cardNumberValueTextEditingController,
+                        inputStatus: viewModel.cardNumberStatus,
+                        labelText: 'Credit Card Number',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(19),
+                          CardNumberInputFormatter()
+                        ],
+                        hintText: 'xxxx xxxx xxxx xxxx xxx',
+                        onSaved: (val) {
+                          actions.onUpdateNumberParam(val!);
+                        },
+                      ),
+                      customTextField(
+                        textFieldKey: Key('validThru-TxtField'),
+                        controller: _validThruController,
+                        inputStatus: viewModel.cardExpiryDateStatus,
+                        labelText: 'Valid Thru',
+                        hintText: "MM/YY",
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(5),
+                          FilteringTextInputFormatter.digitsOnly,
+                          CardMonthInputFormatter()
+                        ],
+                        onSaved: (val) {
+                          actions.onUpdateCardExpiryDate(val!);
+                        },
+                      ),
+                      customTextField(
+                        textFieldKey: Key('userEmailAddress-TxtField'),
+                        controller: _userEmailAddressController,
+                        inputStatus: viewModel.userEmailStatus,
+                        labelText: 'Email for login',
+                        onSaved: (val) {
+                          actions.onUpdateEmailAddress(val!);
+                        },
+                      ),
+                      customTextField(
+                        textFieldKey: Key('userPassword-TxtField'),
+                        controller: _userPasswordValueTextEditingController,
+                        inputStatus: viewModel.userPasswordStatus,
+                        labelText: 'Password',
+                        onSaved: (val) {
+                          actions.onUpdatePassword(val!);
+                        },
+                        obscureText: true,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              key: Key("createButton"),
+                              style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 18),
+                                  primary: Colors.green.withOpacity(0.7)),
+                              onPressed: () async {
+                                _form.currentState!.save();
+                                actions.pressCreateButton(
+                                    context,
+                                    _nameValueTextEditingController.text,
+                                    _cardNumberValueTextEditingController.text,
+                                    _validThruController.text,
+                                    _userEmailAddressController.text,
+                                    _userPasswordValueTextEditingController
+                                        .text);
+                              },
+                              child: Text('Create Account',
+                                  style: TextStyle(fontSize: 20.0))),
+                        ],
+                      ),
+                    ],
+                  ))))
+        ]))));
   }
 
   Widget customTextField({

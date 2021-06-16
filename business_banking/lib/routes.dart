@@ -2,6 +2,7 @@ import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart
 import 'package:business_banking/features/credit_card/ui/credit_card_details/credit_card_details_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
 import 'package:business_banking/features/login/ui/login_feature_widget.dart';
+import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_form_entry/new_online_registration_widget.dart';
 import 'package:business_banking/features/new_online_registration_form/ui/new_online_registration_success_screen/new_online_registration_success_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ import 'features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm
 abstract class BusinessBankingRouter {
   static const String initialRoute = '/';
   static const String hubRoute = '/hub';
+  static const String newOnlineRegistrationScreen =
+      '/newOnlineRegistrationScreen';
   static const String transferFundsRoute = '/transferFunds';
   static const String transferFundsConfirmRoute = '/transferFundsConfirm';
   static const String accountDetailRoute = '/accountDetail';
@@ -35,6 +38,9 @@ abstract class BusinessBankingRouter {
 
       case hubRoute:
         return HubScreen();
+
+      case newOnlineRegistrationScreen:
+        return NewOnlineRegistrationRequestWidget();
 
       case viewBudgetChartRoute:
         return ViewChartWidget();
