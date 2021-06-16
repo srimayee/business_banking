@@ -1,4 +1,4 @@
-import 'package:business_banking/features/test_feature/lib/features/login/ui/login_screen.dart';
+import 'package:business_banking/features/test_feature/lib/features/login/ui/login_ui_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreenView(),
+      home: LoginUIScreen(),
     );
   }
 }
