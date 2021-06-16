@@ -146,13 +146,14 @@ class LoginUIScreen extends Screen {
   }
 
   Widget hnbSvgAssetLogo(BuildContext context) {
-    return SvgPicture.asset(
-      'assets/images/hnb_logo.svg',
-      key: const Key('hnb-logo'),
-      semanticsLabel: 'huntington logo icon',
-      height: CheckDeviceConstraintsUtil().isMobileDevice(context) ? 35 : 60,
-      width: 138.0,
-    );
+    return Container();
+    //   SvgPicture.asset(
+    //   'assets/images/hnb_logo.svg',
+    //   key: const Key('hnb-logo'),
+    //   semanticsLabel: 'huntington logo icon',
+    //   height: CheckDeviceConstraintsUtil().isMobileDevice(context) ? 35 : 60,
+    //   width: 138.0,
+    // );
   }
 
   Widget hnbLogoSvg(BuildContext context) {
@@ -233,12 +234,13 @@ class LoginUIScreen extends Screen {
                     ),
                   Row(mainAxisSize: MainAxisSize.min, children: [
                     Flexible(
-                        child: SvgPicture.asset(
-                      "assets/images/icon_call.svg",
-                      semanticsLabel: 'contact us icon',
-                      key: const Key('contact-us-svg'),
-                      color: const Color.fromARGB(0xFF, 0x1B, 0x56, 0x31),
-                    )),
+                      child: SvgPicture.asset(
+                        "",
+                        semanticsLabel: 'contact us icon',
+                        key: const Key('contact-us-svg'),
+                        color: const Color.fromARGB(0xFF, 0x1B, 0x56, 0x31),
+                      ),
+                    ),
                     const Flexible(
                         child: TextRegularHNB(
                       text: 'Contact Us',
@@ -253,13 +255,14 @@ class LoginUIScreen extends Screen {
   }
 
   Widget hnbSmallLogo() {
-    return SvgPicture.asset(
-      "assets/images/hnb_small_logo.svg",
-      semanticsLabel: 'huntington logo icon',
-      color: const Color.fromARGB(0xFF, 0x1B, 0x56, 0x31),
-      height: 7,
-      width: 7,
-    );
+    return Container();
+    // return SvgPicture.asset(
+    //   "assets/images/hnb_small_logo.svg",
+    //   semanticsLabel: 'huntington logo icon',
+    //   color: const Color.fromARGB(0xFF, 0x1B, 0x56, 0x31),
+    //   height: 7,
+    //   width: 7,
+    // );
   }
 
   Widget hnbSmallLogoWithWText(BuildContext context) {
