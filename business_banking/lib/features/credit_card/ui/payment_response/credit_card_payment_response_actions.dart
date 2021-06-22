@@ -8,19 +8,19 @@ import 'package:printing/printing.dart';
 import '../../../../routes.dart';
 
 class CreditCardPaymentResponseActions {
-
   final CreditCardBloc bloc;
   final CreditCardPaymentResponseViewModel viewModel;
 
   CreditCardPaymentResponseActions(this.bloc, this.viewModel);
 
   void navigateBack(BuildContext context) {
-     CFRouterScope.of(context).popUntil(BusinessBankingRouter.creditCardDetailsRoute);
+    CFRouterScope.of(context)
+        .popUntil(BusinessBankingRouter.creditCardDetailsRoute);
   }
 
   void sharePDFPaymentConfirmation(BuildContext context) async {
     pw.Document pdf = await bloc.generatePDFPaymentConfirmation(viewModel);
-    Printing.sharePdf(bytes: await pdf.save(), filename: 'payment-confirmation.pdf');
+    Printing.sharePdf(
+        bytes: await pdf.save(), filename: 'payment-confirmation.pdf');
   }
-
 }

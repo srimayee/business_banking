@@ -14,9 +14,8 @@ class MockConfirmPressenterAction extends Mock
 
 void main() {
   MaterialApp testWidget;
-  MockConfirmPressenterAction mockPressenterAction;
+
   setUp(() {
-    mockPressenterAction = MockConfirmPressenterAction();
     testWidget = MaterialApp(
       home: BlocProvider<DepositCheckBloc>(
         create: (_) => DepositCheckBlockMock(),

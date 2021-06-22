@@ -11,9 +11,9 @@ import 'deposit_check_presenter.dart';
 
 class DepositCheckScreen extends Screen {
   final DepositCheckViewModel viewModel;
-  final DepositCheckPressenterActions pressenterAction;
+  final DepositCheckPresenterActions presenterAction;
 
-  DepositCheckScreen({required this.viewModel, required this.pressenterAction});
+  DepositCheckScreen({required this.viewModel, required this.presenterAction});
   final _form = GlobalKey<FormState>();
   final _emailFNode = FocusNode();
   final _depositAmountTxtedCtrl = TextEditingController();
@@ -40,7 +40,7 @@ class DepositCheckScreen extends Screen {
               size: 40.0,
             ),
             onTap: () {
-              pressenterAction.popNavigationListener(context);
+              presenterAction.popNavigationListener(context);
             },
             key: Key('Deposit-Check-Back-Button'),
           ),
@@ -116,7 +116,7 @@ class DepositCheckScreen extends Screen {
                                         ),
                                 ),
                                 onTap: () {
-                                  pressenterAction.onPickFrontImg();
+                                  presenterAction.onPickFrontImg();
                                 },
                               ),
                             ],
@@ -148,7 +148,7 @@ class DepositCheckScreen extends Screen {
                                         ),
                                 ),
                                 onTap: () {
-                                  pressenterAction.onPickBackImg();
+                                  presenterAction.onPickBackImg();
                                 },
                               ),
                             ],
@@ -196,12 +196,12 @@ class DepositCheckScreen extends Screen {
                                         RegExp(r'^(\d+)?\.?\d{0,2}')),
                                   ],
                                   onFieldSubmitted: (val) {
-                                    pressenterAction
+                                    presenterAction
                                         .onDepositCheckAmountSavedListener(val);
                                     FocusScope.of(context)
                                         .requestFocus(_emailFNode);
                                   },
-                                  onSaved: (val) => pressenterAction
+                                  onSaved: (val) => presenterAction
                                       .onDepositCheckAmountSavedListener(
                                           val ?? ''),
                                 ),
@@ -243,7 +243,7 @@ class DepositCheckScreen extends Screen {
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.done,
                                   onFieldSubmitted: (val) {
-                                    pressenterAction
+                                    presenterAction
                                         .onUserEmailSavedListener(val);
 
                                     if (_form.currentState != null) {
@@ -253,7 +253,7 @@ class DepositCheckScreen extends Screen {
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
                                   },
-                                  onSaved: (val) => pressenterAction
+                                  onSaved: (val) => presenterAction
                                       .onUserEmailSavedListener(val ?? ''),
                                 ),
                               ),
@@ -316,7 +316,7 @@ class DepositCheckScreen extends Screen {
                           if (_form.currentState != null) {
                             _form.currentState!.save();
                           }
-                          pressenterAction.onTapConfirmBtn(context, viewModel);
+                          presenterAction.onTapConfirmBtn(context, viewModel);
                         },
                       ),
                     ),

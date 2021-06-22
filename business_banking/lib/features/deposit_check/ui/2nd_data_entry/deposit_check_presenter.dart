@@ -20,17 +20,17 @@ class DepositCheckPresenter extends Presenter<DepositCheckBloc,
       DepositCheckViewModel viewModel) {
     return DepositCheckScreen(
       viewModel: viewModel,
-      pressenterAction: DepositCheckPressenterActions(
+      presenterAction: DepositCheckPresenterActions(
         bloc,
       ),
     );
   }
 }
 
-class DepositCheckPressenterActions {
+class DepositCheckPresenterActions {
   DepositCheckBloc bloc;
 
-  DepositCheckPressenterActions(this.bloc);
+  DepositCheckPresenterActions(this.bloc);
 
   popNavigationListener(BuildContext context) {
     CFRouterScope.of(context).pop();

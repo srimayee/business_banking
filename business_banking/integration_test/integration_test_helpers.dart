@@ -1,7 +1,6 @@
-
+import 'package:business_banking/main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:business_banking/main.dart';
 
 final _helperName = "Integration test helper";
 late WidgetTester _tester;
@@ -84,7 +83,6 @@ Future<void> didTextNeverAppear(String widgetText) async {
   expect(finder, findsNothing);
   _log("$_helperName: didtextNeverAppear: $widgetText");
 }
-
 
 Future<void> enterText(String widgetKey, String text) async {
   final Finder finder = find.byKey(Key(widgetKey));

@@ -2,7 +2,6 @@
 import 'package:business_banking/features/deposit_check/bloc/deposit_check_bloc.dart';
 import 'package:business_banking/features/deposit_check/model/2nd_data_entry/deposit_check_view_model.dart';
 import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:business_banking/features/deposit_check/ui/2nd_data_entry/deposit_check_presenter.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +18,12 @@ void main() {
   MaterialApp testWidget;
   DepositCheckBlockMock mockBloc;
   DepositCheckPresenter presenter;
-  DepositCheckPressenterActions pressenterActions;
-  MockBuildContext mockBuildContext;
+  DepositCheckPresenterActions presenterActions;
 
-  DepositCheckViewModel depositCheckViewModel;
-  DepositCheckViewModel depositCheckViewModelOnError;
   setUp(() {
     mockBloc = DepositCheckBlockMock();
     presenter = DepositCheckPresenter();
-    pressenterActions = DepositCheckPressenterActions(mockBloc);
-    mockBuildContext = MockBuildContext();
+    presenterActions = DepositCheckPresenterActions(mockBloc);
 
     testWidget = MaterialApp(
       home: BlocProvider<DepositCheckBloc>(
@@ -42,27 +37,27 @@ void main() {
         availableBalance: 481.84,
         depositLimit: 4500.00,
         accountNickname: 'Checking Account (...6917)');
-    depositCheckViewModel = DepositCheckViewModel(
-        accountInfo: _accountInfo,
-        depositAmount: 200.0,
-        frontCheckImg: '',
-        backCheckImg: '',
-        referenceNumber: '#1',
-        userEmail: 'sample@hnb.com',
-        depositAmountStatus: '',
-        userEmailStatus: '',
-        userInputStatus: UserInputStatus.valid);
+    // depositCheckViewModel = DepositCheckViewModel(
+    //     accountInfo: _accountInfo,
+    //     depositAmount: 200.0,
+    //     frontCheckImg: '',
+    //     backCheckImg: '',
+    //     referenceNumber: '#1',
+    //     userEmail: 'sample@hnb.com',
+    //     depositAmountStatus: '',
+    //     userEmailStatus: '',
+    //     userInputStatus: UserInputStatus.valid);
 
-    depositCheckViewModelOnError = DepositCheckViewModel(
-        accountInfo: _accountInfo,
-        depositAmount: 0.0,
-        frontCheckImg: '',
-        backCheckImg: '',
-        referenceNumber: '',
-        userEmail: '',
-        depositAmountStatus: 'Please provide a value.',
-        userEmailStatus: 'Please provide a value.',
-        userInputStatus: UserInputStatus.invalid);
+    // depositCheckViewModelOnError = DepositCheckViewModel(
+    //     accountInfo: _accountInfo,
+    //     depositAmount: 0.0,
+    //     frontCheckImg: '',
+    //     backCheckImg: '',
+    //     referenceNumber: '',
+    //     userEmail: '',
+    //     depositAmountStatus: 'Please provide a value.',
+    //     userEmailStatus: 'Please provide a value.',
+    //     userInputStatus: UserInputStatus.invalid);
   });
 
   tearDown(() {
@@ -84,7 +79,7 @@ void main() {
     test(
         'should pressenterActions send event through the pipe on UserEmailSavedListener',
         () async {
-      pressenterActions.onUserEmailSavedListener('sample@hnb.com');
+      presenterActions.onUserEmailSavedListener('sample@hnb.com');
 
       await mockBloc.depositCheckViewModelPipe.receive.listen((event) {
         expect(event, isA<DepositCheckViewModel>());
@@ -94,7 +89,7 @@ void main() {
     test(
         'should pressenterActions send event through the pipe on DepositCheckAmountSavedListener',
         () async {
-      pressenterActions.onDepositCheckAmountSavedListener('2500.0');
+      presenterActions.onDepositCheckAmountSavedListener('2500.0');
 
       await mockBloc.depositCheckViewModelPipe.receive.listen((event) {
         expect(event, isA<DepositCheckViewModel>());
@@ -104,7 +99,7 @@ void main() {
     test(
         'should pressenterActions send event through the pipe on onPickFrontImg',
         () async {
-      pressenterActions.onPickFrontImg();
+      presenterActions.onPickFrontImg();
 
       await mockBloc.depositCheckViewModelPipe.receive.listen((event) {
         expect(event, isA<DepositCheckViewModel>());
@@ -114,7 +109,7 @@ void main() {
     test(
         'should pressenterActions send event through the pipe on onPickBackImg',
         () async {
-      pressenterActions.onPickBackImg();
+      presenterActions.onPickBackImg();
 
       await mockBloc.depositCheckViewModelPipe.receive.listen((event) {
         expect(event, isA<DepositCheckViewModel>());

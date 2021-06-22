@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockPressenterAction extends Mock
-    implements DepositCheckPressenterActions {}
+class MockPresenterAction extends Mock implements DepositCheckPresenterActions {
+}
 
 void main() {
   MaterialApp testWidget;
   MaterialApp testWidgetOnError;
   DepositCheckViewModel depositCheckViewModel;
   DepositCheckViewModel depositCheckViewModelOnError;
-  MockPressenterAction mockPressenterAction;
+  MockPresenterAction mockPresenterAction;
 
   setUp(() {
     depositCheckViewModel = DepositCheckViewModel(
@@ -46,22 +46,22 @@ void main() {
         depositAmountStatus: 'Please provide a value.',
         userEmailStatus: 'Please provide a value.');
 
-    mockPressenterAction = MockPressenterAction();
+    mockPresenterAction = MockPresenterAction();
     testWidget = MaterialApp(
       home: DepositCheckScreen(
           viewModel: depositCheckViewModel,
-          pressenterAction: mockPressenterAction),
+          presenterAction: mockPresenterAction),
     );
     testWidgetOnError = MaterialApp(
       home: DepositCheckScreen(
           viewModel: depositCheckViewModelOnError,
-          pressenterAction: mockPressenterAction),
+          presenterAction: mockPresenterAction),
     );
   });
 
   tearDown(() {
     testWidget = null;
-    mockPressenterAction = null;
+    mockPresenterAction = null;
     depositCheckViewModel = null;
   });
   group('Deposit Check Page', () {
@@ -101,7 +101,7 @@ void main() {
       var widget = find.byKey(Key('Deposit-Check-Back-Button'));
       expect(widget, findsOneWidget);
       await tester.tap(widget);
-      verify(mockPressenterAction.popNavigationListener(any)).called(1);
+      verify(mockPresenterAction.popNavigationListener(any)).called(1);
     });
 
     testWidgets('should call pick front image on presenter action',
@@ -112,7 +112,7 @@ void main() {
       var widget = find.byKey(Key('Check-Front-Img-Button'));
       expect(widget, findsOneWidget);
       await tester.tap(widget);
-      verify(mockPressenterAction.onPickFrontImg()).called(1);
+      verify(mockPresenterAction.onPickFrontImg()).called(1);
     });
     testWidgets('should call pick back image on presenter action',
         (tester) async {
@@ -122,7 +122,7 @@ void main() {
       var widget = find.byKey(Key('Check-Back-Img-Button'));
       expect(widget, findsOneWidget);
       await tester.tap(widget);
-      verify(mockPressenterAction.onPickBackImg()).called(1);
+      verify(mockPresenterAction.onPickBackImg()).called(1);
     });
     testWidgets('should call confirm func on presenter action', (tester) async {
       await tester.pumpWidget(testWidget);
@@ -137,7 +137,7 @@ void main() {
       expect(widget, findsOneWidget);
       await tester.tap(widget);
 //      verify(mockPressenterAction.onTapConfirmBtn(any, any, any)).called(1);
-      verify(mockPressenterAction.onTapConfirmBtn(any, any)).called(1);
+      verify(mockPresenterAction.onTapConfirmBtn(any, any)).called(1);
     });
 
     testWidgets(
