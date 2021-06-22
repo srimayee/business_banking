@@ -1,8 +1,4 @@
 // @dart=2.9
-import 'package:business_banking/features/deposit_check/bloc/1st_hub_card/deposit_check_card_event.dart';
-import 'package:business_banking/features/deposit_check/model/1st_hub_card/deposit_check_card_view_model.dart';
-import 'package:business_banking/features/deposit_check/model/account_info_struct.dart';
-import 'package:business_banking/features/deposit_check/model/enums.dart';
 import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_presenter.dart';
 import 'package:business_banking/features/deposit_check/ui/1st_hub_card/deposit_check_card_widget.dart';
 import 'package:clean_framework/clean_framework.dart';
@@ -12,48 +8,12 @@ import 'package:mockito/mockito.dart';
 
 import '../../bloc/deposit_check_bloc_mock.dart';
 
-// class MockPressenterAction extends Mock
-//     implements DepositCheckCardPressenterActions {
-//   DepositCheckBlockMock blocMock;
-//   DepositCheckCardViewModel viewModel;
-//   MockPressenterAction(this.blocMock, this.viewModel);
-
-//   @override
-//   navigateToDepositCheck(BuildContext context) {
-//     blocMock.depositCheckCardEventPipe
-//         .send(UpdateAccountInfoEvent(viewModel.accountInfo));
-//   }
-// }
-
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
-  MockBuildContext mockBuildContext;
-  DepositCheckCardViewModel depositCheckViewModelSucceed;
-  // MockPressenterAction mockPressenterAction;
-  DepositCheckCardPressenterActions depositCheckCardPressenterActions;
-  DepositCheckBlockMock mockBloc;
   MaterialApp testWidget;
 
   setUp(() {
-    mockBuildContext = MockBuildContext();
-
-    mockBloc = DepositCheckBlockMock();
-
-    depositCheckViewModelSucceed = DepositCheckCardViewModel(
-        accountInfo: AccountInfoStruct(
-          accountNumber: '1234567890126917',
-          availableBalance: 481.84,
-          depositLimit: 4500.00,
-          accountNickname: 'Checking Account (...6917)',
-        ),
-        serviceResponseStatus: ServiceResponseStatus.succeed);
-
-    // mockPressenterAction =
-    //     MockPressenterAction(mockBloc, depositCheckViewModelSucceed);
-    depositCheckCardPressenterActions = DepositCheckCardPressenterActions(
-        mockBloc, depositCheckViewModelSucceed);
-
     testWidget = MaterialApp(
       home: BlocProvider<DepositCheckBlockMock>(
         create: (_) => DepositCheckBlockMock(),

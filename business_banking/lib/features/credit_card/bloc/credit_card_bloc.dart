@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+
 import 'credit_card_usecase.dart';
 
 class CreditCardBloc extends Bloc {
@@ -76,7 +77,8 @@ class CreditCardBloc extends Bloc {
         .validatePaymentInformation(paymentValue);
   }
 
-  Future<pw.Document> generatePDFPaymentConfirmation(CreditCardPaymentResponseViewModel viewModel) async {
+  Future<pw.Document> generatePDFPaymentConfirmation(
+      CreditCardPaymentResponseViewModel viewModel) async {
     final pdf = pw.Document();
     pdf.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -85,29 +87,31 @@ class CreditCardBloc extends Bloc {
             mainAxisAlignment: pw.MainAxisAlignment.start,
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
-
               /// title
               pw.Padding(
-              padding: pw.EdgeInsets.only(top: 40.0),
-              child: pw.Row(
+                  padding: pw.EdgeInsets.only(top: 40.0),
+                  child: pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.center,
                       crossAxisAlignment: pw.CrossAxisAlignment.center,
-                    children: [
-                      pw.Text("Payment Confirmation", style: pw.TextStyle(fontSize: 40, fontWeight: pw.FontWeight.bold)),
-                    ]
-              )),
+                      children: [
+                        pw.Text("Payment Confirmation",
+                            style: pw.TextStyle(
+                                fontSize: 40, fontWeight: pw.FontWeight.bold)),
+                      ])),
 
               /// Credit Card Name
               pw.Padding(
-                padding: pw.EdgeInsets.only(top: 40.0),
-                child: pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: pw.CrossAxisAlignment.center,
-                    children: [
-                      pw.Text("Credit Card: ", style: pw.TextStyle(fontSize: 30, fontWeight: pw.FontWeight.bold)),
-                      pw.Text(viewModel.name, style: pw.TextStyle(fontSize: 30)),
-                    ]
-              )),
+                  padding: pw.EdgeInsets.only(top: 40.0),
+                  child: pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Text("Credit Card: ",
+                            style: pw.TextStyle(
+                                fontSize: 30, fontWeight: pw.FontWeight.bold)),
+                        pw.Text(viewModel.name,
+                            style: pw.TextStyle(fontSize: 30)),
+                      ])),
 
               /// Payment Value
               pw.Padding(
@@ -116,16 +120,19 @@ class CreditCardBloc extends Bloc {
                       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: pw.CrossAxisAlignment.center,
                       children: [
-                        pw.Text("Payment Value: ", style: pw.TextStyle(fontSize: 30, fontWeight: pw.FontWeight.bold)),
-                        pw.Text(NumberFormat.simpleCurrency().format(viewModel.paymentValue), style: pw.TextStyle(fontSize: 30)),
-                      ]
-                  )),
-          ],
+                        pw.Text("Payment Value: ",
+                            style: pw.TextStyle(
+                                fontSize: 30, fontWeight: pw.FontWeight.bold)),
+                        pw.Text(
+                            NumberFormat.simpleCurrency()
+                                .format(viewModel.paymentValue),
+                            style: pw.TextStyle(fontSize: 30)),
+                      ])),
+            ],
           ); // Center
         })); // Page
     return pdf;
   }
-
 }
 
 /// view events

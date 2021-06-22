@@ -27,10 +27,10 @@ class DepositCheckPresenter extends Presenter<DepositCheckBloc,
   }
 }
 
-class DepositCheckPressenterActions {
+class DepositCheckPresenterActions {
   DepositCheckBloc bloc;
 
-  DepositCheckPressenterActions(this.bloc);
+  DepositCheckPresenterActions(this.bloc);
 
   popNavigationListener(BuildContext context) {
     CFRouterScope.of(context).pop();
