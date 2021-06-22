@@ -1,5 +1,6 @@
-import 'package:business_banking/features/test_feature/lib/features/login/ui/login_screen.dart';
+import 'package:business_banking/features/test_feature/lib/features/login/ui/login_ui_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,27 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreenView(),
+      home: LoginUIScreen(),
+      builder: (context, widget) {
+        return ResponsiveWrapper.builder(
+          BouncingScrollWrapper.builder(context, widget!),
+          maxWidth: 2460,
+          minWidth: 320,
+          minWidthLandscape: 906,
+          maxWidthLandscape: 1366,
+          defaultScale: true,
+          breakpoints: [
+            const ResponsiveBreakpoint.resize(320, name: MOBILE),
+            const ResponsiveBreakpoint.autoScale(601,
+                name: 'SMALLTABLETS', scaleFactor: 0.8),
+            const ResponsiveBreakpoint.autoScale(1000,
+                name: 'LARGETABLETS', scaleFactor: 0.95),
+            const ResponsiveBreakpoint.autoScale(1200,
+                name: DESKTOP, scaleFactor: 1.15),
+            const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+          ],
+        );
+      },
     );
   }
 }
