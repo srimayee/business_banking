@@ -60,15 +60,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - packages/mbusinessonline/config/env/dev.json
-    - packages/mbusinessonline/config/env/int.json
-    - packages/mbusinessonline/config/env/qa.json
-    - packages/mbusinessonline/config/env/qaInternal.json
-    - packages/mbusinessonline/config/env/prod.json
-    - packages/mbusinessonline/config/env/prodInternal.json
-    - packages/mbusinessonline/config/env/mock.json
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -78,75 +69,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: HuntingtonApex
-      fonts:
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Thin.ttf
-        #  weight: 100
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-ThinItalic.ttf
-        #  weight: 100
-        #  style: italic
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Light.ttf
-        #  weight: 300
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-LightItalic.ttf
-        #  weight: 300
-        #  style: italic
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Book.ttf
-        #  weight:
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-BookItalic.ttf
-        #  style: italic
-        #  weight:
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Medium.ttf
-        #  weight: 500
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-MediumCaps.ttf
-        #  weight: 500
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-MediumItalic.ttf
-        #  weight: 500
-        #  style: italic
-        - asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Bold.ttf
-          weight: 700
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Heavy.ttf
-        #  weight:
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-HeavyItalic.ttf
-        #  weight:
-        #  style: italic
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-Ultra.ttf
-        #  weight:
-        #- asset: packages/hnb_flutter_ui/assets/fonts/HuntingtonApex-UltraItalic.ttf
-        #  weight:
-        #  style: italic
-    - family: Muli
-      fonts:
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-ExtraLight.ttf
-          weight: 200
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-ExtraLightItalic.ttf
-          weight: 200
-          style: italic
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-Light.ttf
-          weight: 300
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-LightItalic.ttf
-          weight: 300
-          style: italic
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-Italic.ttf
-          style: italic
-          weight: 400
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-Regular.ttf
-          weight: 400
-        #- asset: packages/hnb_flutter_ui/assets/fonts/Muli-SemiBold.ttf
-        #  weight: 600
-        #- asset: packages/hnb_flutter_ui/assets/fonts/Muli-SemiBoldItalic.ttf
-        #  style: italic
-        #  weight: 600
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-Bold.ttf
-          weight: 700
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-ExtraBold.ttf
-          weight: 800
-        - asset: packages/hnb_flutter_ui/assets/fonts/Muli-ExtraBoldItalic.ttf
-          style: italic
-          weight: 800
         #- asset: packages/hnb_flutter_ui/assets/fonts/Muli-Black.ttf
         #  weight: 900
         #- asset: packages/hnb_flutter_ui/assets/fonts/Muli-BlackItalic.ttf
