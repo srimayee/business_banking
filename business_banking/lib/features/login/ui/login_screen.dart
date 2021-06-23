@@ -20,75 +20,84 @@ class LoginScreen extends Screen {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: Form(
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(height: media.width * .1),
-            Container(
-              color: Colors.white.withOpacity(.8),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 12, 10, 0),
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 32,
-                      color: Colors.lightGreen),
-                  key: Key('signInText'),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.white.withOpacity(.8),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
-                child: Text(
-                  'Securely access business banking information',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: media.width * .03),
-            _textFormField(Key('usename_key'), 'Huntington Username',
-                onChangeUsermame, TextInputType.emailAddress),
-            SizedBox(height: media.width * .01),
-            _textFormField(Key('password_key'), 'Password', onChangePassword,
-                TextInputType.visiblePassword),
-            SizedBox(height: media.width * .02),
-            ElevatedButton(
-              key: Key('login_button_key'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.lightGreen,
-              ),
-              onPressed: onTapSubmit as void Function()?,
-              child: Text('Login', style: TextStyle(color: Colors.white)),
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 15),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  InkWell(
-                    child: Text(
-                      'Register Account online',
-                      style: TextStyle(
-                        color: Colors.blueGrey,
-                        decoration: TextDecoration.underline,
+    return Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+            color: Colors.green,
+            image: DecorationImage(
+                image: AssetImage("assets/images/login_hex_background.png"),
+                fit: BoxFit.cover,
+                scale: 0.1)),
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Form(
+              child: ListView(
+                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+                children: <Widget>[
+                  SizedBox(height: media.width * .1),
+                  Container(
+                    color: Colors.white.withOpacity(.8),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 12, 10, 0),
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 32,
+                            color: Colors.lightGreen),
+                        key: Key('signInText'),
                       ),
                     ),
-                    onTap: onTapAccountOnline as void Function()?,
-                  )
-                ])),
-          ],
-        ),
-      ),
-    );
+                  ),
+                  Container(
+                    color: Colors.white.withOpacity(.8),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
+                      child: Text(
+                        'Securely access business banking information',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: media.width * .03),
+                  _textFormField(Key('usename_key'), 'Huntington Username',
+                      onChangeUsermame, TextInputType.emailAddress),
+                  SizedBox(height: media.width * .01),
+                  _textFormField(Key('password_key'), 'Password',
+                      onChangePassword, TextInputType.visiblePassword),
+                  SizedBox(height: media.width * .02),
+                  ElevatedButton(
+                    key: Key('login_button_key'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightGreen,
+                    ),
+                    onPressed: onTapSubmit as void Function()?,
+                    child: Text('Login', style: TextStyle(color: Colors.white)),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              child: Text(
+                                'Register Account online',
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              onTap: onTapAccountOnline as void Function()?,
+                            )
+                          ])),
+                ],
+              ),
+            )));
   }
 
   Widget _textFormField(Key key, String hintText, Function? onChangeTextField,
