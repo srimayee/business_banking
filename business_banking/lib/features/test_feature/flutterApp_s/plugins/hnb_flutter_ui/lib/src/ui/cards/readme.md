@@ -1,1 +1,0 @@
-Add reusable card components in this folder.
