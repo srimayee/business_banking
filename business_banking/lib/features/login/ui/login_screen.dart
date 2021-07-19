@@ -8,12 +8,14 @@ class LoginScreen extends Screen {
   final Function? onChangePassword;
   final Function? onTapSubmit;
   final Function? onTapAccountOnline;
+  final Function? onTapForgotPassword;
 
   LoginScreen({
     this.onChangeUsermame,
     this.onChangePassword,
     this.onTapSubmit,
     this.onTapAccountOnline,
+    this.onTapForgotPassword,
     this.viewModel,
   });
 
@@ -83,6 +85,21 @@ class LoginScreen extends Screen {
                       ),
                     ),
                     onTap: onTapAccountOnline as void Function()?,
+                  )
+                ])),
+            Padding(
+                padding: EdgeInsets.only(top: 15),
+                child:
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  InkWell(
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.blueGrey,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    onTap: onTapForgotPassword as void Function()?,
                   )
                 ])),
           ],

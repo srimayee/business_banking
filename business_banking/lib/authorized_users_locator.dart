@@ -1,21 +1,20 @@
-import 'package:business_banking/authorized_users_locator.dart';
 import 'package:business_banking/dependency/url_launcher.dart';
 import 'package:clean_framework/clean_framework.dart';
 import 'package:clean_framework/clean_framework_defaults.dart';
 
 import 'core/patch_simple_rest_api.dart';
 
-ExampleLocator locator() => ExampleLocator();
+AuthorizedUsersLocator locator() => AuthorizedUsersLocator();
 
-Logger logger() => ExampleLocator().logger;
+Logger logger() => AuthorizedUsersLocator().logger;
 
-Future<void> openUrl(url) => ExampleLocator().urlLauncher!.launchURL(url);
+Future<void> openUrl(url) => AuthorizedUsersLocator().urlLauncher!.launchURL(url);
 
-class ExampleLocator implements AuthorizedUsersLocator {
-  ExampleLocator._();
+class AuthorizedUsersLocator implements Locator {
+  AuthorizedUsersLocator._();
 
-  factory ExampleLocator() {
-    Locator.init(ExampleLocator._());
+  factory AuthorizedUsersLocator() {
+    Locator.init(AuthorizedUsersLocator._());
     return Locator.getInstance();
   }
 
@@ -28,8 +27,7 @@ class ExampleLocator implements AuthorizedUsersLocator {
   UrlLauncher? urlLauncher = UrlLauncher();
 
   PatchSimpleRestApi api = PatchSimpleRestApi(
-      baseUrl: 'http://localhost:3001/'); // Points to Mockoon instance
-      // baseUrl: 'http://192.168.0.11:3001/'); //Points to Mockoon instance
+      baseUrl: 'https://gorest.co.in/public/v1');
 
   Repository repository = Repository();
 
