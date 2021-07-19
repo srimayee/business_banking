@@ -1,3 +1,4 @@
+import 'package:business_banking/features/authorized_users/ui/authorized_users_feature_widget.dart';
 import 'package:business_banking/features/budget/ui/chart/view_chart_widget.dart';
 import 'package:business_banking/features/credit_card/ui/credit_card_details/credit_card_details_widget.dart';
 import 'package:business_banking/features/hub/ui/hub_screen.dart';
@@ -10,12 +11,15 @@ import 'features/credit_card/ui/payment_request/credit_card_payment_request_widg
 import 'features/credit_card/ui/payment_response/credit_card_payment_response_widget.dart';
 import 'features/deposit_check/ui/2nd_data_entry/deposit_check_widget.dart';
 import 'features/deposit_check/ui/3rd_request_confirmation/deposit_check_confirm_widget.dart';
+import 'features/forgot_username/ui/forgot_password_feature_widget.dart';
 
 abstract class BusinessBankingRouter {
   static const String initialRoute = '/';
   static const String hubRoute = '/hub';
   static const String newOnlineRegistrationScreen =
       '/newOnlineRegistrationScreen';
+  static const String forgotPasswordScreen =
+      '/forgotPassword';
   static const String transferFundsRoute = '/transferFunds';
   static const String transferFundsConfirmRoute = '/transferFundsConfirm';
   static const String accountDetailRoute = '/accountDetail';
@@ -41,6 +45,9 @@ abstract class BusinessBankingRouter {
 
       case newOnlineRegistrationScreen:
         return NewOnlineRegistrationRequestWidget();
+
+      case forgotPasswordScreen:
+        return ForgotPasswordFeatureWidget();
 
       case viewBudgetChartRoute:
         return ViewChartWidget();
